@@ -1,13 +1,5 @@
 ---
-title: | 
-  | \LARGE{\textbf{Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frogs}}
-author:
-\author[1, 2]{Roland A. Knapp\thanks{corresponding author: roland.knapp@ucsb.edu}}
-\affil[1]{Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, CA 93546, USA}
-\affil[2]{Earth Research Institute, University of California, Santa Barbara, CA 93106-3060, USA}
-\author[3]{Maxwell B. Joseph}
-\affil[3]{Earth Lab, University of Colorado, Boulder, CO 80303, USA}
-
+title: Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog
 output:
   bookdown::pdf_document2:
     keep_tex: true
@@ -25,42 +17,23 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-\begin{abstract}
-Capture-recapture studies are widely used in ecology to estimate population sizes and demographic rates. 
-In some capture-recapture studies, individuals may be visually encountered but not identified. 
-For example, if individual identification is only possible upon capture and individuals escape capture, visual encounters can result in failed captures where individual identities are unknown.
-In such cases, the data consist of capture histories with known individual identities, and counts of failed captures for individuals with unknown identities.
-These failed captures are ignored in traditional capture-recapture analyses that require known individual identities.
-Here we show that if animals can be encountered at most once per sampling occasion, failed captures provide lower bounds on population size that can increase the precision of abundance estimates. 
-Analytical results and simulations indicate that visual encounter data improve abundance estimates when capture probabilities are low, and when there are few repeat surveys. 
-We present a hierarchical Bayesian approach for integrating failed captures and auxiliary encounter data in statistical capture-recapture models. 
-This approach can be integrated with existing capture-recapture models, and may prove particularly useful for hard to capture species in data-limited settings.
-\end{abstract}
+\newpage
 
 \linenumbers
 
----
+\begin{abstract}
+TO BE ADDED
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+\bigskip
+\noindent \textbf{Key words}: antifungal treatment; \textit{Batrachochytrium dendrobatidis}; host-pathogen dynamics; mark-recapture; mountain yellow-legged frog; probiotic; \textit{Rana sierrae}; survival.
 
-## R Markdown
+\end{abstract}
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Introduction
+Emerging infectious diseases are increasingly common in wildlife (Daszak et al. 2000), often due to anthropogenic changes in the ecology of the host or pathogen.
+Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems (Ostfeld et al. 2010, Scheele et al. 2019).
+Diseases of wildlife can also spill over to humans and domestic animals (Daszak et al. 2000). Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health (Daszak et al. 2000). 
+As such, the ability to control diseases in wildlife is critically important, but disease management is often difficult because wildlife diseases are relatively poorly described, many fewer intervention measures (e.g., vaccines) are available than for humans, and free ranging wildlife are inherently difficult to study and treat. As a result, available management strategies are mostly insufficient to mitigate the destructive effects of disease on wildlife.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
