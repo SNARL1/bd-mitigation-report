@@ -5,4 +5,7 @@
 .Ruserdata
 data/clean/
 output/
+*.pdf
+*.log
+*.tex
 
