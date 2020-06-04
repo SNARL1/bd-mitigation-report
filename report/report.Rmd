@@ -1,0 +1,66 @@
+---
+title: | 
+  | \LARGE{\textbf{Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frogs}}
+author:
+\author[1, 2]{Roland A. Knapp\thanks{corresponding author: roland.knapp@ucsb.edu}}
+\affil[1]{Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, CA 93546, USA}
+\affil[2]{Earth Research Institute, University of California, Santa Barbara, CA 93106-3060, USA}
+\author[3]{Maxwell B. Joseph}
+\affil[3]{Earth Lab, University of Colorado, Boulder, CO 80303, USA}
+
+output:
+  bookdown::pdf_document2:
+    keep_tex: true
+    toc: false
+    includes:
+      in_header: header.sty
+fontsize: 12pt
+csl: ecology.csl
+bibliography: bibliography.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{abstract}
+Capture-recapture studies are widely used in ecology to estimate population sizes and demographic rates. 
+In some capture-recapture studies, individuals may be visually encountered but not identified. 
+For example, if individual identification is only possible upon capture and individuals escape capture, visual encounters can result in failed captures where individual identities are unknown.
+In such cases, the data consist of capture histories with known individual identities, and counts of failed captures for individuals with unknown identities.
+These failed captures are ignored in traditional capture-recapture analyses that require known individual identities.
+Here we show that if animals can be encountered at most once per sampling occasion, failed captures provide lower bounds on population size that can increase the precision of abundance estimates. 
+Analytical results and simulations indicate that visual encounter data improve abundance estimates when capture probabilities are low, and when there are few repeat surveys. 
+We present a hierarchical Bayesian approach for integrating failed captures and auxiliary encounter data in statistical capture-recapture models. 
+This approach can be integrated with existing capture-recapture models, and may prove particularly useful for hard to capture species in data-limited settings.
+\end{abstract}
+
+\linenumbers
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
