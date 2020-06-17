@@ -8,4 +8,6 @@ output/
 *.pdf
 *.log
 *.tex
+*.aux
+*.out
 
