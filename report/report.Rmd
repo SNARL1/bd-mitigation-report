@@ -296,14 +296,48 @@ At the conclusion of the second *J. lividum* bath, all animals were released int
 To determine the fate of *J. lividum*-exposed and control animals, we surveyed the study population during the summers of 2012 (n = 3), 2013 (n = 4), and 2014 (n = 1), respectively. 
 During each of these surveys, we conducted VES and captured and swabbed as many subadult and adult frogs as possible, and recorded the toe-clip status for each individual. 
 
-### Microbiome augmentation of adults {-}
-
 ### Reintroduction of adults from Bd-naive populations {-}
+
+Recent evidence indicates that Bd infection of MYL frogs prompts an immune response that reduces susceptibility of exposed individuals to future infection (Toothman et al., in preparation). 
+To test whether infecting frogs with Bd and then clearing them of infection would increase the survival of frogs reintroduced into Bd-positive habitats, we planned an experiment in which Bd-exposed and unexposed control frogs were each reintroduced into three lakes.
+Although the Bd exposures did not produce the expected high-level infections, as described below, we include the study in this report to provide a description of the experiment and the consequences of reintroducing frogs that were essentially Bd-naive into Bd-positive sites.
+
+In July 2013, we collected 100 adult *R. muscosa* from a large Bd-naive population ("Spur Basin") located in the headwaters of Bubbs Creek, South Fork Kings River, Kings Canyon National Park. Captured frogs were PIT tagged, swabbed, measured, and weighed, and held overnight in large mesh pens. 
+The following day, frogs were transported out the backcountry via helicopter, and then driven to the Sierra Nevada Aquatic Research Laboratory. 
+In subsequent days, frogs were randomly assigned to Bd-exposed and unexposed control treatments, housed individually in small aquaria, and fed crickets several times per week. 
+To initiate the experiment, a standard number of Bd zoospores was added to each tank assigned to the exposed treatment (July 7). 
+After the first exposure and continuing until all frogs were cleared of infection, exposed and control frogs were swabbed weekly to quantify Bd loads. 
+This infection protocol has been used successfully to infect MYL frogs with Bd during multiple experiments, and following exposure frogs typically develop high loads within four weeks.
+In this experiment, all frogs became infected (based on week 1 swabs), but after four weeks none had developed moderate or high loads.  
+We therefore opted to conduct another round of exposures. Bd infections were first cleared with itraconazole [@jones2012treatment], and the subsequent Bd exposure was conducted as previously (July 30). 
+Re-exposure again produced only low-level Bd infections, as did a third exposure conducted on August 17. 
+Due to logistical considerations associated with holding frogs overwinter, we opted to release frogs back into the wild. 
+We did not expect that the observed low-level Bd infections were sufficient to cause the development of an immune response, but the reintroductions nonetheless allowed us to test the assumption that Bd-naive frogs introduced into Bd-positive habitats would rapidly become infected with Bd and succumb to chytridiomycosis.  
+Frogs were cleared of infection as referenced previously, and in early September were transported to the three reintroduction lakes via helicopter. 
+The sites were located in three different lake basins (Ruskin, Upper, and Pinchot), separated by 3--7 km, and occupied historically by large *R. muscosa* populations that were extirpated during the previous decade following Bd epizootics. 
+
+To describe the dynamics of the reintroduced populations, we used standard CMR methods [@joseph2018disease]. Sites were visited 1-3 times during the summers  (June–September) of 2014--2019, and on a single day per visit (primary period) all habitats were searched repeatedly for frogs. 
+Frogs were captured using handheld nets, identified via their PIT tag (or tagged if they were untagged), measured, weighed, swabbed, and released at the capture location. 
+Survival of translocated frogs, frog population size, and recruitment of new adults was estimated using R software [@rsoftware2020] and the mrmr package developed by M. Joseph (https://snarl1.github.io/mrmr/). 
 
 ### Reintroduction of adults from declining populations {-}
 
-### Translocation of adults from persistent populations {-}
+The ongoing spread of Bd across Sequoia and Kings Canyon National Parks has resulted in the decline of hundreds of mountain yellow-legged frog populations to extirpation or near-extirpation.
+In an effort to increase the likelihood that remnant populations would persist, in collaboration with SEKI staff we conducted four frog reintroduction studies during the period 2015-2019. 
+Details are provided in a report submitted to SEKI in 2020 ("Critical Restoration Efforts Needed to Recover Endangered Mountain Yellow-legged Frogs in Sequoia and Kings Canyon National Parks - Final Report") and are summarized here.
+Early stage animals (tadpoles and subadults) were collected from four populations that had recently experienced Bd epizootics and declined to near-extirpation, and delivered them to the San Francisco and Oakland Zoos for rearing to adulthood. 
+In preparation for reintroduction into the basin from which they were originally collected, at least half of the frogs from each population were exposed to Bd and the remaining frogs served as unexposed controls.
+In contrast to the Bd-exposure of the Spur Basin frogs (described above), following Bd exposure frogs from all four populations developed moderate-to-high infection loads and were subsquently cleared of infection using itraconazole. 
+To avoid introducing confounding effects into the experiment, frogs in the control group were also treated with itraconazole using the same methods.
+Following release back into the study basins, populations were assessed using standard VES and CMR surveys to determine Bd loads and frog survival, population size, and recruitment. 
 
+### Reintroduction of adults from persistent populations {-}
+
+Recent evidence indicates that MYL frog populations that declined following Bd epizootics and in which frogs persisted in low numbers for 1--2 decades have begun to recover [@knapp2016large].
+These recovering (enzootic) populations would seem ideal sources of frogs for direct translocation to sites from which frogs were recently extirpated. 
+However, the use of translocations in SEKI is limited by the small number of enzootic populations that have developed to date. 
+Recovering populations are much more common in Yosemite National Park, and have been used as sources of frogs for multiple translocations conducted there since 2006. 
+The details of these translocations are available in a report submitted to YOSE in 2020 ("Describing the dynamics of translocated Sierra Nevada yellow-legged frog populations in Yosemite National Park to aid future conservation efforts"), and are summarized here. 
 
 # Results {-}
 
@@ -411,30 +445,13 @@ xxxxxxxx
 
 ## Reintroduction of adults from Bd-naive populations {-}
 
-Recent evidence indicates that Bd infection of MYL frogs prompts an immune response that reduces susceptibility of exposed individuals to future infection (Toothman et al., in preparation). 
-To test whether infecting frogs with Bd and then clearing them of infection would increase the survival of frogs reintroduced into Bd-positive habitats, we conducted a replicated whole lake experiment. 
-In July 2013, we collected XX adult R. muscosa from a large Bd-naive population in the headwaters of Bubbs Creek, South Fork Kings Rier, Kings Canyon National Park. Captured frogs were PIT tagged, swabbed, measured, and weighed, and held overnight in large mesh pens. The following day, frogs were transported out the backcountry via helicopter, and then driven to the Sierra Nevada Aquatic Research Laboratory. 
-In subsequent days, frogs were randomly assigned to Bd-exposed and unexposed control treatments, housed individually in small aquaria, and fed XXXXX ad libitum. 
-To initiate the experiment, ### Bd zoospores were added to tanks assigned to the exposed treatment on three consecutive days. 
-Thereafter, exposed and control frogs were swabbed weekly to quantify Bd loads. 
-This infection protocol has been used successfully to infect MYL frogs with Bd during multiple experiments, and following exposure frogs typically develop high loads within four weeks.
-In this experiment, all frogs became infected (based on week 1 swabs), but after four weeks none had developed moderate or high loads.  
-We therefore opted to conduct another round of exposures. Bd infections were first cleared with itraconazole [@jones2012treatment], and subsequent Bd exposures were conducted as previously. 
-Re-exposure again produced only low-level Bd infections. Due to logistical considerations associated with holding frogs overwinter, we opted to release frogs back into the wild. 
-We did not expect that the observed low-level Bd infections were sufficient to cause the development of an immune response, but the reintroductions nonetheless allowed us to test the assumption that Bd-naive frogs introduced into Bd-positive habitats would rapidly become infected with Bd and succumb to chytridiomycosis.  
-Frogs were cleared of infection as referenced previously, and in early September were transported to the three reintroduction lakes via helicopter. 
-The sites were located in three different lake basins (Ruskin, Upper, and Pinchot), separated by 3--7 km, and occupied historically by large *R. muscosa* populations that were extirpated during the previous decade following Bd epizootics. 
-
-To describe the dynamics of the reintroduced populations, we used standard CMR methods [@joseph2018disease]. Sites were visited 1-3 times during the summers  (June–September) of 2014--2019, and on a single day per visit (primary period) all habitats were searched repeatedly for frogs. 
-Frogs were captured using handheld nets, identified via their PIT tag (or tagged if they were untagged), measured, weighed, swabbed, and released at the capture location. 
-Survival of translocated frogs, frog population size, and recruitment of new adults was estimated using R software [@rsoftware2020] and the mrmr package developed by M. Joseph (https://snarl1.github.io/mrmr/). 
-
 
 ## Reintroduction of adults from declining populations {-}
-xxxxxxxx
 
-## Translocation of adults from persistent populations {-}
-xxxxxxxx
+
+## Reintroduction of adults from persistent populations {-}
+
+
 
 # Discussion {-}
 
@@ -453,12 +470,14 @@ The Bd-state data are therefore less reliable than the quantitative data, and we
 
 ## Microbiome augmentation {-}
 
+In addition to describing results of microbiome augmentation of subadults, briefly mention the augmentation conducted on adults by V. Vredenburg.
+
 ## Conclusions {-}
 
 
 # Acknowledgements {-}
 
-This research was supported by grants from Sequoia and Kings Canyon National Parks and grant EF-0723563 from the National Science Foundation as part of the joint National Science Foundation–National Institutes of Health Ecology of Infectious Disease program. 
+This research was supported by grants from Sequoia and Kings Canyon National Parks, Yosemite National Park, and grant EF-0723563 from the National Science Foundation as part of the joint National Science Foundation–National Institutes of Health Ecology of Infectious Disease program. 
 The following people assisted with fieldwork: A. Adams, K. Atkinson, D. Boiano, I. Chellman, C. Dorsey, J. Erdman, M. Hernandez, A. Jani, N. Kauffman, A. Killion, A. Lindauer, M. Masten, D. Paolilli, W. Philbrook, G. Ruso, A. Stoerp, and L. Torres.
 L. Torres developed the *J. lividum* qPCR protocol while employed in the Vredenburg lab. 
 M. Toothman in the Briggs lab analyzed Bd swabs collected prior to 2016, and K. Rose and A. Barbella in the Knapp lab analyzed those collected thereafter. 
