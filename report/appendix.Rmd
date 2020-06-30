@@ -1,0 +1,92 @@
+---
+title: "Appendix"
+subtitle: "Effectiveness of actions to mitigate impacts of the amphibian chytrid fungus on mountain yellow-legged frog populations"
+author: "Roland A. Knapp, et al."
+output: 
+  bookdown::pdf_document2:
+    keep_tex: TRUE
+    toc: FALSE
+bibliography: bibliography_appendix.bib
+fontsize: 12pt
+csl: ecology.csl
+---
+
+# Methods {-}
+
+## Validation of the zoospore filtration method {-}
+
+It is common for technical replicates of environmental DNA samples to give variable results due to PCR inhibitors or low quantities of target DNA in samples [@mosher2018beyond]. 
+We therefore conducted tests to establish criteria for calling samples Bd-positive or Bd-negative. 
+We ran six negative controls (water filter samples from a Bd-naïve pond) on two separate replicate PCR runs, for a  total of 12 PCR reactions, all of which returned Bd-negative data (0 false positive results out of 12 PCR reactions). 
+We also ran no template controls in triplicate on every PCR run, with no false positives. 
+Therefore, if a sample had at least one positive technical replicate we considered the sample to be positive and calculated the mean across technical replicates after dropping the presumed false negatives. 
+To minimize PCR inhibition, we diluted DNA extracts fifty-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
+
+## *Janthinobacterium lividum* qPCR assay {-}
+
+The *J. lividum* used to develop the real-time PCR assay was a strain provided by Reid Harris, Department of Biology, James Madison University. 
+*J. lividum* DNA was extracted from a pure culture of this strain using a Qiagen DNeasy blood and tissue kit following the manufacturer's protocol. 
+The DNA collected was amplified using methods in [@harris2009skin]. The PCR product was viewed on a 1% agarose gel, and the 500 bp product was sequenced. 
+
+Primers were designed to be specific to *J. lividum* and sequences were as follows: Jliv_For3 ATGCCACCGACGGCTACCA, and Jliv_Rev1 ACGGCGGGATGGTCATCAC. 
+The minor groove binder probe sequence was JLIVT 6FAM AACATCGTTTGCTGTCCGTTGA MGBNFQ. 
+After assay optimization, the 25 $\mu$L reaction volumes included 0.5 $\mu$L of each primer at a concentration of 10 $\mu$M, 0.375 $\mu$L of MGB probe at a concentration of 250 nM, 12.5 $\mu$L of Taqman MasterMix (Applied Biosystems), 1.25 $\mu$L BSA, and 5 $\mu$L of template. 
+The amplification conditions consisted of an initial cycle of 2 min at 50&deg;C and 10 min at 95&deg;C, followed by 50 cycles at 95&deg;C for 15 s, 58&deg;C for 30 s, and 65&deg;C for 45 s. 
+To create standards, DNA was extracted from pure cultures of *J. lividum* with an UltraClean microbial DNA isolation kit (MoBio), and diluted to 10^4^, 10^3^, 10^2^, and 10^1^ *J. lividum* genome equivalents. 
+A standard curve was generated for each 96-well plate to estimate the number of *J. lividum* genome equivalents in sample extracts.
+
+## Hidden Markov model for the LeConte treatment experiment {-}
+
+We tracked the fates of individual animals in the LeConte population using a multi-state hidden Markov model. 
+We augmented the capture histories of observed animals with a large number of additional capture histories of 
+We assumed that the states of individuals are fixed within primary periods, but can change from one primary period to the next. 
+States include (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
+The initial state corresponded to the state at the end of the experiment in 2015, and therefore was known for all experimental animals. 
+For example, if an experimental animal was released at the lower site, we knew that the initial state was (3) “alive at the lower site”. 
+
+# Literature Cited {-}
+
+<div id="refs"></div>
+
+\clearpage
+
+# Tables {-}
+
+## Table S1 {-}
+
+Characteristics of all sites used in the treatment experiments. 
+
+## Table S2 {-}
+
+For the Barrett and Dusy Basin treatment experiment using early life stages, the number of tadpoles and subadults by basin, site id, site pair, and group (treated, control). 
+
+## Table S3 {-}
+
+Timelines for antifungal treatment experiments conducted in the lower and upper basins of the LeConte study area in 2015.
+
+
+# Figure legends {-}
+
+## Figure S1 {-}
+
+Temporal patterns of Bd infection in the LeConte study populations in the years prior to and the year of the treatment experiment. 
+For the lower and upper basins of the study area, Bd prevalence (upper panels) and load (lower panels; on a log10 +1 scale) during the period 2005-2015.
+Estimates of average prevalence include Clopper-Pearson binomial 95% confidence intervals and sample sizes. Boxplot components are as in Figure 1. 
+Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots; Bd load is expressed as log10(copies+1). 
+
+
+## Figure S2 {-}
+
+Zoospore pools in treated and control ponds before and after itraconazole treatment. 
+Y-axis shows zoospore equivalents detected per water sample, normalized to a 1-liter sample volume.
+
+# Figures {-}
+
+## Figure S1 {-}
+
+\clearpage
+
+## Figure S2 {-}
+
+\clearpage
+
