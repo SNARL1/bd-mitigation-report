@@ -382,24 +382,26 @@ Of the frogs that died, most did so during the first half of the treatment perio
 However, Bd loads were not higher on frogs that died versus survived (Table SX). 
 All control frogs survived during the several hour period between capture, processing, and release.
 
-During the three year post-treatment period and across both basins, 51% of treated frogs and 2% of control frogs were recaptured. 
-In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals. 
-During the four year period between the 2015 itraconazole treatment and the final survey in 2018, three captured individuals were known to have moved from the upper basin to the lower basin. 
-All three individuals were in the “treated” group. 
-Of the 749 unique frogs captured in the lower basin, 132 were in the “treated” group, two were in the “control” group, and 615 were not part of the original treatment experiment (“non-experimental”). 
-These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
-In the upper basin, of the 89 unique frogs captured, 81 were treated in 2015 and eight were non-experimental. 
-No control frogs were captured. 
-Across the entire duration of the experiment, the 1,212 individuals that were observed were estimated to represent approximately 83% (posterior median) of the adults that existed in the LeConte population from 2015 to 2018 (95% credible interval: 71%, 92%).
+During the three year post-treatment period and across both basins, 51% of treated frogs and 2% of control frogs were recaptured.
+In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals.
+During the four year period between the 2015 itraconazole treatment and the final survey in 2018, three captured individuals were known to have moved from the upper basin to the lower basin.
+All three individuals were in the “treated” group.
+Of the 749 unique frogs captured in the lower basin, 132 were in the “treated” group, two were in the “control” group, and 615 were not part of the original treatment experiment (“non-experimental”).
+These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic.
+In the upper basin, of the 89 unique frogs captured, 81 were treated in 2015 and eight were non-experimental.
+No control frogs were captured.
+Across the entire duration of the experiment, the 1,212 individuals that were observed were estimated to represent approximately 83% (posterior median) of the adults that existed in the LeConte population from 2015 to 2018 (95% credible interval: 71%, 91%).
 
-Bd loads on control animals were substantially higher than treated and non-experimental animals subsequent to the 2015 field treatments (posterior probability = 1). 
-<<TODO: after re-running the models with updated data - include the 95%CIs for Bd load in the treated and control group immediately after the treatment in 2015, and in the first primary period of 2016)>> 
-The two control animals that were recaptured in the year after the field treatments both had relatively low loads relative to the rest of the individuals in the control group (Fig. 5A). 
-Overall, the LeConte adult population declined in abundance from 2015 to 2018, with the most rapid declines in the control group (Fig. 5B). 
-Between the end of the treatments in 2015 and the first surveys of 2016, the number of animals surviving in the control group dropped from 176 to 12 (95% CI: 2, 43). 
-By the end of the summer in 2016, the posterior median for the number of surviving control animals was zero (95% CI: 0, 6). 
-Bd had a stronger negative effect in the control group relative to the treated and non-experimental animals (posterior probabilities = 0.93, and 0.91, respectively; Fig. 5C). 
-In the last primary period of 2018, the posterior median for the number of treated frogs alive was 4 (95% credible interval: 0, 13), 48 for non-experimental frogs (95% credible interval: 18, 93), and zero for controls (95% CI: 0, 0). 
+Bd loads on control animals were substantially higher than treated and non-experimental animals subsequent to the 2015 field treatments (posterior probability = 1).
+The expected Bd load for treated animals was three orders of magnitude less than the expected Bd loads of control animals (95% CI for the ratio of expected control and treatment Bd load: 0.07%, 0.3%).
+The two control animals recaptured in the year after the field treatments both had low loads relative to the control group (Fig. 5A).
+Overall, the LeConte adult population declined in abundance from 2015 to 2018, with the most rapid declines in the control group (Fig. 5B).
+Between the end of the treatments in 2015 and the first surveys of 2016, the number of animals surviving in the control group dropped from 176 to 12 (95% CI: 2, 42).
+By the end of the summer in 2016, most of the control animals had probably died (posterior median for number of control animals at the end of 2016: 0, with a 95% CI of: 0, 6).
+Bd had a stronger negative effect in the control group relative to the treated and non-experimental animals (posterior probabilities = 0.94, and 0.90, respectively; Fig. 5C).
+From the two year period spanning 2016-2018, approximately 642 individuals recruited into the non-experimental adult class (95% CI: 424, 803).
+Despite this recruitment, a population crash appeared imminent in 2018 (Figure 5A).
+In the last primary period of 2018, the posterior median for the number of treated frogs alive was 4 (95% credible interval: 0, 12), 47 for non-experimental frogs (95% credible interval: 17, 95), and zero for controls (95% credible interval: 0, 0).
 
 ### Treasure Lakes Basin {-}
 
