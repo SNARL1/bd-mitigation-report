@@ -74,7 +74,7 @@ Therefore, prior to exposing frogs to *J. lividum*, we first reduced their Bd lo
 For completeness, we also briefly summarize the results of a *J. lividum* augmentation experiment that focused on adult frogs and was led by Vance Vredenburg. 
 
 Finally, we also describe several efforts designed to reestablish frog populations at sites from which they were previously extirpated following Bd epizootics. 
-These include reintroduction of adults collected from Bd-naive populations, reintroduction of captive-reared adults that originally collected as tadpoles from post-epizootic declining populations, and translocation of adults collected from persistent populations.
+These include reintroduction of adults collected from Bd-naive populations, adults from post-epizootic declining populations, and adults from persistent populations.
 
 
 # Methods {-}
@@ -299,7 +299,7 @@ During each of these surveys, we conducted VES and captured and swabbed as many 
 ### Reintroduction of adults from Bd-naive populations {-}
 
 Recent evidence indicates that Bd infection of MYL frogs prompts an immune response that reduces susceptibility of exposed individuals to future infection (Toothman et al., in preparation). 
-To test whether infecting frogs with Bd and then clearing them of infection would increase the survival of frogs reintroduced into Bd-positive habitats, we planned an experiment in which Bd-exposed and unexposed control frogs were each reintroduced into three lakes.
+To test whether infecting frogs with Bd and then clearing them of infection would increase the survival of frogs reintroduced into Bd-positive habitats, we planned an experiment in which Bd-exposed and unexposed (control) frogs were each reintroduced into three lakes.
 Although the Bd exposures did not produce the expected high-level infections, as described below, we include the study in this report to provide a description of the experiment and the consequences of reintroducing frogs that were essentially Bd-naive into Bd-positive sites.
 
 In July 2013, we collected 100 adult *R. muscosa* from a large Bd-naive population ("Spur Basin") located in the headwaters of Bubbs Creek, South Fork Kings River, Kings Canyon National Park. Captured frogs were PIT tagged, swabbed, measured, and weighed, and held overnight in large mesh pens. 
@@ -313,8 +313,10 @@ We therefore opted to conduct another round of exposures. Bd infections were fir
 Re-exposure again produced only low-level Bd infections, as did a third exposure conducted on August 17. 
 Due to logistical considerations associated with holding frogs overwinter, we opted to release frogs back into the wild. 
 We did not expect that the observed low-level Bd infections were sufficient to cause the development of an immune response, but the reintroductions nonetheless allowed us to test the assumption that Bd-naive frogs introduced into Bd-positive habitats would rapidly become infected with Bd and succumb to chytridiomycosis.  
-Frogs were cleared of infection as referenced previously, and in early September were transported to the three reintroduction lakes via helicopter. 
-The sites were located in three different lake basins (Ruskin, Upper, and Pinchot), separated by 3--7 km, and occupied historically by large *R. muscosa* populations that were extirpated during the previous decade following Bd epizootics. 
+Frogs were cleared of infection as referenced previously, and in early September were transported to the three reintroduction lakes.
+Frogs were helicoptered to the Bench Lake Ranger Station, and transported from there to each lake on foot. 
+The sites were located in three different lake basins (Ruskin, Upper, and Pinchot), separated by 3--7 km. 
+All three sites were occupied historically by large *R. muscosa* populations that were extirpated during the previous decade following Bd epizootics. 
 
 To describe the dynamics of the reintroduced populations, we used standard CMR methods [@joseph2018disease]. Sites were visited 1-3 times during the summers  (June–September) of 2014--2019, and on a single day per visit (primary period) all habitats were searched repeatedly for frogs. 
 Frogs were captured using handheld nets, identified via their PIT tag (or tagged if they were untagged), measured, weighed, swabbed, and released at the capture location. 
@@ -324,10 +326,10 @@ Survival of translocated frogs, frog population size, and recruitment of new adu
 
 The ongoing spread of Bd across Sequoia and Kings Canyon National Parks has resulted in the decline of hundreds of mountain yellow-legged frog populations to extirpation or near-extirpation.
 In an effort to increase the likelihood that remnant populations would persist, in collaboration with SEKI staff we conducted four frog reintroduction studies during the period 2015-2019. 
-Details are provided in a report submitted to SEKI in 2020 ("Critical Restoration Efforts Needed to Recover Endangered Mountain Yellow-legged Frogs in Sequoia and Kings Canyon National Parks - Final Report") and are summarized here.
-Early stage animals (tadpoles and subadults) were collected from four populations that had recently experienced Bd epizootics and declined to near-extirpation, and delivered them to the San Francisco and Oakland Zoos for rearing to adulthood. 
+Details are provided in a report submitted to SEKI in 2020 ("Critical Restoration Efforts Needed to Recover Endangered Mountain Yellow-legged Frogs in Sequoia and Kings Canyon National Parks - Final Report") and are summarized here and in the Results.
+Early stage animals (tadpoles and subadults) were collected from four populations (Tyndall, Milestone, Sixty Lake, Pinchot) that had recently experienced Bd epizootics and declined to near-extirpation, and delivered them to the San Francisco and Oakland Zoos for rearing to adulthood. 
 In preparation for reintroduction into the basin from which they were originally collected, at least half of the frogs from each population were exposed to Bd and the remaining frogs served as unexposed controls.
-In contrast to the Bd-exposure of the Spur Basin frogs (described above), following Bd exposure frogs from all four populations developed moderate-to-high infection loads and were subsquently cleared of infection using itraconazole. 
+In contrast to the Bd-exposure of the Spur Basin frogs (described in *Reintroduction of adults from declining populations*, above), following Bd exposure frogs from all four populations developed moderate-to-high infection loads and were subsequently cleared of infection using itraconazole. 
 To avoid introducing confounding effects into the experiment, frogs in the control group were also treated with itraconazole using the same methods.
 Following release back into the study basins, populations were assessed using standard VES and CMR surveys to determine Bd loads and frog survival, population size, and recruitment. 
 
@@ -337,7 +339,7 @@ Recent evidence indicates that MYL frog populations that declined following Bd e
 These recovering (enzootic) populations would seem ideal sources of frogs for direct translocation to sites from which frogs were recently extirpated. 
 However, the use of translocations in SEKI is limited by the small number of enzootic populations that have developed to date. 
 Recovering populations are much more common in Yosemite National Park, and have been used as sources of frogs for multiple translocations conducted there since 2006. 
-The details of these translocations are available in a report submitted to YOSE in 2020 ("Describing the dynamics of translocated Sierra Nevada yellow-legged frog populations in Yosemite National Park to aid future conservation efforts"), and are summarized here. 
+The details of these translocations are available in a report submitted to YOSE in 2020 ("Describing the dynamics of translocated Sierra Nevada yellow-legged frog populations in Yosemite National Park to aid future conservation efforts"), and are summarized in the Results 
 
 # Results {-}
 
@@ -440,17 +442,55 @@ The one toe-clipped subadult was captured during the third survey, and was ident
 No *R. sierrae* of any life stage were detected during the fourth survey of 2013, or in surveys conducted in 2014 and 2019. 
 As such, *J. lividum* exposure did not increase survival sufficiently to allow persistence of this population over the longer-term. 
 
-## Microbiome augmentation of adults {-}
-xxxxxxxx
 
 ## Reintroduction of adults from Bd-naive populations {-}
+
+Bd-naive adult *R. muscosa* reintroduced to Ruskin, Upper, and Pinchot basins all became Bd-positive within 1-X years, and declined to extirpation or near-extirpation. 
+In Ruskin Basin, frogs were introduced to site ID 10285 and subsequently stayed mostly at that site. 
+A single reintroduced adult was captured in 10284 in 2014, but no frogs were ever detected at 10286 downstream. 
+By the time of the first post-reintroduction visit to this site in July 2014 (no visit was made to this site in 2013), frogs had become infected with Bd (prevalence = 56%), but loads were very low (range = 0-1344 ITS copies). 
+However, by the August and September 2014 visits, Bd prevalence was 100% and loads were high (range = 48->9,000,000 copies). 
+Frog survival during the 2014 summer was low, with an estimated 25% surviving at the time of the September visit (Figure 10A). 
+Only a single adult was captured in 2015 and none in future years. 
+Although second-year tadpoles were observed in 2015, the population declined to extirpation in subsequent years (Figure 10B, C). 
+
+In Upper Basin, frogs were introduced to 10277 and were subsequently recaptured there and in 10276, 11359, 12361, and 12534. 
+The introduced population showed very similar dynamics as Ruskin. 
+In September 2013, all captured frogs remained Bd-negative, and visits in July and August 2014 indicated that although prevalence had increased slightly (13%), Bd loads remained very low (0-96 copies). 
+Prevalence had increased markedly by the time of the September 2014 visit (71%), but loads were still relatively low (0-4272). 
+By summer 2015, only a single adult was observed (Figure 11A) and its load was very high (>10^7), indicating that a Bd epizootic has occurred during the previous winter. 
+A small number of tadpoles was observed in 2016, but the population declined to extirpation (Figure 11B, C). 
+
+The long-term outcome of the frog introduction in Pinchot Basin was similar, but took longer to play out.
+Frogs were introduced to 10315, and were subsequently capture there and in 10214 and 10216. 
+A single frog was Bd-positive during the September 2013 visit (prevalence = 7%). During visits in 2014, 2015, and 2016, prevalence fluctuated widely (0-94%), but loads were always very low (0-1734 copies). 
+During this period, survival of introduced adults was relatively high (Figure 12A), and the population declined slowly and by a similar amount each year (Figure 12B). 
+Tadpoles were observed in 2015 and 2016.
+The site was not visited in 2017, but in 2018 no adults were observed and Bd loads on tadpoles and subadults were generally very high (112-10^7 copies), suggesting that the adults had succumbed to a Bd epizootic sometime between September 2016 and July 2018. 
+The population subsequently declined to extirpation (Figure 12B, C). 
 
 
 ## Reintroduction of adults from declining populations {-}
 
+As described in "Critical Restoration Efforts Needed to Recover Endangered Mountain Yellow-legged Frogs in Sequoia and Kings Canyon National Parks - Final Report - 2020"), reintroduction of captive-reared adults that originated from post-epizootic declining populations (Tyndall, Milestone, Sixty Lake, Pinchot) was relatively unsuccessful in reestablishing or augmenting populations, even when frogs were "immunized" against Bd. 
+Most reintroduced populations declined quickly to extirpation or near-extirpation (lower Milestone, Sixty Lake, Pinchot), indicating that the survival of reintroduced frogs was very low regardless of whether they were “immunized” prior to release or not. 
+
+The two populations reintroduced into the Tyndall watershed declined more slowly, thereby providing an opportunity to better assess differences in survival between Bd-exposed and control frogs.
+At Tyndall Creek Pond, survival of reintroduced Bd-exposed frogs was somewhat higher than that of reintroduced control frogs, and the reintroduction appeared successful in increasing the size of the adult population and may also have increased recruitment of new adults. 
+At Ranger Station Pond, Bd exposure did not affect post-release survival and the population declined to near extirpation within three years. 
+The fact that reintroductions to both of these sites used frogs collected from the same donor population (Tyndall Creek Pond) suggests that biotic or abiotic characteristics of the reintroduction site have important effects on frog survival and the likelihood of population establishment. 
+In addition, frogs obtained from the same population may show effects of immunization that differ between release locations. 
+This suggests that any benefit of immunization may be overridden by site specific factors or site x Bd interactions. 
+
 
 ## Reintroduction of adults from persistent populations {-}
 
+Results from frog translocations conducted in Yosemite indicate that the majority of translocations have resulted in population establishment, suggesting that reintroduction of frogs from persistent populations may be the most effective means of recovering frogs attempted so far. 
+Recent analysis of all translocated populations indicated the importance of both adult survival and recruitment of new adults as key factors affecting whether translocated populations become established (Knapp and Joseph 2020). 
+Results indicate that survival of translocated frogs is highly variable between sites, but is consistent within sites. 
+Therefore, site-specific factors appear to be important drivers of frog survival, and these factors likely include habitat characteristics, and frog-Bd dynamics. 
+Recruitment is also highly variable across sites and time. 
+Although significant pulses of recruitment may occur only 1-2 times per decade at a site, these pulses have critically important and long-lasting effects on frog populations, including on the establishment of translocated populations.
 
 
 # Discussion {-}
@@ -471,6 +511,13 @@ The Bd-state data are therefore less reliable than the quantitative data, and we
 ## Microbiome augmentation {-}
 
 In addition to describing results of microbiome augmentation of subadults, briefly mention the augmentation conducted on adults by V. Vredenburg.
+
+## Reintroduction of frogs from declining populations {-}
+
+Reintroduction of frogs from post-epizootic declining populations, including those "immunized" against Bd, generally resulted in low survival. 
+This suggests that using donor populations that are declining due to ongoing effects of Bd is unlikely to be an effective recovery strategy, even in the short term. 
+Instead, whenever possible, donor populations should be those that are robust and have shown substantial recovery in the decades following Bd epizootics. Every such population in SEKI (e.g., Darwin Bench, McGee, Swamp Lake, Volcanic Lakes) and on surrounding national forests (e.g., Mulkey Meadows) should be used as a source of frogs for future reintroductions to the maximum extent possible.
+Although relatively few such populations exist, they would nonetheless allow the recovery of frogs in many sites in the South Fork San Joaquin, Middle Fork Kings, and Kern River drainages from which frogs have been extirpated. Based on our current understanding, such efforts are likely to have a higher probability of success than efforts that utilize less robust donor populations. 
 
 ## Conclusions {-}
 
