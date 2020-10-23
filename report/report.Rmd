@@ -21,6 +21,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \newpage
 
+TO DO:
+* Barrett/Dusy Bd treatments: Update analyses and figures describing effect of treatment on Bd load over time 
+* Treasure Lake itraconazole treatment: Finalize figures  
+* Dusy Jliv metamorph treatment: analyze effect of Jliv addition on Bd load
+
+\newpage
+
 \linenumbers
 
 \begin{abstract}
@@ -32,7 +39,7 @@ TO BE ADDED
 \end{abstract}
 
 # Introduction {-}
-Emerging infectious diseases are increasingly common in wildlife [@daszak2000emerging], often due to anthropogenic changes in the ecology of the host or pathogen.
+Emerging infectious diseases are increasingly common in wildlife [@daszak2000emerging; @cunningham2017one], often due to anthropogenic changes in the ecology of the host or pathogen.
 Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems [@ostfeld2008infectious; @scheele2019amphibian].
 Diseases of wildlife can also spill over to humans and domestic animals [@daszak2000emerging]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
 As such, the ability to control diseases in wildlife is critically important, but disease management is often difficult because wildlife diseases are relatively poorly described, many fewer intervention measures (e.g., vaccines) are available than for humans, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. As a result, available management strategies are mostly insufficient to mitigate the destructive effects of disease on wildlife.
@@ -137,14 +144,15 @@ Statistical analyses in common across experiments? This could include Clopper-Pe
 
 ### Itraconazole treatment of early life stages {-}
 
-Bd-caused epizootics occurred at the study populations in Barrett Lakes Basin during 2005 to 2007 [@vredenburg2010dynamics] and in Dusy Basin in 2009 (Kings Canyon National Park). 
+Bd-caused epizootics occurred at the study populations in Barrett Lakes Basin during 2005 to 2007 [@vredenburg2010dynamics] and in Dusy Basin in 2009 (Jani et al. 2017?). 
+Both basins are located in Kings Canyon National Park. 
 Itraconazole treatments were conducted over seven consecutive days during mid-summer of 2009 in Barrett and 2010 in Dusy. 
 Because adults typically succumb to chytridiomycosis early in an epizootic, at the time of the experiments these populations were made up primarily of late-stage tadpoles, recently metamorphosed subadults, and a small number of residual adults. 
 In both basins, sufficient numbers of populations were available to allow an experimental design in which treated and control populations were paired to minimize variation in location, elevation, pond area, and pond maximum depth. 
 In the Barrett and Dusy experiments, a total of three and two pairs of populations were included, respectively, and populations were assigned to categories at random (Table S1). 
 In Dusy Basin, itraconazole treatment was also conducted at a third, unpaired site. 
 Data from that site were not included in the analysis of the effects of treatment on frog populations, but were used in the analysis of effects of treatment on Bd density in the environment (see below, Table S1). 
-In both basins, we hypothesized that itraconazole treatment would reduce Bd loads and increase the survival of animals during metamorphosis, resulting in peaks in more subadults counted at treated versus control populations. 
+In both basins, we hypothesized that itraconazole treatment would reduce Bd loads and increase the survival of animals during metamorphosis, resulting in more subadults counted at treated versus control populations. 
 
 In the Barrett experiment, on July 29 pens were set up in the ponds harboring populations assigned to the treated category. 
 During July 29 to August 1, as many animals as possible were captured from each pond, swabbed, and added to the pens. 
@@ -169,9 +177,9 @@ For the first question, we conducted several analyses.
 First, we used a multi-factor ANOVA with Bd load as a function of life stage (tadpole or subadult), swabbing time period (pre- or post-treatment), experimental group (treated or control), and pair (1-5). 
 Bd loads were log10 transformed to improve normality of the distribution. 
 Although we initially attempted to include all Bd load data, we opted to exclude records with Bd load = 0 (39 out of 822) because they resulted in a skewed distribution of Bd load that deviated substantially from normality (after log10 + 1 transformation). 
-This exclusion had virtually no effect in model outcomes. 
+This exclusion had virtually no effect on model outcomes. 
 The two swabbing time periods used in the multi-factor ANOVA included “pre-treatment” and “post-treatment”. 
-Relative to swab collections, the pre-treatment period included swabs collected from animals in the treated populations before they were exposed to itraconazole, and swabs from control populanimals collecte in the middle of the treatment period. 
+The pre-treatment period included swabs collected from animals in the treated populations before they were exposed to itraconazole, and swabs from control populations collected in the middle of the treatment period. 
 The “post-treatment” period included swabs collected from all populations approximately two weeks after the conclusion of the treatment period (day 21-24). 
 Although swabs were collected from treated animals on the last day of itraconazole treatment (day 7), due to logistical challenges related to the amount of time required to capture and swab large numbers of animals, we were unable to collect a corresponding set of swabs from control populations at that time. 
 Therefore, we defined the “post-treatment” period as swabs collected two weeks after the conclusion of the treatment period when swabs were available from both control and treated populations. 
@@ -185,14 +193,14 @@ We conducted three additional analyses focused on the first research question.
 First, because the multi-factor ANOVA didn’t allow a direct assessment of the change in Bd loads over the treatment period, we used a one-way ANOVA applied to data from treated animals only to compare pre-treatment Bd loads with loads measured on the last day of treatment (day 7). 
 For this analysis, Bd load data were pooled across basins. 
 Second, we evaluated Bd prevalence with a binomial test in both treated and control populations two weeks prior to the experiment to determine how infected these populations were prior to treatment.
-Finally, we used Fisher’s exact test to see whether Bd load was different between treated and control animals in the pre-treatment period versus the post-treatment period, 2 weeks after the experiment. 
+Finally, we used Fisher’s exact test to see whether Bd load (should this be prevalence?) was different between treated and control animals in the pre-treatment period versus the post-treatment period, 2 weeks after the experiment. 
 Fisher’s exact test was used instead of a Chi-square test because of small sample sizes in some cells of the contingency table.
 
 To address the second question regarding the long-term effects of treatment on frog survival, we were limited to using VES data. 
 Ideally, we would have repeatedly sampled the treated and control cohorts over time and described survival directly using CMR methods. 
 This wasn’t possible due to the inability to mark individuals and to the time required to repeatedly recapture hundreds of animals. 
-Therefore, we used count data from VES to determine whether treated populations had more subadults frogs than did control populations, a pattern that would be consistent with higher survival of treated animals. 
-We used raw count data, but the observed patterns were unchanged when animal density (count/meter of shoreline) was used instead. 
+Therefore, we used count data from VES to determine whether treated populations had more subadult frogs than did control populations, a pattern that would be consistent with higher survival of treated animals. 
+We used raw count data, but the observed patterns were unchanged when animal density (count per meter of shoreline) was used instead. 
 
 During the itraconazole treatments in Dusy Basin in 2010, we tested if treatment of frogs reduced the concentration of planktonic Bd cells (“zoospore pool”) in pond water. 
 We sampled the zoospore pool before and after itraconazole treatments (July 23-25 and August 21-24, respectively), in each of the five ponds included in the experiment (Table S1). 
