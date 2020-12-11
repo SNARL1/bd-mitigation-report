@@ -12,4 +12,4 @@ Includes the following sections:
   Summarize from SEKI report (KRG02 - Critical restoration efforts). 
 7. Translocation of adults from persistent populations in YOSE. Summarize from YOSE report (KR536 - translocation analysis).
 
-Sections 1-3 are from Bd mitigation manuscript. 
+Sections 1-3 will be included in a "Bd mitigation" manuscript. 
