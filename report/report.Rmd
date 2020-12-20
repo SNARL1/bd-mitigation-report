@@ -188,66 +188,25 @@ Follow-up VES were conducted in mid-August and mid-September 2010, and July and 
 Our analysis of the data from the experiments focused on two questions: During the one-year period following the treatments, did itraconazole treatment influence the (1) Bd loads and (2) survival of treated animals? 
 To address the first question, we developed separate models to describe Bd loads of the animals assigned to the treated and control groups before treatment was initiated, the effectiveness of treatment in reducing Bd loads of animals in the treated group, and post-treatment loads in the treated and control groups in the year of treatment and the following year. Because the treatments in Barrett and Dusy basins were virtually identical in their design, we combined the results from both experiments into a single dataset, and to account for any between-treatment differences we included basin as a predictor variable in models.
 
-We evaluated pre-treatment differences in Bd load between treated and control groups (Figure 1: Days = "pre") using the model *bd_load ~ (treatment x basin)* (family = negative binomial, treatment = treated/control, basin = Barrett/Dusy). 
+We evaluated pre-treatment differences in Bd load between treated and control groups (Figure 1: Days = "pre") using the model *bd_load ~ (basin x treatment)* (family = negative binomial, treatment = treated/control, basin = Barrett/Dusy). 
 Adding a group-level effect of site_id or using a zero-inflated negative binomial model did not improve model fit. 
 Life stage (tadpole, subadult) was not included in the model as a predictor because some ponds had mostly tadpoles and a few had mostly subadults, introducing the potential for singular model fits. 
 As such, we relied on the site_id group-level effect to account for between-pond variation resulting from the predominance of one life stage or another. The group-level effect of site_id on model fit was negligible, indicating that the inability to account for the potential effects of different life stages likely did not bias the model outcome. 
 
-The immediate effect of treatment on Bd load was assessed using the model *bd_load ~ stage + treat_category x basin* (family = zero-inflated negative binomial, treat_category = beginning/end of treatment period). 
+The immediate effect of treatment on Bd load was assessed using the model *bd_load ~ stage +  (basin x treat_category)* (family = zero-inflated negative binomial, treat_category = beginning/end of treatment period). 
 We were able to include stage in this model because many tadpoles metamorphosed into subadults during the treatment, producing a more balanced representation of stages across sites. 
 Plots of conditional effects suggested substantial differences in Bd load variation between the beginning and end of the treatment period, between stages, and between basins. Differences in zero inflation were also evident for treatment_category and stage. 
 Therefore, the shape parameter was also modeled as a function of stage, treat_category, and basin , and the zero-inflation parameter was modeled as a function of treat_category and stage (additive effects only). 
 
-The effect of treatment on Bd loads over the remainder of the summer during which treatment occurred and during the following summer was evaluated using the model *bd_load ~ stage + basin + (treatment x year) + (1 | site_id)* (family = zero-inflated negative binomial, year is a dummy variable in which 0 = year of treatment and 1 = year after treatment, site_id included as a group-level effect). 
+The effect of treatment on Bd loads over the remainder of the summer during which treatment occurred and during the following summer was evaluated using the model *bd_load ~ stage + basin + (year x treatment) + (1 | site_id)* (family = zero-inflated negative binomial, year is a dummy variable in which 0 = year of treatment and 1 = year after treatment, site_id included as a group-level effect). 
 Plots of conditional effects suggested substantial differences in Bd load variation between the treated and control groups, and between stages and between years. 
 In addition, the degree of zero inflation suggested differences between treated and control groups, and between basins.   
 As such, the shape and zero-inflation parameters were also modeled as a function of treatment, stage, basin, and year (additive effects only). 
 
-The effect of treatment on subadult survival was assessed using the model *count ~ basin + tadpole + (std_year x treatment) + (1|site_id)* (family = zero-inflated negative binomial, subadult = number of subadults counted during a VES, tadpole = number of tadpoles counted during the same VES - log10 transformed). The count of subadults served as a proxy for subadult survival, which could not be estimated directly. To account for differences between ponds in potential subadult production due to difference in the number of tadpoles (= future subadults), we included the tadpole count variable. No need for shape or zi predictors was evident. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The two swabbing time periods used in the multi-factor ANOVA included “pre-treatment” and “post-treatment”. 
-The pre-treatment period included swabs collected from animals in the treated populations before they were exposed to itraconazole, and swabs from control populations collected in the middle of the treatment period. 
-The “post-treatment” period included swabs collected from all populations approximately two weeks after the conclusion of the treatment period (day 21-24). 
-Although swabs were collected from treated animals on the last day of itraconazole treatment (day 7), due to logistical challenges related to the amount of time required to capture and swab large numbers of animals, we were unable to collect a corresponding set of swabs from control populations at that time. 
-Therefore, we defined the “post-treatment” period as swabs collected two weeks after the conclusion of the treatment period when swabs were available from both control and treated populations. 
-
-Model selection and validation procedures followed [@zuur2009mixed] (Section 4.2.3 and Appendix A).
-As part of the model selection process, we investigated using linear mixed effects models, but found the simpler ANOVA design provided greater explanatory power as measured by ANOVA and AIC. 
-The pair variable was tested for inclusion as a random effect, but it did not improve model fit and was removed during the variable selection procedure. 
-Basin and site id were closely related to the pair variable, so were not included as separate predictor variables in the model. 
-
-We conducted three additional analyses focused on the first research question. 
-First, because the multi-factor ANOVA didn’t allow a direct assessment of the change in Bd loads over the treatment period, we used a one-way ANOVA applied to data from treated animals only to compare pre-treatment Bd loads with loads measured on the last day of treatment (day 7). 
-For this analysis, Bd load data were pooled across basins. 
-Second, we evaluated Bd prevalence with a binomial test in both treated and control populations two weeks prior to the experiment to determine how infected these populations were prior to treatment.
-Finally, we used Fisher’s exact test to see whether Bd load (should this be prevalence?) was different between treated and control animals in the pre-treatment period versus the post-treatment period, 2 weeks after the experiment. 
-Fisher’s exact test was used instead of a Chi-square test because of small sample sizes in some cells of the contingency table.
-
-To address the second question regarding the long-term effects of treatment on frog survival, we were limited to using VES data. 
-Ideally, we would have repeatedly sampled the treated and control cohorts over time and described survival directly using CMR methods. 
-This wasn’t possible due to the inability to mark individuals and to the time required to repeatedly recapture hundreds of animals. 
-Therefore, we used count data from VES to determine whether treated populations had more subadult frogs than did control populations, a pattern that would be consistent with higher survival of treated animals. 
-We used raw count data, but the observed patterns were unchanged when animal density (count per meter of shoreline) was used instead. 
+The effect of treatment on subadult survival was assessed using the model *count ~ basin + tadpole + (std_year x treatment)* (family = zero-inflated negative binomial, subadult = number of subadults counted during a VES, tadpole = number of tadpoles counted during the same VES - log10 transformed). The count of subadults served as a proxy for subadult survival, which could not be estimated directly. To account for differences between ponds in potential subadult production due to difference in the number of tadpoles (= future subadults), we included the tadpole count variable. No need for shape or zi predictors was evident. 
 
 *Effect of treatment on zoospore pool*. During the itraconazole treatments in Dusy Basin in 2010, we tested if treatment of frogs reduced the concentration of planktonic Bd cells (“zoospore pool”) in pond water. 
-We sampled the zoospore pool before and after itraconazole treatments (July 23-25 and August 21-24, respectively), in each of the five ponds included in the experiment (Table S1). 
-[ref previous studies measuring zoospore pools?] 
+We sampled the zoospore pool before and after itraconazole treatments (July 23-25 and August 21-24, respectively), in each of the five ponds included in the experiment (Table 1). 
 Water samples (six per pond) were collected by filtering water through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
 Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
 DNA was extracted using the DNEasy Blood and Tissue kit (Qiagen). 
@@ -257,13 +216,7 @@ For each sample, we ran three technical replicates, each from an independent sam
 Bd load data were transformed as log10(Bd load + 1), where 1 was added to avoid negative values that result from log10 transformation of numbers less than 1. 
 Methods used to validate the measurement of zoospore pools are provided in Supplementary Materials. 
 
-We were interested in whether itraconazole treatment affected the temporal change in Bd zoospore pools, i.e., whether itraconazole-treated ponds showed smaller increases in zoospore pools over time compared with control ponds. 
-We therefore analyzed the Bd loads (ITS copies) and Bd status (Bd-positive or Bd-negative) of water samples separately to avoid confounding state changes with quantitative changes. 
-To test if itraconazole treatment affected Bd loads, we restricted the data to Bd-positive samples and used a mixed effects model with treatment, time period (before or after treatment), and their interaction as fixed effects and pond as a random effect. 
-To analyze changes in Bd-state, we converted the data to the number of Bd-positive samples in each lake, with sampling effort per lake being equal at n = 6 per lake). 
-This reduced the data to 10 points: one per lake for each sampling phase. 
-We then tested if the number of positive filters per lake was affected by treatment, again using a linear mixed model with treatment, time period, and their interaction fixed and pond random. 
-We note that the analysis of Bd-state is not precise because failure to detect Bd in a sample indicates only that the sample falls below the limit of detection, not necessarily that the sample is truly Bd-negative.
+Analysis of these data was problematic due to unusually severe skew and zero-inflation. As a result, the results are described verbally and in a figure. 
 
 ### Itraconazole treatment of adults {-}
 
@@ -348,8 +301,7 @@ During each of these surveys, we conducted VES and captured and swabbed as many 
 
 The questions that analyses of collected data focused on were similar to those described in the methods for the section "Itraconazole treatment of early life stages". 
 Specifically, we asked whether animals exposed to the combined itraconazole-*J. lividum* treatment had (1) higher concentrations of *J. lividum* and lower Bd loads than untreated control animals and non-experimental ("wild") animals during the two summer months following the end of the treatment period, and (2) higher survival than control animals. 
-For question 2, we assumed that the percentage of animals in each groupt that were recaptured was an accurate proxy of survival. 
-Unlike the Barrett-Dusy dataset that had hierarchical structures, this dataset did not; therefore, we used linear instead of multilevel models.
+For question 2, we assumed that the percentage of animals in each group that were recaptured was an accurate proxy of survival. 
 Unfortunately, recaptures of control animals quickly declined to near zero, thereby precluding formal comparisons of *J. lividum* and Bd load on treated versus control animals.
 We were able to compare treated versus wild frogs, but importantly, unlike the treated and control groups that each contained a single cohort of tagged animals that was repeatedly sampled over time, membership of animals in the wild group likely changed over time as new individuals entered the group and others were removed (e.g., via mortality). 
 
@@ -431,50 +383,15 @@ The effects of tadpole count, basin, and year were unimportant.
 The interaction term indicated that treated populations had higher subadult counts than control populations in the year of the treatment, but that counts in treated populations in the year following treatment were low and similar to that in control populations (Figure 2). 
 Therefore, mirroring the longer-term effects of treatment on Bd load, the increase in subadult survival in treated populations in the month following treatment was no longer evident in the year following treatment. 
 
-
-
-
-
-
-
-
-
-
-
-
-Two weeks prior to the itraconazole treatments, loads were high in all populations, and similar between populations assigned to the treated and control categories (one-way ANOVA: F1,81 = 1.97, p = 0.17). 
-Bd prevalence was near 100% at all sites (Barrett: 100%, CI = 86-100%, n = 24; Dusy: 98%, CI = 90-99%, n = 54). 
-At the end of the treatment period, Bd loads of treated animals were significantly lower than during the pre-treatment period (one-way ANOVA, F1,540 = 646.3, p < 0.0001). 
-In contrast, prevalence was unchanged by treatment (two-sided Fisher’s exact text, p = 1.00), indicating that treatment reduced loads but did not clear animals of infection. 
-
-The final multi-factor ANOVA model included life stage, treatment, time period, and the interaction between treatment and period (adjusted r2 = 0.40, DF = 778, F = 130; Table 1). 
-Between the pre and post periods, Bd loads of treated populations decreased by a similar amount in both basins (Barrett: average load decreased from 61,000 to 1,200 copies; Dusy: average load decreased from 73,000 to 6,100 copies). 
-However, these reductions were short-lived, with no differences in Bd loads between treated and control populations observed in subsequent surveys (Figure 1). 
-
-Comparison of frog counts between treated and control populations suggested that treatment had short-term positive effects on frog survival. 
-In both the Barrett and Dusy experiments, despite differences between populations in the number of tadpoles counted prior to the treatment (Table S2), one month after the treatment period the number of subadults in all five treated populations showed a short-term increase but only one of five control populations showed a corresponding increase (Figure 2). 
-However, this pulse of subadults never appeared as a new cohort of adults, and all treated and control populations in both basins declined to extirpation within 3-5 years (Figure 2).
-
-*Effect of treatment on zoospore pool*. Temporal change in aquatic zoospore pools in Dusy Basin were affected by itraconazole treatment (time * treatment interaction: p = 0.048), apparently because zoospore pools increased marginally in control lakes but not treatment lakes (contrasts comparing before-treatment to after-treatment, p = 0.055 and 0.391 for control and treatment groups, respectively, Figure [AJ1]). 
-Treatment also marginally affected the number of samples that were Bd-positive per lake (time * treatment interaction: p = 0.066), with a greater increase in positive samples in treatment lakes relative to controls (Figure [AJ2]).
+*Effect of treatment on zoospore pool*. Zoospore pools in the ponds assigned to the treated group showed little change between before and after treatment, and those of control ponds may have increased slightly (Figure 3). Assuming the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, we conclude that the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not substantially alter the zoospore pools. 
 
 ## Itraconazole treatment of adults {-}
 
 ### LeConte Basin {-}
 
-Visual surveys of *R. sierrae* populations conducted in the lower and upper basins of the study area between 2005 and 2014 indicated average minimum population sizes of approximately 2,800 and 500 adults, respectively. 
-During this same time period, qPCR-based Bd surveillance indicated that Bd prevalence and load were generally zero or near-zero (Figure S1). 
-Prevalence and load increased in 2012 but declined to baseline levels in 2013 and 2014. 
-(We have observed similar “failed Bd invasions” in other Bd-naïve MYL frog populations in SEKI.) 
-Until 2015, Bd loads on individual frogs were always far below levels indicative of a Bd epizootic (Figure S1), and no mass mortality events were observed during visual surveys or sample collection.
-However, in mid-summer 2015 we detected a rapid increase in Bd prevalence and load (Figure S1) in the lower basin, and VES produced a count of 196 dead adults (and 772 live adults). 
-Collectively, these results indicated that an epizootic was underway. 
-Concurrent sampling in the upper basin indicated that Bd prevalence and load remained low in that population, and only one dead adult (and 791 live adults) was detected during VES. 
-A treatment experiment was initiated in the lower basin 10 days after the epizootic was detected (the 10-day lag was due to logistical constraints). 
-Subsequent Bd surveillance indicated that by the time the lower basin treatment was nearing completion in late-August, an epizootic was beginning in the upper basin (Fig. S1). This provided an opportunity to conduct a second treatment experiment.
-
-In 2015, prior to the treatment period, frogs in the treated and control groups had very high Bd loads, and those of frogs in the control group were somewhat higher than those in the treated group (Figure 2, Table SX). 
-However, Bd loads of both groups were above the level at which symptoms of severe chytridiomycosis are evident. Samples collected at the end of the 7-9 day treatment period indicated that the treatment was effective in reducing Bd loads on treated frogs by 1.4-2.7 orders of magnitude (Figure 2, Table SX). 
+In the experiments conducted in the lower and upper basins, prior to the treatment period frogs assigned to the treated and control groups had very high Bd loads, above the level at which symptoms of severe chytridiomycosis are evident. 
+Bd loads of frogs in the control group were somewhat higher than those in the treated group (Figure 2), likely because control frogs were captured and processed 1-3 days after the treatment frogs and during a period of increasing Bd loads in the study populations. 
+Samples collected at the end of the 7-9 day treatment period indicated that the treatment was effective in reducing Bd loads on treated frogs by 1.4-2.7 orders of magnitude (Figure 4). 
 During the treatment period, 74 of the lower basin treated frogs and 79 of the upper basin treated frogs died. 
 Of the frogs that died, most did so during the first half of the treatment period (lower basin: 73%; upper basin: 74%), consistent with frogs succumbing to chytridiomycosis. 
 However, Bd loads were not higher on frogs that died versus survived (Table SX). 
@@ -519,25 +436,25 @@ Therefore, despite the substantial reduction in Bd loads caused by the 2018 trea
 
 ## Microbiome augmentation of subadult frogs {-}
 
-In the Dusy Basin microbiome augmentation experiment, prior to the itraconazole treatment Bd loads were similar in control and treated subadults (CI -0.37 -- 0.71; Figure x1).
-The 7-day itraconazole treatment reduced Bd loads more than 4 orders of magnitude subadults (CI  -9.34 -- -8.50; Figure x1). 
+In the Dusy Basin microbiome augmentation experiment, prior to the itraconazole treatment Bd loads were similar in control and treated subadults (CI -0.37 -- 0.71; Figure 9).
+The 7-day itraconazole treatment reduced Bd loads more than 4 orders of magnitude subadults (CI  -9.34 -- -8.50; Figure 9). 
 
-*J. lividum* exposure started on the day following the last day of itraconazole treatment, and on that day *J. lividum* concentrations on subadults assigned to the treated group were either zero or near-zero in all individuals (day 0; Figure x2). 
-Twelve days after the two *J. lividum* baths to which animals in the treated group were subjected, *J. lividum* concentrations on subadults were high, but unexpectedly the concentrations were similarly high in treated, control, and wild groups instead of only in the treated group (day 0 versus 12; Figure x2).
+*J. lividum* exposure started on the day following the last day of itraconazole treatment, and on that day *J. lividum* concentrations on subadults assigned to the treated group were either zero or near-zero in all individuals (day 0; Figure 10). 
+Twelve days after the two *J. lividum* baths to which animals in the treated group were subjected, *J. lividum* concentrations on subadults were high, but unexpectedly the concentrations were similarly high in treated, control, and wild groups instead of only in the treated group (day 0 versus 12; Figure 10).
 This indicates that *J. lividum* exposure of animals in the treated group resulted in the effective transfer of *J. lividum* to other frogs in the pond that had not been treated with itraconazole. 
-However, over the following three months, *J. lividum* concentrations on subadults declined rapidly to near baseline levels (Figure x2). 
+However, over the following three months, *J. lividum* concentrations on subadults declined to near baseline levels (Figure 10). 
 Formal comparison of *J lividum* concentrations from day 12 to day 56 across all three groups wasn't possible due to the almost complete loss of control frogs by day 37 (n = 1) and day 56 (n = 0). 
 However, a model that included the treated and wild groups indicated an important effect on *J. lividum* concentration of days since *J. lividum* exposure, but no effect of group or a (day * group) interaction term. 
-Therefore, *J. lividum* concentrations declined over the 3-month period and at similar rates in both treated and wild frogs (Table x1). 
+Therefore, *J. lividum* concentrations declined over the 3-month period and at similar rates in both treated and wild frogs (Table 4). 
 
-Following release of frogs in the treated group (itraconazole-treated and *J. lividum*-exposed) back into the study pond, their Bd loads increased steadily and reached pre-treatment levels after three months (day 56). 
+Following release of frogs in the treated group (itraconazole-treated and *J. lividum*-exposed) back into the study pond, their Bd loads increased steadily and reached pre-treatment levels after three months (Figure 9: day 56). 
 Due to the rapid loss of frogs in the control group, formal comparison of Bd loads from day 12 to day 56 across all three groups wasn't possible. 
 However, a model that included the treated and wild groups indicated that Bd loads increased from day 12 to day 56, and that Bd loads of wild frogs were higher than those of treated frogs. 
-In addition, there was an important effect of the (days * group) interaction, due to increased in loads of treated frogs and relatively constant loads of wild frogs (Table X). 
+In addition, there was an important effect of the (days * group) interaction, due to increased loads of treated frogs and relatively constant loads of wild frogs (Table 5). 
 Together, these results indicated that the combined effect of itraconazole treatment and *J. lividum* exposure was ineffective in preventing the increase in Bd loads to pre-treatment levels. 
 Increased concentrations of *J. lividum* on control and wild frogs also had no obvious effect on Bd load. 
 
-During the three surveys of the study pond conducted in 2012, the percent of frogs in the treated and control groups that were recaptured declined, but the rate of decline was steeper in the control versus treated group (Figure x3). 
+During the three surveys of the study pond conducted in 2012, the percent of frogs in the treated and control groups that were recaptured declined, but the rate of decline was steeper in the control versus treated group (Figure 11). 
 Although no formal analysis is possible due to the relatively few sample points, the results suggest that the intraconazole-*J. lividum* treatment increased frog survival over three month period following the treatment. 
 Only a single experimental animal was captured during surveys in subsequent years, and no *R. sierrae* of any life stage was detected during surveys in 2014 and 2019. 
 The one experimental (i.e., toe-clipped) animal captured after 2012 was detected during a survey on 26-June, and was a member of the treated group. 
@@ -647,15 +564,17 @@ Characteristics of all sites used in the antifungal experiments
 \bigskip
 
 ```{r, include=FALSE}
-t_1 <- read_csv(file = here::here("out", "expt_sites.csv"))
+t_1 <- read_csv(file = here::here("out", "table1_expt_sites.csv"))
 ```
 ```{r table1, echo=FALSE}
 kbl(
   t_1, col.names = c("Basin", "Site ID", "Experiment", "Life stage", "Category", "Elevation", "Depth", "Area"),
   booktabs = TRUE, linesep = "") %>%
   row_spec(0, bold = TRUE) %>%
-  footnote(general = "Units for Elevation and Depth are meters and those for Area are m^2", general_title = "") %>%
-  footnote(general = "Treatment = ''itracon + Jliv'' indicates the use of itraconazole and J. lividum", general_title = "") %>%  
+  footnote(general = "Units for Elevation and Depth are meters and those for Area are m\\\\textsuperscript{2}", 
+           general_title = "", escape = FALSE) %>%
+  footnote(general = "Treatment = ''itracon + Jliv'' indicates the use of itraconazole and \\\\textit{J. lividum}", 
+           general_title = "", escape = FALSE) %>%  
   footnote(general = "Life stage = ''early'' indicates tadpoles and subadults", general_title = "") %>%  
   kable_styling(latex_options = "scale_down")
 ```
@@ -664,15 +583,73 @@ kbl(
 
 ## Table 2 {-}
 
+Effect of itraconazole treatment in Barrett and Dusy basins on Bd loads during the following one year period.
+
+```{r, include=FALSE}
+t_m3c1 <- read_csv(file = here::here("out", "table2_dusbar_m3c1.csv"))
+```
+```{r table2, echo=FALSE}
+kbl(t_m3c1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+      booktabs = TRUE) %>%
+      pack_rows("Group-level effects", 1, 1) %>%
+      pack_rows("Population-level effects", 2, 14) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is zero-inflated negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+\clearpage
+
+## Table 3 {-}
+
+Effect of itraconazole treatment in Barrett and Dusy basins on counts of subadults during the following one year period.
+
+```{r, include=FALSE}
+t_m4a <- read_csv(file = here::here("out", "table3_dusbar_m4a.csv"))
+```
+```{r table3, echo=FALSE}
+kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 6) %>%
+      pack_rows("Family-specific parameters", 7, 7) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+\clearpage
+
+## Table 4 {-}
+
 Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on *J. lividum* concentration on frogs. 
 
 \bigskip
 
 ```{r, include=FALSE}
-t_m4a <- read_csv(file = here::here("out", "dusy2012_m4a.csv")) # how to show 2 decimal points without converting to character (as below).
+t_m3e <- read_csv(file = here::here("out", "table4_dusy2012_m3e.csv")) # how to show 2 decimal points without converting to character (as below).
 # t_m4asum$Rhat <- as.numeric(sprintf(t_m4asum$Rhat, fmt = '%#.3g'))
 ```
-```{r table2, echo=FALSE}
+```{r table4, echo=FALSE}
+kbl(t_m3e, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 4) %>%
+      pack_rows("Family-specific parameters", 5, 5) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+\clearpage
+
+## Table 5 {-}
+
+Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs. 
+
+```{r, include=FALSE}
+t_m4a <- read_csv(file = here::here("out", "table5_dusy2012_m4a.csv")) # how to show 2 decimal points without converting to character (as below).
+# t_m4asum$Rhat <- as.numeric(sprintf(t_m4asum$Rhat, fmt = '%#.3g'))
+```
+```{r table5, echo=FALSE}
 kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
@@ -684,23 +661,6 @@ kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "R
 
 \clearpage
 
-## Table 3 {-}
-
-Effect of intraconazole treatment in Barrett and Dusy basins on Bd loads during the following year.
-
-```{r, include=FALSE}
-t_m3c1 <- read_csv(file = here::here("out", "dusbar_m3c1.csv"))
-```
-```{r table3, echo=FALSE}
-kbl(t_m3c1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 13) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is zero-inflated negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-\clearpage
 
 # Figures {-}
 
@@ -729,11 +689,11 @@ Post-treatment counts of *R. sierrae* subadults in the year the treatment was co
 
 ## Figure 3 {-}
 
-```{r fig3, fig.cap="", eval=FALSE, include=FALSE, out.width="450px"}
-knitr::include_graphics("")
+```{r fig3, echo=FALSE, fig.cap="", out.width="450px"}
+knitr::include_graphics("../out/dusy_zsppool.png")
 ```
 
-Zoospore pools (left panel) and number of Bd-positive water samples (right panel) by treatment group and time period. In the left panel, the Y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. 
+Zoospore pools measured in the study ponds in which frogs were either treated with itraconazole or served as untreated controls. Results are grouped by sampling time (before or after the treatment). The Y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. 
 
 
 \clearpage
@@ -741,11 +701,11 @@ Zoospore pools (left panel) and number of Bd-positive water samples (right panel
 ## Figure 4 {-}
 
 ```{r fig4, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics("../out/leconte_beforeafter_treat.png")
+knitr::include_graphics("../out/leconte_2015_beforeafter_treat.png")
 ```
 
 Effect of antifungal treatments on Bd loads of adult *R. sierrae* in the 2015 LeConte treatment experiment.
-Box plots show Bd loads on frogs in the treated (dark green) and untreated control (white) groups before the treatment began and at the end of treatment. Results are shown separately for treatments conducted in the lower basin (a) and upper basin (b).
+Box plots show Bd loads on frogs in the untreated control (green) and treated (blue) groups before the treatment began and at the end of treatment. Results are shown separately for treatments conducted in the lower basin (a) and upper basin (b).
 Box plot components are as in Figure 1. 
 
 \clearpage
@@ -768,7 +728,8 @@ A rug along the x-axis displays the observed distributions of Bd load.
 knitr::include_graphics("../out/treasure-progress-plot-colored-boxes.png")
 ```
 
-Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred. Box colors indicate Bd loads from pre- and post-treatment periods (gray) and during the treatment (blue).  
+Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred. 
+Box colors indicate Bd loads from pre- and post-treatment periods (gray) and during the treatment (blue). 
 The number of swabs collected on each date is displayed above the x-axis.
 Box plot components are as in Figure 1. 
 During the treatment period, individual frogs were swabbed for Bd immediately following their initial capture and again just prior to their release (on 2018-07-23). 
@@ -802,20 +763,20 @@ For frogs included in the Treasure Lake antifungal treatment, the relationships 
 ## Figure 9 {-}
 
 ```{r fig9, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics("../out/dusy_2012_jliv.png")
+knitr::include_graphics("../out/dusy_2012_bdload.png")
 ```
 
-Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated, control, and wild groups following exposure of frogs in the treated group to *J. lividum* on days 0 and 1. Concentrations on day 0 are from samples collected from frogs assigned to the treated group just prior to the first *J. lividum* exposure. Frogs in the control group quickly disappeared, but concentrations on frogs in the treated and wild groups declined at similar rates over the following three months. 
+Bd loads on subadult *R. sierrae* in the treated, control, and wild groups. Immediately prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole to reduce their loads. Over the following three months, loads of the treated group increased and eventually returned to pre-treatment levels. Loads of control and wild frogs remained high throughout the three months. Therefore, itraconazole treatment followed by *J. lividum" exposure failed to suppress Bd loads over the longer term. 
 
 \clearpage
 
 ## Figure 10 {-}
 
 ```{r fig10, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics("../out/dusy_2012_bdload.png")
+knitr::include_graphics("../out/dusy_2012_jliv.png")
 ```
 
-Bd loads on subadult *R. sierrae* in the treated, control, and wild groups. Immediately prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole to reduce their loads. Over the following three months, loads of the treated group increased and eventually returned to pre-treatment levels. Loads of control and wild frogs remained high throughout the three months. Therefore, itraconazole treatment followed by *J. lividum" exposure failed to suppress Bd loads over the longer term. 
+Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated, control, and wild groups following exposure of frogs in the treated group to *J. lividum* on days 0 and 1. Concentrations on day 0 are from samples collected from frogs assigned to the treated group just prior to the first *J. lividum* exposure. Frogs in the control group quickly disappeared, but concentrations on frogs in the treated and wild groups declined at similar rates over the following three months. 
 
 \clearpage
 
