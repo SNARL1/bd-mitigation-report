@@ -220,7 +220,7 @@ Analysis of these data was problematic due to unusually severe skew and zero-inf
 
 ### Itraconazole treatment of adults {-}
 
-*LeConte Basin*. In mid-summer 2015, routine disease surveillance in Kings Canyon National Park at one of the largest remaining Bd-naïve *R. sierrae* populations detected high Bd loads (Figure S1) and the presence of many moribund and dead frogs. 
+*LeConte Basin*. In mid-summer 2015, routine disease surveillance at one of the largest remaining Bd-naïve *R. sierrae* populations detected high Bd loads (Figure S1) and the presence of many moribund and dead frogs. 
 In response to this epizootic, we immediately conducted two antifungal treatment experiments, one in the lower portion of the basin and one in the upper portion (Table S1). 
 The lower basin contains two lakes and four smaller ponds, and the upper basin contains a single lake. 
 At the time of the experiments, all of these water bodies were occupied by *R. sierrae*. The two basins are approximately 750 m apart and are linked by streams and relatively gentle terrain; we therefore expected some movement of frogs between them.
@@ -239,7 +239,9 @@ Control frogs were captured, processed, and released (see General Methods).
 
 Itraconazole treatments were conducted as described in General Methods and Table S3. 
 To determine treatment effectiveness, 93 frogs in the lower basin treated group (31 from each capture date) and 50 frogs in the upper basin treated group (25 from each capture date) were re-swabbed on the day prior to the last treatment. 
-After the last treatment, all frogs were released from the pens into the lake (nlower = 286, nupper = 127).
+After the last treatment, all frogs were released from the pens into the lake (nlower = 286, nupper = 127). 
+To evaluate any pre-treatment differences in Bd loads of frogs assigned to the treated and control groups, we used the model *bd_load ~ (basin x treatment)* (family = negative binomial, treatment = treated/control, basin = upper/lower). 
+To evaluate the immediate effect of treatment on Bd loads, we used the model *bd_load ~ (basin x treat_category)* (family = negative binomial, treat_category = beginning/end of treatment period). 
 
 The outcome of the treatment experiments was quantified using CMR surveys conducted during the summers of 2016, 2017, and 2018, as described in the General Methods. 
 No post-treatment surveys were possible in 2015 because the frog active season was nearly over by the time the treatments were completed. 
