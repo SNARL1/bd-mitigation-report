@@ -13,14 +13,22 @@ header-includes:
   - \usepackage{blkarray}
   - \usepackage{amsmath}
   - \newcommand{\matr}[1]{\mathbf{#1}}
+editor_options: 
+  chunk_output_type: console
 ---
 
 
 
 # Methods {-}
 
-## Validation of the zoospore filtration method {-}
+## Estimating the zoospore pool from water samples  {-}
 
+Ponds wate was filtered through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
+Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
+DNA was extracted using the DNEasy Blood and Tissue kit (Qiagen). 
+DNA extracts were diluted 1:50 for qPCR. 
+Quantitative PCR conditions and standards were as in [@jani2017epidemic], with a six-point standard curve. 
+For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
 It is common for technical replicates of environmental DNA samples to give variable results due to PCR inhibitors or low quantities of target DNA in samples [@mosher2018beyond]. 
 We therefore conducted tests to establish criteria for calling samples Bd-positive or Bd-negative. 
 We ran six negative controls (water filter samples from a Bd-naïve pond) on two separate replicate PCR runs, for a  total of 12 PCR reactions, all of which returned Bd-negative data (0 false positive results out of 12 PCR reactions). 
@@ -159,46 +167,23 @@ We drew 3000 iterations for each of four chains, using a maximum treedepth of 11
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
 Models were fit using the rstan R package, version 2.19.3 [@rstan2020].
 
+\clearpage
+
+# Literature Cited {-}
+
+<div id="refs"></div>
 
 \clearpage
 
-# Tables {-}
-
-## Table S1 {-}
-
-Characteristics of all sites used in the treatment experiments. 
-
-## Table S2 {-}
-
-For the Barrett and Dusy Basin treatment experiment using early life stages, the number of tadpoles and subadults by basin, site id, site pair, and group (treated, control). 
-
-## Table S3 {-}
-
-Timelines for antifungal treatment experiments conducted in the lower and upper basins of the LeConte study area in 2015.
-
-
-# Figure legends {-}
+# Figures {-}
 
 ## Figure S1 {-}
 
 Temporal patterns of Bd infection in the LeConte study populations in the years prior to and the year of the treatment experiment. 
 For the lower and upper basins of the study area, Bd prevalence (upper panels) and load (lower panels; on a log10 +1 scale) during the period 2005-2015.
 Estimates of average prevalence include Clopper-Pearson binomial 95% confidence intervals and sample sizes. Boxplot components are as in Figure 1. 
-Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots; Bd load is expressed as log10(copies+1). 
-
-
-## Figure S2 {-}
-
-Zoospore pools in treated and control ponds before and after itraconazole treatment. 
-Y-axis shows zoospore equivalents detected per water sample, normalized to a 1-liter sample volume.
-
-# Figures {-}
-
-## Figure S1 {-}
+Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots; Bd load is expressed as log10(copies+1).
 
 \clearpage
 
-## Figure S2 {-}
-
-\clearpage
 
