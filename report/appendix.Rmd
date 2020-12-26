@@ -177,12 +177,16 @@ Models were fit using the rstan R package, version 2.19.3 [@rstan2020].
 
 # Figures {-}
 
-## Figure S1 {-}
+## Figure A1 {-}
+
+```{r figa1, echo=FALSE, fig.cap=""}
+knitr::include_graphics("../out/leconte_fig_a1.png")
+```
 
 Temporal patterns of Bd infection in the LeConte study populations in the years prior to and the year of the treatment experiment. 
-For the lower and upper basins of the study area, Bd prevalence (upper panels) and load (lower panels; on a log10 +1 scale) during the period 2005-2015.
+For the lower and upper basins of the study area, Bd prevalence (upper panels) and load (lower panels; on a log~10~ + 1 scale) during the period 2005-2015.
 Estimates of average prevalence include Clopper-Pearson binomial 95% confidence intervals and sample sizes. Boxplot components are as in Figure 1. 
-Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots; Bd load is expressed as log10(copies+1).
+Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots. Units for Bd load are the number of ITS1 copies.
 
 \clearpage
 
