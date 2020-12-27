@@ -41,12 +41,13 @@ library(here)
 # Summary {-}
 
 In this report, we describe the outcome of studies conducted primarily in Sequoia, Kings Canyon, and Yosemite National Parks that attempted to mitigate the negative effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd) on populations of the endangered mountain yellow-legged frog (*Rana muscosa*, *Rana sierrae*). 
-These studies included treatment of (1) tadpoles and subadults, and (2) adults with the antifungal drug itraconazole during Bd epizootics, and (3) augmentation of the skin microbiome of subadults with *Janthinobacterium lividum*, a commensal bacteria with antifungal properties. 
+These studies included treatment of (1) tadpoles and subadults, and (2) adults with the antifungal drug itraconazole during Bd epizootics, and (3) augmentation of the skin microbiome of subadults with *Janthinobacterium lividum*, a commensal bacterium with antifungal properties. 
 We also describe the outcome of frog reintroductions that used animals collected from Bd-naive, post-epizootic declining, and recovering frog populations. 
 In all of the antifungal treatments, itraconazole exposure substantially reduced Bd loads. 
 In the experiments focused on early life stages, Bd loads and frog survival returned to pre-treatment levels relatively quickly, and treatment had no effect on population persistence. 
 In the itraconazole treatment experiment that focused on adults, the reduced Bd loads of treated frogs were maintained over several years and resulted in increased survival of adults. 
 However, recruitment of new adults failed to occur and the population eventually declined to near-extirpation. 
+In the microbiome augmentation experiment, bathing frogs in a *J. lividum* solution after Bd load reduction with itraconazole increased concentrations of this bacterium on frogs. However, concentrations declined relatively quickly, and any benefit of the joint Bd-clearing and *J. lividum* augmentation was lost before a significant effect on frog survival was realized. 
 Frogs collected from Bd-naive and post-epizootic declining populations and reintroduced into formerly occupied sites generally became reinfected with Bd quickly and most populations were rapidly extirpated. 
 In contrast, frogs collected from robust recovering populations maintained relatively low Bd loads and their survival was high. 
 Importantly, the majority of such populations showed evidence of becoming established.
@@ -98,7 +99,7 @@ We assumed that probiotic bacteria might have the strongest effect on Bd-frog dy
 Therefore, prior to exposing frogs to *J. lividum*, we first reduced their Bd loads with seven days of itraconazole treatment. 
 
 Finally, we also describe several efforts designed to reestablish frog populations at sites from which they were previously extirpated following Bd epizootics. 
-Specifically, these include reintroduction of adults collected from Bd-naive populations, adults from post-epizootic declining populations, and adults from persistent populations, all of which were conducted in Sequoia and Kings Canyon National Parks and Yosemite National Park. 
+Specifically, these include reintroduction of adults collected from Bd-naive populations, adults from post-epizootic declining populations, and adults from persistent populations, all of which were conducted in Sequoia, Kings Canyon, and Yosemite National Parks. 
 
 # Methods {-}
 
@@ -155,9 +156,9 @@ After the last treatment, all animals were released from the pens into the study
 ### Statistical analyses {-}
 
 Analysis of treatment experiments generally utilized linear and multilevel models analyzed in a Bayesian framework using the *brms* package [@bürkner2017rpackage; @bürkner2018advanced] and R software v. 4.0.3 [@rsoftware2020]. 
-The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was developed using Stan  [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
+The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was conducted using Stan  [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
 When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualization of leave-one-out ("LOO") probability integral transforms ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
-When suggested by the data structure, visualizations of LOO-PIT, or conditional effects via *brms*, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see brms vignette, "Estimating distributional models with brms" by P.-C. Bürkner). 
+When suggested by the data structure, visualizations of LOO-PIT, or conditional effects via *brms*, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
 We compared fits of models with and without the added terms using LOO and the *loo* package [@vehtari2017practical]. 
 For the sake of brevity, the models described below are the best-fit models that resulted from this workflow. 
 Predictors of population-level effects and family-specific parameters were considered important when the 95% credible interval (hereafter, "CI") of the estimates did not include zero, and relatively unimportant otherwise. 

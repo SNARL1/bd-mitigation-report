@@ -13,17 +13,20 @@ header-includes:
   - \usepackage{blkarray}
   - \usepackage{amsmath}
   - \newcommand{\matr}[1]{\mathbf{#1}}
+  - \usepackage{setspace}\doublespacing
+  - \usepackage[document]{ragged2e}
+  - \usepackage{lineno}
+  - \usepackage[none]{hyphenat}
 editor_options: 
   chunk_output_type: console
 ---
-
-
+\linenumbers
 
 # Methods {-}
 
 ## Estimating the zoospore pool from water samples  {-}
 
-Ponds wate was filtered through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
+Pond water was filtered through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
 Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
 DNA was extracted using the DNEasy Blood and Tissue kit (Qiagen). 
 DNA extracts were diluted 1:50 for qPCR. 
@@ -42,8 +45,15 @@ The *J. lividum* used to develop the real-time PCR assay was a strain provided b
 *J. lividum* DNA was extracted from a pure culture of this strain using a Qiagen DNeasy blood and tissue kit following the manufacturer's protocol. 
 The DNA collected was amplified using methods in [@harris2009skin]. The PCR product was viewed on a 1% agarose gel, and the 500 bp product was sequenced. 
 
-Primers were designed to be specific to *J. lividum* and sequences were as follows: Jliv_For3 ATGCCACCGACGGCTACCA, and Jliv_Rev1 ACGGCGGGATGGTCATCAC. 
-The minor groove binder probe sequence was JLIVT 6FAM AACATCGTTTGCTGTCCGTTGA MGBNFQ. 
+Primers were designed to be specific to *J. lividum* and sequences were: 
+
+* Jliv_For3 ATGCCACCGACGGCTACCA
+* Jliv_Rev1 ACGGCGGGATGGTCATCAC
+
+The minor groove binder probe sequence was:
+
+* JLIVT 6FAM AACATCGTTTGCTGTCCGTTGA MGBNFQ
+
 After assay optimization, the 25 $\mu$L reaction volumes included 0.5 $\mu$L of each primer at a concentration of 10 $\mu$M, 0.375 $\mu$L of MGB probe at a concentration of 250 nM, 12.5 $\mu$L of Taqman MasterMix (Applied Biosystems), 1.25 $\mu$L BSA, and 5 $\mu$L of template. 
 The amplification conditions consisted of an initial cycle of 2 min at 50&deg;C and 10 min at 95&deg;C, followed by 50 cycles at 95&deg;C for 15 s, 58&deg;C for 30 s, and 65&deg;C for 45 s. 
 To create standards, DNA was extracted from pure cultures of *J. lividum* with an UltraClean microbial DNA isolation kit (MoBio), and diluted to 10^4^, 10^3^, 10^2^, and 10^1^ *J. lividum* genome equivalents. 
