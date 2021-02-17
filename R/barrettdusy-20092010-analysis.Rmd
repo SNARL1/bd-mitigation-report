@@ -1,0 +1,778 @@
+---
+title: "Analysis of Barrett-Dusy treatment experiments: 2009-2010"
+output: author: "Roland Knapp
+editor_options: 
+  chunk_output_type: console
+---
+# Analysis of data collected during itraconazole treatment experiments in Dusy and Barrett Lakes basins
+## Use *brms* package to conduct regression analyses in a Bayesian framework (default priors used in all analyses)
+
+### Load packages
+```{r}
+library(EnvStats)
+library(bayesplot)
+library(brms)
+library(loo) 
+library(tidyverse)
+library(patchwork)
+```
+
+### Load data set for analysis of Bd load before, at end, and after itraconazole treatment
+```{r}
+d <- read_csv(file = here::here("data", "dusybarrett-20092010-captures.csv"))
+```
+
+## ANALYSIS 1: Pre-treatment differences in loads between populations assigned as "treated" and "control"
+### Create dataset
+```{r}
+d1 <- d %>%
+  filter(date_label == "0_preexperiment") %>% 
+  mutate(log10load = log10(bd_load + 1)) %>%
+  select(basin, site_id, swab_id, treatment, visit_date, date_label, num_days, stage, bd_load, log10load) %>%
+  as_tibble()
+```
+
+### Data exploration
+```{r}
+d1 %>% 
+  ggplot(aes(x = date_label, y = log10load, color = stage)) +
+    geom_point(position = "jitter") +
+    facet_wrap(~ basin + treatment, ncol = 4) +
+    stat_n_text()
+
+d1 %>%
+  ggplot(aes(x = treatment, y = log10load)) +
+    geom_boxplot() + 
+    facet_wrap(~ basin, ncol = 2) +
+    stat_n_text()
+```
+* Nothing of concern in the data, sample sizes sufficient for analysis.
+
+### Plot distribution of bd_load response variable
+```{r}
+d1 %>% 
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+
+d1 %>% 
+  ggplot(aes(sample = bd_load)) +
+    geom_qq() +
+    geom_qq_line()
+```
+* Data are strongly left-skewed, possibly zero-inflated. Model using negative binomial family.
+
+### Fit negative binomial model with 2 population-level effects (treatment category & basin) and interaction
+```{r}
+d1 <- d1 %>% mutate(bd_load = as.integer(bd_load))
+```
+```{r}
+m1 <- brm(bd_load ~ treatment * basin, 
+          data = d1,
+          family = negbinomial())
+summary(m1)
+plot(m1)
+plot(conditional_effects(m1), ask = FALSE)
+```
+* Also fit a zero-inflated model, but it showed little evidence of zero-inflation and was equivalent to negbinomial model based on loo.
+
+#### LOO probability integral transform
+```{r}
+loo_m1 <- loo(m1, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m1)
+ppc_loo_pit_overlay(
+  y = d1$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m1$psis_object))
+```
+* Some minor deviation from uniformity
+
+### Add group-level effect of site_id
+```{r}
+m1a <- brm(bd_load ~ treatment * basin +  (1 | site_id), 
+           data = d1,
+           family = negbinomial())
+summary(m1a)
+plot((m1a), ask = FALSE)
+plot(conditional_effects(m1a), ask = FALSE)
+```
+
+### Compare model fit
+```{r}
+loo(m1, m1a)
+```
+* No substantial improvement in fit from adding group-level effect (elpd_diff/se_diff < 2). Also seen in LOO-PIT. 
+
+### Add predictor for shape parameter (basin)
+```{r}
+m1b <- brm(bf(bd_load ~ treatment * basin, shape ~ basin), 
+           data = d1,
+           family = negbinomial())
+summary(m1b)
+plot((m1b), ask = FALSE)
+plot(conditional_effects(m1b), ask = FALSE)
+```
+* Effect of shape predictor is unimportant, no improvement in fit indicated by LOO, LOO-PIT.
+* m1 is best model. 
+* Interpretation: bd_load is similar between populations assigned to treat and control categories and between basins, and relationship between bd_load and treatment category is similar between basins.
+
+## ANALYSIS 2: Immediate effect of treatment on loads (beginning vs. end of treatment)
+### Data exploration to facilite dataset creation
+```{r}
+# number of swabs collected across groups
+d %>% select(basin, date_label, num_days, treatment, site_id, stage) %>% 
+  filter(date_label == "1_experiment" & treatment == "treated") %>%
+  count(basin, treatment, site_id, stage) %>% View()
+```
+```{r}
+# number of swabs collected on each day of treatment
+d %>% select(basin, date_label, num_days, treatment, site_id, stage) %>% 
+  filter(date_label == "1_experiment" & treatment == "treated") %>%
+  count(basin, date_label, treatment, site_id, num_days, stage) %>% 
+  arrange(basin, site_id, num_days) %>% View()
+```
+* Mix of tadpoles and subadults.
+* For treated animals, create column to distinguish swabs collected at beginning (num_days: -1, 0, 1) and end of treatment (num_days = 6). 
+
+### Create dataset for analysis
+```{r}
+d2 <- d %>%
+  filter(date_label == "1_experiment" & treatment == "treated") %>%
+  mutate(treatcat = if_else(num_days < 6, "begin", "end"),
+         across(c("stage", "treatcat", "basin"), as.factor)) %>% 
+  select(basin, site_id, swab_id, treatment, treatcat, visit_date, date_label, num_days, stage, bd_load) %>%
+  as_tibble()
+```
+
+### Data exploration of Bd load patterns across basins, sites, life stages
+```{r}
+d2 %>% ggplot(aes(x = bd_load)) +
+  geom_histogram()
+```
+```{r}
+d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
+  geom_boxplot() +
+  facet_grid( ~ basin) +
+  stat_n_text()
+```
+```{r}
+d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
+  geom_boxplot() +
+  facet_grid( ~ basin + site_id) +
+  stat_n_text()
+```
+```{r}
+d2 %>% ggplot(aes(x = treatcat, log10(bd_load + 1))) +
+  geom_boxplot() +
+  facet_grid(stage ~ basin + site_id) +
+  stat_n_text()
+```
+```{r}
+# alternative visualization
+d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1), color = stage)) +
+  geom_point(position = "jitter") +
+  facet_grid(~ basin + site_id) +
+  stat_n_text()
+```
+* Bd load is strongly left-skewed and possibly zero-inflated.
+* Treatment reduced loads in both basins, but in Dusy load was reduced more than in Barrett. More zeros as a result. 
+* Within a basin, sites showed similar patterns (as described above).
+* Faceting by life_stage and site_id indicated that many of the subadults swabbed at end of treatment started treatment as tadpoles. As a result, fewer subadults swabbed at beginning of treatment than at end. Only 11469 in Barrett had any subadults at beginning of treatment (and had very few tadpoles). 
+* Overall, results suggest model with treatcat * basin term, likely no need to include site_id as random effect. 
+* Include stage in model to account for potential stage-specific differences in load.
+
+### Fit negative binomial model with 2 population-level effects plus their interaction
+```{r}
+d2 <- d2 %>%
+  mutate(bd_load = as.integer(bd_load))
+```
+```{r}
+m2 <- brm(bd_load ~ stage + treatcat * basin, 
+          data = d2,
+          family = negbinomial())
+summary(m2)
+plot((m2), ask = FALSE)
+plot(conditional_effects(m2), ask = FALSE)
+```
+* Negative effect of treatment on load, no effect of basin or stage, important effect of treat*basin interaction 
+* Greater variation in load at beginning than end of treatment, especially for Dusy. 
+
+#### LOO probability integral transform
+```{r}
+loo2 <- loo(m2, save_psis = TRUE)
+yrep <- posterior_predict(m2)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2$psis_object)
+)
+```
+* Substantial deviation from uniformity. 
+
+### Fit zero-inflated negative binomial model
+```{r}
+m2a <- brm(bd_load ~ stage + treatcat * basin, 
+          data = d2,
+          family = zero_inflated_negbinomial())
+summary(m2a)
+plot((m2a), ask = FALSE)
+plot(conditional_effects(m2a), ask = FALSE)
+loo(m2, m2a)
+```
+
+#### Calculate fit diagnostics
+```{r}
+loo(m2, m2a)
+```
+```{r}
+loo2a <- loo(m2a, save_psis = TRUE)
+yrep <- posterior_predict(m2a)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2a$psis_object)
+)
+```
+* LOO and LOO-PIT both indicate no improvement in fit (LOO: elpd_diff/se_diff = 1.5).
+* However, 95% CI of zi parameter does not include zero, so there is some zi but perhaps not enough to improve model fit. 
+
+### Add group effect (site_id) to negative binomial model
+```{r}
+m2b <- brm(bd_load ~ stage + treatcat * basin + (1 | site_id), 
+           data = d2,
+           family = negbinomial(), 
+           control = list(adapt_delta = 0.99, max_treedepth = 20), 
+           cores = 2)
+summary(m2b)
+plot((m2b), ask = FALSE)
+plot(conditional_effects(m2b), ask = FALSE)
+```
+
+#### Compute fit diagnostics
+```{r}
+loo(m2b, m2)
+```
+```{r}
+loo2b <- loo(m2b, save_psis = TRUE)
+yrep <- posterior_predict(m2b)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2b$psis_object)
+)
+```
+* Adding group effect of site_id had little effect on fit (LOO: elpd_diff/se_diff < 1). 
+
+### Add predictors of shape parameter to negative binomial model
+```{r}
+m2c <- brm(bf(bd_load ~ stage + treatcat * basin, 
+              shape ~ stage + treatcat + basin), 
+           data = d2,
+           family = negbinomial())
+summary(m2c)
+plot(m2c, ask = FALSE)
+plot(conditional_effects(m2c), ask = FALSE)
+```
+* Adding all three predictors of shape (based on differences in bd_load variation between levels for all three) changed importance of predictors: state, treatcat, and basin all have important effects, as does treatcat*basin interaction.
+
+#### Compute fit diagnostics
+```{r}
+loo(m2c, m2)
+```
+```{r}
+loo2c <- loo(m2c, save_psis = TRUE)
+yrep <- posterior_predict(m2c)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2c$psis_object)
+)
+```
+* Much better fit than model without predictors of shape parameter (LOO: elpd_diff/se_diff = 5.8). 
+* LOO-PIT still shows non-uniformity. 
+* Any further improvement from using zero-inflated negbinomial family?
+
+### Fit zero-inflated negative binomial model, with predictors of shape parameter
+```{r}
+m2d <- brm(bf(bd_load ~ stage + treatcat * basin, 
+              shape ~ stage + treatcat + basin), 
+           data = d2,
+           family = zero_inflated_negbinomial())
+summary(m2d)
+plot(m2d, ask = FALSE)
+plot(conditional_effects(m2d), ask = FALSE)
+```
+* Same effects of predictors as without zero-inflation, amount of zero-inflation is small.
+
+#### Compute fit diagnostics
+```{r}
+loo(m2c, m2d)
+```
+```{r}
+loo2d <- loo(m2d, save_psis = TRUE)
+yrep <- posterior_predict(m2d)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2d$psis_object)
+)
+```
+* No improvement in fit (LOO: elpd_diff/se_diff = 1.5), but LOO-PIT suggests less deviation from uniformity. 
+
+### Add 3 predictors of zero inflation to m2d
+```{r}
+m2e <- brm(bf(bd_load ~ stage + treatcat * basin, 
+              shape ~ stage + treatcat + basin, 
+              zi ~ stage + treatcat + basin),
+           data = d2,
+           family = zero_inflated_negbinomial)
+summary(m2e)
+plot(m2e, ask = FALSE)
+plot(conditional_effects(m2e), ask = FALSE)
+```
+
+#### Compute fit diagnostics
+```{r}
+loo(m2c, m2e)
+loo(m2d, m2e)
+```
+```{r}
+loo2e <- loo(m2e, save_psis = TRUE)
+yrep <- posterior_predict(m2e)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2e$psis_object)
+)
+```
+* Fit is slightly better than model without zi (LOO: elpd_diff/se_diff = 2.6)
+* Model fit little improved over zi model w/o zi predictors (LOO: elpd_diff/se_diff = 2.3).
+* Model m2d (zero-inflated negbinom, with shape predictors) is best model, but still shows some lack of fit. 
+
+## ANALYSIS 3: Effect of treatment on Bd load in year of treatment and following year
+### Create dataset
+```{r}
+d3 <- d %>%
+  filter(num_days > 6) %>% # exclude records from during and before treatment period
+  mutate(across(c("stage", "treatment", "basin", "year_std"), as.factor)) %>%
+  select(basin, site_id, swab_id, treatment, visit_date, year_std, date_label, num_days, stage, bd_load) %>% as_tibble() 
+```
+
+### Data exploration
+```{r}
+d3 %>% 
+  ggplot(aes(x = year_std, y = log10(bd_load + 1), color = stage)) +
+  geom_point(position = "jitter") +
+  facet_grid(~ basin + treatment + site_id ) +
+  stat_n_text(size = 3, angle = 90)
+```
+```{r}
+d3 %>% 
+  filter(basin == "dusy") %>%
+  ggplot(aes(x = year_std, y = log10(bd_load + 1))) +
+  geom_boxplot() +
+  facet_grid(~ treatment + site_id + stage) +
+  stat_n_text(size = 3, angle = 90)
+```
+```{r}
+d3 %>% 
+  filter(basin == "barrett") %>%
+  ggplot(aes(x = year_std, y = log10(bd_load + 1))) +
+  geom_boxplot() +
+  facet_grid(~ treatment + site_id + stage) +
+  stat_n_text(size = 3, angle = 90)
+```
+* General pattern in both basins: (1) subadults have higher loads, (2) loads in control ponds relatively high and constant between years 0 and 1, (3) loads in treated ponds are lower than control ponds in year 0, but increase between years 0 and 1, (4) effects somewhat different between sites, (5) treatment increases probability that bd_load = 0. 
+* Suggests the following model: load ~ basin + stage + treatment*year_std + (1 | site_id).
+
+### Distribution of bd_load response variable
+```{r}
+d3 %>% 
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+
+d3 %>% 
+  ggplot(aes(sample = bd_load)) +
+    geom_qq() +
+    geom_qq_line()
+```
+* Distribution shows strong negative skew and possible zero-inflation. As with previous datasets, will need to model using negative binomial or zero-inflated negative binomial.
+
+### Fit negative binomial model, population-level predictors only
+```{r}
+d3 <- d3 %>%
+  mutate(bd_load = as.integer(bd_load))
+```
+```{r}
+m3 <- brm(bd_load ~ stage + basin + year_std * treatment,
+          data = d3, 
+          family = negbinomial())
+summary(m3)
+plot(m3, ask = FALSE)
+plot(conditional_effects(m3), ask = FALSE)
+```
+* Important predictors of bd_load: stage, treatment, year_std, year_std*treatment
+* CI differs substantially between stages and treatments.  
+
+#### Compute fit diagnostics
+```{r}
+loo3 <- loo(m3, save_psis = TRUE)
+yrep <- posterior_predict(m3)
+ppc_loo_pit_overlay(
+  y = d3$bd_load, 
+  yrep = yrep,
+  lw = weights(loo3$psis_object))
+```
+* Some lack of uniformity, but not much. 
+
+### Fit zero-inflated negative binomial model, population-level predictors only
+```{r}
+m3a <- brm(bd_load ~ stage + basin + year_std * treatment,
+          data = d3, 
+          family = zero_inflated_negbinomial())
+summary(m3a)
+plot(m3a, ask = FALSE)
+plot(conditional_effects(m3a), ask = FALSE)
+```
+* Minimal zero-inflation 
+
+#### Compute fit diagnostics
+```{r}
+loo(m3, m3a)
+```
+```{r}
+loo3a <- loo(m3a, save_psis = TRUE)
+yrep <- posterior_predict(m3a)
+ppc_loo_pit_overlay(
+  y = d3$bd_load, 
+  yrep = yrep,
+  lw = weights(loo3a$psis_object))
+```
+* Despite minimal amount of zero inflation, zero-inflated model provides slightly better fit (loo: elpd_diff/se_diff = 2.5).
+* Uniformity slightly improved by zi. 
+
+### Add site_id as group_level predictor
+```{r}
+m3b <- brm(bd_load ~ stage + basin + year_std * treatment + (1 | site_id),
+          data = d3, 
+          family = zero_inflated_negbinomial(), 
+          cores = 2)
+summary(m3b)
+plot(m3b, ask = FALSE)
+plot(conditional_effects(m3b), ask = FALSE)
+```
+* Group effect due to site_id is important. 
+
+#### Compute fit diagnostics
+```{r}
+loo(m3a, m3b)
+```
+```{r}
+loo3b <- loo(m3b, save_psis = TRUE)
+yrep <- posterior_predict(m3b)
+ppc_loo_pit_overlay(
+  y = d3$bd_load, 
+  yrep = yrep,
+  lw = weights(loo3b$psis_object))
+```
+* Addition of site_id as group-level effect substantially improved fit based on loo (loo: elpd_diff/se_diff = 3.8).
+* Probability integral transform shows minimal improvement.
+
+### Add effect of stage and treatment on shape parameter
+```{r}
+m3c <- brm(bf(bd_load ~ stage + basin + year_std * treatment + (1 | site_id),
+              shape ~ stage + basin + year_std + treatment), 
+          data = d3, 
+          family = zero_inflated_negbinomial(), 
+          cores = 2)
+summary(m3c)
+plot(m3c, ask = FALSE)
+plot(conditional_effects(m3c), ask = FALSE)
+```
+* Stage, basin, year_std, and treatment have important effects on shape parameter. 
+
+#### Compute fit diagnostics
+```{r}
+loo(m3b, m3c)
+```
+```{r}
+loo3c <- loo(m3c, save_psis = TRUE)
+yrep <- posterior_predict(m3c)
+ppc_loo_pit_overlay(
+  y = d3$bd_load, 
+  yrep = yrep,
+  lw = weights(loo3c$psis_object))
+```
+* Adding predictors for shape substantially improved fit (loo: elpd_diff/se_diff = 11.7). 
+* Adding shape predictors reduced deviation from uniformity. 
+
+### Add zero inflation predictors
+```{r}
+m3d <- brm(bf(bd_load ~ stage + basin + year_std * treatment + (1 | site_id),
+              shape ~ stage + basin + year_std + treatment, 
+              zi ~ stage + basin + year_std + treatment),
+          data = d3, 
+          family = zero_inflated_negbinomial(),
+          control = list(adapt_delta = 0.99, max_treedepth = 20),  
+          cores = 2)
+summary(m3d)
+plot(m3d, ask = FALSE)
+plot(conditional_effects(m3d), ask = FALSE)
+```
+* Stage, basin, year_std, and treatment have important effects on zero inflation.
+
+#### Compute fit diagnostics
+```{r}
+loo(m3c, m3d)
+```
+```{r}
+loo3d <- loo(m3d, save_psis = TRUE)
+yrep <- posterior_predict(m3d)
+ppc_loo_pit_overlay(
+  y = d3$bd_load, 
+  yrep = yrep,
+  lw = weights(loo3d$psis_object))
+```
+* Addition of zero-inflation predictors produced little if any improvement in model fit (loo: elpd_diff/se_diff = 2.1). 
+* Deviation from uniformity increased relative to m3c. m3c is best model. 
+
+### Create plots of Bd load over 1 year period of experiment for both basins
+#### Create new columns and rows
+```{r}
+d_plot <- d %>% 
+  mutate(
+    date_label1 = case_when(basin == "barrett" & num_days == "-14" ~ "-14",
+                            basin == "barrett" & between(num_days, -1, 5) ~ "-1 to 5",
+                            basin == "barrett" & num_days == "6" ~ "6", 
+                            basin == "barrett" & between(num_days, 22, 23) ~ "22 to 23", 
+                            basin == "barrett" & between(num_days, 41, 42) ~ "41 to 42",
+                            basin == "barrett" & between(num_days, 365, 366) ~ "365 to 366",
+                            basin == "barrett" & between(num_days, 383, 384) ~ "383 to 384", 
+                            basin == "barrett" & between(num_days, 407, 408) ~ "407 to 408", 
+                            basin == "dusy" & between(num_days, -15, -14) ~ "-15 to -14", 
+                            basin == "dusy" & between(num_days, 0, 2) ~ "0 to 2", 
+                            basin == "dusy" & num_days == 6 ~ "6", 
+                            basin == "dusy" & between(num_days, 20, 21) ~ "20 to 21", 
+                            basin == "dusy" & between(num_days, 46, 47) ~ "46 to 47", 
+                            basin == "dusy" & between(num_days, 356, 357) ~ "356 to 357", 
+                            basin == "dusy" & between(num_days, 389, 392) ~ "389 to 392")) %>%
+  add_row(basin = "dusy", num_days = 407, date_label1 = "407 to 408", treatment = "control") %>%
+  add_row(basin = "dusy", num_days = 408, date_label1 = "407 to 408", treatment = "treated") %>%
+  select(site_id, basin, visit_date, num_days, date_label, date_label1, treatment, stage, bd_load)
+```
+
+#### Create Barrett and Dusy plots
+```{r}
+d_plot1 <- d_plot %>%
+  filter(basin == "barrett") %>%
+  mutate(date_label1 = fct_relevel(
+    date_label1, "-14", "-1 to 5", "6", "22 to 23", "41 to 42", "356 to 357", "383 to 384", "407 to 408")) %>%
+  ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
+    geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
+    labs(y = (expression(Bd~load~(log["10"]~copies+1))),
+         x = Days) +
+    scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
+    ggtitle("(a)") +
+    theme_classic() +
+    theme(axis.title.x = element_blank())
+```
+```{r}
+d_plot2 <- d_plot %>%
+  filter(basin == "dusy") %>%
+  mutate(date_label1 = fct_relevel(
+    date_label1, "-15 to -14", "0 to 2", "6", "20 to 21", "46 to 47", "356 to 357", "389 to 392", "407 to 408")) %>%
+  ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
+    geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
+    labs(y = (expression(Bd~load~(log["10"]~copies+1))),
+         x = "Days") +
+    scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
+    ggtitle("(b)") +
+    theme_classic() +
+    theme(legend.position = "none")
+```
+```{r}
+d_plot1 / d_plot2
+```
+```{r}
+ggsave(here::here("out", "barrettdusy-20092010-bdload.png"), width = 15, height = 15, units = "cm")
+```
+
+## ANALYSIS 4: Effect of treatment on subsequent metamorph counts
+### Load data set
+```{r}
+d4 <- read_csv(file = here::here("data", "dusybarrett-20092010-counts.csv"))
+```
+```{r}
+d4  <- d4 %>% mutate(
+  ltadpole = log10(tadpole + 1), 
+  across(c("basin", "site_id", "treatment", "year_std"), as.factor))
+```
+
+### Data exploration
+```{r}
+# Distribution of count data
+d4 %>% 
+  ggplot(aes(x = subadult)) +
+    geom_histogram()
+```
+```{r}
+# Subadult counts by year_std 
+d4 %>% 
+  ggplot(aes(x = year_std, y = log10(subadult + 1))) + 
+    geom_boxplot() +
+    facet_grid(~ basin + treatment + site_id)
+```
+```{r}
+# Subadult and tadpole counts on every survey data during years 0 and 1
+d4 %>% pivot_longer(cols = tadpole:subadult,
+                    names_to = "stage",
+                    values_to = "count") %>%
+  filter(basin == "barrett") %>%  # barrett or dusy
+  ggplot(aes(x = factor(plot_date), y = log10(count + 1), fill = stage)) +
+    geom_bar(stat = "identity") + 
+    theme(axis.text.x = element_text(angle = 90)) +
+  facet_grid(~ treatment + site_id)
+```
+```{r}
+d4 %>% 
+  ggplot(aes(x = tadpole, y = subadult, color = treatment)) + 
+  geom_point() + 
+  facet_grid(~ basin)
+```
+* Count data are left-skewed and possibly zero-inflated. 
+* Subadult counts are somewhat higher in treated ponds than control ponds, but not markedly so. 
+* No consistent association between counts of tadpoles versus subadults. 
+
+### Fit poisson model
+```{r}
+m4 <- brm(subadult ~ basin + ltadpole + year_std * treatment, 
+          data = d4,
+          family = poisson())
+summary(m4)
+plot((m4), ask = FALSE)
+plot(conditional_effects(m4), ask = FALSE)
+```
+* Number of tadpoles, year_std, treatment, and year_std*treatment all have important effects in predicted directions.
+
+### Fit negbinomial model
+```{r}
+m4a <- brm(subadult ~ basin + ltadpole + year_std * treatment, 
+          data = d4,
+          family = negbinomial(),
+          control = list(adapt_delta = 0.99))
+summary(m4a)
+plot((m4a), ask = FALSE)
+plot(conditional_effects(m4a), ask = FALSE)
+```
+
+### Compute fit diagnostics
+```{r}
+loo(m4, m4a)
+```
+```{r}
+loo4a <- loo(m4a, save_psis = TRUE)
+yrep <- posterior_predict(m4a)
+ppc_loo_pit_overlay(
+  y = d4$subadult, 
+  yrep = yrep,
+  lw = weights(loo4a$psis_object))
+```
+* Fit of negbinomial model substantially better than poisson (LOO: elpd_diff/se_diff = 3.4). 
+
+### Fit zero-inflated negbinomial model
+```{r}
+m4b <- brm(subadult ~ basin + ltadpole + year_std * treatment, 
+          data = d4,
+          family = zero_inflated_negbinomial(),
+          control = list(adapt_delta = 0.99))
+summary(m4b)
+plot((m4b), ask = FALSE)
+plot(conditional_effects(m4b), ask = FALSE)
+```
+* This is best model, has decent fit. 
+* Based on results below, no need for group-level effect of site_id, no need for shape predictors.
+
+### Compute fit diagnostics
+```{r}
+loo(m4a, m4b)
+```
+```{r}
+loo4b <- loo(m4a, save_psis = TRUE)
+yrep <- posterior_predict(m4b)
+ppc_loo_pit_overlay(
+  y = d4$subadult, 
+  yrep = yrep,
+  lw = weights(loo4b$psis_object))
+```
+* Fit of zero-inflated model is no better than negbinomial (LOO: elpd_diff/se_diff < 1). 
+
+#### Add site_id as group-level effect to model m4a
+```{r}
+m4c <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment + (1|site_id)), 
+          data = d4,
+          family = negbinomial(),
+          control = list(adapt_delta = 0.99))
+summary(m4c)
+plot((m4c), ask = FALSE)
+plot(conditional_effects(m4c), ask = FALSE)
+```
+
+### Compute fit diagnostics
+```{r}
+loo(m4a, m4c)
+```
+```{r}
+loo4c <- loo(m4c, save_psis = TRUE)
+yrep <- posterior_predict(m4c)
+ppc_loo_pit_overlay(
+  y = d4$subadult, 
+  yrep = yrep,
+  lw = weights(loo4c$psis_object))
+```
+* No improvement in fit from adding site_id as group-level effect (LOO: elpd_diff/se_diff = 2.1). 
+
+#### Add shape predictors to model m4a
+```{r}
+m4d <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment, 
+          shape ~ basin + ltadpole + year_std + treatment),
+          data = d4,
+          family = negbinomial(),
+          control = list(adapt_delta = 0.99))
+summary(m4d)
+plot((m4d), ask = FALSE)
+plot(conditional_effects(m4d), ask = FALSE)
+```
+
+### Compute fit diagnostics
+```{r}
+loo(m4a, m4d)
+```
+```{r}
+loo4d <- loo(m4d, save_psis = TRUE)
+yrep <- posterior_predict(m4d)
+ppc_loo_pit_overlay(
+  y = d4$subadult, 
+  yrep = yrep,
+  lw = weights(loo4d$psis_object))
+```
+* No improvement of fit from adding shape predictors (LOO: elpd_diff/se_diff < 1)
+
+### Make plot of count data 
+```{r}
+d4 %>% 
+  ggplot(aes(x = year_std, y = subadult, color = site_id, shape = basin)) +
+    geom_point(position = position_dodge(width = .3), size = 3) + 
+    scale_colour_manual(values = c("green3", "deepskyblue2", "darkgreen", "dodgerblue3", "blue3", "forestgreen", "lightskyblue1", "seagreen2", "blue4", "green", "lightskyblue2")) +
+ #   scale_shape_manual()
+    labs(
+      color = "Site",
+      x = expression("Year - standardized"),
+      y = "Number of subadults counted") + 
+    facet_grid(~ treatment) +
+    theme_classic() 
+```
+```{r}
+ggsave(here::here("output", "dusbar_yrs01_counts.png"), width = 10, height = 12, units = "cm")
+```
+

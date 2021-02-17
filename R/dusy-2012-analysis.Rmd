@@ -1,0 +1,483 @@
+---
+title: "dusy-2012-analyses"
+author: "Roland Knapp"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Analyses of 2012 Jliv treatment experiment with metamorphs
+## Use *brms* package to conduct regression analyses in a Bayesian framework (default priors used in all analyses)
+
+### Load packages
+```{r}
+library(EnvStats)
+library(brms)
+library(loo)
+library(bayesplot)
+library(lubridate)
+library(tidyverse)
+```
+
+### Load data
+```{r}
+d <- read_csv(file = here::here("data", "dusy-2012-swabs.csv"))
+```
+
+### Exploration of full dataset 
+#### Distribution of bd load data
+```{r}
+d %>% 
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+
+d %>% 
+  ggplot(aes(sample = bd_load)) + 
+    geom_qq() +
+    geom_qq_line()
+
+d %>% 
+  ggplot(aes(x = log10(bd_load + 1))) +
+    geom_histogram()
+
+d %>% 
+  ggplot(aes(sample = log10(bd_load + 1))) + 
+    geom_qq() +
+    geom_qq_line()
+```
+* Bd load data are highly left-skewed and zero-inflated. 
+
+#### General patterns of Bd load before and after itraconazole/Jliv treatment during summer 2012
+```{r}
+# loads of control (no itraconazole or Jliv), treated (itraconazole + Jliv), and wild subadults in first year faceted by date
+d %>% 
+  mutate(expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
+  ggplot(aes(x = expt_trt, y = log10(bd_load + 1), fill = expt_trt)) +
+    geom_boxplot() +
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    facet_grid(~ group_date) +
+    stat_n_text(size = 2.5) + 
+    labs(
+      x = "Group",
+      y = "Bd load (log10(copies + 1)"
+    ) +
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 90))
+```
+* Loads of subadults assigned to control and itraconazole-treated groups were similar immediately before treatment began
+* Itraconazole treatment greatly reduced loads.
+* Following Jliv baths and release of subadults into pond, loads of treated animals increased and by September were similar to loads of wild subadults.
+* Control subadults disappeared quickly, resulting in few captures of animals in this group on later dates. 
+
+### ANALYSIS #1: Were Bd loads similar between treated/control groups before itraconazole treatment?
+
+#### Create data set
+```{r}
+d1  <- d %>% filter(group_date == "2012-07-12") %>%
+             mutate(expt_trt = as.factor(expt_trt))  
+```
+```{r}
+# Check distribution of Bd_load
+d1 %>% 
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+
+d1 %>%
+  ggplot(aes(x = log10(bd_load + 1))) +
+    geom_histogram()
+```
+* Negative skew, not nearly as dramatic as with full dataset (due to effect of itraconazole treatment). Negative binomial is reasonable distribution.
+
+#### Fit negative binomial model
+```{r}
+m1 <- brm(bd_load ~ expt_trt, 
+          data = d1,
+          family = negbinomial())
+
+summary(m1)
+plot(m1)
+conditional_effects(m1)
+
+# write_rds(m1, file = here::here("out", "m1.rds"), "xz", compression = 9L)
+```
+
+#### Fit zero inflated negative binomial model
+```{r}
+m1a <- brm(bd_load ~ expt_trt, 
+          data = d1,
+          family = zero_inflated_negbinomial())
+summary(m1a)
+plot(m1a)
+```
+* No indication of zero-inflation, based on overlap of 95% CI with 0. 
+
+#### Compare model fits
+```{r}
+loo(m1, m1a)
+```
+* m1 and m1a have equivalent fits (elpd_diff/se_diff < 1). Use m1. 
+
+#### LOO probability integral transform
+```{r}
+loo_m1 <- loo(m1, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m1)
+ppc_loo_pit_overlay(
+  y = d1$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m1$psis_object))
+```
+
+### ANALYSIS #2: Effect of itraconazole treatment on loads (begin vs end of treatment)
+#### Create dataset
+```{r}
+d2 <- d %>% filter(expt_trt == "treated" & 
+                      (group_date == "2012-07-12" | group_date == "2012-07-19")) %>%
+            mutate(group_date = as.factor(group_date))
+```
+```{r}
+d2 %>% 
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+```
+* Strong negative skew and zero inflation
+
+#### Fit negative binomial model
+```{r}
+m2 <- brm(bd_load ~ group_date,
+          data = d2, 
+          family = negbinomial())
+summary(m2)
+plot(m2)
+conditional_effects(m2)
+```
+* Strong negative effect of treatment, much less variation after treatment. 
+
+#### Fit a zero-inflated negative binomial model
+```{r}
+m2a <- brm(bd_load ~ group_date,
+          data = d2, 
+          family = zero_inflated_negbinomial())
+summary(m2a)
+plot(m2a)
+conditional_effects(m2a)
+```
+* Results indicate substantial zero-inflation.
+
+#### Compare fit of model with and without zero inflation
+```{r}
+loo(m2, m2a)
+```
+* Zero-inflated model (m2a) is substantially better (elpd_diff/se_diff = 3.7)
+
+#### LOO probability integral transform
+```{r}
+loo_m2a <- loo(m2a, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m2a)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m2a$psis_object))
+```
+
+#### Add group_date as a predictor of zero inflation
+```{r}
+m2b <- brm(bf(bd_load ~ group_date, zi ~ group_date),
+           data = d2,
+           family = zero_inflated_negbinomial())
+summary(m2b)
+plot(m2b)
+conditional_effects(m2b)
+```
+* Itraconazole treatment increased the probability of bd_load = 0
+
+#### Compare fit of models with  and without zero inflation predictor
+```{r}
+loo(m2a, m2b)
+```
+* Fit of model with zi predictor is somewhat better than model without, but not substantially so (elpd_diff/se_diff = 2.4). 
+
+#### LOO probability integral transform
+```{r}
+loo_m2b <- loo(m2b, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m2b)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m2b$psis_object))
+```
+* PIT figure showed no improvement with addition of zi predictor. 
+* Addition of shape predictor to m2a indicated that predictor was unimportant. Model m2a is best fit. 
+
+### ANALYSIS #3: Temporal patterns of Jliv concentration on treated, control, and wild subadults
+#### General patterns of Jliv load
+```{r}
+# Distribution of Jliv concentrations in 2012, excluding records from prior to Jliv exposure
+d %>%
+  filter(group_date > "2012-07-19") %>%
+  ggplot(aes(x = jliv_ge)) +
+        geom_histogram()
+```
+```{r}
+# Jliv concentration on control, treated, and wild subadults, faceted by date
+d %>%
+  mutate(expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
+  filter(group_date > "2012-07-12") %>%
+  ggplot(aes(x = expt_trt, y = log10(jliv_ge + 1), fill = expt_trt)) +
+    geom_boxplot() +
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    facet_grid(~ group_date) +
+    stat_n_text() +
+    labs(
+      x = "Group",
+      y = expression("Concentration of"~italic("J. lividum")~"(genomic equivalents)")) +
+    theme(axis.text.x = element_text(angle = 90))
+```
+* Distribution of Jliv concentration is highly negative-skewed, when modeled as response variable will need negbinomial family
+* Very low Jliv concentration on "treated" group immediately prior to Jliv exposure 
+* 2 weeks following Jliv treatment of "treated" group, treated, control, and wild groups all had substantial jliv concentrations
+* Decreased at similar rate across groups, returned to pre-exposure concentrations by mid-September
+
+#### Create dataset
+```{r}
+# calculate number of days between jliv exposure and survey date 
+diffprior <- as.numeric(as.Date("2012-07-12") - as.Date("2012-07-19"))
+diff10 <- as.numeric(as.Date("2012-07-31") - as.Date("2012-07-19"))
+diff20 <- as.numeric(as.Date("2012-08-25") - as.Date("2012-07-19"))
+diff30 <- as.numeric(as.Date("2012-09-13") - as.Date("2012-07-19"))
+```
+```{r}
+# create dataset
+d3 <- d %>%
+  mutate(
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
+    days = case_when(
+      group_date == "2012-07-31" ~ diff10,
+      group_date == "2012-08-25" ~ diff20,
+      group_date == "2012-09-13" ~ diff30)) %>%
+  filter(group_date > "2012-07-19") %>%
+  mutate(group_date = as.factor(group_date), 
+         expt_trt = as.factor(expt_trt), 
+         jliv_ge = as.integer(jliv_ge))
+```
+
+#### Fit negative binomial model
+```{r}
+m3 <- brm(jliv_ge ~ days,
+          data = d3,
+          family = negbinomial())
+summary(m3)
+plot(m3)
+conditional_effects(m3)
+```
+* expt_trt not included as predictor in model because there is only 1 sample for control group on 2nd date and none on 3rd date 
+* Important effect of days on jliv_ge, with exponential decline of jliv_ge over time 
+
+#### LOO probability integral transform
+```{r}
+loo_m3 <- loo(m3, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m3)
+ppc_loo_pit_overlay(
+  y = d3$jliv_ge, 
+  yrep = yrep,
+  lw = weights(loo_m3$psis_object))
+```
+* Some lack of fit indicated by departure from uniform distribution at larger x-values
+
+#### Fit zero inflated negative binomial model
+```{r}
+m3a <- brm(jliv_ge ~ group_date,
+          data = d3,
+          family = zero_inflated_negbinomial())
+summary(m3a)
+plot(m3a)
+conditional_effects(m3a)
+```
+* Only weak evidence for importance of zero inflation (95% CI very nearly overlaps 0)
+
+#### Compare fit of negbinomial and zi_negbinomial models
+```{r}
+loo(m3, m3a)
+```
+* No evidence of zero inflation (elpd_diff/se_diff < 1), use m3. 
+
+#### Fit model with date and treatment group as predictors, exclude control treatment because of small sample sizes
+```{r}
+d3a <- d3 %>% filter(expt_trt != "control")
+```
+```{r}
+# use days as predictor
+m3b <- brm(jliv_ge ~ days * expt_trt,
+          data = d3a,
+          family = negbinomial())
+summary(m3b)
+plot(m3b)
+plot(conditional_effects(m3b), ask = FALSE)
+```
+* No effect of treated vs wild on Jliv concentration
+* No interaction between treated/wild and days 
+
+#### Figure of Jliv concentrations over time 
+```{r}
+# points grouped by expt_trt
+# better represents time scale (days)
+d %>%
+  mutate(
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
+    days = case_when(
+      group_date == "2012-07-19" ~ 0,
+      group_date == "2012-07-31" ~ diff10,
+      group_date == "2012-08-25" ~ diff20,
+      group_date == "2012-09-13" ~ diff30)) %>%
+  filter(group_date > "2012-07-12") %>%
+  ggplot(aes(x = days, y = log10(jliv_ge + 1), color = expt_trt)) +
+    geom_point(position = position_dodge(width=5), size = 2.5) +  
+    scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    labs(color = "Frog group", 
+         x = expression("Days since"~italic("J. lividum")~"exposure"),
+         y = expression(~italic("J. lividum")~"concentration (log10(genomic equivalents))")) +
+    stat_n_text() +
+    theme_classic()
+```
+```{r}
+ggsave(here::here("out", "dusy_2012_jliv.png"), width = 15, height = 10, units = "cm")
+```
+
+### ANALYSIS #4: Differences in Bd load between itraconazole+Jliv treated and wild subadults 
+#### Fit negative binomial model
+```{r}
+# distribution of bdload response variable (negative skew and zero inflation)
+d3a %>%
+  ggplot(aes(x = bd_load)) +
+    geom_histogram()
+```
+```{r}
+m4 <- brm(bd_load ~ days * expt_trt,
+          data = d3a,
+          family = negbinomial())
+summary(m4)
+plot(m4)
+plot(conditional_effects(m4), ask = FALSE)
+```
+* Important effect on bd_load of days (+), expt_trt (higher for wild), and interaction
+
+#### LOO probability integral transform
+```{r}
+loo_m4 <- loo(m4, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m4)
+ppc_loo_pit_overlay(
+  y = d3a$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m4$psis_object))
+```
+* Some lack of fit indicated by deviations from uniform distribution
+
+#### Fit zero inflated negbinomial model
+```{r}
+m4a <- brm(bd_load ~ days * expt_trt,
+          data = d3a,
+          family = zero_inflated_negbinomial())
+table_m4asum <- summary(m4a)
+plot((m4a), ask = FALSE)
+plot(conditional_effects(m4a), ask = FALSE)
+```
+
+#### Compare fit of models with and without zero inflation
+```{r}
+loo(m4, m4a)
+```
+* Zero inflated model somewhat better (elpd_diff/se_diff = 3.2) 
+* Adding expt_trt as shape predictor indicated no effect
+
+#### LOO probability integral transform
+```{r}
+loo_m4a <- loo(m4a, save_psis = TRUE)
+```
+```{r}
+yrep <- posterior_predict(m4a)
+ppc_loo_pit_overlay(
+  y = d3a$bd_load, 
+  yrep = yrep,
+  lw = weights(loo_m4a$psis_object))
+```
+* Some improvement in uniformity (except at smallest values of x)
+
+#### Write out file of summary(m4a) results (for use in report)
+```{r}
+table_m4asum <- write.csv(file = here::here("out", "summary_m4a.csv"))
+```
+
+#### Figure of Bd concentrations over time 
+```{r}
+# create diff objects first, in analysis > create dataset 
+d %>%
+  mutate(
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
+    days = case_when(
+      group_date == "2012-07-12" ~ diffprior,
+      group_date == "2012-07-19" ~ 0,
+      group_date == "2012-07-31" ~ diff10,
+      group_date == "2012-08-25" ~ diff20,
+      group_date == "2012-09-13" ~ diff30)) %>%
+  ggplot(aes(x = days, y = log10(bd_load + 1), color = expt_trt)) +
+    geom_point(position = position_dodge(width=5), size = 2.5) +  
+    scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    labs(color = "Frog group", 
+         x = expression("Days since"~italic("J. lividum")~"exposure"),
+         y = expression("Bd load"~(log[10]~("copies + 1")))) +
+    stat_n_text() +
+    theme_classic()
+```
+```{r}
+ggsave(here::here("out", "dusy_2012_bdload.png", width = 15, height = 10, units = "cm"))
+```
+
+### ANALYSIS #5: Counts of recaptured animals in control, treated, and wild groups in 2012
+#### Create dataset (IMPROVE THIS CODE)
+```{r}
+d4 <- d %>%
+  filter(group_date > "2012-07-19" & expt_or_wild == "expt") %>%
+  mutate(
+    days = case_when(
+            group_date == "2012-07-31" ~ diff10,
+            group_date == "2012-08-25" ~ diff20,
+            group_date == "2012-09-13" ~ diff30),
+    released = case_when(
+            expt_trt == "control" ~ 60,    # sample sizes from information recorded in field notebooks
+            expt_trt == "treated" ~ 254))
+
+d4_count <- d4 %>%
+  group_by(days, expt_trt, released) %>%
+  count(expt_trt) %>%
+  ungroup() %>%
+  complete(days, expt_trt, fill = list(n = 0, released = 60)) %>%
+  mutate(freq = (n / released))
+```
+* Too few recaptures of control subadults (due to low apparent survival) to allow formal analysis
+
+#### Plot showing frog recaptures over time in 2012
+```{r}
+d4_count %>% 
+  ggplot(aes(x = days, y = freq, color = expt_trt)) +
+    geom_line() +
+    geom_point(size = 4) + 
+    scale_color_manual(values = c("forestgreen", "deepskyblue2")) +
+    labs(
+      color = "Frog group",
+      x = expression("Days since"~italic("J. lividum")~"exposure"),
+      y = "Percent of frogs recaptured") +
+    theme_classic() 
+```
+
+```{r}
+ggsave(here::here("out", "dusy_2012_recapture.png", width = 15, height = 10, units = "cm"))
+```
