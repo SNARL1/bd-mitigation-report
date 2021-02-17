@@ -5,6 +5,7 @@
 .Ruserdata
 data/clean/
 out/
+R-working/
 *.pdf
 *.log
 *.tex
