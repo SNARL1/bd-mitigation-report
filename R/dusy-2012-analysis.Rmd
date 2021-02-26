@@ -411,11 +411,6 @@ ppc_loo_pit_overlay(
 ```
 * Some improvement in uniformity (except at smallest values of x)
 
-#### Write out file of summary(m4a) results (for use in report)
-```{r}
-table_m4asum <- write.csv(file = here::here("out", "summary_m4a.csv"))
-```
-
 #### Figure of Bd concentrations over time 
 ```{r}
 # create diff objects first, in analysis > create dataset 
