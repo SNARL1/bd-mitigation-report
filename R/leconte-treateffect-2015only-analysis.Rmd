@@ -1,0 +1,251 @@
+---
+title: "LeConte treatment"
+author: "Roland Knapp"
+date: "12/20/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(brms)
+library(tidyverse)
+library(loo)
+library(bayesplot)
+```
+
+# Create dataset for analysis
+## Read in data
+```{r}
+d <- read_csv(here::here("data", "leconte-20152018-captures.csv"))
+```
+
+## Select 2015 data (collected during treatment period)
+```{r}
+d <- d %>%
+  filter(visit_date < "2015-12-31") %>%
+  drop_na(bd_load) %>% 
+  mutate(bd_load = as.integer(bd_load)) %>%
+  select(location, category, trt_period, visit_date, trt_died, pit_tag_ref, bd_load) %>% as_tibble()
+```
+
+# ANALYSIS #1:  Bd load between treated and control groups before treatment
+## Create dataset, check distribution of response variable
+```{r}
+d1 <- d %>% filter(trt_period == "pretreat" & trt_died == FALSE) %>%
+  mutate(across(c("location", "category"), as.factor))
+
+d1 %>%
+  ggplot(aes(x = bd_load)) +
+    geom_histogram(bins = 200)
+```
+* Load data are strongly left-skewed, may be zero-inflated
+
+## Negative binomial model
+```{r}
+m1 <- brm(bd_load ~ location * category,
+          data = d1,
+          family = negbinomial)
+summary(m1)
+plot((m1), ask = FALSE)
+plot(conditional_effects(m1), ask = FALSE)  
+```
+
+#### LOO probability integral transform
+```{r}
+loo1 <- loo(m1, save_psis = TRUE)
+yrep <- posterior_predict(m1)
+ppc_loo_pit_overlay(
+  y = d1$bd_load, 
+  yrep = yrep,
+  lw = weights(loo1$psis_object))
+```
+* Fit of m1 is quite good, uniform distribution
+* Important effect of category, effect of location is unimportant, weak effect of interaction
+
+## Zero-inflated negative binomial
+```{r}
+m1a <- brm(bd_load ~ location * category,
+          data = d1,
+          family = zero_inflated_negbinomial())
+summary(m1a)
+plot((m1a), ask = FALSE)
+plot(conditional_effects(m1a), ask = FALSE)  
+```
+* No evidence of zero inflation (zi-estimate = 0), use negative binomial model
+
+# ANALYSIS #2: Bd load of treated group before/after treatment
+## Create dataset, check distribution of response variable
+```{r}
+d2 <- d %>% filter(category == "treated" & (trt_died == FALSE | is.na(trt_died))) %>%
+  mutate(location = as.factor(location),
+         trt_period = fct_relevel(trt_period, rev))
+```
+
+### Distribution of Bd load data
+```{r}
+d2 %>%
+  ggplot(aes(x = bd_load)) +
+    geom_histogram(bins = 200)
+```
+* Load data are strongly left-skewed, may be zero-inflated
+
+## Negative binomial model
+```{r}
+m2 <- brm(bd_load ~ location * trt_period,
+          data = d2,
+          family = negbinomial)
+summary(m2)
+plot((m2), ask = FALSE)
+plot(conditional_effects(m2), ask = FALSE)  
+
+# plot single parameter, make changes to default plot
+p1 <- conditional_effects(m2, "location:trt_period")
+plot(p1, plot = FALSE)[[1]] +
+  theme_classic()
+```
+* Important effects of location (higher loads in upper), trt_period (lower after treatment), interaction (loads start higher & end higher in upper)
+
+#### LOO probability integral transform
+```{r}
+loo2 <- loo(m2, save_psis = TRUE)
+yrep <- posterior_predict(m2)
+ppc_loo_pit_overlay(
+  y = d2$bd_load, 
+  yrep = yrep,
+  lw = weights(loo2$psis_object))
+```
+* Fit of m2 is quite good, uniform distribution
+
+## Zero-inflated negative binomial
+```{r}
+m2a <- brm(bd_load ~ location * trt_period,
+          data = d2,
+          family = zero_inflated_negbinomial())
+summary(m2a)
+plot((m2a), ask = FALSE)
+plot(conditional_effects(m2a), ask = FALSE)  
+```
+* No evidence of zero inflation (zi-estimate = 0.03), use negative binomial model
+
+# ANALYSIS #3: Loads of frogs that lived vs died during treatment
+```{r}
+d3 <- d %>% filter(trt_period == "pretreat") %>% 
+    mutate(across(c("location", "trt_died"), as.factor),
+           bd_load = as.integer(bd_load)) %>% as_tibble()
+```
+
+### Distribution of Bd load data
+```{r}
+d3 %>% ggplot(aes(x = bd_load)) +
+          geom_histogram(bins = 50)
+```
+* Strong negative skew, zero-inflation isn't extreme
+
+### Fit negative binomial model
+```{r}
+m3 <- brm(startload ~ trt_died * location,
+          data = d3,
+          family = negbinomial())
+summary(m3)
+plot(m3)
+plot(conditional_effects(m3), ask = FALSE)
+```
+
+### Fit negative binomial model with shape predictors
+```{r}
+m3b <- brm(bf(startload ~ status*location, 
+             shape ~ status + location),
+          data = d3,
+          family = negbinomial())
+summary(m3b)
+plot(m3b)
+plot(conditional_effects(m3b), ask = FALSE)
+```
+
+#### Compare fit of models with and wo shape predictors
+```{r}
+loo3 <- loo(m3, save_psis = TRUE)
+loo3b <- loo(m3b, save_psis = TRUE)
+
+loo(m3, m3b)
+```
+* m3b has a better fit (diff ratio = 3.1), but see LOO-PIT results.
+
+#### LOO probability integral transform
+```{r}
+# for m3b
+yrep <- posterior_predict(m3b)
+ppc_loo_pit_overlay(
+  y = d3$startload, 
+  yrep = yrep,
+  lw = weights(loo3b$psis_object))
+
+# for m3
+yrep <- posterior_predict(m3)
+ppc_loo_pit_overlay(
+  y = d3$startload, 
+  yrep = yrep,
+  lw = weights(loo3$psis_object))
+```
+* LOO-PIT shows better fit of m3 - more uniform
+
+### Fit zero-inflated negative binomial model
+```{r}
+m3a <- brm(startload ~ status*location,
+          data = d3,
+          family = zero_inflated_negbinomial())
+summary(m3a)
+plot(m3a)
+plot(conditional_effects(m3a), ask = FALSE)
+```
+* No evidence of zero-inflation
+
+## CREATE PLOT
+### Load packages needed for plotting
+```{r}
+library(patchwork)
+library(EnvStats)
+```
+
+### Plot of Bd loads before and at end of treatment, by location
+```{r}
+p1 <- d %>% 
+  filter(location == "lower" & (trt_died == FALSE | is.na(trt_died))) %>% 
+  mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
+  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
+  geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched boxplot same size as others
+    labs(x = "Treatment period",
+         y = expression(Bd~load~(log["10"]~copies+1))) +
+    scale_x_discrete(labels = c("Before","End")) + # rename x axis labels
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
+    ggtitle("(a)") +
+    stat_n_text(size = 3) +
+    theme_classic() +
+    theme(legend.position = "none", 
+          axis.text = element_text(color = "black"),
+          axis.title.x = element_text(vjust = -0.7))
+
+p2 <- d %>% 
+  filter(location == "upper" & (trt_died == FALSE | is.na(trt_died))) %>% 
+  mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
+  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
+  geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched boxplot same size as others
+    labs(x = "Treatment period",
+         y = expression(Bd~load~(log["10"]~copies+1))) +
+    scale_x_discrete(labels = c("Before","End")) + # rename x axis labels
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
+    ggtitle("(b)") +
+    stat_n_text(size = 3) +
+    theme_classic() + 
+    theme(axis.text = element_text(color = "black"),
+          axis.title.x = element_text(vjust = -0.7))
+
+fig4 <- p1 + p2
+```
+```{r}
+ggsave(here::here("out", "leconte_2015_beforeafter_treat.png"), width = 15, height = 10, units = "cm")
+```
+
+
+
