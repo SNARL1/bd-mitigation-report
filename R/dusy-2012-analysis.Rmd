@@ -433,7 +433,7 @@ d %>%
     theme_classic()
 ```
 ```{r}
-ggsave(here::here("out", "dusy_2012_bdload.png", width = 15, height = 10, units = "cm"))
+ggsave(here::here("out", "dusy_2012_bdload.png"), width = 15, height = 10, units = "cm")
 ```
 
 ### ANALYSIS #5: Counts of recaptured animals in control, treated, and wild groups in 2012
@@ -474,5 +474,5 @@ d4_count %>%
 ```
 
 ```{r}
-ggsave(here::here("out", "dusy_2012_recapture.png", width = 15, height = 10, units = "cm"))
+ggsave(here::here("out", "dusy_2012_recapture.png"), width = 15, height = 10, units = "cm")
 ```
