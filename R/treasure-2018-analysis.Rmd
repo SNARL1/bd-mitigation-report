@@ -1,0 +1,203 @@
+---
+title: "Treasure analysis - brms"
+author: "Roland Knapp (analysis) & Tom Smith (plotting)"
+date: "12/20/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+library(brms)
+library(loo)
+library(bayesplot)
+library(tidyverse)
+```
+
+## ANALYSIS #1: Immediate effect of treatment on load
+### Create dataset
+```{r}
+treasure_Bd <- read_csv(file = here::here("data", "treasure-captures-swabs.csv"))
+```
+```{r}
+d1  <- treasure_Bd %>% 
+  select(visit_date, bd_load) %>%
+  filter(visit_date > "2018-07-15" & visit_date < "2018-07-24") %>% 
+  mutate(group = case_when(visit_date < "2018-07-23" ~ "pre",
+                           visit_date == "2018-07-23" ~ "post"),
+         bd_load = as.integer(bd_load),
+         group = fct_relevel(group, "pre", "post"))
+```
+
+### Distribution of Bd load data
+```{r}
+d1 %>% ggplot(aes(x = bd_load)) +
+          geom_histogram()
+```
+* Strong left skew, possible zero-inflation 
+
+### Fit negative binomial model
+```{r}
+m1 <- brm(bd_load ~ group,
+          data = d1, 
+          family = negbinomial())
+summary(m1)
+plot(m1)
+plot(conditional_effects(m1))
+```
+* Bd loads of post-treatment samples is lower than that of pre-treatment samples 
+
+### Check fit
+```{r}
+loo1 <- loo(m1, save_psis = TRUE)
+yrep <- posterior_predict(m1)
+ppc_loo_pit_overlay(
+  y = d1$bd_load, 
+  yrep = yrep,
+  lw = weights(loo1$psis_object))
+```
+* Fairly uniform distribution, fit is okay
+
+### Fit zero-inflated negative binomial model
+```{r}
+m1a <- brm(bd_load ~ group,
+          data = d1, 
+          family = zero_inflated_negbinomial())
+summary(m1a)
+plot(m1a)
+plot(conditional_effects(m1a))
+```
+* Minimal zero-inflation, m1 is best
+
+## ANALYSIS #2: Predictors of treatment effectiveness
+### Create dataset
+```{r}
+d2 <- read_csv(here::here("data", "treasure-Bd-4.csv"))
+```
+
+### Distribution of LRR response variable
+```{r}
+d2 %>% ggplot(aes(x = LRR)) +
+  geom_histogram()
+
+d2 %>% ggplot(aes(sample = LRR)) +
+  stat_qq() +
+  stat_qq_line()
+```
+* Normally distributed
+
+### Fit gaussian model
+```{r}
+m2 <- brm(LRR ~ capture_swab_std * days_inside,
+          data = d2,
+          family = gaussian())
+
+summary(m2)
+plot((m2), ask = FALSE)
+plot(conditional_effects(m2), ask = FALSE)
+```
+* Important effect (-) of # days treated, initial load and interaction not important
+
+### Check fit
+```{r}
+loo2 <- loo(m2, save_psis = TRUE)
+yrep <- posterior_predict(m2)
+ppc_loo_pit_overlay(
+  y = d2$LRR, 
+  yrep = yrep,
+  lw = weights(loo2$psis_object))
+```
+* Model fits well, uniform distribution
+
+## CREATE PLOTS
+### Load packages needed for plotting
+```{r}
+library(EnvStats)
+library(lubridate)
+```
+
+### Figure X: Boxplots of Bd loads relative to survey date, colored relative to whether collected during survey or during Bd treatment.
+
+Plot all Bd loads recorded from the Treasure Lake treatment site, from 2016 and 2017 surveys, through 2018 surveys, treatment, and follow up survey. No frogs were captured in 2019 or beyond. This plot colors the boxplots relative to whether they were collected during a survey or during the antifungal treatment.
+```{r}
+treasure_progress_plot_colored_boxes <- 
+  ggplot(data=treasure_Bd, aes(x=factor(visit_date), y=log10(bd_load+1)), fill=survey_treatment ) + 
+  geom_boxplot(aes(fill=survey_treatment)) +
+  scale_fill_manual(values=c("darkgray", "deepskyblue2")) +
+  stat_n_text(y.pos = -.75, vjust=0, size=3, y.expand.factor = 0) + # places sample sizes along x-axis in space between lowest values and axis line
+  theme_classic() +
+  xlab("Survey Date") + 
+  ylab(expression(paste("Bd load (log"[10]," copies + 1)"))) +
+  theme(axis.text.x=element_text(angle=45,  vjust=1, hjust=1),
+        legend.title = element_blank()
+        )
+treasure_progress_plot_colored_boxes
+ggsave(here::here("treasure-progress-plot-colored-boxes.png"), width = 15, height = 10, units="cm")
+```
+
+### Figure XX. Trajectories of loads on individual frogs across treatment and follow up survey.
+
+What was the change in Bd load for individual frogs, both within the treatment, and after? Did loads continue to decrease, did they increase, or neither?  
+-  First, tally the number of times each frog was captured and swabbed, which informs how the swab data are plotted and each point is connected.  
+-  Create an index of how many days each frog spent in the treatment.
+-  Plot the figure.
+```{r}
+# filters the swab data for the captures, releases, and recaptures (excludes swabs prior to treatment)
+treasure_Bd_2 <- treasure_Bd %>% 
+  filter(visit_date > "2018-07-07") %>% # includes swab data for capture, release, and recapture
+  group_by(pit_tag_ref) %>% 
+  select(visit_date, pit_tag_ref, bd_load)
+
+# TALLY NUMBER OF CAPTURES
+# assigns a category to each frog representing the number of times it was captured (once, twice, thrice)
+treasure_Bd_capture_tally <- treasure_Bd_2 %>% 
+  tally() %>% 
+  mutate(times_captured=factor(n)) %>% 
+  left_join(treasure_Bd_2) %>% 
+  select(-n) %>% 
+  arrange(pit_tag_ref, visit_date)
+
+# DAYS INSIDE INDEX
+# creates an index of how many days each individual frog was inside the pen for treatment
+days_inside <- treasure_Bd %>% 
+  filter(visit_date > "2018-07-07",
+         visit_date < "2018-07-23") %>% 
+  group_by(pit_tag_ref) %>% 
+  mutate(days_inside= ymd("2018-07-23")-visit_date  ) %>% 
+  select(pit_tag_ref, days_inside) %>% 
+  unique()
+
+# PLOT
+# join the days_inside index to the treasure_Bd_capture_tally data, and
+# add a factor variable containing clear labels for figure facets, then
+# create the figure
+multicapture_loads_plot <- 
+  treasure_Bd_capture_tally %>% # this first section of piping from the data object to ggplot simply 1) creates a variable coded with clear labels for figure facets, and 2) joins with the index of how many days each frog was inside the pen getting treatment.
+    left_join(days_inside, by="pit_tag_ref") %>% # joins with the days_inside index 
+    mutate(days_inside=as.integer(days_inside), 
+           facet_labels=recode(times_captured, # creates the facet labels
+                               "One"="Non-survivor",
+                               "Two"="Survivor - not recaptured",
+                               "Three"="Survivor - recaptured")) %>% 
+  ggplot(aes(x=visit_date, y=log10(bd_load+1), color = factor(days_inside), group=pit_tag_ref))+
+  geom_line(aes(color=factor(days_inside)), size=1, alpha=0.5) +
+  scale_color_manual(values=c("#000000" ,"#00232f","#00475f","#006a8e","#008ebe","#00b2ee")) + # colors selected from https://www.color-hex.com
+  geom_point(shape=21, aes(fill=factor(days_inside)), size=2, color="black", alpha=0.75) +
+  scale_fill_manual(values=c("#000000" ,"#00232f","#00475f","#006a8e","#008ebe","#00b2ee")) +
+  scale_x_date(date_breaks = "1 week") + 
+  facet_grid(facet_labels~.) +
+  guides(color=FALSE) +
+  xlab("Swab date") + 
+  ylab(expression(paste("Bd load (log"[10]," copies + 1)"))) +
+  labs(fill="Treatment\nduration (days)") +
+  theme_bw()+
+  theme(panel.grid = element_blank(),
+        strip.background=element_rect(fill="white"),
+        axis.text.x=element_text(angle=45,  vjust=1, hjust=1)
+        )
+multicapture_loads_plot
+ggsave(here::here("out", "treasure-multicapture-loads.png"), width = 15, height = 10, units="cm")
+```
+
+
+
+
