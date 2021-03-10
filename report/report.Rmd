@@ -1,12 +1,15 @@
 ---
-title: Effectiveness of actions to mitigate impacts of the amphibian chytrid fungus on mountain yellow-legged frog populations
-subtitle: Report to Sequoia-Kings Canyon and Yosemite National Parks, Cooperative Agreement P19AC00789
-# title: Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog
+title: Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog
 author: 
   - Roland A. Knapp^1,2^
   - Maxwell B. Joseph^3^
   - Ericka E. Hegeman^1,2^
   - Thomas C. Smith^1,2^ 
+  - James E. Erdman, Jr.^4^
+  - Vance T. Vredenburg^5,6^
+  - Daniel M. Boiano^7^
+  - Andrea J. Jani^8^
+  - Cheryl J. Briggs^9^
 output:
   bookdown::pdf_document2:
     keep_tex: true
@@ -28,11 +31,23 @@ library(kableExtra)
 library(here)
 ```
 
-^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, CA 93546
+^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, California, USA
 
-^2^ Earth Research Institute, University of California, Santa Barbara, CA 93106-3060
+^2^ Earth Research Institute, University of California-Santa Barbara, California, USA
 
-^3^ Earth Lab, University of Colorado, Boulder, CO 80303
+^3^ Earth Lab, University of Colorado, Boulder, Colorado, USA
+
+^4^ California Department of Fish and Wildlife, Bishop, California, USA
+
+^5^ Department of Biology, San Francisco State University, San Francisco, California, USA
+
+^6^ Museum of Vertebrate Zoology, University of California-Berkeley, Berkeley, California, USA
+
+^7^ Sequoia and Kings Canyon National Parks, National Park Service, Three Rivers, CA, USA
+
+^8^ Pacific Biosciences Research Center, University of Hawai'i at Mànoa, Honolulu, Hawai'i, USA
+
+^9^ Department of Ecology, Evolution, and Marine Biology, University of California-Santa Barbara, Santa Barbara, California, USA
 
 \newpage
 
