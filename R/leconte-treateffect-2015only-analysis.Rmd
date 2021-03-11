@@ -50,6 +50,7 @@ summary(m1)
 plot((m1), ask = FALSE)
 plot(conditional_effects(m1), ask = FALSE)  
 ```
+* Important effect of category, effect of location is unimportant, weak effect of interaction
 
 #### LOO probability integral transform
 ```{r}
@@ -61,7 +62,6 @@ ppc_loo_pit_overlay(
   lw = weights(loo1$psis_object))
 ```
 * Fit of m1 is quite good, uniform distribution
-* Important effect of category, effect of location is unimportant, weak effect of interaction
 
 ## Zero-inflated negative binomial
 ```{r}
@@ -98,11 +98,6 @@ m2 <- brm(bd_load ~ location * trt_period,
 summary(m2)
 plot((m2), ask = FALSE)
 plot(conditional_effects(m2), ask = FALSE)  
-
-# plot single parameter, make changes to default plot
-p1 <- conditional_effects(m2, "location:trt_period")
-plot(p1, plot = FALSE)[[1]] +
-  theme_classic()
 ```
 * Important effects of location (higher loads in upper), trt_period (lower after treatment), interaction (loads start higher & end higher in upper)
 
@@ -130,7 +125,7 @@ plot(conditional_effects(m2a), ask = FALSE)
 
 # ANALYSIS #3: Loads of frogs that lived vs died during treatment
 ```{r}
-d3 <- d %>% filter(trt_period == "pretreat") %>% 
+d3 <- d %>% filter(trt_period == "pretreat" & category == "treated") %>% 
     mutate(across(c("location", "trt_died"), as.factor),
            bd_load = as.integer(bd_load)) %>% as_tibble()
 ```
@@ -144,7 +139,7 @@ d3 %>% ggplot(aes(x = bd_load)) +
 
 ### Fit negative binomial model
 ```{r}
-m3 <- brm(startload ~ trt_died * location,
+m3 <- brm(bd_load ~ trt_died * location,
           data = d3,
           family = negbinomial())
 summary(m3)
@@ -154,14 +149,15 @@ plot(conditional_effects(m3), ask = FALSE)
 
 ### Fit negative binomial model with shape predictors
 ```{r}
-m3b <- brm(bf(startload ~ status*location, 
-             shape ~ status + location),
+m3b <- brm(bf(bd_load ~ trt_died * location, 
+             shape ~ trt_died + location),
           data = d3,
           family = negbinomial())
 summary(m3b)
-plot(m3b)
+plot((m3b), ask = FALSE)
 plot(conditional_effects(m3b), ask = FALSE)
 ```
+* Effects of predictors are unchanged.
 
 #### Compare fit of models with and wo shape predictors
 ```{r}
@@ -170,21 +166,21 @@ loo3b <- loo(m3b, save_psis = TRUE)
 
 loo(m3, m3b)
 ```
-* m3b has a better fit (diff ratio = 3.1), but see LOO-PIT results.
+* m3b has a better fit (diff ratio = 3.1), but see LOO-PIT results. Use simpler model, m3.
 
 #### LOO probability integral transform
 ```{r}
 # for m3b
 yrep <- posterior_predict(m3b)
 ppc_loo_pit_overlay(
-  y = d3$startload, 
+  y = d3$bd_load, 
   yrep = yrep,
   lw = weights(loo3b$psis_object))
 
 # for m3
 yrep <- posterior_predict(m3)
 ppc_loo_pit_overlay(
-  y = d3$startload, 
+  y = d3$bd_load, 
   yrep = yrep,
   lw = weights(loo3$psis_object))
 ```
@@ -192,23 +188,23 @@ ppc_loo_pit_overlay(
 
 ### Fit zero-inflated negative binomial model
 ```{r}
-m3a <- brm(startload ~ status*location,
+m3a <- brm(bd_load ~ trt_died * location,
           data = d3,
           family = zero_inflated_negbinomial())
 summary(m3a)
-plot(m3a)
+plot((m3a), ask = FALSE)
 plot(conditional_effects(m3a), ask = FALSE)
 ```
 * No evidence of zero-inflation
 
-## CREATE PLOT
-### Load packages needed for plotting
+# CREATE PLOT
+## Load packages needed for plotting
 ```{r}
 library(patchwork)
 library(EnvStats)
 ```
 
-### Plot of Bd loads before and at end of treatment, by location
+## Plot of Bd loads before and at end of treatment, by location
 ```{r}
 p1 <- d %>% 
   filter(location == "lower" & (trt_died == FALSE | is.na(trt_died))) %>% 
@@ -242,6 +238,7 @@ p2 <- d %>%
           axis.title.x = element_text(vjust = -0.7))
 
 fig4 <- p1 + p2
+fig4
 ```
 ```{r}
 ggsave(here::here("out", "leconte_2015_beforeafter_treat.png"), width = 15, height = 10, units = "cm")
