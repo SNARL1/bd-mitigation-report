@@ -53,6 +53,28 @@ library(here)
 
 \linenumbers
 
+# Author Contributions {-}
+
+Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, analyzed all of the datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
+
+Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, and reviewed all drafts of the manuscript. 
+
+Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+
+Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments, and reviewed all drafts of the manuscript. 
+
+James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
+
+Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, supported the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
+
+Daniel Boiano assisted with the LeConte treatment, facilitated the National Park Service permitting of all treatments conducted in Sequoia and Kings Canyon National Parks, and reviewed all drafts of the manuscript.
+
+Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zoospore pool study, provided the associated dataset, preliminary analyses, and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+
+Cheryl Briggs provided modeling results that motivated the treatments, assisted with the design of treatments, and reviewed all drafts of the manuscript.  
+
+\newpage
+
 # Summary {-}
 
 In this report, we describe the outcome of studies conducted primarily in Sequoia, Kings Canyon, and Yosemite National Parks that attempted to mitigate the negative effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd) on populations of the endangered mountain yellow-legged frog (*Rana muscosa*, *Rana sierrae*). 
@@ -261,6 +283,7 @@ To determine treatment effectiveness, 93 frogs in the lower basin treated group 
 After the last treatment, all frogs were released from the pens into the lake (n~lower~ = 286, n~upper~ = 127). 
 To evaluate any pre-treatment differences in Bd loads of frogs assigned to the treated and control groups, we used the model *bd_load ~ (basin x treatment)* (family = negative binomial, treatment = treated/control, basin = upper/lower). 
 To evaluate the immediate effect of treatment on Bd loads, we used the model *bd_load ~ (basin x treat_category)* (family = negative binomial, treat_category = beginning/end of treatment period). 
+For both analyses, we excluded any frogs that died during the treatment period. 
 Given that some frogs died during the treatment, we evaluated differences in Bd loads of frogs that lived versus died using the model *bd_load ~ (status x basin)* (family = negative binomial, status = lived/died).
 
 The outcome of the treatment experiments was quantified using CMR surveys conducted during the summers of 2016, 2017, and 2018 (see General Methods for details). 
@@ -419,17 +442,17 @@ Therefore, mirroring the longer-term effects of treatment on Bd load, the increa
 
 In the experiments conducted in the lower and upper basins, prior to the treatment period frogs assigned to the treated and control groups had very high Bd loads, above the level at which symptoms of severe chytridiomycosis are evident. 
 In both basins, Bd loads of the control group were somewhat higher than those in the treated group (Figure 4), likely because control frogs were captured and processed 1-3 days after the frogs assigned to the treated group (Table 2) and during a period of increasing Bd loads in the study populations. 
-Model results affirmed an important pre-treatment effect of treatment group on Bd load (Bd loads of treated group lower than control group, CI: -1.22 -- -0.59). 
-The unimportant effects of both basin (CI: -0.40 -- 0.45) and the (treatment x basin) interaction term (CI: -0.01 -- 1.02) indicated that this pattern was similar in both basins. 
+Model results affirmed an important pre-treatment effect of treatment group on Bd load (Bd loads of treated group lower than control group, CI: -1.23 -- -0.61). 
+The effect of basin was unimportant (CI: -0.39 -- 0.43), and the (treatment * basin) interaction term was relatively weak (CI: 0.04 -- 1.02), indicating that this pattern was similar in both basins. 
 
 Samples collected at the end of the 7-9 day treatment period indicated that in both basins the treatment was effective in reducing Bd loads on treated frogs (Figure 4; a reduction of 1.4-2.7 orders of magnitude). 
-Model results affirmed the important effect on Bd load of treatment (Bd loads at end of treatment lower than at beginning; CI: -3.07 -- -2.23). 
-The effect of basin was also important, indicating that Bd loads were higher in the upper than lower basin (CI: 0.15 -- 0.90). 
-Finally, the (basin x trt_time) interaction was important (CI: 0.44 -- 1.86), and showed that Bd loads before and at the end of treatment were both higher in the upper basin than in the lower basin. 
+Model results affirmed the important effect on Bd load of treatment (Bd loads at end of treatment lower than at beginning; CI: -3.07 -- -2.24). 
+The effect of basin was also important, indicating that Bd loads were higher in the upper than lower basin (CI: 0.18 -- 0.92). 
+Finally, the (basin * trt_period) interaction was important (CI: 0.43 -- 1.89), and showed that Bd loads before and at the end of treatment were both higher in the upper basin than in the lower basin. 
 
-During the treatment period, 74 of the lower basin treated frogs and 79 of the upper basin treated frogs died. 
+During the treatment period, 74 of the lower basin treated frogs and 80 of the upper basin treated frogs died. 
 Of the frogs that died, most did so during the first half of the treatment period (lower basin: 73%; upper basin: 74%), consistent with frogs succumbing to chytridiomycosis. 
-However, Bd loads were not higher on frogs that died versus survived (CI~bd_load~: -0.48 -- 0.24, CI~basin~: 0.29 -- 0.86, CI~interaction~: -0.33 -- 0.71). 
+However, Bd loads were not higher on frogs that died versus survived (CI~bd_load~: -0.52 -- 0.19, CI~basin~: 0.24 -- 0.83, CI~interaction~: -0.30 -- 0.76). 
 All control frogs survived during the several hour period between capture, processing, and release.
 
 During the three year post-treatment period and across both basins, 51% of treated frogs and 2% of control frogs were recaptured. 
@@ -602,14 +625,11 @@ Although relatively few such populations exist, they provide the best known oppo
 # Acknowledgements {-}
 
 The research described in this report was supported by grants from Sequoia and Kings Canyon National Parks, Yosemite National Park, National Science Foundation–National Institutes of Health Ecology of Infectious Disease program (EF-0723563), and National Science Foundation Rapid Response Research program (IOS-1244804). 
-Analysis of results from the Bd-mitigation experiments and the writing of this report was supported by Cooperative Agreement P19AC00789.
-The following people assisted with fieldwork: A. Adams, K. Atkinson, D. Boiano, I. Chellman, C. Dorsey, J. Erdman, M. Hernandez, A. Jani, N. Kauffman, A. Killion, A. Lindauer, M. Masten, D. Paolilli, W. Philbrook, G. Ruso, A. Stoerp, and L. Torres.
+Development of this paper was supported by Cooperative Agreement P19AC00789 from the National Park Service.
+The following people assisted with fieldwork: A. Adams, K. Atkinson, I. Chellman, C. Dorsey, M. Hernandez, N. Kauffman, A. Killion, A. Lindauer, M. Masten, D. Paolilli, W. Philbrook, G. Ruso, A. Stoerp, and L. Torres.
 L. Torres developed the *J. lividum* qPCR protocol while employed in the Vredenburg lab (San Francisco State University). 
-M. Toothman in the Briggs lab (University of California, Santa Barbara) analyzed Bd swabs collected prior to 2016, and K. Rose and A. Barbella in the Knapp lab analyzed swabs collected thereafter. 
-J. Erdman (California Department of Fish and Wildlife - Region 6) led the Treasure Lake itraconazole treatment, and conducted the post-treatment population surveys. 
-A. Jani (University of California, Santa Barbara) conducted the Dusy Basin zoospore pool study and provided associated text and analyses included in this report. 
-We also thank C. Briggs (University of California, Santa Barbara) for her many contributions to the studies described in this report. 
-Research permits were provided by Sequoia and Kings Canyon National Parks, Yosemite National Park, U.S. Fish and Wildlife Service, and the Institutional Animal Use and Care Committee at the University of California, Santa Barbara. 
+M. Toothman in the Briggs lab (University of California-Santa Barbara) analyzed Bd swabs collected prior to 2016, and K. Rose and A. Barbella in the Knapp lab analyzed swabs collected thereafter. 
+Research permits were provided by Sequoia and Kings Canyon National Parks, U.S. Fish and Wildlife Service, and the Institutional Animal Use and Care Committee at the University of California-Santa Barbara. 
 
 # Literature Cited {-}
 
@@ -798,11 +818,12 @@ Zoospore pools measured in the Dusy Basin study ponds assigned to either treated
 ## Figure 4 {-}
 
 ```{r fig4, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics("../out/leconte_2015_beforeafter_treat.png")
+knitr::include_graphics(here::here("out", "leconte_2015_beforeafter_treat.png"))
 ```
 
 Effect of antifungal treatments on Bd loads of adult *R. sierrae* in the 2015 LeConte treatment experiment: (a) lower basin, and (b) upper basin.
 Box plots show Bd loads on frogs in the untreated control (green) and treated (blue) groups before the treatment began and at the end of the treatment period. 
+Only frogs that survived to the end of the treatment period and were released back into the study lakes are included. 
 Box plot components are as in Figure 1. 
 
 \clearpage
