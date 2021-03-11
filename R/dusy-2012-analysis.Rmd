@@ -24,6 +24,21 @@ library(tidyverse)
 d <- read_csv(file = here::here("data", "dusy-2012-swabs.csv"))
 ```
 
+### Create dataframe for use in datasets developed below
+```{r}
+diff1 <- as.numeric(as.Date("2012-07-12") - as.Date("2012-07-19"))
+diff2 <- as.numeric(as.Date("2012-07-19") - as.Date("2012-07-19"))
+diff3 <- as.numeric(as.Date("2012-07-31") - as.Date("2012-07-19"))
+diff4 <- as.numeric(as.Date("2012-08-25") - as.Date("2012-07-19"))
+diff5 <- as.numeric(as.Date("2012-09-13") - as.Date("2012-07-19"))
+
+days <- c(diff1, diff2, diff3, diff4, diff5)
+group_date <- c("2012-07-12", "2012-07-19", "2012-07-31", "2012-08-25", "2012-09-13")
+
+jliv_days <- tibble(group_date, days) %>% 
+  mutate(group_date = as.Date(group_date))
+```
+
 ### Exploration of full dataset 
 #### Distribution of bd load data
 ```{r}
@@ -245,24 +260,12 @@ d %>%
 
 #### Create dataset
 ```{r}
-# calculate number of days between jliv exposure and survey date 
-diffprior <- as.numeric(as.Date("2012-07-12") - as.Date("2012-07-19"))
-diff10 <- as.numeric(as.Date("2012-07-31") - as.Date("2012-07-19"))
-diff20 <- as.numeric(as.Date("2012-08-25") - as.Date("2012-07-19"))
-diff30 <- as.numeric(as.Date("2012-09-13") - as.Date("2012-07-19"))
-```
-```{r}
-# create dataset
 d3 <- d %>%
+  left_join(jliv_days, by = "group_date") %>% 
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
-    days = case_when(
-      group_date == "2012-07-31" ~ diff10,
-      group_date == "2012-08-25" ~ diff20,
-      group_date == "2012-09-13" ~ diff30)) %>%
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
   filter(group_date > "2012-07-19") %>%
-  mutate(group_date = as.factor(group_date), 
-         expt_trt = as.factor(expt_trt), 
+  mutate(across(c("group_date", "expt_trt"), as.factor), 
          jliv_ge = as.integer(jliv_ge))
 ```
 
@@ -327,18 +330,13 @@ plot(conditional_effects(m3b), ask = FALSE)
 #### Figure of Jliv concentrations over time 
 ```{r}
 # points grouped by expt_trt
-# better represents time scale (days)
 d %>%
+  left_join(jliv_days, by = "group_date") %>% 
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
-    days = case_when(
-      group_date == "2012-07-19" ~ 0,
-      group_date == "2012-07-31" ~ diff10,
-      group_date == "2012-08-25" ~ diff20,
-      group_date == "2012-09-13" ~ diff30)) %>%
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
   filter(group_date > "2012-07-12") %>%
   ggplot(aes(x = days, y = log10(jliv_ge + 1), color = expt_trt)) +
-    geom_point(position = position_dodge(width=5), size = 2.5) +  
+    geom_point(position = position_dodge(width = 5), size = 2.5) +  
     scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(color = "Frog group", 
          x = expression("Days since"~italic("J. lividum")~"exposure"),
@@ -411,20 +409,14 @@ ppc_loo_pit_overlay(
 ```
 * Some improvement in uniformity (except at smallest values of x)
 
-#### Figure of Bd concentrations over time 
+#### Figure of Bd loads over time 
 ```{r}
-# create diff objects first, in analysis > create dataset 
-d %>%
+d %>% 
+  left_join(jliv_days, by = "group_date") %>% 
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"), 
-    days = case_when(
-      group_date == "2012-07-12" ~ diffprior,
-      group_date == "2012-07-19" ~ 0,
-      group_date == "2012-07-31" ~ diff10,
-      group_date == "2012-08-25" ~ diff20,
-      group_date == "2012-09-13" ~ diff30)) %>%
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
   ggplot(aes(x = days, y = log10(bd_load + 1), color = expt_trt)) +
-    geom_point(position = position_dodge(width=5), size = 2.5) +  
+    geom_point(position = position_dodge(width = 5), size = 2.5) +  
     scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(color = "Frog group", 
          x = expression("Days since"~italic("J. lividum")~"exposure"),
@@ -437,15 +429,12 @@ ggsave(here::here("out", "dusy_2012_bdload.png"), width = 15, height = 10, units
 ```
 
 ### ANALYSIS #5: Counts of recaptured animals in control, treated, and wild groups in 2012
-#### Create dataset (IMPROVE THIS CODE)
+#### Create dataset
 ```{r}
 d4 <- d %>%
+  left_join(jliv_days, by = "group_date") %>% 
   filter(group_date > "2012-07-19" & expt_or_wild == "expt") %>%
   mutate(
-    days = case_when(
-            group_date == "2012-07-31" ~ diff10,
-            group_date == "2012-08-25" ~ diff20,
-            group_date == "2012-09-13" ~ diff30),
     released = case_when(
             expt_trt == "control" ~ 60,    # sample sizes from information recorded in field notebooks
             expt_trt == "treated" ~ 254))
