@@ -55,13 +55,13 @@ library(here)
 
 # Author Contributions {-}
 
-Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, analyzed all of the datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
+Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
 
 Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, and reviewed all drafts of the manuscript. 
 
 Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
-Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments, and reviewed all drafts of the manuscript. 
+Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
 
 James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
 
