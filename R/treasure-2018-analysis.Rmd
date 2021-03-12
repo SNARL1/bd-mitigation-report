@@ -126,10 +126,10 @@ library(lubridate)
 Plot all Bd loads recorded from the Treasure Lake treatment site, from 2016 and 2017 surveys, through 2018 surveys, treatment, and follow up survey. No frogs were captured in 2019 or beyond. This plot colors the boxplots relative to whether they were collected during a survey or during the antifungal treatment.
 ```{r}
 treasure_progress_plot_colored_boxes <- 
-  ggplot(data=treasure_Bd, aes(x=factor(visit_date), y=log10(bd_load+1)), fill=survey_treatment ) + 
-  geom_boxplot(aes(fill=survey_treatment)) +
-  scale_fill_manual(values=c("darkgray", "deepskyblue2")) +
-  stat_n_text(y.pos = -.75, vjust=0, size=3, y.expand.factor = 0) + # places sample sizes along x-axis in space between lowest values and axis line
+  ggplot(data = treasure_Bd, aes(x = factor(visit_date), y = log10(bd_load + 1)), fill = survey_treatment) + 
+  geom_boxplot(aes(fill = survey_treatment)) +
+  scale_fill_manual(values = c("darkgray", "deepskyblue2")) +
+  stat_n_text(y.pos = -.75, vjust = 0, size = 3, y.expand.factor = 0) + 
   theme_classic() +
   xlab("Survey Date") + 
   ylab(expression(paste("Bd load (log"[10]," copies + 1)"))) +
