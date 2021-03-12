@@ -6,7 +6,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Analyses of 2012 Jliv treatment experiment with metamorphs
+# Analyses of 2012 Jliv treatment experiment with subadult frogs
 ## Use *brms* package to conduct regression analyses in a Bayesian framework (default priors used in all analyses)
 
 ### Load packages
@@ -51,37 +51,28 @@ d %>%
     geom_qq() +
     geom_qq_line()
 
-d %>% 
-  ggplot(aes(x = log10(bd_load + 1))) +
-    geom_histogram()
-
-d %>% 
-  ggplot(aes(sample = log10(bd_load + 1))) + 
-    geom_qq() +
-    geom_qq_line()
 ```
-* Bd load data are highly left-skewed and zero-inflated. 
+* Bd load data are highly left-skewed and appears zero-inflated. 
 
 #### General patterns of Bd load before and after itraconazole/Jliv treatment during summer 2012
 ```{r}
-# loads of control (no itraconazole or Jliv), treated (itraconazole + Jliv), and wild subadults in first year faceted by date
 d %>% 
   mutate(expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
   ggplot(aes(x = expt_trt, y = log10(bd_load + 1), fill = expt_trt)) +
-    geom_boxplot() +
+    geom_dotplot(method = "histodot", binaxis = "y", stackdir = "center", stackratio = 0.3, dotsize = 0.5, stroke = 0.5) +
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     facet_grid(~ group_date) +
-    stat_n_text(size = 2.5) + 
+    stat_n_text(size = 3) + 
+    stat_summary(fun = median, geom = "point", shape = 4, size = 3, show.legend = FALSE) +
     labs(
       x = "Group",
-      y = "Bd load (log10(copies + 1)"
-    ) +
+      y = "Bd load (log10(copies + 1)") +
     theme_bw() + 
     theme(axis.text.x = element_text(angle = 90))
 ```
-* Loads of subadults assigned to control and itraconazole-treated groups were similar immediately before treatment began
+* Bd loads of subadults assigned to control and itraconazole-treated groups were similar immediately before treatment began
 * Itraconazole treatment greatly reduced loads.
-* Following Jliv baths and release of subadults into pond, loads of treated animals increased and by September were similar to loads of wild subadults.
+* Following Jliv exposure and release of subadults into pond, Bd loads of treated animals increased and by September were similar to loads of wild subadults.
 * Control subadults disappeared quickly, resulting in few captures of animals in this group on later dates. 
 
 ### ANALYSIS #1: Were Bd loads similar between treated/control groups before itraconazole treatment?
@@ -96,12 +87,8 @@ d1  <- d %>% filter(group_date == "2012-07-12") %>%
 d1 %>% 
   ggplot(aes(x = bd_load)) +
     geom_histogram()
-
-d1 %>%
-  ggplot(aes(x = log10(bd_load + 1))) +
-    geom_histogram()
 ```
-* Negative skew, not nearly as dramatic as with full dataset (due to effect of itraconazole treatment). Negative binomial is reasonable distribution.
+* Negative skew, not nearly as strong as with full dataset. No obvious zero-inflation. Negative binomial is reasonable distribution.
 
 #### Fit negative binomial model
 ```{r}
@@ -112,9 +99,8 @@ m1 <- brm(bd_load ~ expt_trt,
 summary(m1)
 plot(m1)
 conditional_effects(m1)
-
-# write_rds(m1, file = here::here("out", "m1.rds"), "xz", compression = 9L)
 ```
+* Before treatment, no difference in Bd load between frogs assigned to treated vs control categories.
 
 #### Fit zero inflated negative binomial model
 ```{r}
@@ -123,14 +109,9 @@ m1a <- brm(bd_load ~ expt_trt,
           family = zero_inflated_negbinomial())
 summary(m1a)
 plot(m1a)
+conditional_effects(m1a)
 ```
-* No indication of zero-inflation, based on overlap of 95% CI with 0. 
-
-#### Compare model fits
-```{r}
-loo(m1, m1a)
-```
-* m1 and m1a have equivalent fits (elpd_diff/se_diff < 1). Use m1. 
+* No indication of zero-inflation, based on overlap of 95% CI with 0. Use m1. 
 
 #### LOO probability integral transform
 ```{r}
@@ -143,6 +124,7 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo_m1$psis_object))
 ```
+* Relatively uniform distribution, indicating adequate fit. 
 
 ### ANALYSIS #2: Effect of itraconazole treatment on loads (begin vs end of treatment)
 #### Create dataset
@@ -167,7 +149,7 @@ summary(m2)
 plot(m2)
 conditional_effects(m2)
 ```
-* Strong negative effect of treatment, much less variation after treatment. 
+* Strong negative effect of treatment on Bd load, much less variation after treatment. 
 
 #### Fit a zero-inflated negative binomial model
 ```{r}
@@ -184,7 +166,7 @@ conditional_effects(m2a)
 ```{r}
 loo(m2, m2a)
 ```
-* Zero-inflated model (m2a) is substantially better (elpd_diff/se_diff = 3.7)
+* Zero-inflated model (m2a) is substantially better (elpd_diff/se_diff = 3.8)
 
 #### LOO probability integral transform
 ```{r}
@@ -197,6 +179,7 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo_m2a$psis_object))
 ```
+* Relatively uniform distribution except at lowest x-axis values.
 
 #### Add group_date as a predictor of zero inflation
 ```{r}
@@ -213,7 +196,7 @@ conditional_effects(m2b)
 ```{r}
 loo(m2a, m2b)
 ```
-* Fit of model with zi predictor is somewhat better than model without, but not substantially so (elpd_diff/se_diff = 2.4). 
+* Fit of model with zi predictor is somewhat better than model without, but not substantially so (elpd_diff/se_diff = 2.5). 
 
 #### LOO probability integral transform
 ```{r}
@@ -227,7 +210,7 @@ ppc_loo_pit_overlay(
   lw = weights(loo_m2b$psis_object))
 ```
 * PIT figure showed no improvement with addition of zi predictor. 
-* Addition of shape predictor to m2a indicated that predictor was unimportant. Model m2a is best fit. 
+* Addition of shape predictor to m2a indicated that predictor was relatively unimportant. Model m2a is best fit. 
 
 ### ANALYSIS #3: Temporal patterns of Jliv concentration on treated, control, and wild subadults
 #### General patterns of Jliv load
@@ -238,6 +221,9 @@ d %>%
   ggplot(aes(x = jliv_ge)) +
         geom_histogram()
 ```
+* Highly left-skewed and possible zero-inflation. Negative binomial distribution is reasonable. 
+
+#### Exploration of Jliv concentrations through time
 ```{r}
 # Jliv concentration on control, treated, and wild subadults, faceted by date
 d %>%
@@ -253,9 +239,8 @@ d %>%
       y = expression("Concentration of"~italic("J. lividum")~"(genomic equivalents)")) +
     theme(axis.text.x = element_text(angle = 90))
 ```
-* Distribution of Jliv concentration is highly negative-skewed, when modeled as response variable will need negbinomial family
-* Very low Jliv concentration on "treated" group immediately prior to Jliv exposure 
-* 2 weeks following Jliv treatment of "treated" group, treated, control, and wild groups all had substantial jliv concentrations
+* Very low Jliv concentration on "treated" group immediately prior to Jliv exposure. 
+* 2 weeks following Jliv exposure of "treated" group, treated, control, and wild groups all had substantial jliv concentrations.
 * Decreased at similar rate across groups, returned to pre-exposure concentrations by mid-September
 
 #### Create dataset
@@ -292,7 +277,7 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo_m3$psis_object))
 ```
-* Some lack of fit indicated by departure from uniform distribution at larger x-values
+* Some lack of fit indicated by departure from uniform distribution at small and large x-values
 
 #### Fit zero inflated negative binomial model
 ```{r}
@@ -303,7 +288,7 @@ summary(m3a)
 plot(m3a)
 conditional_effects(m3a)
 ```
-* Only weak evidence for importance of zero inflation (95% CI very nearly overlaps 0)
+* No evidence for importance of zero inflation (95% CI includes 0)
 
 #### Compare fit of negbinomial and zi_negbinomial models
 ```{r}
@@ -316,7 +301,6 @@ loo(m3, m3a)
 d3a <- d3 %>% filter(expt_trt != "control")
 ```
 ```{r}
-# use days as predictor
 m3b <- brm(jliv_ge ~ days * expt_trt,
           data = d3a,
           family = negbinomial())
@@ -327,7 +311,7 @@ plot(conditional_effects(m3b), ask = FALSE)
 * No effect of treated vs wild on Jliv concentration
 * No interaction between treated/wild and days 
 
-#### Figure of Jliv concentrations over time 
+#### Plot of Jliv concentrations over time 
 ```{r}
 # points grouped by expt_trt
 d %>%
@@ -349,13 +333,15 @@ ggsave(here::here("out", "dusy_2012_jliv.png"), width = 15, height = 10, units =
 ```
 
 ### ANALYSIS #4: Differences in Bd load between itraconazole+Jliv treated and wild subadults 
-#### Fit negative binomial model
+### Distribution of Bd load data
 ```{r}
-# distribution of bdload response variable (negative skew and zero inflation)
 d3a %>%
   ggplot(aes(x = bd_load)) +
     geom_histogram()
 ```
+* Strongly left-skewed, possible zero-inflation.
+
+### Fit negative binomial model
 ```{r}
 m4 <- brm(bd_load ~ days * expt_trt,
           data = d3a,
@@ -377,14 +363,14 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo_m4$psis_object))
 ```
-* Some lack of fit indicated by deviations from uniform distribution
+* Some lack of fit indicated by deviations from uniform distribution.
 
 #### Fit zero inflated negbinomial model
 ```{r}
 m4a <- brm(bd_load ~ days * expt_trt,
           data = d3a,
           family = zero_inflated_negbinomial())
-table_m4asum <- summary(m4a)
+summary(m4a)
 plot((m4a), ask = FALSE)
 plot(conditional_effects(m4a), ask = FALSE)
 ```
@@ -393,8 +379,7 @@ plot(conditional_effects(m4a), ask = FALSE)
 ```{r}
 loo(m4, m4a)
 ```
-* Zero inflated model somewhat better (elpd_diff/se_diff = 3.2) 
-* Adding expt_trt as shape predictor indicated no effect
+* Zero inflated model somewhat better (elpd_diff/se_diff = 3.2).  
 
 #### LOO probability integral transform
 ```{r}
@@ -407,7 +392,18 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo_m4a$psis_object))
 ```
-* Some improvement in uniformity (except at smallest values of x)
+* Some improvement in uniformity (except at smallest values of x). 
+
+#### Add expt_trt as shape predictor
+```{r}
+m4b <- brm(bf(bd_load ~ days * expt_trt, shape ~ expt_trt),
+          data = d3a,
+          family = zero_inflated_negbinomial())
+summary(m4b)
+plot((m4b), ask = FALSE)
+plot(conditional_effects(m4b), ask = FALSE)
+```
+* expt_trt not an important predictor of shape (based on CI including 0). m4a is best. 
 
 #### Figure of Bd loads over time 
 ```{r}
