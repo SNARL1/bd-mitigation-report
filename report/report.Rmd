@@ -438,8 +438,8 @@ Therefore, despite the substantial reduction in Bd loads caused by the 2018 trea
 
 ## Microbiome augmentation of subadult frogs {-}
 
-In the Dusy Basin microbiome augmentation experiment, prior to the itraconazole treatment Bd loads were similar in subadults assigned to the control and treated groups (CI: -0.37 -- 0.71; Figure 8: days < 0).
-The 7-day itraconazole treatment reduced Bd loads almost 4 orders of magnitude (CI: -9.34 -- -8.50; Figure 8: days < 0 versus day = 0). 
+In the Dusy Basin microbiome augmentation experiment, prior to the itraconazole treatment Bd loads were similar in subadults assigned to the control and treated groups (CI: -0.38 -- 0.70; Figure 8: days < 0).
+The 7-day itraconazole treatment reduced Bd loads almost 4 orders of magnitude (CI: -9.34 -- -8.48; Figure 8: days < 0 versus day = 0). 
 
 *J. lividum* exposure started on the day following the last day of itraconazole treatment, and on that day *J. lividum* concentrations on subadults assigned to the treated group were either zero or near-zero for all individuals (day 0; Figure 9). 
 Twelve days after the two *J. lividum* baths to which animals in the treated group were subjected, *J. lividum* concentrations on subadults were high, but unexpectedly the concentrations were similarly high in treated, control, and wild groups instead of only in the treated group (day 0 versus 12; Figure 9).
