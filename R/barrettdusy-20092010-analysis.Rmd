@@ -38,6 +38,7 @@ d1 %>%
   ggplot(aes(x = date_label, y = log10load, color = stage)) +
     geom_point(position = "jitter") +
     facet_wrap(~ basin + treatment, ncol = 4) +
+    stat_summary(fun = median, geom = "point", shape = 18, size = 5, show.legend = FALSE) +
     stat_n_text()
 
 d1 %>%
@@ -163,7 +164,7 @@ d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
   stat_n_text()
 ```
 ```{r}
-d2 %>% ggplot(aes(x = treatcat, log10(bd_load + 1))) +
+d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
   geom_boxplot() +
   facet_grid(stage ~ basin + site_id) +
   stat_n_text()
@@ -182,7 +183,7 @@ d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1), color = stage)) +
 * Overall, results suggest model with treatcat * basin term, likely no need to include site_id as random effect. 
 * Include stage in model to account for potential stage-specific differences in load.
 
-### Fit negative binomial model with 2 population-level effects plus their interaction
+### Fit negative binomial model with 3 population-level effects plus interaction term
 ```{r}
 d2 <- d2 %>%
   mutate(bd_load = as.integer(bd_load))
@@ -195,7 +196,7 @@ summary(m2)
 plot((m2), ask = FALSE)
 plot(conditional_effects(m2), ask = FALSE)
 ```
-* Negative effect of treatment on load, no effect of basin or stage, important effect of treat*basin interaction 
+* Negative effect of treatment on load, no effect of basin or stage, important effect of treat*basin interaction.
 * Greater variation in load at beginning than end of treatment, especially for Dusy. 
 
 #### LOO probability integral transform
@@ -262,7 +263,7 @@ ppc_loo_pit_overlay(
   lw = weights(loo2b$psis_object)
 )
 ```
-* Adding group effect of site_id had little effect on fit (LOO: elpd_diff/se_diff < 1). 
+* Adding group effect of site_id had little effect on fit (LOO: elpd_diff/se_diff = 1.1). 
 
 ### Add predictors of shape parameter to negative binomial model
 ```{r}
@@ -291,64 +292,7 @@ ppc_loo_pit_overlay(
 ```
 * Much better fit than model without predictors of shape parameter (LOO: elpd_diff/se_diff = 5.8). 
 * LOO-PIT still shows non-uniformity. 
-* Any further improvement from using zero-inflated negbinomial family?
-
-### Fit zero-inflated negative binomial model, with predictors of shape parameter
-```{r}
-m2d <- brm(bf(bd_load ~ stage + treatcat * basin, 
-              shape ~ stage + treatcat + basin), 
-           data = d2,
-           family = zero_inflated_negbinomial())
-summary(m2d)
-plot(m2d, ask = FALSE)
-plot(conditional_effects(m2d), ask = FALSE)
-```
-* Same effects of predictors as without zero-inflation, amount of zero-inflation is small.
-
-#### Compute fit diagnostics
-```{r}
-loo(m2c, m2d)
-```
-```{r}
-loo2d <- loo(m2d, save_psis = TRUE)
-yrep <- posterior_predict(m2d)
-ppc_loo_pit_overlay(
-  y = d2$bd_load, 
-  yrep = yrep,
-  lw = weights(loo2d$psis_object)
-)
-```
-* No improvement in fit (LOO: elpd_diff/se_diff = 1.5), but LOO-PIT suggests less deviation from uniformity. 
-
-### Add 3 predictors of zero inflation to m2d
-```{r}
-m2e <- brm(bf(bd_load ~ stage + treatcat * basin, 
-              shape ~ stage + treatcat + basin, 
-              zi ~ stage + treatcat + basin),
-           data = d2,
-           family = zero_inflated_negbinomial)
-summary(m2e)
-plot(m2e, ask = FALSE)
-plot(conditional_effects(m2e), ask = FALSE)
-```
-
-#### Compute fit diagnostics
-```{r}
-loo(m2c, m2e)
-loo(m2d, m2e)
-```
-```{r}
-loo2e <- loo(m2e, save_psis = TRUE)
-yrep <- posterior_predict(m2e)
-ppc_loo_pit_overlay(
-  y = d2$bd_load, 
-  yrep = yrep,
-  lw = weights(loo2e$psis_object)
-)
-```
-* Fit is slightly better than model without zi (LOO: elpd_diff/se_diff = 2.6)
-* Model fit little improved over zi model w/o zi predictors (LOO: elpd_diff/se_diff = 2.3).
-* Model m2d (zero-inflated negbinom, with shape predictors) is best model, but still shows some lack of fit. 
+* Model m2c is best model, but still shows some lack of fit. 
 
 ## ANALYSIS 3: Effect of treatment on Bd load in year of treatment and following year
 ### Create dataset
@@ -412,7 +356,7 @@ summary(m3)
 plot(m3, ask = FALSE)
 plot(conditional_effects(m3), ask = FALSE)
 ```
-* Important predictors of bd_load: stage, treatment, year_std, year_std*treatment
+* Important predictors of bd_load: stage, treatment, year_std*treatment
 * CI differs substantially between stages and treatments.  
 
 #### Compute fit diagnostics
@@ -462,7 +406,7 @@ summary(m3b)
 plot(m3b, ask = FALSE)
 plot(conditional_effects(m3b), ask = FALSE)
 ```
-* Group effect due to site_id is important. 
+* Group-level effect of site_id is important. 
 
 #### Compute fit diagnostics
 ```{r}
@@ -477,7 +421,7 @@ ppc_loo_pit_overlay(
   lw = weights(loo3b$psis_object))
 ```
 * Addition of site_id as group-level effect substantially improved fit based on loo (loo: elpd_diff/se_diff = 3.8).
-* Probability integral transform shows minimal improvement.
+* LOO-PIT shows minimal improvement.
 
 ### Add effect of stage and treatment on shape parameter
 ```{r}
@@ -538,40 +482,43 @@ ppc_loo_pit_overlay(
 * Deviation from uniformity increased relative to m3c. m3c is best model. 
 
 ### Create plots of Bd load over 1 year period of experiment for both basins
-#### Create new columns and rows
+#### Create labels for plotting
 ```{r}
 d_plot <- d %>% 
   mutate(
     date_label1 = case_when(basin == "barrett" & num_days == "-14" ~ "-14",
                             basin == "barrett" & between(num_days, -1, 5) ~ "-1 to 5",
                             basin == "barrett" & num_days == "6" ~ "6", 
-                            basin == "barrett" & between(num_days, 22, 23) ~ "22 to 23", 
-                            basin == "barrett" & between(num_days, 41, 42) ~ "41 to 42",
-                            basin == "barrett" & between(num_days, 365, 366) ~ "365 to 366",
-                            basin == "barrett" & between(num_days, 383, 384) ~ "383 to 384", 
-                            basin == "barrett" & between(num_days, 407, 408) ~ "407 to 408", 
+                            basin == "barrett" & between(num_days, 22, 23) ~ "22-23", 
+                            basin == "barrett" & between(num_days, 41, 42) ~ "41-42",
+                            basin == "barrett" & between(num_days, 365, 366) ~ "365-366",
+                            basin == "barrett" & between(num_days, 383, 384) ~ "383-384", 
+                            basin == "barrett" & between(num_days, 407, 408) ~ "407-408", 
                             basin == "dusy" & between(num_days, -15, -14) ~ "-15 to -14", 
-                            basin == "dusy" & between(num_days, 0, 2) ~ "0 to 2", 
+                            basin == "dusy" & between(num_days, 0, 2) ~ "0-2", 
                             basin == "dusy" & num_days == 6 ~ "6", 
-                            basin == "dusy" & between(num_days, 20, 21) ~ "20 to 21", 
-                            basin == "dusy" & between(num_days, 46, 47) ~ "46 to 47", 
-                            basin == "dusy" & between(num_days, 356, 357) ~ "356 to 357", 
-                            basin == "dusy" & between(num_days, 389, 392) ~ "389 to 392")) %>%
-  add_row(basin = "dusy", num_days = 407, date_label1 = "407 to 408", treatment = "control") %>%
-  add_row(basin = "dusy", num_days = 408, date_label1 = "407 to 408", treatment = "treated") %>%
+                            basin == "dusy" & between(num_days, 20, 21) ~ "20-21", 
+                            basin == "dusy" & between(num_days, 46, 47) ~ "46-47", 
+                            basin == "dusy" & between(num_days, 356, 357) ~ "356-357", 
+                            basin == "dusy" & between(num_days, 389, 392) ~ "389-392")) %>%
+  add_row(basin = "dusy", num_days = 407, date_label1 = "407-408", treatment = "control") %>% # dummy row to match the number of categories in barrett
+  add_row(basin = "dusy", num_days = 408, date_label1 = "407-408", treatment = "treated") %>% # dummy row to match the number of categories in barrett
   select(site_id, basin, visit_date, num_days, date_label, date_label1, treatment, stage, bd_load)
 ```
 
 #### Create Barrett and Dusy plots
 ```{r}
+library(patchwork)
+```
+```{r}
 d_plot1 <- d_plot %>%
   filter(basin == "barrett") %>%
   mutate(date_label1 = fct_relevel(
-    date_label1, "-14", "-1 to 5", "6", "22 to 23", "41 to 42", "356 to 357", "383 to 384", "407 to 408")) %>%
+    date_label1, "-14", "-1 to 5", "6", "22-23", "41-42", "365-366", "383-384", "407-408")) %>%
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
     labs(y = (expression(Bd~load~(log["10"]~copies+1))),
-         x = Days) +
+         x = "Days") +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
     ggtitle("(a)") +
     theme_classic() +
@@ -581,7 +528,7 @@ d_plot1 <- d_plot %>%
 d_plot2 <- d_plot %>%
   filter(basin == "dusy") %>%
   mutate(date_label1 = fct_relevel(
-    date_label1, "-15 to -14", "0 to 2", "6", "20 to 21", "46 to 47", "356 to 357", "389 to 392", "407 to 408")) %>%
+    date_label1, "-15 to -14", "0-2", "6", "20-21", "46-47", "356-357", "389-392", "407-408")) %>% 
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
     labs(y = (expression(Bd~load~(log["10"]~copies+1))),
@@ -592,7 +539,9 @@ d_plot2 <- d_plot %>%
     theme(legend.position = "none")
 ```
 ```{r}
-d_plot1 / d_plot2
+plot12 <- d_plot1 / d_plot2
+# 2 dummy rows have bd_load = NA, will cause warning message
+plot12
 ```
 ```{r}
 ggsave(here::here("out", "barrettdusy-20092010-bdload.png"), width = 15, height = 15, units = "cm")
@@ -628,11 +577,10 @@ d4 %>%
 d4 %>% pivot_longer(cols = tadpole:subadult,
                     names_to = "stage",
                     values_to = "count") %>%
-  filter(basin == "barrett") %>%  # barrett or dusy
-  ggplot(aes(x = factor(plot_date), y = log10(count + 1), fill = stage)) +
+ggplot(aes(x = factor(plot_date), y = log10(count + 1), fill = stage)) +
     geom_bar(stat = "identity") + 
     theme(axis.text.x = element_text(angle = 90)) +
-  facet_grid(~ treatment + site_id)
+  facet_grid(~ basin + treatment + site_id)
 ```
 ```{r}
 d4 %>% 
@@ -646,6 +594,7 @@ d4 %>%
 
 ### Fit poisson model
 ```{r}
+
 m4 <- brm(subadult ~ basin + ltadpole + year_std * treatment, 
           data = d4,
           family = poisson())
@@ -678,7 +627,7 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo4a$psis_object))
 ```
-* Fit of negbinomial model substantially better than poisson (LOO: elpd_diff/se_diff = 3.4). 
+* Fit of negbinomial model substantially better than poisson (LOO: elpd_diff/se_diff = 3.3). 
 
 ### Fit zero-inflated negbinomial model
 ```{r}
@@ -690,8 +639,7 @@ summary(m4b)
 plot((m4b), ask = FALSE)
 plot(conditional_effects(m4b), ask = FALSE)
 ```
-* This is best model, has decent fit. 
-* Based on results below, no need for group-level effect of site_id, no need for shape predictors.
+* Small amount of zero-inflation, but CI of zi term overlaps zero.
 
 ### Compute fit diagnostics
 ```{r}
@@ -709,7 +657,7 @@ ppc_loo_pit_overlay(
 
 #### Add site_id as group-level effect to model m4a
 ```{r}
-m4c <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment + (1|site_id)), 
+m4c <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment + (1 | site_id)), 
           data = d4,
           family = negbinomial(),
           control = list(adapt_delta = 0.99))
@@ -730,11 +678,12 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo4c$psis_object))
 ```
-* No improvement in fit from adding site_id as group-level effect (LOO: elpd_diff/se_diff = 2.1). 
+* Slight improvement in fit from adding site_id as group-level effect (LOO: elpd_diff/se_diff = 2.6). 
+* Based on all results, this is best model. 
 
-#### Add shape predictors to model m4a
+#### Add shape predictors to model m4c
 ```{r}
-m4d <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment, 
+m4d <- brm(bf(subadult ~ basin + ltadpole + year_std * treatment + (1 | site_id), 
           shape ~ basin + ltadpole + year_std + treatment),
           data = d4,
           family = negbinomial(),
@@ -746,7 +695,7 @@ plot(conditional_effects(m4d), ask = FALSE)
 
 ### Compute fit diagnostics
 ```{r}
-loo(m4a, m4d)
+loo(m4c, m4d)
 ```
 ```{r}
 loo4d <- loo(m4d, save_psis = TRUE)
@@ -758,21 +707,43 @@ ppc_loo_pit_overlay(
 ```
 * No improvement of fit from adding shape predictors (LOO: elpd_diff/se_diff < 1)
 
-### Make plot of count data 
+### Make plots of count data 
 ```{r}
-d4 %>% 
-  ggplot(aes(x = year_std, y = subadult, color = site_id, shape = basin)) +
-    geom_point(position = position_dodge(width = .3), size = 3) + 
-    scale_colour_manual(values = c("green3", "deepskyblue2", "darkgreen", "dodgerblue3", "blue3", "forestgreen", "lightskyblue1", "seagreen2", "blue4", "green", "lightskyblue2")) +
- #   scale_shape_manual()
+d4_plot1 <- d4 %>% 
+  filter(basin == "barrett") %>% 
+  ggplot(aes(x = year_std, y = subadult, fill = treatment)) +
+    geom_dotplot(method = "histodot", binaxis = "y", stackdir = "center", stackratio = 1, dotsize = 1.4, stroke = 0.5) + 
+    stat_summary(fun = median, geom = "point", shape = 18, size = 2.9, fill = "white", show.legend = FALSE) +
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(
-      color = "Site",
-      x = expression("Year - standardized"),
+      title = "(a)",
+      x = expression("Year"),
       y = "Number of subadults counted") + 
-    facet_grid(~ treatment) +
-    theme_classic() 
+    facet_grid(~ treatment) + 
+    theme_classic() +
+    theme(axis.text = element_text(color = "black"),
+      legend.position = "none")
 ```
 ```{r}
-ggsave(here::here("output", "dusbar_yrs01_counts.png"), width = 10, height = 12, units = "cm")
+d4_plot2 <- d4 %>% 
+  filter(basin == "dusy") %>% 
+  ggplot(aes(x = year_std, y = subadult, fill = treatment)) +
+    geom_dotplot(method = "histodot", binaxis = "y", stackdir = "center", stackratio = 1, dotsize = 1.4, stroke = 0.5) + 
+    stat_summary(fun = median, geom = "point", shape = 18, size = 2.9, fill = "white", show.legend = FALSE) +
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    labs(
+      title = "(b)",
+      x = expression("Year"),
+      y = "Number of subadults counted") + 
+    facet_grid(~ treatment) + 
+    theme_classic() +
+    theme(axis.text = element_text(color = "black"),
+      legend.position = "none")
+```
+```{r}
+d4_plot1 / d4_plot2
+```
+```{r}
+ggsave(here::here("out", "barrettdusy_yrs01_counts.png"), width = 8, height = 15, units = "cm")
 ```
 
