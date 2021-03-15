@@ -313,20 +313,28 @@ plot(conditional_effects(m3b), ask = FALSE)
 
 #### Plot of Jliv concentrations over time 
 ```{r}
-# points grouped by expt_trt
+anno_text1 <- tibble(expt_trt = "control", jliv_ge = -0.57, lab = "text",
+                    days = factor(56, levels = c("0", "12", "37", "56")))
+```
+```{r}
 d %>%
   left_join(jliv_days, by = "group_date") %>% 
   mutate(
     expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
-  filter(group_date > "2012-07-12") %>%
-  ggplot(aes(x = days, y = log10(jliv_ge + 1), color = expt_trt)) +
-    geom_point(position = position_dodge(width = 5), size = 2.5) +  
-    scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
-    labs(color = "Frog group", 
-         x = expression("Days since"~italic("J. lividum")~"exposure"),
-         y = expression(~italic("J. lividum")~"concentration (log10(genomic equivalents))")) +
-    stat_n_text() +
-    theme_classic()
+  filter(group_date > "2012-07-12") %>% 
+  ggplot(aes(x = expt_trt, y = log10(jliv_ge + 1), fill = expt_trt)) + 
+    geom_boxplot(width = 0.9) +  
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    labs(fill = "Frog group", 
+         x = "Frog group",
+         y = expression(~italic("J. lividum")~"concentration"~(log[10]~("genomic equiv. + 1")))) + 
+    stat_n_text(size = 3) +
+    geom_text(data = anno_text1, label = "n=0", size = 3) +
+    facet_grid(~ days) +
+    theme_classic() +
+    theme(axis.text = element_text(color = "black", angle = 90),
+          axis.title.x = element_text(vjust = 0),
+          legend.position = "none")
 ```
 ```{r}
 ggsave(here::here("out", "dusy_2012_jliv.png"), width = 15, height = 10, units = "cm")
@@ -405,20 +413,29 @@ plot(conditional_effects(m4b), ask = FALSE)
 ```
 * expt_trt not an important predictor of shape (based on CI including 0). m4a is best. 
 
-#### Figure of Bd loads over time 
+#### Plot of Bd loads over time 
 ```{r}
-d %>% 
+anno_text2 <- tibble(expt_trt = "control", bd_load = -0.81, lab = "text",
+                    days = factor(56, levels = c("-7", "0", "12", "37", "56")))
+```
+```{r}
+d %>%
   left_join(jliv_days, by = "group_date") %>% 
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
-  ggplot(aes(x = days, y = log10(bd_load + 1), color = expt_trt)) +
-    geom_point(position = position_dodge(width = 5), size = 2.5) +  
-    scale_color_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
-    labs(color = "Frog group", 
-         x = expression("Days since"~italic("J. lividum")~"exposure"),
-         y = expression("Bd load"~(log[10]~("copies + 1")))) +
-    stat_n_text() +
-    theme_classic()
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>% 
+  ggplot(aes(x = expt_trt, y = log10(bd_load + 1), fill = expt_trt)) + 
+    geom_boxplot(width = 0.9) +  
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
+    labs(fill = "Frog group", 
+         x = "Frog group",
+         y = expression("Bd load"~(log[10]~("copies + 1")))) + 
+    stat_n_text(size = 3) +
+    geom_text(data = anno_text2, label = "n=0", size = 3) +
+    facet_grid(~ days) +
+    theme_classic() +
+    theme(axis.text = element_text(color = "black", angle = 90),
+          axis.title.x = element_text(vjust = 0),
+          legend.position = "none")
 ```
 ```{r}
 ggsave(here::here("out", "dusy_2012_bdload.png"), width = 15, height = 10, units = "cm")
