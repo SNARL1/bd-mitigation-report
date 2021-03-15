@@ -210,13 +210,14 @@ p1 <- d %>%
   filter(location == "lower" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
   ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
-  geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched boxplot same size as others
-    labs(x = "Treatment period",
-         y = expression(Bd~load~(log["10"]~copies+1))) +
+  geom_boxplot(width = 0.9, position = position_dodge2(preserve = "single")) + # keep unmatched boxplot same size as others
+    labs(title = "(a)",
+      x = "Treatment period",
+      y = expression("Bd load"~(log[10]~("copies + 1")))) +
     scale_x_discrete(labels = c("Before","End")) + # rename x axis labels
     scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
     ggtitle("(a)") +
-    stat_n_text(size = 3) +
+    annotate("text", x = c("pretreat", "endtreat"), y = -0.5, label = c("n=102  n=285", "n=96"), size = 3) +
     theme_classic() +
     theme(legend.position = "none", 
           axis.text = element_text(color = "black"),
@@ -226,13 +227,14 @@ p2 <- d %>%
   filter(location == "upper" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
   ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
-  geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched boxplot same size as others
-    labs(x = "Treatment period",
-         y = expression(Bd~load~(log["10"]~copies+1))) +
+  geom_boxplot(width = 0.9, position = position_dodge2(preserve = "single")) + # keep unmatched boxplot same size as others
+    labs(title = "(b)", 
+      x = "Treatment period",
+      y = expression("Bd load"~(log[10]~("copies + 1")))) +
     scale_x_discrete(labels = c("Before","End")) + # rename x axis labels
     scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
-    ggtitle("(b)") +
-    stat_n_text(size = 3) +
+#    ggtitle("(b)") +
+    annotate("text", x = c("pretreat", "endtreat"), y = -0.5, label = c("n=74  n=125", "n=50"), size = 3) +
     theme_classic() + 
     theme(axis.text = element_text(color = "black"),
           axis.title.x = element_text(vjust = -0.7))
