@@ -185,7 +185,7 @@ After the last treatment, all animals were released from the pens into the study
 ### Statistical analyses {-}
 
 Analysis of treatment experiments generally utilized linear and multilevel models analyzed in a Bayesian framework using the *brms* package [@bürkner2017rpackage; @bürkner2018advanced] and R software v. 4.0.3 [@rsoftware2020]. 
-The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was conducted using Stan  [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
+The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was conducted using Stan [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
 When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualization of leave-one-out ("LOO") probability integral transforms ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
 When suggested by the data structure, visualizations of LOO-PIT, or conditional effects via *brms*, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
 We compared fits of models with and without the added terms using LOO and the *loo* package [@vehtari2017practical]. 
@@ -359,13 +359,14 @@ As with the *J. lividum* analyses, formal assessment of the effect of treatment 
 ## Itraconazole treatment of early life stages {-}
 
 Immediately before itraconazole treatments in the Barrett and Dusy experiments began, Bd loads of animals in ponds assigned to the treated and control groups were similar (Figure 1a: Days = "1-6"; Figure 1b: Days = "1-3"). 
-Model results indicated that treatment group did not affect Bd load (CI: -1.36 -- 1.69), nor did the (treatment x basin) interaction term (CI: -0.52 -- 3.19). Basin had a weak effect, and indicated that Bd loads in Dusy were slightly lower than in Barrett (CI: -2.86 -- -0.02). 
+Model results indicated that Bd load did not differ between treatment groups (CI: -1.35 -- 1.75). 
+Basin had a weak effect, and indicated that Bd loads in Dusy were slightly lower than in Barrett (CI: -2.86 -- -0.02). The (treatment x basin) interaction term was unimportant, and therefore the patterns of Bd load between treatment groups were similar in both basins (CI: -0.53 -- 3.19). 
 
 The  treatments substantially reduced Bd loads of treated populations (Figure 1: Days = "1-6" or "1-3" versus "7"). 
-Model results indicated an important effect of treatment category (lower at end than beginning; CI: -3.04 -- -2.18). 
-In addition, important effects on Bd load were also evident for stage (lower in tadpoles than subadults; CI: -2.65 -- -1.68), basin (higher in Dusy than Barrett; CI: 1.35 -- 2.04), and the (basin x treatment_category) interaction term. 
+Model results indicated an important effect of treatment category (lower at end than beginning; CI: -3.01 -- -2.10). 
+In addition, important effects on Bd load were also evident for stage (lower in tadpoles than subadults; CI: -2.86 -- -1.72), basin (higher in Dusy than Barrett; CI: 1.32 -- 2.08), and the (basin x treatment_category) interaction term (CI: -5.68 -- -3.92). 
 The interaction term indicated that loads were higher in Dusy than Barrett at the beginning of the treatment, but lower in Dusy than Barrett at the end of treatment (Figure 1). 
-Finally, treatment category, stage, and basin all had important effects on the shape parameter, as did treatment category and stage on the zero-inflation parameter. 
+Finally, treatment category, stage, and basin all had important effects on the shape parameter. 
 
 The reduction in Bd load in treated versus control groups that was evident at the end of the treatment period persisted for at least the next 1.5 months (Figure 1: Days > 7). 
 Model results (Table 3) showed important effects on Bd load of most predictor variables, including treatment (treated lower than control), stage (lower in tadpoles than subadults), year (lower in year 1 than year 0), and the (year x treatment) interaction term. 
@@ -374,10 +375,10 @@ The (year x treatment) term indicated that Bd loads were lower in the treated gr
 Therefore, although the treatment effect was evident for more than a month, Bd loads on animals in treated ponds returned to pre-treatment levels in the year following treatment (Figure 1). 
 All predictors of family-specific parameters had important effects and their inclusion, especially those of the shape parameter, substantially improved model fit. 
 
-The reduction in Bd load caused by the treatment was associated with increased counts of subadults in treated versus control populations (Figure 2). 
+The reduction in Bd load caused by the treatment was associated with increased counts of subadults in treated versus control populations (Figure 2).
+
 Model results indicated that treatment and the (year x treatment) interaction term had important effects (Table 4). 
-There was also an important positive effect of tadpole count on subadult count. 
-The effects of basin and year were unimportant. 
+The effects of tadpole count, basin, and year were unimportant. 
 The interaction term indicated that treated populations had higher subadult counts than control populations in the year of the treatment, but that counts in treated populations in the year following treatment were low and similar to those in control populations (Figure 2). 
 Therefore, mirroring the longer-term effects of treatment on Bd load, the increase in subadult survival in treated populations in the 1.5 months following treatment was no longer evident in the year following treatment. 
 
