@@ -1,0 +1,133 @@
+---
+title: "Dusy 2010 zoospore pool data"
+author: "Roland Knapp"
+output: 
+editor_options: 
+  chunk_output_type: console
+---
+## Dataset provided by Andrea Jani
+
+## ANALYSIS #1: Effect of 2010 Dusy Basin itraconazole treatment on Bd zoospore pool
+## Load packages
+```{r setup}
+library(brms)
+library(loo)
+library(bayesplot)
+library(tidyverse)
+```
+
+### Read in data. To minimize effect of false negatives, removed all filters with Bd load = 0
+```{r}
+d1 <- read_csv(here::here("data", "dusy-2010-zsppool.csv"))
+```
+```{r}
+d1 <- d1 %>% 
+  filter(bd_load > 0) %>% 
+  mutate(pre_post = fct_relevel(pre_post, "pre", "post"),
+         tmt = as.factor(tmt)) %>% 
+  select(-group)
+```
+
+### Data exploration
+```{r}
+d1 %>% 
+  ggplot(aes(x = tmt, y = log10(bd_load), fill = tmt)) +
+  geom_boxplot() +
+  facet_grid(.~ pre_post)
+```
+
+### Distribution of bd_load 
+```{r}
+d1 %>%
+  ggplot(aes(x = bd_load)) +
+    geom_histogram(bins = 100)
+```
+```{r}
+d1 %>% filter(sample_id != "AJF132") %>%
+  ggplot(aes(x = bd_load)) +
+    geom_histogram(bins = 50)
+```
+```{r}
+d1 %>% filter(sample_id != "AJF132") %>%
+  ggplot(aes(x = log10(bd_load))) +
+    geom_histogram(bins = 50)
+```
+* filter AJF132 has loads an order of magnitude higher than other filters. 
+* Data are left-skewed. 
+
+### Fit negative binomial model
+```{r}
+d1a <- d1 %>% 
+  mutate(bd_load = as.integer(bd_load))
+```
+```{r}
+m1 <- brm(bd_load ~ pre_post * tmt + (1 | sample_id),
+          data = d1a,
+          family = negbinomial(),
+          save_all_pars = TRUE) # for loo below - deprecated but works (new format "save_pars(all = TRUE)" produces error)
+summary(m1)
+plot(m1, ask = FALSE)
+plot(conditional_effects(m1), ask = FALSE)
+```
+* Effects of pre_post, trt, and interaction are all unimportant.
+* Variation in load is higher for "post" vs "pre", and "treated" vs "control" samples.
+
+#### Compute fit diagnostics
+```{r}
+loo1 <- loo(m1, save_psis = TRUE)  # 17 observations with pareto_k > 0.7
+```
+```{r}
+loo1 <- loo(m1, save_psis = TRUE, moment_match = TRUE) # 2 observations with pareto_k > 0
+```
+```{r}
+yrep <- posterior_predict(m1)
+ppc_loo_pit_overlay(
+  y = d1a$bd_load, 
+  yrep = yrep,
+  lw = weights(loo1$psis_object))
+```
+* LOO-PIT has non-uniform distribution.
+
+### Add predictors of shape
+```{r}
+m1a <- brm(bf(bd_load ~ pre_post * tmt + (1 | sample_id), shape ~ pre_post + tmt),
+          data = d1a,
+          family = negbinomial())
+summary(m1a)
+plot(m1a, ask = FALSE)
+plot(conditional_effects(m1a), ask = FALSE)
+```
+* Predictors of shape are both unimportant.
+* No additional analyses possible. 
+* Small sample sizes are likely a factor in poor fit. 
+
+## CREATE PLOT 
+```{r}
+library(EnvStats)
+```
+```{r}
+prepost_names <- c('pre' = "Before treatment",
+                   'post' = "After treatment")
+```
+```{r}
+d1 %>% 
+  ggplot(aes(x = tmt, y = log10(bd_load), fill = tmt)) +
+  geom_dotplot(method = "histodot", binaxis = "y", stackdir = "center", stackratio = 1, dotsize = 0.8, stroke = 0.5) + 
+   facet_grid(~ pre_post, labeller = as_labeller(prepost_names)) +
+   labs(
+     x = "Treatment period", 
+     y = expression("Bd load"~(log[10]("copies")))) +
+   scale_fill_manual(values = c("forestgreen", "deepskyblue2")) +
+   scale_x_discrete(labels = c("Control", "Treated")) +
+   stat_n_text(size = 3) + 
+   stat_summary(fun = median, geom = "point", shape = 18, size = 2.5, show.legend = FALSE) +
+   theme_classic() +
+   theme(axis.text = element_text(color = "black"),
+         legend.position = "none")
+```
+```{r}
+ggsave(here::here("out", "dusy_zsppool.png"), width = 10, height = 10, units = "cm")
+```
+
+
+
