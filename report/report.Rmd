@@ -26,9 +26,8 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
-library(tidyverse)
+library(readr)
 library(kableExtra)
-library(here)
 ```
 
 ^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, California, USA
@@ -57,7 +56,7 @@ library(here)
 
 Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
 
-Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, and reviewed all drafts of the manuscript. 
+Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
 
 Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
@@ -530,7 +529,7 @@ Characteristics of all sites used in the antifungal treatment experiments
 \bigskip
 
 ```{r, include=FALSE}
-t_1 <- read_csv(file = here::here("out", "expt_sites.csv"))
+t_1 <- read_csv(file = here::here("out", "tables", "expt_sites.csv"))
 ```
 ```{r table1, echo=FALSE}
 kbl(
@@ -553,7 +552,7 @@ Timelines for antifungal treatment experiments conducted in the lower and upper 
 
 (a) Lower basin
 ```{r, include=FALSE}
-t_lower <- read_csv(file = here::here("out", "timeline-lower.csv")) 
+t_lower <- read_csv(file = here::here("out", "tables", "timeline-lower.csv")) 
 ```
 ```{r table2a, echo=FALSE}
 kbl(t_lower, booktabs = TRUE, linesep = "") %>%
@@ -570,7 +569,7 @@ kbl(t_lower, booktabs = TRUE, linesep = "") %>%
 
 (b) Upper basin
 ```{r, include=FALSE}
-t_upper <- read_csv(file = here::here("out", "timeline-upper.csv")) 
+t_upper <- read_csv(file = here::here("out", "tables", "timeline-upper.csv")) 
 ```
 ```{r table2b, echo=FALSE}
 kbl(t_upper, booktabs = TRUE, linesep = "") %>%
@@ -591,13 +590,13 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
 Effect of itraconazole treatment in Barrett and Dusy basins on Bd loads during the following one year period.
 
 ```{r, include=FALSE}
-t_m3c1 <- read_csv(file = here::here("out", "dusbar_m3c1.csv"))
+barrettdusy_m3c <- read_csv(file = here::here("out", "tables", "barrettdusy-m3c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
 ```{r table3, echo=FALSE}
-kbl(t_m3c1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+kbl(barrettdusy_m3c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Group-level effects", 1, 1) %>%
-      pack_rows("Population-level effects", 2, 14) %>%
+      pack_rows("Population-level effects", 2, 12) %>%
       row_spec(0, bold = TRUE) %>%
       footnote(general = "Model family is zero-inflated negative binomial", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
@@ -610,13 +609,14 @@ kbl(t_m3c1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "
 Effect of itraconazole treatment in Barrett and Dusy basins on counts of subadults during the following one year period.
 
 ```{r, include=FALSE}
-t_m4a <- read_csv(file = here::here("out", "dusbar_m4a.csv"))
+barrettdusy_m4c <- read_csv(file = here::here("out", "tables", "dusbar-m4c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
 ```{r table4, echo=FALSE}
-kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+kbl(barrettdusy_m4c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 6) %>%
-      pack_rows("Family-specific parameters", 7, 7) %>%
+      pack_rows("Group-level effects", 1, 1) %>%
+      pack_rows("Population-level effects", 2, 7) %>%    
+      pack_rows("Family-specific parameters", 8, 8) %>%
       row_spec(0, bold = TRUE) %>%
       footnote(general = "Model family is negative binomial", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
@@ -628,13 +628,11 @@ kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "R
 
 Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on *J. lividum* concentration on frogs. 
 
-\bigskip
-
 ```{r, include=FALSE}
-t_m3e <- read_csv(file = here::here("out", "dusy2012_m3e.csv")) 
+dusy2012_m3b <- read_csv(file = here::here("out", "tables", "dusy2012-m3b.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
 ```{r table5, echo=FALSE}
-kbl(t_m3e, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
@@ -650,10 +648,10 @@ kbl(t_m3e, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "R
 Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs. 
 
 ```{r, include=FALSE}
-t_m4a <- read_csv(file = here::here("out", "dusy2012_m4a.csv")) 
+dusy2012_m4a <- read_csv(file = here::here("out", "tables", "dusy2012-m4a.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat)) 
 ```
 ```{r table6, echo=FALSE}
-kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"),
+kbl(dusy2012_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 6) %>%
@@ -669,7 +667,7 @@ kbl(t_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "R
 ## Figure 1 {-}
 
 ```{r fig1, echo=FALSE, fig.cap="", out.width="400px"}
-knitr::include_graphics(here::here("out", "dusbar_200910_bdload.png"))
+knitr::include_graphics(here::here("out", "figures", "dusbar_200910_bdload.png"))
 ```
 
 For the itraconazole treatment experiment in (a) Barrett and (b) Dusy basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control (green) and treated (blue) groups. 
@@ -680,7 +678,7 @@ The horizontal bar in the boxplots represents the median, hinges represent first
 ## Figure 2 {-}
 
 ```{r fig2, echo=FALSE, fig.cap="", out.width="450px"}
-knitr::include_graphics(here::here("out", "dusbar_yrs01_counts.png"))
+knitr::include_graphics(here::here("out", "figures", "dusbar_yrs01_counts.png"))
 ```
 
 For control and treated populations in Barrett and Dusy basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted and the year following the treatment. 
@@ -691,7 +689,7 @@ For control and treated populations in Barrett and Dusy basins, post-treatment c
 ## Figure 3 {-}
 
 ```{r fig3, echo=FALSE, fig.cap="", out.width="450px"}
-knitr::include_graphics(here::here("out", "dusy_zsppool.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy_zsppool.png"))
 ```
 
 Zoospore pools measured in the Dusy Basin study ponds assigned to either treated or control categories. Results are grouped by sampling time (before or after the treatment). The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. 
@@ -702,7 +700,7 @@ Zoospore pools measured in the Dusy Basin study ponds assigned to either treated
 ## Figure 4 {-}
 
 ```{r fig4, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "leconte_2015_beforeafter_treat.png"))
+knitr::include_graphics(here::here("out", "figures", "leconte_2015_beforeafter_treat.png"))
 ```
 
 Effect of antifungal treatments on Bd loads of adult *R. sierrae* in the 2015 LeConte treatment experiment: (a) lower basin, and (b) upper basin.
@@ -715,7 +713,7 @@ Box plot components are as in Figure 1.
 ## Figure 5 {-}
 
 ```{r fig5, fig.cap="", echo=FALSE}
-knitr::include_graphics(here::here("out", "leconte-multistate-results.png"))
+knitr::include_graphics(here::here("out", "figures", "leconte-multistate-results.png"))
 ```
 Outcome of the LeConte treatment experiment with adult *R. sierrae*, showing results for control, treated, and non-experimental animals. 
 Time series from 2015 to 2018 of observed (A) Bd loads (on a log scale), with lines connecting sequential observations of tagged individuals, (B) posterior estimates for the number of live adults (abundance) in each group, where each point is a draw from the posterior, and (C) estimated relationships between Bd load and adult survival probability, with one line for each posterior draw. 
@@ -726,7 +724,7 @@ A rug along the x-axis displays the observed distributions of Bd load.
 ## Figure 6 {-}
 
 ```{r fig6, fig.cap="", echo=FALSE}
-knitr::include_graphics(here::here("out", "treasure-progress-plot-colored-boxes.png"))
+knitr::include_graphics(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"))
 ```
 
 Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred. 
@@ -740,7 +738,7 @@ During the treatment period, individual frogs were swabbed for Bd immediately fo
 ## Figure 7 {-}
 
 ```{r fig7, fig.cap="", echo=FALSE}
-knitr::include_graphics(here::here("out", "treasure-multicapture-loads.png"))
+knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-loads.png"))
 ```
 
 Bd loads for adult *R. sierrae* in the 2018 Treasure Lakes antifungal treatment, plotted over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys. 
@@ -753,7 +751,7 @@ The upper and lower panels include treated frogs that were either not recaptured
 ## Figure 8 {-}
 
 ```{r fig8, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "dusy_2012_bdload.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy_2012_bdload.png"))
 ```
 
 Bd loads for subadult *R. sierrae* in the treated, control, and wild groups of the Dusy Basin *J. lividum* augmentation experiment. Total sample size on each date is shown above the x-axis. Prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole to reduce their Bd loads. 
@@ -763,7 +761,7 @@ Bd loads for subadult *R. sierrae* in the treated, control, and wild groups of t
 ## Figure 9 {-}
 
 ```{r fig9, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "dusy_2012_jliv.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy_2012_jliv.png"))
 ```
 
 Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated, control, and wild groups of the Dusy Basin *J. lividum* augmentation experiment. Frogs in the treated group were exposed to *J. lividum* on days 0 and 1. Concentrations on day 0 are from samples collected from frogs assigned to the treated group just prior to the first *J. lividum* exposure. Total sample size on each date is shown above the x-axis. 
@@ -773,7 +771,7 @@ Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated,
 ## Figure 10 {-}
 
 ```{r fig10, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "dusy_2012_recapture.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy_2012_recapture.png"))
 ```
 
 In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J lividum* exposure. 
