@@ -75,6 +75,7 @@ plot(m1)
 plot(conditional_effects(m1), ask = FALSE)
 ```
 * Also fit a zero-inflated model, but it showed little evidence of zero-inflation and was equivalent to negbinomial model based on loo.
+* Based on all following code chunks, m1 is best model. 
 
 #### LOO probability integral transform
 ```{r}
@@ -544,7 +545,7 @@ plot12 <- d_plot1 / d_plot2
 plot12
 ```
 ```{r}
-ggsave(here::here("out", "barrettdusy-20092010-bdload.png"), width = 15, height = 15, units = "cm")
+ggsave(here::here("out", "figures", "barrettdusy-20092010-bdload.png"), width = 15, height = 15, units = "cm")
 ```
 
 ## ANALYSIS 4: Effect of treatment on subsequent metamorph counts
@@ -594,7 +595,6 @@ d4 %>%
 
 ### Fit poisson model
 ```{r}
-
 m4 <- brm(subadult ~ basin + ltadpole + year_std * treatment, 
           data = d4,
           family = poisson())
@@ -679,7 +679,7 @@ ppc_loo_pit_overlay(
   lw = weights(loo4c$psis_object))
 ```
 * Slight improvement in fit from adding site_id as group-level effect (LOO: elpd_diff/se_diff = 2.6). 
-* Based on all results, this is best model. 
+* Based on all results, m4c is best model. 
 
 #### Add shape predictors to model m4c
 ```{r}
@@ -744,6 +744,6 @@ d4_plot2 <- d4 %>%
 d4_plot1 / d4_plot2
 ```
 ```{r}
-ggsave(here::here("out", "barrettdusy_yrs01_counts.png"), width = 8, height = 15, units = "cm")
+ggsave(here::here("out", "figures", "barrettdusy-yrs01-counts.png"), width = 8, height = 15, units = "cm")
 ```
 
