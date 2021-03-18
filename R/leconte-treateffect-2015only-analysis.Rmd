@@ -230,20 +230,22 @@ p2 <- d %>%
   geom_boxplot(width = 0.9, position = position_dodge2(preserve = "single")) + # keep unmatched boxplot same size as others
     labs(title = "(b)", 
       x = "Treatment period",
-      y = expression("Bd load"~(log[10]~("copies + 1")))) +
-    scale_x_discrete(labels = c("Before","End")) + # rename x axis labels
+      y = expression("Bd load"~(log[10]~("copies + 1"))), 
+      fill = "Frog group") +
+    scale_x_discrete(labels = c("Before","End")) + 
     scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
-#    ggtitle("(b)") +
     annotate("text", x = c("pretreat", "endtreat"), y = -0.5, label = c("n=74  n=125", "n=50"), size = 3) +
     theme_classic() + 
     theme(axis.text = element_text(color = "black"),
-          axis.title.x = element_text(vjust = -0.7))
+          axis.title.x = element_text(vjust = -0.7),
+          legend.position = c(0.3, 0.35),
+          legend.background = element_rect(size = 0.3, color = "black"))
 
 fig4 <- p1 + p2
 fig4
 ```
 ```{r}
-ggsave(here::here("out", "leconte_2015_beforeafter_treat.png"), width = 15, height = 10, units = "cm")
+ggsave(here::here("out", "figures", "leconte-2015-beforeafter-treat.png"), width = 15, height = 10, units = "cm")
 ```
 
 

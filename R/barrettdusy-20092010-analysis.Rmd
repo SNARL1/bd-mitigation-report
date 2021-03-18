@@ -518,12 +518,17 @@ d_plot1 <- d_plot %>%
     date_label1, "-14", "-1 to 5", "6", "22-23", "41-42", "365-366", "383-384", "407-408")) %>%
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
-    labs(y = (expression(Bd~load~(log["10"]~copies+1))),
-         x = "Days") +
+    labs(title = "(a)",
+      x = "Days",
+      y = (expression(Bd~load~(log["10"]~copies+1))),
+      fill = "Frog group") +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
-    ggtitle("(a)") +
     theme_classic() +
-    theme(axis.title.x = element_blank())
+    theme(plot.title = element_text(margin = margin(t = 0, b = -30)), 
+          axis.title.x = element_blank(), 
+          axis.text = element_text(color = "black"),
+          legend.position = "top", 
+          legend.background = element_rect(size = 0.5, color = "black"))
 ```
 ```{r}
 d_plot2 <- d_plot %>%
@@ -532,12 +537,13 @@ d_plot2 <- d_plot %>%
     date_label1, "-15 to -14", "0-2", "6", "20-21", "46-47", "356-357", "389-392", "407-408")) %>% 
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
-    labs(y = (expression(Bd~load~(log["10"]~copies+1))),
-         x = "Days") +
+    labs(title = "(b)",
+      x = "Days",
+      y = (expression(Bd~load~(log["10"]~copies+1)))) +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
-    ggtitle("(b)") +
     theme_classic() +
-    theme(legend.position = "none")
+    theme(axis.text = element_text(color = "black"),
+      legend.position = "none")
 ```
 ```{r}
 plot12 <- d_plot1 / d_plot2

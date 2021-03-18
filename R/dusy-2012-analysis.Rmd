@@ -327,7 +327,7 @@ d %>%
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(fill = "Frog group", 
          x = "Frog group",
-         y = expression(~italic("J. lividum")~"concentration"~(log[10]~("genomic equiv. + 1")))) + 
+         y = expression(~italic("J. lividum")~"concentration"~(log[10]~("GE + 1")))) + 
     stat_n_text(size = 3) +
     geom_text(data = anno_text1, label = "n=0", size = 3) +
     facet_grid(~ days) +
@@ -464,17 +464,20 @@ d4_count <- d4 %>%
 #### Plot showing frog recaptures over time in 2012
 ```{r}
 d4_count %>% 
-  ggplot(aes(x = days, y = freq, color = expt_trt)) +
+  ggplot(aes(x = days, y = freq, fill = expt_trt)) +
     geom_line() +
-    geom_point(size = 4) + 
-    scale_color_manual(values = c("forestgreen", "deepskyblue2")) +
+    geom_point(shape = 21, size = 4) + 
+    scale_fill_manual(values = c("forestgreen", "deepskyblue2")) +
     labs(
-      color = "Frog group",
+      fill = "Frog group",
       x = expression("Days since"~italic("J. lividum")~"exposure"),
       y = "Percent of frogs recaptured") +
-    theme_classic() 
+    theme_classic() +
+    theme(axis.text = element_text(color = "black"),
+          legend.position = c(0.85, 0.85),
+          legend.background = element_rect(size = 0.3, color = "black"))
 ```
 
 ```{r}
-ggsave(here::here("out",  "figures", "dusy-2012-recapture.png"), width = 15, height = 10, units = "cm")
+ggsave(here::here("out", "figures", "dusy-2012-recapture.png"), width = 10, height = 10, units = "cm")
 ```

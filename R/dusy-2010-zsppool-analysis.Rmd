@@ -115,7 +115,7 @@ d1 %>%
   geom_dotplot(method = "histodot", binaxis = "y", stackdir = "center", stackratio = 1, dotsize = 0.8, stroke = 0.5) + 
    facet_grid(~ pre_post, labeller = as_labeller(prepost_names)) +
    labs(
-     x = "Treatment period", 
+     x = "Frog group", 
      y = expression("Bd load"~(log[10]("copies")))) +
    scale_fill_manual(values = c("forestgreen", "deepskyblue2")) +
    scale_x_discrete(labels = c("Control", "Treated")) +
@@ -123,10 +123,11 @@ d1 %>%
    stat_summary(fun = median, geom = "point", shape = 18, size = 2.5, show.legend = FALSE) +
    theme_classic() +
    theme(axis.text = element_text(color = "black"),
+         axis.title.x = element_text(vjust = 0.5),
          legend.position = "none")
 ```
 ```{r}
-ggsave(here::here("out", "dusy_zsppool.png"), width = 10, height = 10, units = "cm")
+ggsave(here::here("out", "figures", "dusy-zsppool.png"), width = 10, height = 10, units = "cm")
 ```
 
 

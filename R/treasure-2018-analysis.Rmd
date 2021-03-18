@@ -127,18 +127,20 @@ Plot all Bd loads recorded from the Treasure Lake treatment site, from 2016 and 
 ```{r}
 treasure_progress_plot_colored_boxes <- 
   ggplot(data = treasure_Bd, aes(x = factor(visit_date), y = log10(bd_load + 1)), fill = survey_treatment) + 
-  geom_boxplot(aes(fill = survey_treatment)) +
-  scale_fill_manual(values = c("darkgray", "deepskyblue2")) +
-  stat_n_text(y.pos = -.75, vjust = 0, size = 3, y.expand.factor = 0) + 
-  theme_classic() +
-  xlab("Survey Date") + 
-  ylab(expression(paste("Bd load (log"[10]," copies + 1)"))) +
-  theme(axis.text.x = element_text(color = "black", angle = 45,  vjust = 1, hjust = 1),
+    geom_boxplot(aes(fill = survey_treatment)) +
+    scale_fill_manual(values = c("darkgray", "deepskyblue2")) +
+    stat_n_text(y.pos = -.75, vjust = 0, size = 3, y.expand.factor = 0) + 
+    theme_classic() +
+    labs(x = "Survey Date",
+         y = (expression(paste("Bd load (log"[10]," copies + 1)")))) +
+    theme(axis.text.x = element_text(color = "black", angle = 45,  vjust = 1, hjust = 1),
+        legend.position = c(0.5, 0.3),
+        legend.background = element_rect(size = 0.3, color = "black"),
         legend.title = element_blank())
 treasure_progress_plot_colored_boxes
 ```
 ```{r}
-ggsave(here::here("out", "treasure-progress-plot-colored-boxes.png"), width = 15, height = 10, units="cm")
+ggsave(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"), width = 15, height = 10, units="cm")
 ```
 
 ### Figure 7: Trajectories of loads on individual frogs across treatment and follow up survey.
@@ -200,11 +202,12 @@ multicapture_loads_plot <-
   theme_bw() +
   theme(panel.grid = element_blank(),
         strip.background = element_rect(fill = "white"),
+        axis.text = element_text(color = "black"),
         axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 multicapture_loads_plot
 ```
 ```{r}
-ggsave(here::here("out", "treasure-multicapture-loads.png"), width = 15, height = 10, units="cm")
+ggsave(here::here("out", "figures", "treasure-multicapture-loads.png"), width = 15, height = 10, units="cm")
 ```
 
 
