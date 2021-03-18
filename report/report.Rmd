@@ -3,10 +3,10 @@ title: Effectiveness of antifungal treatments during chytridiomycosis epizootics
 author: 
   - Roland A. Knapp^1,2^
   - Maxwell B. Joseph^3^
-  - Ericka E. Hegeman^1,2^
   - Thomas C. Smith^1,2^ 
-  - James E. Erdman, Jr.^4^
-  - Vance T. Vredenburg^5,6^
+  - Ericka E. Hegeman^1,2^
+  - Vance T. Vredenburg^4,5^
+  - James E. Erdman, Jr.^6^
   - Daniel M. Boiano^7^
   - Andrea J. Jani^8^
   - Cheryl J. Briggs^9^
@@ -36,11 +36,11 @@ library(kableExtra)
 
 ^3^ Earth Lab, University of Colorado, Boulder, Colorado, USA
 
-^4^ California Department of Fish and Wildlife, Bishop, California, USA
+^4^ Department of Biology, San Francisco State University, San Francisco, California, USA
 
-^5^ Department of Biology, San Francisco State University, San Francisco, California, USA
+^5^ Museum of Vertebrate Zoology, University of California-Berkeley, Berkeley, California, USA
 
-^6^ Museum of Vertebrate Zoology, University of California-Berkeley, Berkeley, California, USA
+^6^ California Department of Fish and Wildlife, Bishop, California, USA
 
 ^7^ Sequoia and Kings Canyon National Parks, National Park Service, Three Rivers, CA, USA
 
@@ -58,13 +58,13 @@ Roland Knapp obtained the permits for all treatments, designed and implemented a
 
 Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
 
-Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
-
 Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
 
-James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
+Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
 Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, supported the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
+
+James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
 
 Daniel Boiano assisted with the LeConte treatment, facilitated the National Park Service permitting of all treatments conducted in Sequoia and Kings Canyon National Parks, and reviewed all drafts of the manuscript.
 
@@ -74,7 +74,7 @@ Cheryl Briggs provided modeling results that motivated the treatments, assisted 
 
 \newpage
 
-# Summary {-}
+# Abstract {-}
 
 In this report, we describe the outcome of studies conducted primarily in Sequoia, Kings Canyon, and Yosemite National Parks that attempted to mitigate the negative effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd) on populations of the endangered mountain yellow-legged frog (*Rana muscosa*, *Rana sierrae*). 
 These studies included treatment of (1) tadpoles and subadults, and (2) adults with the antifungal drug itraconazole during Bd epizootics, and (3) augmentation of the skin microbiome of subadults with *Janthinobacterium lividum*, a commensal bacterium with antifungal properties. 
@@ -181,18 +181,18 @@ After 10 minutes, animals were removed from the tubs and returned to pens.
 To determine treatment effectiveness, all animals or a subset (depending on the experiment) were re-swabbed at the end of the treatment period. 
 After the last treatment, all animals were released from the pens into the study lake.
 
-### Statistical analyses {-}
+### Statistical analyses {-} 
 
 Analysis of treatment experiments generally utilized linear and multilevel models analyzed in a Bayesian framework using the *brms* package [@bürkner2017rpackage; @bürkner2018advanced] and R software v. 4.0.3 [@rsoftware2020]. 
 The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was conducted using Stan [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
-When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualization of leave-one-out ("LOO") probability integral transforms ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
-When suggested by the data structure, visualizations of LOO-PIT, or conditional effects via *brms*, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
+When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualization of leave-one-out ("LOO") cross-validation and LOO probability integral transforms ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
+When suggested by the data structure or measures of model fit, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
 We compared fits of models with and without the added terms using LOO and the *loo* package [@vehtari2017practical]. 
-For the sake of brevity, the models described below are the best-fit models that resulted from this workflow. 
-Predictors of population-level effects and family-specific parameters were considered important when the 95% credible interval (hereafter, "CI") of the estimates did not include zero, and relatively unimportant otherwise. 
-Tables of model outputs are provided only for the models that specifically addressed key results from the experiments, e.g., whether treatment had longer-term effects on Bd load and survival. 
-Results of analyses to address associated issues (e.g., whether Bd loads were similar before treatment, degree to which Bd loads differed between the beginning and end of the treatment period) are described in the text. 
-For all models, we used *brms* defaults for priors, number of chains (4), and warmup and post-warmup iterations (1000 for each). Model convergence was evaluated using trace plots, Gelman-Rubin statistics (Rhat), and measures of effective sample size.  
+For all models, we used *brms* defaults for priors, number of chains (4), and warmup and post-warmup iterations (1000 for each). Model convergence was evaluated using trace plots, Gelman-Rubin statistics (Rhat), and measures of effective sample size. 
+
+The models described below are the best-fit models that resulted from the workflow outlined above.
+We considered predictors of group- and population-level effects and family-specific parameters to be important when the 95% credible interval (hereafter, "CI") of the estimates did not include zero, and relatively unimportant otherwise. 
+We provide the results of all analyses in tabular form, in the Results for analyses describing the outcome of treatment experiments, and in the Supporting Information for related but less central analyses. The key results from treatment experiments are also visualized using boxplots or dotplots, the former when sample sizes are relatively large and the latter when sample sizes are small and boxplots are consequently less informative. 
 
 ## Experiment-specific methods {-}
 
@@ -243,12 +243,10 @@ As such, the shape and zero-inflation parameters were also modeled as a function
 
 The effect of treatment on subadult survival was assessed using the model *count ~ basin + tadpole + (std_year x treatment)* (family = zero-inflated negative binomial, subadult = number of subadults counted during a VES, tadpole = number of tadpoles counted during the same VES - log~10~ transformed). The count of subadults served as a proxy for subadult survival, which could not be estimated directly. To account for differences between ponds in potential subadult production due to differences in the number of tadpoles (= future subadults), we included the tadpole count variable. No need for shape or zero-inflation predictors was evident. 
 
-*Effect of treatment on zoospore pool*. During the itraconazole treatments in Dusy Basin in 2010, we tested if treatment of frogs reduced the zoospore pool in pond water. 
+*Effect of treatment on zoospore pool*. During the itraconazole treatments in Dusy Basin in 2010, we tested if treatment of frogs reduced the concentration of Bd zoospores in pond water ("zoospore pool"; Briggs et al. 2010). 
 We sampled the zoospore pool before and after itraconazole treatments (July 23-25 and August 21-24, respectively), in each of the five ponds included in the experiment (Table 1).
 Water samples (six per pond) were collected by filtering water until filters clogged. 
-Additional details of the methods used, including those to validate the measurement of zoospore pools, are provided in the Appendix.
-Analysis of these data was problematic due to unusually severe skew and zero-inflation. 
-Therefore, no analyses of these results are provided, and instead the results are depicted graphically and described verbally. 
+Additional details of the methods used, including those to validate the measurement of zoospore pools, are provided in the Supporting Information.
 
 ### Itraconazole treatment of adults {-}
 
@@ -287,7 +285,7 @@ We used parameter-expanded Bayesian data augmentation, which augments the captur
 The states included (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
 On any particular survey, we considered three possible observations of an individual: (1) “alive at the upper site”, (2) “alive at the lower site”, and (3) “not detected”. 
 The model structure builds on the work of Joseph and Knapp (2018), tracking individual Bd (log) loads over time, allowing the expected log~10~(Bd load + 1) to vary as a function of treatment and time, and allowing the effect of Bd load on survival and detection to vary as a function of treatment. 
-Details of this model are provided in the Appendix.
+Details of this model are provided in the Supporting Information.
 
 *Treasure Lakes Basin*. In July 2018, we conducted an antifungal treatment of adult *R. sierrae* during a Bd epizootic in the Treasure Lakes basin, Inyo National Forest (Table 1). 
 Epizootics occurred in all other populations in the basin during summer 2017, and in 2018 the epizootic was occurring in the lake containing last known adult frogs in the basin.
@@ -315,7 +313,7 @@ To evaluate the factors influencing treatment effectiveness, we used the model *
 In 2012, the Bd epizootic in Dusy Basin (see "Itraconazole treatment of early life stages" section) was ongoing and most *R. sierrae* populations were extirpated. 
 Those populations that remained contained only late-stage tadpoles and recently metamorphosed subadults, and given the absence of any adults were presumed to be the final cohorts at these sites. 
 In July 2012, we initiated an experiment to test the combined effect of itraconazole treatment and *J. lividum* augmentation on Bd load and frog survival. 
-The qPCR assay used to quantify the concentration of *J. lividum* in subadults during the experiment is provided in the Appendix. 
+The qPCR assay used to quantify the concentration of *J. lividum* in subadults during the experiment is provided in the Supporting Information. 
 For this experiment, we selected a single pond where late-stage tadpoles and recently-metamorphosed subadults were still relatively abundant. 
 This pond was used previously in the 2010 experiment in which early life stages were treated with itraconazole (Table 1). 
 
@@ -333,7 +331,7 @@ To assess the effectiveness of itraconazole treatment in reducing Bd loads over 
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19-20, we bathed the itraconazole-treated subadults (n = 256) in a solution of water from the study pond (2 L) and *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively). 
 At the conclusion of the second *J. lividum* bath, all treated animals were released back into the pond.
-The *J. lividum* qPCR protocol used to describe the concentration of *J. lividum* on frogs in this experiment is described in the Appendix. 
+The *J. lividum* qPCR protocol used to describe the concentration of *J. lividum* on frogs in this experiment is described in the Supporting Information. 
 
 To assess the longer-term effects of the combined itraconazole-*J. lividum* treatment, we surveyed the study population during the summers of 2012 (n = 3 surveys), 2013 (n = 3), 2014 (n = 1), and 2019 (n = 1). 
 During each of these surveys, we conducted VES and captured and swabbed as many subadult and adult frogs as possible, and recorded the toe-clip status for each individual. 
@@ -524,75 +522,12 @@ Research permits were provided by Sequoia and Kings Canyon National Parks, U.S. 
 
 ## Table 1 {-}
 
-Characteristics of all sites used in the antifungal treatment experiments
-
-\bigskip
-
-```{r, include=FALSE}
-t_1 <- read_csv(file = here::here("out", "tables", "expt_sites.csv"))
-```
-```{r table1, echo=FALSE}
-kbl(
-  t_1, col.names = c("Basin", "Site ID", "Experiment", "Life stage", "Category", "Elevation", "Depth", "Area"),
-  booktabs = TRUE, linesep = "") %>%
-  row_spec(0, bold = TRUE) %>%
-  footnote(general = "Units for Elevation and Depth are meters and those for Area are m\\\\textsuperscript{2}", 
-           general_title = "", escape = FALSE) %>%
-  footnote(general = "Treatment = ``itracon + Jliv'' indicates the use of itraconazole and \\\\textit{J. lividum}", 
-           general_title = "", escape = FALSE) %>%  
-  footnote(general = "Life stage = ``early'' indicates tadpoles and subadults", general_title = "") %>%  
-  kable_styling(latex_options = "scale_down")
-```
-
-\clearpage
-
-## Table 2 {-}
-
-Timelines for antifungal treatment experiments conducted in the lower and upper basins of the LeConte study area in 2015.
-
-(a) Lower basin
-```{r, include=FALSE}
-t_lower <- read_csv(file = here::here("out", "tables", "timeline-lower.csv")) 
-```
-```{r table2a, echo=FALSE}
-kbl(t_lower, booktabs = TRUE, linesep = "") %>%
-      row_spec(0, bold = TRUE) %>%
-      column_spec(1, width = "7em") %>%
-      column_spec(2, width = "7em") %>%
-      column_spec(3, width = "7em") %>%
-      column_spec(4, width = "7em") %>%
-      column_spec(5, width = "7em") %>%
-      column_spec(6, width = "7em") %>%
-      column_spec(7, width = "7em") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-(b) Upper basin
-```{r, include=FALSE}
-t_upper <- read_csv(file = here::here("out", "tables", "timeline-upper.csv")) 
-```
-```{r table2b, echo=FALSE}
-kbl(t_upper, booktabs = TRUE, linesep = "") %>%
-      row_spec(0, bold = TRUE) %>%
-      column_spec(1, width = "7em") %>%
-      column_spec(2, width = "7em") %>%
-      column_spec(3, width = "7em") %>%
-      column_spec(4, width = "7em") %>%
-      column_spec(5, width = "7em") %>%
-      column_spec(6, width = "7em") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-\clearpage
-
-## Table 3{-}
-
 Effect of itraconazole treatment in Barrett and Dusy basins on Bd loads during the following one year period.
 
 ```{r, include=FALSE}
 barrettdusy_m3c <- read_csv(file = here::here("out", "tables", "barrettdusy-m3c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
-```{r table3, echo=FALSE}
+```{r table1, echo=FALSE}
 kbl(barrettdusy_m3c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Group-level effects", 1, 1) %>%
@@ -604,14 +539,14 @@ kbl(barrettdusy_m3c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 
 \clearpage
 
-## Table 4 {-}
+## Table 2 {-}
 
 Effect of itraconazole treatment in Barrett and Dusy basins on counts of subadults during the following one year period.
 
 ```{r, include=FALSE}
-barrettdusy_m4c <- read_csv(file = here::here("out", "tables", "dusbar-m4c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+barrettdusy_m4c <- read_csv(file = here::here("out", "tables", "barrettdusy-m4c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
-```{r table4, echo=FALSE}
+```{r table2, echo=FALSE}
 kbl(barrettdusy_m4c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Group-level effects", 1, 1) %>%
@@ -624,14 +559,14 @@ kbl(barrettdusy_m4c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 
 \clearpage
 
-## Table 5 {-}
+## Table 3 {-}
 
 Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on *J. lividum* concentration on frogs. 
 
 ```{r, include=FALSE}
 dusy2012_m3b <- read_csv(file = here::here("out", "tables", "dusy2012-m3b.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
-```{r table5, echo=FALSE}
+```{r table3, echo=FALSE}
 kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
@@ -641,16 +576,14 @@ kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
       kable_styling(latex_options = "scale_down")
 ```
 
-\clearpage
-
-## Table 6 {-}
+## Table 4 {-}
 
 Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs. 
 
 ```{r, include=FALSE}
 dusy2012_m4a <- read_csv(file = here::here("out", "tables", "dusy2012-m4a.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat)) 
 ```
-```{r table6, echo=FALSE}
+```{r table4, echo=FALSE}
 kbl(dusy2012_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
@@ -667,7 +600,7 @@ kbl(dusy2012_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
 ## Figure 1 {-}
 
 ```{r fig1, echo=FALSE, fig.cap="", out.width="400px"}
-knitr::include_graphics(here::here("out", "figures", "dusbar_200910_bdload.png"))
+knitr::include_graphics(here::here("out", "figures", "barrettdusy-20092010-bdload.png"))
 ```
 
 For the itraconazole treatment experiment in (a) Barrett and (b) Dusy basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control (green) and treated (blue) groups. 
@@ -678,7 +611,7 @@ The horizontal bar in the boxplots represents the median, hinges represent first
 ## Figure 2 {-}
 
 ```{r fig2, echo=FALSE, fig.cap="", out.width="450px"}
-knitr::include_graphics(here::here("out", "figures", "dusbar_yrs01_counts.png"))
+knitr::include_graphics(here::here("out", "figures", "barrettdusy-yrs01-counts.png"))
 ```
 
 For control and treated populations in Barrett and Dusy basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted and the year following the treatment. 
@@ -689,7 +622,7 @@ For control and treated populations in Barrett and Dusy basins, post-treatment c
 ## Figure 3 {-}
 
 ```{r fig3, echo=FALSE, fig.cap="", out.width="450px"}
-knitr::include_graphics(here::here("out", "figures", "dusy_zsppool.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy-zsppool.png"))
 ```
 
 Zoospore pools measured in the Dusy Basin study ponds assigned to either treated or control categories. Results are grouped by sampling time (before or after the treatment). The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. 
@@ -700,7 +633,7 @@ Zoospore pools measured in the Dusy Basin study ponds assigned to either treated
 ## Figure 4 {-}
 
 ```{r fig4, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "figures", "leconte_2015_beforeafter_treat.png"))
+knitr::include_graphics(here::here("out", "figures", "leconte-2015-beforeafter-treat.png"))
 ```
 
 Effect of antifungal treatments on Bd loads of adult *R. sierrae* in the 2015 LeConte treatment experiment: (a) lower basin, and (b) upper basin.
@@ -751,7 +684,7 @@ The upper and lower panels include treated frogs that were either not recaptured
 ## Figure 8 {-}
 
 ```{r fig8, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "figures", "dusy_2012_bdload.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy-2012-bdload.png"))
 ```
 
 Bd loads for subadult *R. sierrae* in the treated, control, and wild groups of the Dusy Basin *J. lividum* augmentation experiment. Total sample size on each date is shown above the x-axis. Prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole to reduce their Bd loads. 
@@ -761,7 +694,7 @@ Bd loads for subadult *R. sierrae* in the treated, control, and wild groups of t
 ## Figure 9 {-}
 
 ```{r fig9, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "figures", "dusy_2012_jliv.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy-2012-jliv.png"))
 ```
 
 Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated, control, and wild groups of the Dusy Basin *J. lividum* augmentation experiment. Frogs in the treated group were exposed to *J. lividum* on days 0 and 1. Concentrations on day 0 are from samples collected from frogs assigned to the treated group just prior to the first *J. lividum* exposure. Total sample size on each date is shown above the x-axis. 
@@ -771,7 +704,7 @@ Concentrations of *J. lividum* bacteria on subadult *R. sierrae* in the treated,
 ## Figure 10 {-}
 
 ```{r fig10, fig.cap = "", echo = FALSE, out.width = "450px"}
-knitr::include_graphics(here::here("out", "figures", "dusy_2012_recapture.png"))
+knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
 ```
 
 In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J lividum* exposure. 
