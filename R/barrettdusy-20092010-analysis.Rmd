@@ -483,7 +483,7 @@ ppc_loo_pit_overlay(
 * Deviation from uniformity increased relative to m3c. m3c is best model. 
 
 ### Create plots of Bd load over 1 year period of experiment for both basins
-#### Create labels for plotting
+#### Add labels for plotting
 ```{r}
 d_plot <- d %>% 
   mutate(
@@ -507,6 +507,13 @@ d_plot <- d %>%
   select(site_id, basin, visit_date, num_days, date_label, date_label1, treatment, stage, bd_load)
 ```
 
+Calculate samples sizes for use as annotation in each boxplot
+```{r}
+anno_plot1 <- d_plot %>% 
+  filter(basin == "barrett") %>% 
+  count(date_label1, treatment)
+```
+
 #### Create Barrett and Dusy plots
 ```{r}
 library(patchwork)
@@ -517,11 +524,11 @@ d_plot1 <- d_plot %>%
   mutate(date_label1 = fct_relevel(
     date_label1, "-14", "-1 to 5", "6", "22-23", "41-42", "365-366", "383-384", "407-408")) %>%
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
-    geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
+    geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 7 same size as others
     labs(title = "(a)",
       x = "Days",
       y = (expression(Bd~load~(log["10"]~copies+1))),
-      fill = "Frog group") +
+      fill = "Treatment group") +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
     theme_classic() +
     theme(plot.title = element_text(margin = margin(t = 0, b = -30)), 
@@ -536,7 +543,7 @@ d_plot2 <- d_plot %>%
   mutate(date_label1 = fct_relevel(
     date_label1, "-15 to -14", "0-2", "6", "20-21", "46-47", "356-357", "389-392", "407-408")) %>% 
   ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
-    geom_boxplot(position = position_dodge(preserve = "single")) + # keep unmatched day 7 same size as others
+    geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 7 same size as others
     labs(title = "(b)",
       x = "Days",
       y = (expression(Bd~load~(log["10"]~copies+1)))) +
@@ -726,6 +733,7 @@ d4_plot1 <- d4 %>%
       x = expression("Year"),
       y = "Number of subadults counted") + 
     facet_grid(~ treatment) + 
+    stat_n_text(vjust = 0.5, size = 2.5) +
     theme_classic() +
     theme(axis.text = element_text(color = "black"),
       legend.position = "none")
@@ -741,7 +749,8 @@ d4_plot2 <- d4 %>%
       title = "(b)",
       x = expression("Year"),
       y = "Number of subadults counted") + 
-    facet_grid(~ treatment) + 
+    facet_grid(~ treatment) +
+    stat_n_text(vjust = 0.5, size = 2.5) +
     theme_classic() +
     theme(axis.text = element_text(color = "black"),
       legend.position = "none")
