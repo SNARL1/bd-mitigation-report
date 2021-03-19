@@ -26,14 +26,15 @@ d <- d %>%
   filter(visit_date < "2015-12-31") %>%
   drop_na(bd_load) %>% 
   mutate(bd_load = as.integer(bd_load)) %>%
-  select(location, category, trt_period, visit_date, trt_died, pit_tag_ref, bd_load) %>% as_tibble()
+  rename(group = category) %>% 
+  select(location, group, trt_period, visit_date, trt_died, pit_tag_ref, bd_load) %>% as_tibble()
 ```
 
 # ANALYSIS #1:  Bd load between treated and control groups before treatment
 ## Create dataset, check distribution of response variable
 ```{r}
 d1 <- d %>% filter(trt_period == "pretreat" & trt_died == FALSE) %>%
-  mutate(across(c("location", "category"), as.factor))
+  mutate(across(c("location", "group"), as.factor))
 
 d1 %>%
   ggplot(aes(x = bd_load)) +
@@ -43,14 +44,14 @@ d1 %>%
 
 ## Negative binomial model
 ```{r}
-m1 <- brm(bd_load ~ location * category,
+m1 <- brm(bd_load ~ location * group,
           data = d1,
           family = negbinomial)
 summary(m1)
 plot((m1), ask = FALSE)
 plot(conditional_effects(m1), ask = FALSE)  
 ```
-* Important effect of category, effect of location is unimportant, weak effect of interaction
+* Important effect of group, effect of location is unimportant, weak effect of interaction
 
 #### LOO probability integral transform
 ```{r}
@@ -65,7 +66,7 @@ ppc_loo_pit_overlay(
 
 ## Zero-inflated negative binomial
 ```{r}
-m1a <- brm(bd_load ~ location * category,
+m1a <- brm(bd_load ~ location * group,
           data = d1,
           family = zero_inflated_negbinomial())
 summary(m1a)
@@ -77,7 +78,7 @@ plot(conditional_effects(m1a), ask = FALSE)
 # ANALYSIS #2: Bd load of treated group before/after treatment
 ## Create dataset, check distribution of response variable
 ```{r}
-d2 <- d %>% filter(category == "treated" & (trt_died == FALSE | is.na(trt_died))) %>%
+d2 <- d %>% filter(group == "treated" & (trt_died == FALSE | is.na(trt_died))) %>%
   mutate(location = as.factor(location),
          trt_period = fct_relevel(trt_period, rev))
 ```
@@ -125,7 +126,7 @@ plot(conditional_effects(m2a), ask = FALSE)
 
 # ANALYSIS #3: Loads of frogs that lived vs died during treatment
 ```{r}
-d3 <- d %>% filter(trt_period == "pretreat" & category == "treated") %>% 
+d3 <- d %>% filter(trt_period == "pretreat" & group == "treated") %>% 
     mutate(across(c("location", "trt_died"), as.factor),
            bd_load = as.integer(bd_load)) %>% as_tibble()
 ```
@@ -209,7 +210,7 @@ library(EnvStats)
 p1 <- d %>% 
   filter(location == "lower" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
-  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
+  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = group)) +
   geom_boxplot(width = 0.9, position = position_dodge2(preserve = "single")) + # keep unmatched boxplot same size as others
     labs(title = "(a)",
       x = "Treatment period",
@@ -226,12 +227,12 @@ p1 <- d %>%
 p2 <- d %>% 
   filter(location == "upper" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
-  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = category)) +
+  ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = group)) +
   geom_boxplot(width = 0.9, position = position_dodge2(preserve = "single")) + # keep unmatched boxplot same size as others
     labs(title = "(b)", 
       x = "Treatment period",
       y = expression("Bd load"~(log[10]~("copies + 1"))), 
-      fill = "Frog group") +
+      fill = "Treatment\ngroup") +
     scale_x_discrete(labels = c("Before","End")) + 
     scale_fill_manual(values = c("forestgreen", "deepskyblue2")) + 
     annotate("text", x = c("pretreat", "endtreat"), y = -0.5, label = c("n=74  n=125", "n=50"), size = 3) +
