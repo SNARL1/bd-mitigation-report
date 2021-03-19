@@ -259,7 +259,7 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
 
 ## Table S3 {-}
 
-In Barrett Lakes and Dusy basins, comparison of Bd loads on frogs assigned to control and treated categories immediately prior to the start of itraconazole treatment. 
+In for the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs from ponds assigned to control and treated groups immediately before the treatment period. 
 
 ```{r, include=FALSE}
 barrettdusy_m1 <- read_csv(file = here::here("out", "tables", "barrettdusy-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -278,7 +278,7 @@ kbl(barrettdusy_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 
 ## Table S4 {-}
 
-In Barrett Lakes and Dusy basins, effect of itraconazole treatment on Bd loads at the end of the treatment period compared to immediately before treatment. 
+For the itraconazole treatment experiment in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
 
 ```{r, include=FALSE}
 barrettdusy_m2c <- read_csv(file = here::here("out", "tables", "barrettdusy-m2c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -296,7 +296,7 @@ kbl(barrettdusy_m2c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 
 ## Table S5 {-}
 
-In the Dusy Basin itraconazole treatment experiment, effect of treatment on the Bd zoospore pool.   
+For the Dusy Basin itraconazole treatment experiment, results of model comparing zoospore pools of ponds assigned to the control and treated groups before and after treatment.   
 
 ```{r, include=FALSE}
 dusy2010_m1 <- read_csv(file = here::here("out", "tables", "dusy2010-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -312,14 +312,105 @@ kbl(dusy2010_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       kable_styling(latex_options = "scale_down")
 ```
 
+\clearpage
+
 ## Table S6 {-}
 
-In the Dusy Basin microbiome augmentation experiment, Bd loads on frogs assigned to control and treated categories immediately prior to the start of itraconazole treatment.   
+For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the control and treated categories immediately before the treatment period.   
+
+```{r, include=FALSE}
+leconte2015_m1 <- read_csv(file = here::here("out", "tables", "leconte2015-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+```
+```{r tableS6, echo=FALSE}
+kbl(leconte2015_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 4) %>%
+      pack_rows("Family-specific parameters", 5, 5) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+## Table S7 {-}
+
+For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
+
+```{r, include=FALSE}
+leconte2015_m2 <- read_csv(file = here::here("out", "tables", "leconte2015-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+```
+```{r tableS7, echo=FALSE}
+kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 4) %>%
+      pack_rows("Family-specific parameters", 5, 5) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+\clearpage
+
+## Table S8 {-}
+
+For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs in the treated group that survived versus died.   
+
+```{r, include=FALSE}
+leconte2015_m3 <- read_csv(file = here::here("out", "tables", "leconte2015-m3.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+```
+```{r tableS8, echo=FALSE}
+kbl(leconte2015_m3, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 4) %>%
+      pack_rows("Family-specific parameters", 5, 5) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+## Table S9 {-}
+
+For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
+
+```{r, include=FALSE}
+treasure_m1 <- read_csv(file = here::here("out", "tables", "treasure-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+```
+```{r tableS9, echo=FALSE}
+kbl(treasure_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 2) %>%
+      pack_rows("Family-specific parameters", 3, 3) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+\clearpage
+
+## Table S10 {-}
+
+For the Treasure Lakes Basin itraconazole treatment, results of model evaluating predictors of treatment effectiveness.
+
+```{r, include=FALSE}
+treasure_m2 <- read_csv(file = here::here("out", "tables", "treasure-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+```
+```{r tableS10, echo=FALSE}
+kbl(treasure_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+      booktabs = TRUE) %>%
+      pack_rows("Population-level effects", 1, 4) %>%
+      pack_rows("Family-specific parameters", 5, 5) %>%
+      row_spec(0, bold = TRUE) %>%
+      footnote(general = "Model family is Gaussian", general_title = "") %>%
+      kable_styling(latex_options = "scale_down")
+```
+
+## Table S11 {-}
+
+For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the control and treated groups immediately before the itraconazole treatment period.   
 
 ```{r, include=FALSE}
 dusy2012_m1 <- read_csv(file = here::here("out", "tables", "dusy2012-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
-```{r tableS6, echo=FALSE}
+```{r tableS11, echo=FALSE}
 kbl(dusy2012_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 2) %>%
@@ -331,109 +422,20 @@ kbl(dusy2012_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 
 \clearpage
 
-## Table S7 {-}
+## Table S12 {-}
 
-In the Dusy Basin microbiome augmentation experiment, Bd loads on frogs in the treated category immediately prior to and at the end of the itraconazole treatment.   
+For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the treated category from immediately before versus at the end of the itraconazole treatment.   
 
 ```{r, include=FALSE}
 dusy2012_m2a <- read_csv(file = here::here("out", "tables", "dusy2012-m2a.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
-```{r tableS7, echo=FALSE}
+```{r tableS12, echo=FALSE}
 kbl(dusy2012_m2a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 2) %>%
       pack_rows("Family-specific parameters", 3, 4) %>%
       row_spec(0, bold = TRUE) %>%
       footnote(general = "Model family is zero-inflated negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-## Table S8 {-}
-
-In the LeConte Basin itraconazole experiment, Bd loads on frogs assigned to the control and treated categories immediately prior to treatment.   
-
-```{r, include=FALSE}
-leconte2015_m1 <- read_csv(file = here::here("out", "tables", "leconte2015-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
-```
-```{r tableS8, echo=FALSE}
-kbl(leconte2015_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 4) %>%
-      pack_rows("Family-specific parameters", 5, 5) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-\clearpage
-
-## Table S9 {-}
-
-In the LeConte Basin itraconazole experiment, Bd loads on frogs in the treated category immediately prior to and at end of treatment.   
-
-```{r, include=FALSE}
-leconte2015_m2 <- read_csv(file = here::here("out", "tables", "leconte2015-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
-```
-```{r tableS9, echo=FALSE}
-kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 4) %>%
-      pack_rows("Family-specific parameters", 5, 5) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-## Table S10 {-}
-
-In the LeConte Basin itraconazole experiment, Bd loads on frogs in the treated category that survived versus died.   
-
-```{r, include=FALSE}
-leconte2015_m3 <- read_csv(file = here::here("out", "tables", "leconte2015-m3.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
-```
-```{r tableS10, echo=FALSE}
-kbl(leconte2015_m3, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 4) %>%
-      pack_rows("Family-specific parameters", 5, 5) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-\clearpage
-
-## Table S11 {-}
-
-In the Treasure Lakes Basin itraconazole experiment, Bd loads on frogs before and at the end of the treatment period.
-
-```{r, include=FALSE}
-treasure_m1 <- read_csv(file = here::here("out", "tables", "treasure-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
-```
-```{r tableS11, echo=FALSE}
-kbl(treasure_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 2) %>%
-      pack_rows("Family-specific parameters", 3, 3) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is negative binomial", general_title = "") %>%
-      kable_styling(latex_options = "scale_down")
-```
-
-## Table S12 {-}
-
-In the Treasure Lakes Basin itraconazole experiment, predictors of treatment effectiveness.
-
-```{r, include=FALSE}
-treasure_m2 <- read_csv(file = here::here("out", "tables", "treasure-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
-```
-```{r tableS12, echo=FALSE}
-kbl(treasure_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
-      booktabs = TRUE) %>%
-      pack_rows("Population-level effects", 1, 4) %>%
-      pack_rows("Family-specific parameters", 5, 5) %>%
-      row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is Gaussian", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
 ```
 

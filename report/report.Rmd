@@ -183,16 +183,19 @@ After the last treatment, all animals were released from the pens into the study
 
 ### Statistical analyses {-} 
 
-Analysis of treatment experiments generally utilized linear and multilevel models analyzed in a Bayesian framework using the *brms* package [@bürkner2017rpackage; @bürkner2018advanced] and R software v. 4.0.3 [@rsoftware2020]. 
-The exception is the analysis of the itraconazole treatment of adults in LeConte Basin that was conducted using Stan [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" for details). 
-When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualization of leave-one-out ("LOO") cross-validation and LOO probability integral transforms ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
-When suggested by the data structure or measures of model fit, we added group-level ("random") effects to the model, or included predictor terms for other parameters of the response distribution (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
-We compared fits of models with and without the added terms using LOO and the *loo* package [@vehtari2017practical]. 
+Analysis of treatment experiments utilized linear simple and multilevel models analyzed in a Bayesian framework using R software v. 4.0.3 [@rsoftware2020]. All analyses except one used the *brms* package [@bürkner2017rpackage; @bürkner2018advanced]. 
+The one exception was the analysis of the CMR data collected as part of the itraconazole treatment experiment in LeConte Basin. 
+This analysis was conducted using Stan [@carpenter2017stan] directly instead of via the *brms* interface (see "Itraconazole treatment of adults: LeConte Basin" and Supporting Information for details). 
+When using the *brms* package, our analysis workflow included starting with a linear model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations ("LOO-PIT") [@gelman2013bayesian; @vehtari2017practical]. 
+When suggested by the data structure or measures of model fit, we evaluated other model families or added group-level ("random") effects to the model. In addition, when necessary, we developed distributional models in which predictor terms are specified for other parameters of the response distribution instead of only the mean (e.g., shape, zero-inflation ("zi"); see *brms* vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
+For example, itraconazole treatment can reduce not only mean Bd load, but also the variation around the mean (i.e, shape) and amount of zero-inflation. 
+In these situations, including predictor terms for the mean, shape, and zi parameters can be helpful in improving model fit. 
+We compared fits of models using LOO cross-validation and the *loo* package [@vehtari2017practical]. 
 For all models, we used *brms* defaults for priors, number of chains (4), and warmup and post-warmup iterations (1000 for each). Model convergence was evaluated using trace plots, Gelman-Rubin statistics (Rhat), and measures of effective sample size. 
 
 The models described below are the best-fit models that resulted from the workflow outlined above.
-We considered predictors of group- and population-level effects and family-specific parameters to be important when the 95% credible interval (hereafter, "CI") of the estimates did not include zero, and relatively unimportant otherwise. 
-We provide the results of all analyses in tabular form, in the Results for analyses describing the outcome of treatment experiments, and in the Supporting Information for related but less central analyses. The key results from treatment experiments are also visualized using boxplots or dotplots, the former when sample sizes are relatively large and the latter when sample sizes are small and boxplots are consequently less informative. 
+We considered predictors of group- and population-level effects and family-specific parameters to be important when the 95% credible interval ("CI") of the estimates did not include zero, and relatively unimportant otherwise. 
+We provide the results of all analyses in tabular form, in the Results section of the main text for analyses describing the outcome of treatment experiments, and in the Supporting Information for related but less central analyses. The key results from treatment experiments are also visualized using boxplots or dotplots; we used the former when sample sizes were relatively large and the latter when sample sizes were small and boxplots are consequently less informative. 
 
 ## Experiment-specific methods {-}
 
@@ -214,14 +217,14 @@ To assess treatment effectiveness in reducing Bd loads, swabs were collected fro
 A total of 977 tadpoles and 65 subadults were treated. 
 In the control populations, animals were captured on a single day (one population per day during August 2--4), swabbed, held in a pen until capturing was complete, and then released. 
 Swabs were collected from a total of 75 tadpoles and 23 subadults. 
-To quantify the longer-term effects of treatment on Bd load and frog population dynamics, post-treatment VES were conducted in late August and early September 2009, and in July and August 2010. 
+To quantify the longer-term effects of treatment on Bd load and frog population dynamics, post-treatment VES were conducted in late August and early September 2009 (two surveys per pond), and in July, August, and September 2010 (three surveys per pond). 
 
 The Dusy experiment was identical in most respects to the Barrett experiment. During July 24--26, we captured as many animals as possible from the ponds assigned to the treated group and placed them in pens. 
 Daily itraconazole treatments began on July 27 and lasted through August 2, resulting in seven days of treatment for all animals. 
 Swabs were collected from a subset of animals from the ponds assigned to the treated group on July 27 before treatment began, and after the final treatment on August 2. 
 A total of 3707 tadpoles and 125 subadults were treated. 
 Animals in control populations were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults). 
-Follow-up VES were conducted in mid-August and mid-September 2010, and July and August 2011.
+Follow-up VES were conducted in mid-August and mid-September 2010, and July and August 2011 (two surveys per pond in both years).
 
 Our analysis of the data from the experiments focused on two questions: During the one-year period following the treatments, did itraconazole treatment influence (1) Bd loads and (2) survival of treated animals? 
 To address the first question, we developed separate models to describe Bd loads of the animals assigned to the treated and control groups before treatment was initiated, the effectiveness of treatment in reducing Bd loads of animals in the treated group, and post-treatment loads in the treated and control groups in the year of treatment and the following year. Because the treatments in Barrett and Dusy Basins were virtually identical in their design, we combined the results from both experiments into a single dataset, and to account for any between-treatment differences we included basin as a predictor variable in models.
@@ -355,40 +358,38 @@ As with the *J. lividum* analyses, formal assessment of the effect of treatment 
 
 ## Itraconazole treatment of early life stages {-}
 
-Immediately before itraconazole treatments in the Barrett and Dusy experiments began, Bd loads of animals in ponds assigned to the treated and control groups were similar (Figure 1a: Days = "1-6"; Figure 1b: Days = "1-3"). 
-Model results indicated that Bd load did not differ between treatment groups (CI: -1.35 -- 1.75). 
-Basin had a weak effect, and indicated that Bd loads in Dusy were slightly lower than in Barrett (CI: -2.86 -- -0.02). The (treatment x basin) interaction term was unimportant, and therefore the patterns of Bd load between treatment groups were similar in both basins (CI: -0.53 -- 3.19). 
+In the Barrett and Dusy experiments, immediately before itraconazole treatments began, Bd loads of animals in ponds assigned to the treated and control groups were similar (Figure 1a: Days = "-1 to 5"; Figure 1b: Days = "0-2"). 
+Model results (Table S3) confirmed that Bd load did not differ between treatment groups. In addition, basin had a weak effect (loads were lower in Dusy than Barrett), and the (treatment x basin) interaction term was unimportant, indicating that the patterns of Bd load between treatment groups were similar in both basins. 
 
-The  treatments substantially reduced Bd loads of treated populations (Figure 1: Days = "1-6" or "1-3" versus "7"). 
-Model results indicated an important effect of treatment category (lower at end than beginning; CI: -3.01 -- -2.10). 
-In addition, important effects on Bd load were also evident for stage (lower in tadpoles than subadults; CI: -2.86 -- -1.72), basin (higher in Dusy than Barrett; CI: 1.32 -- 2.08), and the (basin x treatment_category) interaction term (CI: -5.68 -- -3.92). 
-The interaction term indicated that loads were higher in Dusy than Barrett at the beginning of the treatment, but lower in Dusy than Barrett at the end of treatment (Figure 1). 
+The treatments substantially reduced Bd loads of treated frogs (Figure 1a: Days = "-1 to 5" versus "6", Figure 1b: Days = "0-2" versus "6"). 
+Model results (Table S4) substantiated the important effect of treatment period ("treatcat"; lower after treatment than before treatment). 
+In addition, important effects on Bd load were also evident for frog stage (lower in tadpoles than subadults), basin (higher in Dusy than Barrett), and the (basin x treatment_category) interaction term. 
+The importance of the interaction term indicated that loads were higher in Dusy than Barrett at the beginning of the treatment, but lower in Dusy than Barrett at the end of treatment (Figure 1). 
 Finally, treatment category, stage, and basin all had important effects on the shape parameter. 
 
-The reduction in Bd load in treated versus control groups that was evident at the end of the treatment period persisted for at least the next 1.5 months (Figure 1: Days > 7). 
-Model results (Table 3) showed important effects on Bd load of most predictor variables, including treatment (treated lower than control), stage (lower in tadpoles than subadults), year (lower in year 1 than year 0), and the (year x treatment) interaction term. 
+After release of the treated animals back into the study ponds, the reduction in Bd load in treated versus control groups that was evident at the end of the treatment period persisted for at least the next 1.5 months (Figure 1: Days > 6). 
+Results from a model of predictors of Bd load over the 1-year post-release period (Table 1) showed important effects on Bd load of most predictor variables, including treatment (treated lower than control), stage (lower in tadpoles than subadults), year (lower in the year following treatment (year 1) than the year of treatment (year 0)), and the (year x treatment) interaction term. 
 Basin did not have an important effect. 
-The (year x treatment) term indicated that Bd loads were lower in the treated group than the control group in year 0, but by year 1 loads in the treated group had increased to the point that Bd loads of the treated and control groups were similar. 
+The (year x treatment) term indicated that Bd loads were lower in the treated group than the control group in year 0, but by year 1 loads in the treated group had increased such that Bd loads of the treated and control groups were similar. 
 Therefore, although the treatment effect was evident for more than a month, Bd loads on animals in treated ponds returned to pre-treatment levels in the year following treatment (Figure 1). 
-All predictors of family-specific parameters had important effects and their inclusion, especially those of the shape parameter, substantially improved model fit. 
+All predictors of the shape parameter had important effects. 
 
 The reduction in Bd load caused by the treatment was associated with increased counts of subadults in treated versus control populations (Figure 2).
-
-Model results indicated that treatment and the (year x treatment) interaction term had important effects (Table 4). 
+Model results (Table 2) indicated that treatment and the (year x treatment) interaction term had important effects. 
 The effects of tadpole count, basin, and year were unimportant. 
 The interaction term indicated that treated populations had higher subadult counts than control populations in the year of the treatment, but that counts in treated populations in the year following treatment were low and similar to those in control populations (Figure 2). 
-Therefore, mirroring the longer-term effects of treatment on Bd load, the increase in subadult survival in treated populations in the 1.5 months following treatment was no longer evident in the year following treatment. 
+Therefore, mirroring the longer-term effects of treatment on Bd load, the increase in subadult counts (as an index of subadult survival) in treated populations in the 1.5 months following treatment was no longer evident in the year following treatment. 
 
-*Effect of treatment on zoospore pool*. Zoospore pools in the ponds assigned to the treated group showed little change between before and after treatment, and those of control ponds may have increased slightly (Figure 3). Assuming the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, we conclude that the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not substantially alter the zoospore pools. 
+*Effect of treatment on zoospore pool*. Before treatment, zoospore pools (measured as Bd load of collected filters) in the ponds assigned to the control and treated groups were similar. After treatment, zoospore pools in control ponds may have increased slightly and decreased slightly in treated pools (Figure 3). However, analysis results (Table S5) suggested that the effects of treatment, basin, and the (treatment x basin) interaction term were all unimportant. Therefore, assuming that the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not substantially alter the zoospore pools. 
 
 ## Itraconazole treatment of adults {-}
 
 ### LeConte Basin {-}
 
-In the experiments conducted in the lower and upper basins, prior to the treatment period frogs assigned to the treated and control groups had very high Bd loads, above the level at which symptoms of severe chytridiomycosis are evident. 
-In both basins, Bd loads of the control group were somewhat higher than those in the treated group (Figure 4), likely because control frogs were captured and processed 1-3 days after the frogs assigned to the treated group (Table 2) and during a period of increasing Bd loads in the study populations. 
-Model results affirmed an important pre-treatment effect of treatment group on Bd load (Bd loads of treated group lower than control group, CI: -1.23 -- -0.61). 
-The effect of basin was unimportant (CI: -0.39 -- 0.43), and the (treatment * basin) interaction term was relatively weak (CI: 0.04 -- 1.02), indicating that this pattern was similar in both basins. 
+In the itraconazole treatment experiments conducted in LeConte Basin, prior to the treatment period, frogs assigned to the treated and control groups had very high Bd loads, above the level at which symptoms of severe chytridiomycosis are evident (log~10~(Bd load) = 5.8 copies). 
+In locations were experiments were conducted (lower and upper), Bd loads of the control group were somewhat higher than those in the treated group (Figure 4), likely because control frogs were captured and processed 1-3 days after the frogs assigned to the treated group (Table S2) and during a period of rapidly increasing Bd loads in the study populations. 
+Model results (Table S6)affirmed an important pre-treatment difference in Bd load between treatment groups (treated group lower than control group).
+The location and (treatment x basin) interaction terms were unimportant, with the latter indicating that the pattern of Bd load between treatment groups was similar in both basins. 
 
 Samples collected at the end of the 7-9 day treatment period indicated that in both basins the treatment was effective in reducing Bd loads on treated frogs (Figure 4; a reduction of 1.4-2.7 orders of magnitude). 
 Model results affirmed the important effect on Bd load of treatment (Bd loads at end of treatment lower than at beginning; CI: -3.07 -- -2.24). 
@@ -603,7 +604,7 @@ kbl(dusy2012_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
 knitr::include_graphics(here::here("out", "figures", "barrettdusy-20092010-bdload.png"))
 ```
 
-For the itraconazole treatment experiment in (a) Barrett and (b) Dusy basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control (green) and treated (blue) groups. 
+For the itraconazole treatment experiment in Barrett (a) and Dusy (b) basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control (green) and treated (blue) groups. 
 The horizontal bar in the boxplots represents the median, hinges represent first and third quartiles, and whiskers extend to largest and smallest values within 1.5x interquartile range beyond hinges. Dots indicate values outside the 1.5x interquartile range.
 
 \clearpage
@@ -614,7 +615,7 @@ The horizontal bar in the boxplots represents the median, hinges represent first
 knitr::include_graphics(here::here("out", "figures", "barrettdusy-yrs01-counts.png"))
 ```
 
-For control and treated populations in Barrett and Dusy basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted and the year following the treatment. 
+For control and treated populations in Barrett (a) and Dusy (b) basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted (year = 0) and the year following the treatment (year = 1). Each dot indicates the count made during a survey of one of the study ponds. Median counts for each treatment group in years 0 and 1 is indicated with a back diamond, and the total number of surveys is displayed above the x-axis. 
 
 
 \clearpage
