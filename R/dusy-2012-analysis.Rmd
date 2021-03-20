@@ -469,12 +469,12 @@ d4_count %>%
     geom_point(shape = 21, size = 4) + 
     scale_fill_manual(values = c("forestgreen", "deepskyblue2")) +
     labs(
-      fill = "Frog group",
+      fill = "Treatment group",
       x = expression("Days since"~italic("J. lividum")~"exposure"),
       y = "Percent of frogs recaptured") +
     theme_classic() +
     theme(axis.text = element_text(color = "black"),
-          legend.position = c(0.85, 0.85),
+          legend.position = c(0.80, 0.85),
           legend.background = element_rect(size = 0.3, color = "black"))
 ```
 

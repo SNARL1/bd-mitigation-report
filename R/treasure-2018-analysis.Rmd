@@ -22,10 +22,10 @@ treasure_Bd <- read_csv(file = here::here("data", "treasure-captures-swabs.csv")
 d1  <- treasure_Bd %>% 
   select(visit_date, bd_load) %>%
   filter(visit_date > "2018-07-15" & visit_date < "2018-07-24") %>% 
-  mutate(group = case_when(visit_date < "2018-07-23" ~ "pre",
-                           visit_date == "2018-07-23" ~ "post"),
+  mutate(treatcat = case_when(visit_date < "2018-07-23" ~ "before",
+                           visit_date == "2018-07-23" ~ "after"),
          bd_load = as.integer(bd_load),
-         group = fct_relevel(group, "pre", "post"))
+         treatcat = fct_relevel(treatcat, "before", "after"))
 ```
 
 ### Distribution of Bd load data
@@ -37,7 +37,7 @@ d1 %>% ggplot(aes(x = bd_load)) +
 
 ### Fit negative binomial model
 ```{r}
-m1 <- brm(bd_load ~ group,
+m1 <- brm(bd_load ~ treatcat,
           data = d1, 
           family = negbinomial())
 summary(m1)
@@ -59,7 +59,7 @@ ppc_loo_pit_overlay(
 
 ### Fit zero-inflated negative binomial model
 ```{r}
-m1a <- brm(bd_load ~ group,
+m1a <- brm(bd_load ~ treatcat,
           data = d1, 
           family = zero_inflated_negbinomial())
 summary(m1a)
@@ -79,6 +79,12 @@ loo(m1, m1a)
 ```{r}
 d2 <- read_csv(here::here("data", "treasure-Bd-4.csv"))
 ```
+```{r}
+d2 <- d2 %>% rename(capture_bdload = capture_swab,
+                    release_bdload = release_swab,
+                    recapture_bdload = recapture_swab,
+                    capture_bdload_std = capture_swab_std)
+```
 
 ### Distribution of LRR response variable
 ```{r}
@@ -93,7 +99,7 @@ d2 %>% ggplot(aes(sample = LRR)) +
 
 ### Fit gaussian model
 ```{r}
-m2 <- brm(LRR ~ capture_swab_std * days_inside,
+m2 <- brm(LRR ~ capture_bdload_std * days_inside,
           data = d2,
           family = gaussian())
 
@@ -132,7 +138,7 @@ treasure_progress_plot_colored_boxes <-
     stat_n_text(y.pos = -.75, vjust = 0, size = 3, y.expand.factor = 0) + 
     theme_classic() +
     labs(x = "Survey Date",
-         y = (expression(paste("Bd load (log"[10]," copies + 1)")))) +
+         y = (expression(paste("Bd load (log"[10]," (copies + 1))")))) +
     theme(axis.text.x = element_text(color = "black", angle = 45,  vjust = 1, hjust = 1),
         legend.position = c(0.5, 0.3),
         legend.background = element_rect(size = 0.3, color = "black"),
@@ -197,7 +203,7 @@ multicapture_loads_plot <-
   facet_grid(facet_labels~.) +
   guides(color = FALSE) +
   xlab("Swab date") + 
-  ylab(expression(paste("Bd load (log"[10]," copies + 1)"))) +
+  ylab(expression(paste("Bd load (log"[10]," (copies + 1))"))) +
   labs(fill="Treatment\nduration (days)") +
   theme_bw() +
   theme(panel.grid = element_blank(),
