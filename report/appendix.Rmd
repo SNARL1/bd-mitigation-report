@@ -355,21 +355,20 @@ kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs in the treated group that survived versus died.   
 
 ```{r, include=FALSE}
-leconte2015_m3 <- read_csv(file = here::here("out", "tables", "leconte2015-m3.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
+leconte2015_m4 <- read_csv(file = here::here("out", "tables", "leconte2015-m4.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
 ```
 ```{r tableS8, echo=FALSE}
-kbl(leconte2015_m3, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
+kbl(leconte2015_m4, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%CI", "Rhat", "Bulk ESS", "Tail Ess"), align = "lrrrrrrr",
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
-      pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is negative binomial", general_title = "") %>%
+      footnote(general = "Model family is bernoulli", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
 ```
 
 ## Table S9 {-}
 
-For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
+For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs before versus the end of the treatment period. 
 
 ```{r, include=FALSE}
 treasure_m1 <- read_csv(file = here::here("out", "tables", "treasure-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -399,7 +398,7 @@ kbl(treasure_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      footnote(general = "Model family is Gaussian", general_title = "") %>%
+      footnote(general = "Model family is gaussian", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
 ```
 
