@@ -31,11 +31,14 @@ d <- d %>%
 ```
 
 # ANALYSIS #1:  Bd load between treated and control groups before treatment
-## Create dataset, check distribution of response variable
+## Create dataset
 ```{r}
 d1 <- d %>% filter(trt_period == "pretreat" & trt_died == FALSE) %>%
   mutate(across(c("location", "group"), as.factor))
+```
 
+## Check distribution of response variable
+```{r}
 d1 %>%
   ggplot(aes(x = bd_load)) +
     geom_histogram(bins = 200)
@@ -197,6 +200,19 @@ plot((m3a), ask = FALSE)
 plot(conditional_effects(m3a), ask = FALSE)
 ```
 * No evidence of zero-inflation
+
+### Fit binary logistic regression model
+```{r}
+d3a <- d3 %>% 
+  mutate(lbd_load = log10(bd_load + 1))
+
+m4 <- brm(trt_died ~ lbd_load * location,
+          data = d3a,
+          family = bernoulli())
+summary(m4)
+plot((m4), ask = FALSE)
+plot(conditional_effects(m4), ask = FALSE)
+```
 
 # CREATE PLOT
 ## Load packages needed for plotting
