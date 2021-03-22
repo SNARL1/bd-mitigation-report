@@ -292,7 +292,7 @@ We used open population multi-state hidden Markov models to understand subsequen
 We used parameter-expanded Bayesian data augmentation, which augments the capture histories of observed individuals with a large number of capture histories for individuals that were never detected [@royle2012parameter].
 The states included (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
 On any particular survey, we considered three possible observations of an individual: (1) “alive at the upper site”, (2) “alive at the lower site”, and (3) “not detected”. 
-The model structure builds on the work of Joseph and Knapp (2018), tracking individual Bd (log) loads over time, allowing the expected log~10~(Bd load + 1) to vary as a function of treatment and time, and allowing the effect of Bd load on survival and detection to vary as a function of treatment. 
+The model structure builds on the work of Joseph and Knapp (2018), tracking individual Bd (log) loads over time, allowing the expected log~10~(Bd load + 1) to vary as a function of treatment and time, and allowing the effect of Bd load on survival to vary as a function of treatment. 
 Details of this model are provided in the Supporting Information.
 
 *Treasure Lakes Basin*. In July 2018, we conducted an antifungal treatment of adult *R. sierrae* during a Bd epizootic in the Treasure Lakes basin, Inyo National Forest (Table 1). 
@@ -406,6 +406,16 @@ Of the treated frogs that died, most did so during the first half of the treatme
 However, Bd load was not an important predictor of whether frogs died versus survived (Table S8). 
 Location and the (location x bd_load) interaction term were also unimportant. 
 
+```{r read-stan-results}
+pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
+load_diff <- readr::read_csv(here::here("stan", "load_diffs.csv"))
+survival_diff <- readr::read_csv(here::here("stan", "survival_diffs.csv"))
+abund_2018 <- readr::read_csv(here::here("stan", "2018_abund.csv"))
+trt_2018 <- dplyr::filter(abund_2018, trt == "treated")
+new_2018 <- dplyr::filter(abund_2018, trt == "new")
+ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
+```
+
 During the three year post-treatment period across both experiments, 51% of treated frogs and 2% of control frogs were recaptured. 
 In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals. 
 Between frog release in 2015 and the final survey in 2018, three recaptured individuals moved between the two basins. All three were in the treated group and had moved from the upper to the lower basin. All three were included in counts of unique individuals in the basin in which they were captured.
@@ -413,19 +423,21 @@ Of the 749 unique frogs captured in the lower basin, 132 were in the treated gro
 These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
 In the upper basin, of the 89 unique frogs captured, 81 were in the treated group and eight were non-experimental. 
 No control frogs were captured. 
-Across the entire duration of the experiment (2015-2018), the 1212 individuals captured were estimated to represent approximately 83% (posterior median) of the adults that existed in the LeConte population during this time (CI: 71% -- 92%).
+Across the entire duration of the experiment (2015-2018), the 1212 individuals captured were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
 
 During the 2015 (post-treatment) to 2018 period, Bd loads on untreated control frogs were substantially higher than on treated and non-experimental frogs (posterior probability = 1). 
-On average, loads of the control group were 683 (CI: 303 -- 1548) times higher than loads of the treated group (Figure 5a).
-The two control frogs that were recaptured were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 5a). 
-Bd load dynamics of the treated and non-experimental groups from 2016 to 2018 were similar. Importantly, the reduced loads of the treated group after the 2015 treatment period were maintained in subsequent years (Figure 5a). 
+On average, loads of the control group were `r load_diff$diff[2]` (CI: `r load_diff$diff[1]` -- `r load_diff$diff[3]`) times higher than loads of the treated group (Figure 5a).
+The two recaptured control frogs were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 5a). 
+Bd load dynamics of the treated and non-experimental groups from 2016 to 2018 were similar. 
+Importantly, the reduced loads of the treated group after the 2015 treatment period were maintained in subsequent years (Figure 5a). 
 
 Overall, the LeConte adult population declined in abundance from 2015 to 2018, with the most rapid declines in the control group (Figure 5b). 
-Between the end of the treatments in 2015 and the first surveys of 2016, the number of animals surviving in the control group dropped from 176 to 12 (CI: 2 -- 43). 
-By the end of the summer in 2016, the posterior median for the number of surviving control animals was zero (CI: 0 -- 6). 
-Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = 0.93 and 0.91, for control versus treated, and control versus non-experimental, respectively; Figure 5c). 
+Between the end of the treatments in 2015 and the first surveys of 2016, the number of animals surviving in the control group dropped from 176 to `r ctrl_abund$med[ctrl_abund$primary_period == 2]` (CI: `r ctrl_abund$lo[ctrl_abund$primary_period == 2]` -- `r ctrl_abund$hi[ctrl_abund$primary_period == 2]`). 
+By the end of the summer in 2016, the posterior median for the number of surviving control animals was `r ctrl_abund$med[ctrl_abund$primary_period == 4]` (CI: `r ctrl_abund$lo[ctrl_abund$primary_period == 4]` -- `r ctrl_abund$hi[ctrl_abund$primary_period == 4]`). 
+Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = `r survival_diff$ctrl_lt_trt` and `r survival_diff$ctrl_lt_new`, for control versus treated, and control versus non-experimental, respectively; Figure 5C). 
 Therefore, control animals were less tolerant of Bd infection than were treated and non-experimental frogs. 
-Nonetheless, despite the treatment, by 2018 the study populations had declined to very few remaining adults. In the last primary period of 2018, the posterior median for the number of treated frogs alive was 4 (CI: 0 -- 13), 48 for non-experimental frogs (CI: 18 -- 93), and zero for controls (CI: 0 -- 0). 
+Nonetheless, despite the treatment, by 2018 the study populations had declined to few remaining adults. 
+In the last primary period of 2018, the posterior median for the number of treated frogs alive was `r trt_2018$med` (CI: `r trt_2018$lo` -- `r trt_2018$hi`), `r new_2018$med` for non-experimental frogs (CI: `r new_2018$lo` -- `r new_2018$hi`), and zero for controls (CI: 0 -- 0). 
 
 ### Treasure Lakes Basin {-}
 

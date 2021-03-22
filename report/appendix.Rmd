@@ -99,29 +99,28 @@ Four states are possible:
 
 ### Observation model {-}
 
-An emission matrix $\matr{\Omega}^{(i, t)}$ links observations to hidden states for individual $i$ in primary period $t$.
-The rows in $\matr{\Omega}^{(i, t)}$ correspond to the state of individual $i$ in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
+An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
+The rows in $\matr{\Omega}^{(t)}$ correspond to the state of an individual in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
 
 \[
-\matr{\Omega}^{(i, t)} =
+\matr{\Omega}^{(t)} =
 \begin{blockarray}{cccc}
   \text{Detected: upper} & \text{Detected: lower} & \text{Not detected}\\
 \begin{block}{(ccc)c}
-  p_{i, t} & 0 & 1 - p_{i, t} & \begin{tabular}{@{}c@{}}Alive: upper \end{tabular} \\
-  0 & p_{i, t} & 1 - p_{i, t} & \begin{tabular}{@{}c@{}}Alive: lower \end{tabular} \\
+  p_t & 0 & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: upper \end{tabular} \\
+  0 & p_t & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: lower \end{tabular} \\
   0 & 0 & 1 & \begin{tabular}{@{}c@{}}Not recruited \end{tabular} \\
   0 & 0 & 1 & \begin{tabular}{@{}c@{}}Dead \end{tabular} \\
 \end{block}
 \end{blockarray}
  \]
 
-Here, $p_{i, t}$ is the probability of detection for individual $i$ if it is alive in primary period $t$. 
-We allowed detection probabilities to vary as a function of expected Bd load [@joseph2018]:
+Here, $p_t$ is the probability of detection for an individual if it is alive in primary period $t$. 
+We allowed detection probabilities to vary over time [@joseph2018]:
 
-$$\text{logit}(p_{i, t}) = \alpha_0 + \alpha_\text{g[i]}^{(g)} + \alpha_\text{g[i]}^{(z)} z_{i, t} + \epsilon^{(p)}_t,$$
+$$\text{logit}(p_t) = \alpha_0 + \epsilon^{(p)}_t,$$
 
-where $\alpha_0$ is an intercept parameter, $\alpha_\text{g[i]}^{(g)}$ is an adjustment for group $g$, $g[i]$ is the group that individual $i$ belongs to, $\alpha_\text{g[i]}^{(z)}$ is the effect of Bd load on group $g$, $z_{i, t}$ is the Bd load of individual $i$ in primary period $t$, and $\epsilon^{(p)}_t$ is an adjustment on detection probability for primary period $t$.
-Together these terms in the detection probability model account for differences among control, treated, and non-experimental animals, differential effects of Bd load on detection, and differences among primary periods. 
+where $\alpha_0$ is an intercept parameter, and $\epsilon^{(p)}_t$ is an adjustment on detection probability for primary period $t$.
 
 ### State model {-}
 
@@ -143,10 +142,9 @@ Here, $\phi_{i, t}$ is the probability of survival, $\nu^{(l)}$ and $\nu^{(u)}$ 
 
 Survival probabilities were modeled as a function of Bd load: 
 
-$$\text{logit}(\phi_{i, t}) = \beta_0 + \beta_\text{g[i]}^{(g)} + \beta_\text{g[i]}^{(z)} z_{i, t} + \epsilon^{(\phi)}_t,$$
+$$\text{logit}(\phi_{i, t}) = \beta_0 + \beta_\text{g[i]}^{(g)} + \beta_\text{g[i]}^{(z)} z_{i, t},$$
 
-where $\beta_0$ is an intercept parameter, $\beta_\text{g[i]}^{(g)}$ is an adjustment for group $g$, $g[i]$ is the group that individual $i$ belongs to, $\beta_\text{g[i]}^{(z)}$ is the effect of Bd load on group $g$, $z_{i, t}$ is the Bd load of individual $i$ in primary period $t$, and $\epsilon^{(\phi)}_t$ is an adjustment on detection probability for primary period $t$.
-As with the detection model, these terms account for differences among groups, among individuals with different Bd loads, and among primary periods.
+where $\beta_0$ is an intercept parameter, $\beta_\text{g[i]}^{(g)}$ is an adjustment for group $g$, $g[i]$ is the group that individual $i$ belongs to, $\beta_\text{g[i]}^{(z)}$ is the effect of Bd load on group $g$, and $z_{i, t}$ is the Bd load of individual $i$ in primary period $t$.
 
 We treat the field experiment in 2015 as the first primary period, for which states are known for experimental animals. 
 For example, if individual $i$ was captured and released at the upper site, then we know that $s_{i, t} = 1$. 
@@ -182,7 +180,7 @@ Standard deviation parameters were given unit scale half normal priors, and all 
 We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte carlo in Stan. 
 We drew 3000 iterations for each of four chains, using a maximum treedepth of 11 and an adapt_delta value of 0.99.
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
-Models were fit using the rstan R package, version 2.19.3 [@rstan2020].
+Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 
 \clearpage
 

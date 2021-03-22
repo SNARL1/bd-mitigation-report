@@ -11,4 +11,5 @@ R-working/
 *.tex
 *.aux
 *.out
-
+fig
+stan/*.rds
