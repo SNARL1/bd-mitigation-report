@@ -535,8 +535,12 @@ mean(bd_grp_adj[, 2] > bd_grp_adj[, 3]) # pr new > treated
 
 # Bd load effects on survival
 str(beta_srv_bd)
-mean(beta_srv_bd[, 1] < beta_srv_bd[, 3])
-mean(beta_srv_bd[, 1] < beta_srv_bd[, 2])
+tibble(
+  ctrl_lt_trt = mean(beta_srv_bd[, 1] < beta_srv_bd[, 3]), 
+  ctrl_lt_new = mean(beta_srv_bd[, 1] < beta_srv_bd[, 2])
+) %>%
+  mutate_all(~round(., 2)) %>%
+  write_csv("stan/survival_diffs.csv")
 
 
 
@@ -561,11 +565,10 @@ diff_ctrl_trt <- l_ctrl / l_trt
 
 # difference in first primary period
 primary_date_df$visit_date[1]
-quantile(diff_ctrl_trt[, 1], c(0.025, .5, .975))
-
-# difference in second primary period
-primary_date_df$visit_date[2]
-quantile(diff_ctrl_trt[, 2], c(0.025, .5, .975))
+quantile(diff_ctrl_trt[, 1], c(0.025, .5, .975)) %>%
+  tibble(diff = ., 
+         vals = c(0.025, .5, .975)) %>%
+  write_csv("stan/load_diffs.csv")
 
 
 # Abundance in the last primary period ------------------------------------
@@ -574,14 +577,15 @@ s_df %>%
   filter(t == max(t)) %>%
   complete(trt, t, iter, fill = list(n = 0)) %>%
   group_by(t, trt) %>%
-  summarize(lo = quantile(n, 0.025), 
+  summarize(lo = round(quantile(n, 0.025)), 
             med = median(n), 
-            hi = quantile(n, .975)) %>%
+            hi = round(quantile(n, .975))) %>%
   rename(primary_period = t) %>%
   as.data.frame %>%
   left_join(survey_df %>%
               group_by(primary_period) %>%
-              summarize(date = min(visit_date)))
+              summarize(date = min(visit_date))) %>%
+  write_csv("stan/2018_abund.csv")
 
 # abundance of controls on each primary period
 s_df %>%
@@ -595,7 +599,8 @@ s_df %>%
   as.data.frame %>%
   left_join(survey_df %>%
               group_by(primary_period) %>%
-              summarize(date = min(visit_date)))
+              summarize(date = min(visit_date))) %>%
+  write_csv("stan/ctrl_abund.csv")
 
 
 
@@ -618,8 +623,10 @@ full_join(rec_low_df, rec_hi_df) %>%
 Nsuper <- rstan::extract(m_fit, pars = "Nsuper")$Nsuper
 frac_observed <- length(unique(captures$pit_tag_id)) / Nsuper 
 hist(frac_observed)
-quantile(frac_observed, c(.025, .5, .975))
-
+quantile(frac_observed, c(.025, .5, .975)) %>%
+  tibble(p = round(., 2) * 100, 
+         vals = c(0.025, .5, .975)) %>%
+  write_csv("stan/pct_observed.csv")
 
 
 
