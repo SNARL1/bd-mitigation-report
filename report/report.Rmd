@@ -64,7 +64,7 @@ Reintroduction of frogs from such populations provides the best opportunity to r
 
 # Introduction {-}
 
-Emerging infectious diseases are increasingly common in wildlife [@daszak2000emerging; @cunningham2017one], often due to anthropogenic changes in the ecology of the host or pathogen.
+Emerging infectious diseases are increasingly common in wildlife, often due to anthropogenic changes in the ecology of the host or pathogen [@daszak2000emerging; @cunningham2017one].
 Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems [@ostfeld2008infectious; @scheele2019amphibian].
 Diseases of wildlife can also spill over to humans and domestic animals [@alexander2018ecology]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
 As such, the ability to control diseases in wildlife is critically important, but disease management is often difficult because wildlife diseases are relatively poorly described, many fewer intervention measures (e.g., vaccines) are available than for humans, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. As a result, available management strategies are mostly insufficient to mitigate the destructive effects of disease on wildlife.
@@ -72,8 +72,11 @@ As such, the ability to control diseases in wildlife is critically important, bu
 The amphibian disease chytridiomycosis is caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”). 
 This recently discovered pathogen [@berger1998chytridiomycosis; @longcore1999batrachochytrium] is thought to have originated in Asia [@ohanlon2018recent] and spread globally via human commerce [@schloegel2009magnitude]. 
 Bd is highly pathogenic to a wide range of amphibian species and, by one estimate, has caused the severe decline or extinction of at least 500 amphibian species [@scheele2019amphibian], and many more are predicted to be at risk [@rodder2009global]. 
-In an effort to reduce the impact of chytridiomycosis, several mitigations have been suggested, including host density reduction, vaccination, and treatment with probiotics or antifungal drugs [@woodhams2011mitigating]. 
-However, field tests of treatment effectiveness remain uncommon [@hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal; @bosch2020significant]. 
+In an effort to reduce the impact of chytridiomycosis, several mitigation measures have been suggested to increase the fraction of frogs surviving chytridiomycosis outbreaks, including treating frogs with antifungal agents [including use of drugs and augmentation of the skin microbiome with probiotics; @woodhams2011mitigating], treating the environment with antifungals to reduce the pool of infectious zoospores, and reducing the density of the host population [@garner2016mitigating]. Al
+However, field tests of treatment effectiveness in promoting host population persistence remain uncommon 
+
+
+[e.g., @hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal; @bosch2020significant; @fernandez2020situ]. 
 
 Mountain yellow-legged (“MYL”) frogs are emblematic of global amphibian declines, including those caused by Bd. 
 The mountain yellow-legged frog is a complex of two closely-related species, *Rana muscosa* and *Rana sierrae*, endemic to the mountains of California and adjacent Nevada, USA [@vredenburg2007concordant].
