@@ -5,11 +5,11 @@ author:
   - Maxwell B. Joseph^3^
   - Thomas C. Smith^1,2^ 
   - Ericka E. Hegeman^1,2^
-  - Vance T. Vredenburg^4,5^
-  - James E. Erdman, Jr.^6^
-  - Daniel M. Boiano^7^
-  - Andrea J. Jani^8^
-  - Cheryl J. Briggs^9^
+  - Vance T. Vredenburg^4^
+  - James E. Erdman, Jr.^5^
+  - Daniel M. Boiano^6^
+  - Andrea J. Jani^7^
+  - Cheryl J. Briggs^8^
 output:
   bookdown::pdf_document2:
     keep_tex: true
@@ -30,49 +30,23 @@ library(readr)
 library(kableExtra)
 ```
 
-^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, California, USA
+^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, California, 93546 USA, roland.knapp@ucsb.edu
 
-^2^ Earth Research Institute, University of California-Santa Barbara, California, USA
+^2^ Earth Research Institute, University of California-Santa Barbara, California, 93106 USA 
 
-^3^ Earth Lab, University of Colorado, Boulder, Colorado, USA
+^3^ Earth Lab, University of Colorado, Boulder, Colorado, 80303 USA
 
-^4^ Department of Biology, San Francisco State University, San Francisco, California, USA
+^4^ Department of Biology, San Francisco State University, San Francisco, California, 94132 USA
 
-^5^ Museum of Vertebrate Zoology, University of California-Berkeley, Berkeley, California, USA
+^5^ California Department of Fish and Wildlife, Bishop, California, 93514 USA
 
-^6^ California Department of Fish and Wildlife, Bishop, California, USA
+^6^ Sequoia and Kings Canyon National Parks, National Park Service, Three Rivers, California, 93271 USA
 
-^7^ Sequoia and Kings Canyon National Parks, National Park Service, Three Rivers, CA, USA
+^7^ Pacific Biosciences Research Center, University of Hawai'i at Mànoa, Honolulu, Hawai'i, 96822 USA
 
-^8^ Pacific Biosciences Research Center, University of Hawai'i at Mànoa, Honolulu, Hawai'i, USA
-
-^9^ Department of Ecology, Evolution, and Marine Biology, University of California-Santa Barbara, Santa Barbara, California, USA
-
-\newpage
+^8^ Department of Ecology, Evolution, and Marine Biology, University of California-Santa Barbara, Santa Barbara, California, 93106 USA
 
 \linenumbers
-
-# Author Contributions {-}
-
-Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
-
-Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
-
-Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
-
-Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
-
-Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, supported the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
-
-James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
-
-Daniel Boiano assisted with the LeConte treatment, facilitated the National Park Service permitting of all treatments conducted in Sequoia and Kings Canyon National Parks, and reviewed all drafts of the manuscript.
-
-Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zoospore pool study, provided the associated dataset, preliminary analyses, and wrote some of the associated text, and reviewed all drafts of the manuscript. 
-
-Cheryl Briggs provided modeling results that motivated the treatments, assisted with the design of treatments, and reviewed all drafts of the manuscript.  
-
-\newpage
 
 # Abstract {-}
 
@@ -86,18 +60,20 @@ We conclude that Bd mitigation efforts focused on populations that are Bd-naive 
 Instead, recovery efforts should utilize robust recovering populations whenever possible. 
 Reintroduction of frogs from such populations provides the best opportunity to reestablish extirpated mountain yellow-legged frog populations across their historical range. 
 
+*Keywords*: amphibian chytrid fungus, *Batrachochytrium dendrobatidis*, epizootic, population decline, antifungal treatment
+
 # Introduction {-}
 
 Emerging infectious diseases are increasingly common in wildlife [@daszak2000emerging; @cunningham2017one], often due to anthropogenic changes in the ecology of the host or pathogen.
 Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems [@ostfeld2008infectious; @scheele2019amphibian].
-Diseases of wildlife can also spill over to humans and domestic animals [@daszak2000emerging]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
+Diseases of wildlife can also spill over to humans and domestic animals [@alexander2018ecology]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
 As such, the ability to control diseases in wildlife is critically important, but disease management is often difficult because wildlife diseases are relatively poorly described, many fewer intervention measures (e.g., vaccines) are available than for humans, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. As a result, available management strategies are mostly insufficient to mitigate the destructive effects of disease on wildlife.
 
 The amphibian disease chytridiomycosis is caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”). 
 This recently discovered pathogen [@berger1998chytridiomycosis; @longcore1999batrachochytrium] is thought to have originated in Asia [@ohanlon2018recent] and spread globally via human commerce [@schloegel2009magnitude]. 
 Bd is highly pathogenic to a wide range of amphibian species and, by one estimate, has caused the severe decline or extinction of at least 500 amphibian species [@scheele2019amphibian], and many more are predicted to be at risk [@rodder2009global]. 
 In an effort to reduce the impact of chytridiomycosis, several mitigations have been suggested, including host density reduction, vaccination, and treatment with probiotics or antifungal drugs [@woodhams2011mitigating]. 
-However, field tests of treatment effectiveness remain rare [@hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal]. 
+However, field tests of treatment effectiveness remain uncommon [@hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal; @bosch2020significant]. 
 
 Mountain yellow-legged (“MYL”) frogs are emblematic of global amphibian declines, including those caused by Bd. 
 The mountain yellow-legged frog is a complex of two closely-related species, *Rana muscosa* and *Rana sierrae*, endemic to the mountains of California and adjacent Nevada, USA [@vredenburg2007concordant].
@@ -106,28 +82,29 @@ In the Sierra Nevada portion of the range, the primary causes of decline are the
 MYL frogs are highly susceptible to chytridiomycosis, and the arrival of Bd in a naive population typically results in rapid increases in Bd prevalence and load, and subsequent mass frog die-offs [@vredenburg2010dynamics]. 
 Such epizootics generally lead to the extirpation of the affected frog population, and hundreds of such extirpations have occurred in the past two decades as Bd spread across the Sierra Nevada. 
 
-In an effort to increase the probability of frog population persistence through Bd epizootics and boost the chances of future population recovery, numerous chytridiomycosis mitigation efforts have been tested in MYL frog populations during or soon after epizootics. 
-Here we report on the effectiveness of three types of treatment to reduce Bd infection intensity (i.e., "load") and thereby increase frog survival and population persistence: (1) treatment of tadpoles and metamorphs with the antifungal drug itraconazole [@garner2009using], (2) treatment of adults with itraconazole, and (3) treatment of metamorphs with *Janthinobacterium lividum*, a bacterium that inhabits amphibian skin and has antifungal properties [@brucker2008amphibian]. 
+To increase the probability of frog population persistence through Bd epizootics, during the period 2009-2018 we tested three types of  chytridiomycosis treatments in MYL frog populations during or soon after epizootics, with a goal of reducing Bd infection intensity (i.e., "load") and increasing frog survival and population persistence. 
+Treatments included (1) treatment of early life stages (tadpoles and recently metamorphosed subadults) with the antifungal drug itraconazole [@garner2009using], (2) treatment of adults with itraconazole, and (3) treatment of early life stages with *Janthinobacterium lividum*, a symbiotic bacterium on amphibian skin that has antifungal properties [@brucker2008amphibian]. 
 The motivation for each of these experiments was somewhat different as a result of increases over time in our understanding of responses by the amphibian innate and acquired immune systems to Bd infection. 
-These treatments were conducted in Kings Canyon National Park and the adjacent John Muir Wilderness (Inyo National Forest). 
 
 The first mitigation experiments were conducted in 2009-2010 and focused on tadpoles and metamorphs. 
 These life stages were available in large numbers during a Bd epizootic, in contrast to adults and juveniles that experience high and rapid mortality and disappear early in the epizootic [@vredenburg2010dynamics]. 
 In tadpoles, Bd only infects the keratinized portions of tadpole mouthparts and they are little affected. 
-However, at metamorphosis the skin rapidly keratinizes and is colonized by Bd [@mcmahon2015transition], and this whole-body infection then results in mortality of metamorphs as well. 
-Nonetheless, metamorphs are available for treatment for several weeks before they succumb to chytridiomycosis. 
+However, at metamorphosis the skin rapidly keratinizes and is colonized by Bd [@mcmahon2015transition], and this whole-body infection then results in subadult mortality. 
+Nonetheless, subadults are often available for treatment for several weeks before they succumb to chytridiomycosis. 
 In addition to these logistical considerations, during this relatively early period in our understanding of frog-Bd dynamics, we relied largely on model results indicating that treatment of a large proportion of a frog population with antifungal drugs could increase individual survival by reducing the density of infective zoospores in the host population or the habitat ("zoospore pool"; Briggs et al. 2010). 
 
-Early studies on the immune response by frogs against Bd suggested that the acquired immune system of adults was ineffective [@rosenblum2012only; @fites2013invasive]. 
-However, more recent discoveries indicate that at least some amphibians, including adult MYL frogs (Toothman et al., in preparation), can develop an acquired immune response that is protective against Bd [@mcmahon2014amphibians; @ellison2014fighting]. 
+Initial studies on the immune response by frogs against Bd suggested that the acquired immune system of adults was ineffective [@rosenblum2012only; @fites2013invasive]. 
+However, subsequent discoveries indicate that at least some amphibians, including adult MYL frogs, can develop an acquired immune response that is protective against Bd [@mcmahon2014amphibians; @ellison2015more]. 
 This suggests that antifungal treatments could work in concert with an immune response to increase frog survival during epizootics and facilitate the transition of affected populations to an enzootic state [@briggs2010enzootic]. 
 We hypothesized that the high mortality observed in MYL frogs during Bd epizootics is the result of rapid increases in Bd loads on frogs causing severe chytridiomycosis and subsequent mortality before the immune system can fully respond. 
-If true, treating adult frogs with antifungal drugs during an epizootic could slow the growth of Bd and allow the full development of acquired immunity, which would increase adult survival and facilitate population persistence in an enzootic state.
+If true, treating adult frogs with antifungal drugs during an epizootic could slow the growth of Bd and allow the full development of acquired immunity, which in turn could allow increased adult survival and population persistence. To test this possibility, we conducted antifungal treatments of adult frogs in 2015 and 2018. 
 
-Results from several studies suggest that some symbiotic bacteria inhabiting amphibian skin have antifungal properties [@harris2006amphibian; @bletz2013mitigating], and laboratory experiments indicated that their presence can alter frog-Bd dynamics and increase frog survival in the laboratory [@harris2009skin; @kueneman2016probiotic]. 
+NEED SEGUE HERE. Results from several studies suggest that some symbiotic bacteria inhabiting amphibian skin have antifungal properties [@harris2006amphibian; @bletz2013mitigating], and laboratory experiments indicate that their presence can alter frog-Bd dynamics and increase frog survival [@harris2009skin; @kueneman2016probiotic]. 
 In 2012, we tested this possibility in the wild with an experiment in which the skin microbiome of metamorphs was augmented with the bacterium *J. lividum*. 
 We assumed that probiotic bacteria might have the strongest effect on Bd-frog dynamics in reducing Bd colonization of relatively lightly infected frogs (and not in reducing Bd load on heavily infected frogs; R. Harris, personal communication). 
-Therefore, prior to exposing frogs to *J. lividum*, we first reduced their Bd loads with seven days of itraconazole treatment. 
+Therefore, prior to exposing frogs to *J. lividum*, we first reduced their Bd loads with antifungal drug treatment. 
+
+ADD FINAL PARAGRAPH STATING THAT ALL TREATMENTS FAILED TO ALLOW LONG-TERM POPULATION PERSISTENCE. HOWEVER, THE COMPREHENSIVE VIEW OF MITIGATION EFFECTIVENESS MAKES THE STUDY RESULTS NONETHELESS VALUABLE FOR UNDERSTANDING THE CONSEQUENCES OF TREATMENTS AND INSIGHTS INTO THE CAUSES OF FAILURE. 
 
 # Methods {-}
 
@@ -456,27 +433,27 @@ Therefore, despite the substantial reduction in Bd loads caused by the 2018 trea
 
 In the Dusy Basin microbiome augmentation experiment, prior to the itraconazole treatment, Bd loads were similar in subadults assigned to the control and treated groups (Figure 8: days = -7).
 Model results (Table S11) affirmed that pre-treatment Bd loads of the two groups were not different. 
-Itraconazole treatment reduced Bd loads almost four orders of magnitude (Figure 8: day 7 versus 0), and model results XXXXXX. 
+Itraconazole treatment reduced Bd loads almost four orders of magnitude (Figure 8: day -7 versus 0), and model results (Table S12) substantiated this important effect. 
 
 *J. lividum* exposure started on the day following the last day of itraconazole treatment, and on that day *J. lividum* concentrations on subadults assigned to the treated group were either zero or near-zero for all individuals (day 0; Figure 9). 
 Twelve days after the two *J. lividum* baths to which animals in the treated group were subjected, *J. lividum* concentrations on subadults were high, but unexpectedly the concentrations were similarly high in treated, control, and wild groups instead of only in the treated group (day 0 versus 12; Figure 9).
 This indicates that *J. lividum* exposure of animals in the treated group resulted in the effective transfer of *J. lividum* to other frogs in the pond that had not been treated with itraconazole or bathed experimentally in high concentrations of *J. lividum*. 
 However, over the following three months, *J. lividum* concentrations on subadults in all three groups declined to near baseline levels (Figure 9). 
 Formal comparison of *J. lividum* concentrations from day 12 to day 56 across all three groups wasn't possible due to the almost complete loss of control frogs by day 37 (n = 1) and day 56 (n = 0). 
-However, a model that included the treated and wild groups indicated an important negative effect of the number of days since *J. lividum* exposure on *J. lividum* concentration, but no effect of group or the (day x group) interaction term  (Table 5). 
+However, a model that included the treated and wild groups indicated an important negative effect of the number of days since *J. lividum* exposure on *J. lividum* concentration, but no effect of group or the (day x group) interaction term (Table 3). 
 Therefore, *J. lividum* concentrations declined over the 2-month period and at similar rates in both treated and wild frogs. 
 
 Following release of frogs in the treated group (itraconazole-treated and *J. lividum*-exposed) back into the study pond, their Bd loads increased steadily and reached pre-treatment levels after two months (Figure 8: day 56). 
 Due to the rapid loss of frogs in the control group, formal comparison of Bd loads from day 12 to day 56 across all three groups wasn't possible. 
-However, a model that included the treated and wild groups indicated that Bd loads increased from day 12 to day 56, and that Bd loads of wild frogs were higher than those of treated frogs (Table 6). 
-In addition, there was an important effect of the (days x group) interaction term, due to increased loads of treated frogs and relatively constant loads of wild frogs. 
+However, a model that included the treated and wild groups indicated that Bd loads increased from day 12 to day 56, and that Bd loads of wild frogs were higher than those of treated frogs (Table 4). 
+In addition, there was an important effect of the (days x group) interaction term, due to increasing loads of treated frogs versus relatively constant loads of wild frogs. 
 Together, these results indicate that the combined effect of itraconazole treatment and *J. lividum* exposure was ineffective in preventing the increase in Bd loads to pre-treatment levels. 
 Increased concentrations of *J. lividum* on control and wild frogs also had no obvious effect on Bd load. 
 
 During the three surveys of the study pond conducted in 2012, the percent of frogs in the treated and control groups that were recaptured declined, but the rate of decline was steeper in the control versus treated group (Figure 10). 
-Although no formal analysis is possible due to the relatively few sample points, the results suggest that the intraconazole-*J. lividum* treatment increased frog survival over two month period following the treatment. 
-Nonetheless, only a single experimental animal was captured during surveys in 2013, and no *R. sierrae* of any life stage was detected during surveys in 2014 and 2019. 
-The one experimental (i.e., toe-clipped) animal recaptured in 2013 was detected during a survey on 26-June, and was a member of the treated group. 
+Although no formal analysis is possible due to the relatively few sample points, the results suggest that the itraconazole-*J. lividum* treatment increased frog survival over the two month period following treatment. 
+However, in 2013 only a single experimental animal was captured during surveys, and no *R. sierrae* of any life stage was detected during surveys in 2014 and 2019. 
+The one experimental animal recaptured in 2013 was detected during a survey on 26-June, and was a member of the treated group. 
 In conclusion, the itraconazole-*J. lividum* exposure did not increase survival sufficiently to allow persistence of this population over the longer-term. 
 
 # Discussion {-}
@@ -594,6 +571,8 @@ kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
       footnote(general = "Model family is negative binomial", general_title = "") %>%
       kable_styling(latex_options = "scale_down")
 ```
+
+\clearpage
 
 ## Table 4 {-}
 
