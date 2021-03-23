@@ -37,6 +37,9 @@ group_date <- c("2012-07-12", "2012-07-19", "2012-07-31", "2012-08-25", "2012-09
 
 jliv_days <- tibble(group_date, days) %>% 
   mutate(group_date = as.Date(group_date))
+
+d <- d %>% 
+  left_join(jliv_days, by = "group_date")
 ```
 
 ### Exploration of full dataset 
@@ -52,7 +55,7 @@ d %>%
     geom_qq_line()
 
 ```
-* Bd load data are highly left-skewed and appears zero-inflated. 
+* Bd load data are highly left-skewed and appear zero-inflated. 
 
 #### General patterns of Bd load before and after itraconazole/Jliv treatment during summer 2012
 ```{r}
@@ -80,7 +83,9 @@ d %>%
 #### Create data set
 ```{r}
 d1  <- d %>% filter(group_date == "2012-07-12") %>%
-             mutate(expt_trt = as.factor(expt_trt))  
+             mutate(expt_trt = as.factor(expt_trt),
+                    days = as.factor(days),
+                    bd_load = as.integer(bd_load))  
 ```
 ```{r}
 # Check distribution of Bd_load
@@ -129,9 +134,10 @@ ppc_loo_pit_overlay(
 ### ANALYSIS #2: Effect of itraconazole treatment on loads (begin vs end of treatment)
 #### Create dataset
 ```{r}
-d2 <- d %>% filter(expt_trt == "treated" & 
-                      (group_date == "2012-07-12" | group_date == "2012-07-19")) %>%
-            mutate(group_date = as.factor(group_date))
+d2 <- d %>% filter(expt_trt == "treated" & (group_date == "2012-07-12" | group_date == "2012-07-19")) %>% 
+  mutate(expt_trt = as.factor(expt_trt),
+         days = as.factor(days),
+         bd_load = as.integer(bd_load))  
 ```
 ```{r}
 d2 %>% 
@@ -142,7 +148,7 @@ d2 %>%
 
 #### Fit negative binomial model
 ```{r}
-m2 <- brm(bd_load ~ group_date,
+m2 <- brm(bd_load ~ days,
           data = d2, 
           family = negbinomial())
 summary(m2)
@@ -153,7 +159,7 @@ conditional_effects(m2)
 
 #### Fit a zero-inflated negative binomial model
 ```{r}
-m2a <- brm(bd_load ~ group_date,
+m2a <- brm(bd_load ~ days,
           data = d2, 
           family = zero_inflated_negbinomial())
 summary(m2a)
@@ -183,7 +189,7 @@ ppc_loo_pit_overlay(
 
 #### Add group_date as a predictor of zero inflation
 ```{r}
-m2b <- brm(bf(bd_load ~ group_date, zi ~ group_date),
+m2b <- brm(bf(bd_load ~ days, zi ~ days),
            data = d2,
            family = zero_inflated_negbinomial())
 summary(m2b)
@@ -192,7 +198,7 @@ conditional_effects(m2b)
 ```
 * Itraconazole treatment increased the probability of bd_load = 0
 
-#### Compare fit of models with  and without zero inflation predictor
+#### Compare fit of models with and without zero inflation predictor
 ```{r}
 loo(m2a, m2b)
 ```
@@ -210,7 +216,7 @@ ppc_loo_pit_overlay(
   lw = weights(loo_m2b$psis_object))
 ```
 * PIT figure showed no improvement with addition of zi predictor. 
-* Addition of shape predictor to m2a indicated that predictor was relatively unimportant. Model m2a is best fit. 
+* Addition of shape predictor to m2a indicated that shape predictor was relatively unimportant. Model m2a is best fit. 
 
 ### ANALYSIS #3: Temporal patterns of Jliv concentration on treated, control, and wild subadults
 #### General patterns of Jliv load
@@ -246,11 +252,11 @@ d %>%
 #### Create dataset
 ```{r}
 d3 <- d %>%
-  left_join(jliv_days, by = "group_date") %>% 
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
+    frog_group = expt_trt,
+    frog_group = replace(frog_group, is.na(frog_group) & expt_or_wild == "wild", "wild")) %>% 
   filter(group_date > "2012-07-19") %>%
-  mutate(across(c("group_date", "expt_trt"), as.factor), 
+  mutate(frog_group = as.factor(frog_group), 
          jliv_ge = as.integer(jliv_ge))
 ```
 
@@ -263,7 +269,7 @@ summary(m3)
 plot(m3)
 conditional_effects(m3)
 ```
-* expt_trt not included as predictor in model because there is only 1 sample for control group on 2nd date and none on 3rd date 
+* frog_group not included as predictor in model because there is only 1 sample for control group on 2nd date and none on 3rd date 
 * Important effect of days on jliv_ge, with exponential decline of jliv_ge over time 
 
 #### LOO probability integral transform
@@ -281,7 +287,7 @@ ppc_loo_pit_overlay(
 
 #### Fit zero inflated negative binomial model
 ```{r}
-m3a <- brm(jliv_ge ~ group_date,
+m3a <- brm(jliv_ge ~ days,
           data = d3,
           family = zero_inflated_negbinomial())
 summary(m3a)
@@ -296,12 +302,12 @@ loo(m3, m3a)
 ```
 * No evidence of zero inflation (elpd_diff/se_diff < 1), use m3. 
 
-#### Fit model with date and treatment group as predictors, exclude control treatment because of small sample sizes
+#### Fit model with days and treatment group as predictors, exclude control treatment because of small sample sizes
 ```{r}
-d3a <- d3 %>% filter(expt_trt != "control")
+d3a <- d3 %>% filter(frog_group != "control")
 ```
 ```{r}
-m3b <- brm(jliv_ge ~ days * expt_trt,
+m3b <- brm(jliv_ge ~ days * frog_group,
           data = d3a,
           family = negbinomial())
 summary(m3b)
@@ -318,7 +324,6 @@ anno_text1 <- tibble(expt_trt = "control", jliv_ge = -0.57, lab = "text",
 ```
 ```{r}
 d %>%
-  left_join(jliv_days, by = "group_date") %>% 
   mutate(
     expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
   filter(group_date > "2012-07-12") %>% 
@@ -351,7 +356,7 @@ d3a %>%
 
 ### Fit negative binomial model
 ```{r}
-m4 <- brm(bd_load ~ days * expt_trt,
+m4 <- brm(bd_load ~ days * frog_group,
           data = d3a,
           family = negbinomial())
 summary(m4)
@@ -375,13 +380,14 @@ ppc_loo_pit_overlay(
 
 #### Fit zero inflated negbinomial model
 ```{r}
-m4a <- brm(bd_load ~ days * expt_trt,
+m4a <- brm(bd_load ~ days * frog_group,
           data = d3a,
           family = zero_inflated_negbinomial())
 summary(m4a)
 plot((m4a), ask = FALSE)
 plot(conditional_effects(m4a), ask = FALSE)
 ```
+* Some evidence of zero-inflation (zi CI does not include 0).
 
 #### Compare fit of models with and without zero inflation
 ```{r}
@@ -404,14 +410,14 @@ ppc_loo_pit_overlay(
 
 #### Add expt_trt as shape predictor
 ```{r}
-m4b <- brm(bf(bd_load ~ days * expt_trt, shape ~ expt_trt),
+m4b <- brm(bf(bd_load ~ days * frog_group, shape ~ expt_trt),
           data = d3a,
           family = zero_inflated_negbinomial())
 summary(m4b)
 plot((m4b), ask = FALSE)
 plot(conditional_effects(m4b), ask = FALSE)
 ```
-* expt_trt not an important predictor of shape (based on CI including 0). m4a is best. 
+* frog_group not an important predictor of shape (based on CI including 0). m4a is best. 
 
 #### Plot of Bd loads over time 
 ```{r}
@@ -420,7 +426,6 @@ anno_text2 <- tibble(expt_trt = "control", bd_load = -0.81, lab = "text",
 ```
 ```{r}
 d %>%
-  left_join(jliv_days, by = "group_date") %>% 
   mutate(
     expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>% 
   ggplot(aes(x = expt_trt, y = log10(bd_load + 1), fill = expt_trt)) + 
