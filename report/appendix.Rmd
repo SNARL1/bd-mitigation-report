@@ -1,6 +1,6 @@
 ---
 title: "Supporting Information"
-subtitle: "Effectiveness of actions to mitigate impacts of the amphibian chytrid fungus on mountain yellow-legged frog populations"
+subtitle: "Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog"
 author: "Roland A. Knapp, et al."
 output: 
   bookdown::pdf_document2:
@@ -28,6 +28,26 @@ library(kableExtra)
 ```
 
 \linenumbers
+
+# Author Contributions {-}
+
+Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
+
+Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
+
+Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
+
+Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+
+Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, supported the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
+
+James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
+
+Daniel Boiano assisted with the LeConte treatment, facilitated the National Park Service permitting of all treatments conducted in Sequoia and Kings Canyon National Parks, and reviewed all drafts of the manuscript.
+
+Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zoospore pool study, provided the associated dataset, preliminary analyses, and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+
+Cheryl Briggs provided modeling results that motivated the treatments, assisted with the design of treatments, and reviewed all drafts of the manuscript.  
 
 # Methods {-}
 
@@ -195,8 +215,6 @@ Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 ## Table S1 {-}
 
 Characteristics of all sites used in the antifungal treatment experiments
-
-\bigskip
 
 ```{r, include=FALSE}
 t_1 <- read_csv(file = here::here("out", "tables", "expt_sites.csv"))
