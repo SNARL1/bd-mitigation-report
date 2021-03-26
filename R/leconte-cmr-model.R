@@ -99,7 +99,8 @@ loads_2015 %>%
 assert_that(nrow(loads_2015) == length(unique(loads_2015$pit_tag_id)))
 assert_that(!any(is.na(loads_2015$category)))
 
-pal <- c("darkgrey", "#008a8a", "#8a0082")
+#pal <- c("darkgrey", "#008a8a", "#8a0082")
+pal <- c("forestgreen", "deepskyblue2", "darkgray")
 
 
 table(captures$category)
@@ -361,7 +362,8 @@ s_df <- s_post %>%
   count(trt, t, iter)
 
 
-pal <- c("darkgrey", "#008a8a", "#8a0082")
+#pal <- c("darkgrey", "#008a8a", "#8a0082")
+pal <- c("forestgreen", "deepskyblue2", "darkgray")
 
 s_plot <- s_df %>%
   arrange(iter, t, n) %>%
@@ -378,12 +380,13 @@ s_plot <- s_df %>%
   facet_wrap(~trt, nrow = 1) + 
   ylab("Live adults") + 
   theme_classic() + 
-  xlab("") +   
+  xlab("Year") +   
   scale_color_manual("Group", values = pal) + 
   theme_classic() +
   theme(legend.position = "none", 
         strip.background = element_blank(),
-        strip.text.x = element_blank()) + 
+        strip.text.x = element_blank(),
+        axis.text = element_text(color = "black")) + 
   scale_y_log10()
 s_plot
 
@@ -457,7 +460,8 @@ surv_plot <- surv_df %>%
       trt == "treated" ~ "Treated"
     ), 
     trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
-  ggplot(aes(10^(scaled_load * sd(bd_load_df$log_load) + mean(bd_load_df$log_load)) - 1, 
+  #  ggplot(aes(10^(scaled_load * sd(bd_load_df$log_load) + mean(bd_load_df$log_load)) - 1, 
+  ggplot(aes(scaled_load * sd(bd_load_df$log_load) + mean(bd_load_df$log_load), 
              p,
              group = iter,
              color = trt, 
@@ -475,10 +479,10 @@ surv_plot <- surv_df %>%
              trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental")),
              name = ifelse(location == "lower",
                            "Lower site", "Upper site")),
-           aes(x = bd_load, color = trt),
+           aes(x = log10(bd_load + 1), color = trt),
            alpha = .2) +
-  scale_x_log10() +
-  xlab("Bd load (copies)") + 
+  #  scale_x_log10() +
+  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
   ylab("Survival probability") + 
   scale_color_manual("Group", values = pal) + 
   scale_fill_manual("Group", values = pal) + 
@@ -487,7 +491,8 @@ surv_plot <- surv_df %>%
   theme(panel.grid.minor = element_blank(), 
         legend.position = "none", 
         strip.background = element_blank(),
-        strip.text.x = element_blank())
+        strip.text.x = element_blank(),
+        axis.text = element_text(color = "black"))
 surv_plot
 
 bd_ts <- bd_load_df %>%
@@ -500,27 +505,31 @@ bd_ts <- bd_load_df %>%
   trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental")),
   name = ifelse(location == "lower",
                 "Lower site", "Upper site")) %>%
-  ggplot(aes(visit_date, bd_load, color = trt)) + 
+  ggplot(aes(visit_date, log10(bd_load + 1), color = trt)) + 
   geom_point(alpha = .7, size = .5) + 
-  scale_y_log10() + 
+  #  scale_y_log10() + 
   geom_line(aes(group = pit_tag_id), size = .1) +
   facet_grid( ~ trt) + 
-  xlab("") + 
-  ylab("Bd load (copies)") +
+  xlab("Year") + 
+  ylab("Bd load\n(log10(copies + 1))") +
   theme_classic() +
   theme(legend.position = "none", 
-        panel.grid.minor = element_blank()) + 
-  scale_color_manual(values = pal, "Group")
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(color = "black")) + 
+#       axis.title.y = element_text(vjust = -3)) + 
+  
+  scale_color_manual(values = pal, "Group") 
 bd_ts
 
 
 # Save out the final figure
-p <- bd_ts + ggtitle("A") + 
-  s_plot + ggtitle("B") +
-  surv_plot + ggtitle("C") + 
+p <- bd_ts + ggtitle("a") + 
+  s_plot + ggtitle("b") +
+  surv_plot + ggtitle("c") + 
   plot_layout(ncol = 1, heights = c(1, .8, .8))
-dir.create("fig", showWarnings = FALSE)
-ggsave("fig/leconte-fig.png", plot = p, width = 6.5, height = 6)
+# dir.create("fig", showWarnings = FALSE)
+ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 6)
+
 
 
 
