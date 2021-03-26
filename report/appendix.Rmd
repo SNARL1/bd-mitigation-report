@@ -1,7 +1,16 @@
 ---
 title: "Supporting Information"
 subtitle: "Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog"
-author: "Roland A. Knapp, et al."
+author: 
+  - Roland A. Knapp
+  - Maxwell B. Joseph
+  - Thomas C. Smith 
+  - Ericka E. Hegeman
+  - Vance T. Vredenburg
+  - James E. Erdman, Jr.
+  - Daniel M. Boiano
+  - Andrea J. Jani
+  - Cheryl J. Briggs
 output: 
   bookdown::pdf_document2:
     keep_tex: TRUE
@@ -31,21 +40,21 @@ library(kableExtra)
 
 # Author Contributions {-}
 
-Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote the manuscript. 
+Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote most of the manuscript. 
 
-Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
+Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and associated post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
 
-Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
+Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-treatment surveys for multiple treatments, analyzed the results of the Treasure treatment and wrote some of the associated text, conducted preliminary analyses of the Barrett-2009, Dusy-2010, and Dusy-2012 treatments, and reviewed all drafts of the manuscript. 
 
-Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys for multiple treatments, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
-Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, supported the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
+Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, including supporting the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and qPCR analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
 
 James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
 
 Daniel Boiano assisted with the LeConte treatment, facilitated the National Park Service permitting of all treatments conducted in Sequoia and Kings Canyon National Parks, and reviewed all drafts of the manuscript.
 
-Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zoospore pool study, provided the associated dataset, preliminary analyses, and wrote some of the associated text, and reviewed all drafts of the manuscript. 
+Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zoospore pool study, provided the associated dataset, conducted preliminary analyses, and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
 Cheryl Briggs provided modeling results that motivated the treatments, assisted with the design of treatments, and reviewed all drafts of the manuscript.  
 
@@ -56,15 +65,12 @@ Cheryl Briggs provided modeling results that motivated the treatments, assisted 
 Pond water was filtered through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
 Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
 DNA was extracted using the DNEasy Blood and Tissue kit (Qiagen). 
-DNA extracts were diluted 1:50 for qPCR. 
 Quantitative PCR conditions and standards were as in [@jani2017epidemic], with a six-point standard curve. 
 For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
-It is common for technical replicates of environmental DNA samples to give variable results due to PCR inhibitors or low quantities of target DNA in samples [@mosher2018beyond]. 
-We therefore conducted tests to establish criteria for calling samples Bd-positive or Bd-negative. 
-We ran six negative controls (water filter samples from a Bd-naïve pond) on two separate replicate PCR runs, for a  total of 12 PCR reactions, all of which returned Bd-negative data (0 false positive results out of 12 PCR reactions). 
-We also ran no template controls in triplicate on every PCR run, with no false positives. 
-Therefore, if a sample had at least one positive technical replicate we considered the sample to be positive and calculated the mean across technical replicates after dropping the presumed false negatives. 
-To minimize PCR inhibition, we diluted DNA extracts fifty-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
+To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
+It is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study
+Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (90 from samples collected before and 90 from samples collected after the itraconazole treatment), 49% had a Bd load = 0. 
+Because ponds were clearly Bd-positive, in the analysis of the effect of itraconazole treatment on the zoospore pool, we excluded all false-negative replicates.
 
 ## *Janthinobacterium lividum* qPCR assay {-}
 
@@ -460,15 +466,9 @@ kbl(dusy2012_m2a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
 
 ## Figure S1 {-}
 
-```{r figa1, echo=FALSE, fig.cap=""}
-knitr::include_graphics(here::here("out", "figures", "leconte-20052015-bdload.png"))
+```{r figS1, echo=FALSE, fig.cap=""}
+knitr::include_graphics(here::here("out", "figures", "dusy-2012-pens.jpg"))
 ```
 
-Temporal patterns of Bd infection in the LeConte study populations in the years prior to and the year of the treatment experiment. 
-For the lower and upper basins of the study area, Bd prevalence (upper panels) and load (lower panels; on a log~10~ + 1 scale) during the period 2005-2015.
-Estimates of average prevalence include Clopper-Pearson binomial 95% confidence intervals and sample sizes. Boxplot components are as in Figure 1. 
-Hollow dots overlying the Bd load boxplots represent the actual values (jittered) used to calculate the box plots. Units for Bd load are the number of ITS1 copies.
-
-\clearpage
-
+Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 microbiome augmentation experiment in Dusy Basin.  
 
