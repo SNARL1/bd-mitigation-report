@@ -8,7 +8,8 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
 
-surveys <- read_csv("data/leconte-20152018-surveys.csv")
+# Load capture data -------------------------------------------------------
+
 captures <- read_csv("data/leconte-20152018-captures.csv") %>%
   mutate(visit_date = visit_date, 
          pit_tag_id = as.character(pit_tag_ref))
@@ -19,6 +20,15 @@ grp_df <- distinct(captures, pit_tag_id, location, category)
 
 end_trt_load <- captures %>%
   filter(trt_period == "endtreat")
+
+captures %>%
+  group_by(category) %>%
+  summarize(length(unique(pit_tag_id)))
+
+
+# Load survey data --------------------------------------------------------
+
+surveys <- read_csv("data/leconte-20152018-surveys.csv")
 
 first_period <- surveys %>%
   group_by(location) %>%
@@ -78,6 +88,10 @@ assert_that(nrow(survey_df) == nrow(surveys))
 
 last_swab_date <- tibble(location = c("lower", "upper"), 
                          last_date = as.Date(c("2015-09-01", "2015-09-15")))
+
+
+
+# Clean end of treatment Bd load data ---------------------------------------
 
 loads_2015 <- captures %>%
   filter(trt_period == "pretreat") %>%
@@ -149,7 +163,7 @@ y_obs <- captures %>%
   )) %>%
   select(pit_tag_id, primary_period, secondary_period, y)
 
-n_aug <- round(1.0 * length(unique(captures$pit_tag_id)))
+n_aug <- round(1 * length(unique(captures$pit_tag_id)))
 M <- length(unique(captures$pit_tag_id)) + n_aug
 y_aug <- tibble(pit_tag_id = paste0("aug_", 1:n_aug))
 
@@ -211,6 +225,8 @@ trt_grp <- ifelse(is.na(trt_grp), "new", trt_grp)
 table(trt_grp)
 
 
+# Clean up Bd load data ---------------------------------------------------
+
 bd_load_df <- captures %>%
   left_join(survey_df) %>%
   full_join(loads_2015) %>% 
@@ -232,8 +248,8 @@ unk_bd_idx <- all_bd_idx %>%
 
 assert_that(nrow(unk_bd_idx) == nrow(all_bd_idx)-nrow(obs_bd_idx))
 
-# Format data for rstan ---------------------------------------------------
 
+# Format data for rstan ---------------------------------------------------
 
 stan_d <- list(M = M, 
                T = dim(Y)[2], 
@@ -257,16 +273,14 @@ stan_d <- list(M = M,
 
 # Fit models --------------------------------------------------------------
 
-
-
-# Full model
 m_init <- stan_model("stan/time-varying.stan")
 m_fit <- sampling(m_init, data = stan_d, 
-                  control = list(max_treedepth = 11, adapt_delta = 0.99))
+                  control = list(adapt_delta=0.99, max_treedepth=11))
 write_rds(m_fit, "stan/m_fit.rds")
-
+# m_fit <- read_rds("stan/m_fit.rds")
 
 # Check convergence -----------------------------------------------------------
+
 traceplot(m_fit)
 traceplot(m_fit, pars = c("beta_srv_bd", 
                           "beta_srv",
@@ -286,6 +300,8 @@ print(m_fit, pars = "mu_bd")
 print(m_fit, pars = "Nsuper")
 print(m_fit, pars = "initial_state_vec")
 
+plot(m_fit, pars = "pr_detect")
+
 # Bd effects 
 # 1: ctrl, 2: new, 3: treated
 plot(m_fit, pars = "bd_grp_adj")  # adjustment on expected load
@@ -299,8 +315,7 @@ traceplot(m_fit, pars = "Nsuper") +
 
 # Generating final graphics -----------------------------------------------
 
-
-# Visualize survival estimates
+# visualize survival estimates
 
 primary_date_df <- survey_df %>%
   mutate(secondary_period = ifelse(is.na(secondary_period), 0, secondary_period)) %>%
@@ -376,18 +391,17 @@ s_plot <- s_df %>%
   ), 
   trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
   ggplot(aes(visit_date, n, color = trt))  + 
-  geom_jitter(alpha = .006, size = .5, width = 10, height = 0) + 
+  geom_path(aes(group = iter), alpha = 0.006) +
+  geom_point(alpha = 0.01) + 
   facet_wrap(~trt, nrow = 1) + 
   ylab("Live adults") + 
-  theme_classic() + 
   xlab("Year") +   
   scale_color_manual("Group", values = pal) + 
   theme_classic() +
   theme(legend.position = "none", 
         strip.background = element_blank(),
         strip.text.x = element_blank(),
-        axis.text = element_text(color = "black")) + 
-  scale_y_log10()
+        axis.text = element_text(color = "black"))
 s_plot
 
 
@@ -487,7 +501,6 @@ surv_plot <- surv_df %>%
   scale_color_manual("Group", values = pal) + 
   scale_fill_manual("Group", values = pal) + 
   theme_classic() +
-  #theme_minimal() + 
   theme(panel.grid.minor = element_blank(), 
         legend.position = "none", 
         strip.background = element_blank(),
@@ -527,8 +540,9 @@ p <- bd_ts + ggtitle("a") +
   s_plot + ggtitle("b") +
   surv_plot + ggtitle("c") + 
   plot_layout(ncol = 1, heights = c(1, .8, .8))
-# dir.create("fig", showWarnings = FALSE)
-ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 6)
+dir.create("out/figures", showWarnings = FALSE, recursive = TRUE)
+ggsave("out/figures/leconte-multistate-results.png", plot = p, 
+       width = 6.5, height = 6)
 
 
 

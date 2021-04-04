@@ -113,14 +113,6 @@ transformed parameters {
     vector[T] pr_survive;
 
     for (i in 1:M) {
-      if (initial_state_known[i]) {
-        for (j in 1:4) {
-          gam[1, j] = initial_state[i] == j;
-        }
-      } else {
-        gam[1, ] = pr_initial_state;
-      }
-      
       for (t in 1:T) {
         pr_survive[t] = inv_logit(
           mu_srv
@@ -154,12 +146,21 @@ transformed parameters {
         ps[t, 4, 4] = 1;
       }
 
-      for (t in 2:T) { // primary periods
+      for (t in 1:T) { // primary periods
         for (k in 1:4) { // state
           for (kk in 1:4) { // previous state
-            acc[kk] = gam[t - 1, kk] * ps[t, kk, k];
+            if (t == 1) {
+              if (initial_state_known[i]) {
+                acc[kk] = initial_state[i] == kk;
+              } else {
+                acc[kk] = pr_initial_state[kk];
+              }
+            } else {
+              acc[kk] = gam[t - 1, kk];
+            }
+            acc[kk] *= ps[t, kk, k];
             for (j in 1:J[t]) {
-              acc[kk] = acc[kk] * po[t, k, Y[i, t, j]];
+              acc[kk] *= po[t, k, Y[i, t, j]];
             }
           }
           gam[t, k] = sum(acc);
@@ -205,15 +206,29 @@ generated quantities {
 
 
   {
+    real acc[4];
+    vector[4] gam[T];
     vector[4] ps[T, 4];
     vector[T] pr_survive;
+    matrix[T, 4] forward;
+    vector[4] tmp;
+
     for (i in 1:M) {
       for (t in 1:T) {
         pr_survive[t] = inv_logit(
-          + mu_srv
+          mu_srv
           + beta_srv[trt_grp[i]]
           + beta_srv_bd[trt_grp[i]] * load[i, t]);
-        
+      }
+
+      // s = 1 :: alive upper
+      // s = 2 :: alive lower
+      // s = 3 :: not recruited
+      // s = 4 :: dead
+      // transition matrix entries [s(t+1) | s(t)]
+      // first index (rows): s(t)
+      // second index (columns): s(t + 1)
+      for (t in 1:T) {
         ps[t, 1, 1] = pr_survive[t] * (1 - pr_move_to_lower);
         ps[t, 1, 2] = pr_survive[t] * pr_move_to_lower;
         ps[t, 1, 3] = 0;
@@ -231,18 +246,43 @@ generated quantities {
         ps[t, 4, 3] = 0;
         ps[t, 4, 4] = 1;
       }
-      
+
+      for (t in 1:T) { // primary periods
+        for (k in 1:4) { // state
+          for (kk in 1:4) { // previous state
+            if (t == 1) {
+              if (initial_state_known[i]) {
+                acc[kk] = initial_state[i] == kk;
+              } else {
+                acc[kk] = pr_initial_state[kk];
+              }
+            } else {
+              acc[kk] = gam[t - 1, kk];
+            }
+            acc[kk] *= ps[t, kk, k];
+            for (j in 1:J[t]) {
+              acc[kk] *= po[t, k, Y[i, t, j]];
+            }
+          }
+          gam[t, k] = sum(acc);
+        }
+        forward[t, ] = gam[t, ]';
+      }
+  
+      // backward sampling
+      s[i, T] = categorical_rng(forward[T, ]' / sum(forward[T]));
+      for(t_rev in 1:(T - 1)) {
+        int t = T - t_rev;
+        int tp1 = t + 1;
+        tmp = forward[t,]' .* to_vector(ps[tp1, , s[i, tp1]]);
+        s[i, t] = categorical_rng(tmp / sum(tmp));
+      }
       if (initial_state_known[i]) {
         s[i, 1] = initial_state[i];
-      } else {
-        s[i, 1] = categorical_rng(pr_initial_state);
       }
-      for (t in 2:T) {
-        s[i, t] = categorical_rng(to_vector(ps[t, s[i, t - 1], ]));
-      }
-    }
+    } // end loop over individuals
+  } // end temporary scope
 
-  }
   {
     int al[M, T];
     int ever_alive[M];
