@@ -176,7 +176,7 @@ We treat the field experiment in 2015 as the first primary period, for which sta
 For example, if individual $i$ was captured and released at the upper site, then we know that $s_{i, t} = 1$. 
 Initial states are not known for non-experimental animals, which could have been alive at either site (states 1 or 2), or in the not recruited class (state 3). 
 Note that we are only interested in modeling the state and capture histories of animals that might have been alive. 
-We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution, which assigns equal prior density to each initial state.
+We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution for non-experimental frogs, which assigns equal prior density to each initial state.
 
 ### Bd load model {-}
 
@@ -193,7 +193,7 @@ Expected Bd load was modeled as a function of treatment, primary period, and ind
 
 $$z_{i, t} = \mu_t + \beta_{\text{trt}[i]} + \epsilon_i,$$
 
-\noindent where $\mu_t$ is a time-varying intercept, $\beta_{\text{trt}[i]}$ is an adjustment for the treatment group of individual $i$ (denoted $\text{trt}[i])$ to account for potential differences in mean Bd loads between treated, control, and non-experimental animals, and $\epsilon_i$ is an individual-level adjustment.
+\noindent where $\mu_t$ is a time-varying intercept, $\beta_{\text{trt}[i]}$ is an adjustment for the treatment group of individual $i$ (denoted $\text{trt}[i])$ to account for differences in mean Bd loads between treated, control, and non-experimental animals, and $\epsilon_i$ is an individual-level adjustment.
 
 ### Prior distributions {-}
 
