@@ -1,4 +1,4 @@
-# Report describing all Bd mitigation efforts conducted in Sequoia-Kings Canyon National Parks 2000-2018
+# Report describing all Bd mitigation efforts conducted in Sequoia-Kings Canyon National Parks and Yosemite National Park 2009-2018
 Required deliverable under cooperative agreement number P19AC00789 (KRG04).
 
 Includes the following sections:
