@@ -395,7 +395,7 @@ s_plot <- s_df %>%
   geom_point(alpha = 0.01) + 
   facet_wrap(~trt, nrow = 1) + 
   ylab("Live adults") + 
-  xlab("Year") +   
+  xlab("Date") +   
   scale_color_manual("Group", values = pal) + 
   theme_classic() +
   theme(legend.position = "none", 
@@ -523,7 +523,7 @@ bd_ts <- bd_load_df %>%
   #  scale_y_log10() + 
   geom_line(aes(group = pit_tag_id), size = .1) +
   facet_grid( ~ trt) + 
-  xlab("Year") + 
+  xlab("Date") + 
   ylab("Bd load\n(log10(copies + 1))") +
   theme_classic() +
   theme(legend.position = "none", 
