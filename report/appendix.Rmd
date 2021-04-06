@@ -68,9 +68,10 @@ DNA was extracted using the DNEasy Blood and Tissue kit (Qiagen).
 Quantitative PCR conditions and standards were as in [@jani2017epidemic], with a six-point standard curve. 
 For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
 To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
-It is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study
+It is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
 Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (90 from samples collected before and 90 from samples collected after the itraconazole treatment), 49% had a Bd load = 0. 
 Because ponds were clearly Bd-positive, in the analysis of the effect of itraconazole treatment on the zoospore pool, we excluded all false-negative replicates.
+This resulted in one pond assigned to the treated group being dropped from the analysis, due to a lack of any Bd-positive replicates. 
 
 ## *Janthinobacterium lividum* qPCR assay {-}
 
