@@ -234,7 +234,7 @@ We sampled the zoospore pool before and after itraconazole treatments (July 23-2
 Water samples (six per pond) were collected by filtering water until filters clogged. 
 Bd loads on filters were quantified by analyzing three replicate subsamples using qPCR. 
 Additional details of the methods used are provided in Supporting Information. 
-The effect of frog treatments on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre-post = before/after the frog treatment period, sample_id included as a group-level effect to account for replicates). 
+The effect of frog treatments on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre_post = before/after the frog treatment period, sample_id included as a group-level effect to account for replicates). 
 
 ### Itraconazole treatment of adults {-}
 
@@ -394,7 +394,7 @@ Location and the (location x bd_load) interaction term were also unimportant.
 ```{r read-stan-results, include=FALSE}
 pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
 load_diff <- readr::read_csv(here::here("stan", "load_diffs.csv")) %>%
-  mutate(diff = round(diff))
+  dplyr::mutate(diff = round(diff))
 survival_diff <- readr::read_csv(here::here("stan", "survival_diffs.csv"))
 abund_2018 <- readr::read_csv(here::here("stan", "2018_abund.csv"))
 trt_2018 <- dplyr::filter(abund_2018, trt == "treated")
@@ -469,7 +469,21 @@ In conclusion, the itraconazole-*J. lividum* exposure did not increase survival 
 
 # Discussion {-}
 
-[e.g., @hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal; @bosch2020significant; @fernandez2020situ]. 
+The devastating impact of chytridiomycosis on amphibian populations worldwide [@scheele2019amphibian] has highlighted the urgent need to develop effective strategies to mitigate disease impacts in the wild following Bd emergence. 
+Strategies include those aimed at eliminating Bd (e.g., by disinfecting aquatic habitats and treating amphibians with antifungals), or facilitating host-pathogen coexistence via several potential mechanisms, including changes in host resistance or tolerance, adaptive immunity, or density-dependent transmission [@brannelly2021mechanisms].
+Affecting these changes might be possible by treating amphibians with antifungal agents, augmenting the amphibian microbiome with probiotics, or amphibian translocation and reintroduction [@garner2016mitigating]. 
+Although complete eradication of Bd from amphibians and the environment will rarely be feasible, in an isolated and simple ecosystem, treatment of all amphibians and chemical disinfection of aquatic habitats eliminated Bd over the long term [@bosch2015successful]. 
+Similar methods applied to a more complex system failed to achieve long-term eradication [@fernandez2020situ]. 
+Strategies that facilitate host-pathogen coexistence may be more universally applicable. 
+Direct treatment of larval or post-metamorphic frogs with antifungal agents has been attempted in several species, and generally produces short-term reductions in Bd prevalence or load [@geiger2017antifungal; @hudson2016situ; @hardy2015itraconazole] and associated increases in frog survival [@hudson2016situ]. However, in most cases, these effects disappear within weeks or months of treatment, with little effect on long-term population persistence [@hudson2016situ; but see @hardy2015itraconazole for a possible exception].
+Translocations and reintroductions that utilize amphibians from populations with a long history of Bd exposure and potential selection for more Bd resistant/tolerant genotypes also indicate some promise. 
+The translocation of frogs collected from recovering, Bd-infected populations resulted in the long-term reestablishment of an extirpated population [@joseph2018disease], but the success of such efforts may vary widely between sites and species [@joseph2018disease; @brannelly2016chytrid]. 
+Finally, laboratory experiments in which the frog skin microbiome was augmented with antifungal probiotics have demonstrated the potential of this method [@harris2009skin; @kueneman2016probiotic], but results from field trials are lacking. 
+
+Despite some notable successes, most Bd mitigation efforts conducted to date have failed to increase the long-term persistence and growth of affected amphibian populations [@garner2016mitigating].
+Nonetheless, such trials can provide important insights into host-Bd dynamics that generally cannot be gained from observational studies alone, including those related to life stage-specific outcomes and the role of adaptive immunity. 
+In turn, these insights may suggest improvements to future mitigation efforts. 
+In the current study, we conducted five Bd treatments in larval, subadult, and adult mountain yellow-legged frogs, including direct treatment of tadpoles and adults using the antifungal drug itraconazole, and one treatment using both itraconazole and microbiome augmentation with the bacterium *J. lividum*. 
 
 All of the itraconazole treatment experiments, including those with tadpoles, subadults, or adults, produced the desired short-term effect of substantially reducing Bd loads [@garner2009using; @jones2012treatment], often by two or more orders of magnitude. 
 In all experiments in which early life stages were treated (Barrett, Dusy), Bd loads remained suppressed during the 1-2 month period following itraconazole treatment, and the reduction in Bd load was associated with increased survival of subadults. 
