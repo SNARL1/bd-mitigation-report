@@ -249,7 +249,7 @@ The design of the treatment experiments in the lower and upper basins was nearly
 To simplify logistics, frogs in the treated group were captured during the first 2-3 days of the experiment, and frogs for the untreated (“control”) group were captured on the following day (day 3 or 4). 
 All frogs included in the study were adults, and were collected opportunistically. 
 Frogs that were visibly sick (as indicated by an impaired righting reflex) were excluded because these frogs were likely within hours of death. 
-In the lower basin, a total of 360 and 102 frogs were captured for the treated and control groups, respectively. 
+In the lower basin, a total of 359 and 102 frogs were captured for the treated and control groups, respectively. 
 In the upper basin, these totals were 206 and 74 frogs. 
 To meet our goal of completing frog capture and processing as quickly as possible (to minimize the introduction of additional confounding effects into the experiments), the number of adult frogs included in each experiment likely represented a relatively small proportion of those present. 
 
@@ -404,15 +404,16 @@ new_2018 <- dplyr::filter(abund_2018, trt == "new")
 ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
 ```
 
-Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1212 individuals captured were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
+Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1212 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
 Between frog release in 2015 and the final survey in 2018, three recaptured individuals moved between the two basins. All three were in the treated group and had moved from the upper to the lower basin. All three were included in counts of unique individuals in the basin in which they were captured.
 In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals. 
-<!-- 1212 vs. 2212 adults captured. Need to clarify what these numbers are referring to -->
 Of the 749 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 615 were not part of the original treatment experiment (“non-experimental” frogs). 
-These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
-In the upper basin, of the 89 unique frogs captured, 81 were in the treated group and eight were non-experimental. 
+In the upper basin, 89 unique frogs were captured, of which 81 were in the treated group and eight were non-experimental. 
 No control frogs were captured. 
-In summary, during the three year post-treatment period across both experiments, 51% of treated frogs and 2% of control frogs were recaptured. 
+In total, during the three year post-treatment period across both experiments, 54% of treated frogs and 1% of control frogs were recaptured. 
+The 618 <!-- updated number compared to above --> non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
+Frogs in this group spanned a broad range of sizes (40--75 mm, median = 50 mm), and 83% were larger than the 40--45 mm range that characterizes recent adult *R. sierrae* recruits.  
+In addition, all of these larger untagged frogs (> 45 mm) were captured in 2016, and all frogs captured thereafter were in the 40--45 mm range. 
 
 During the 2015 (during treatment) to 2018 period, Bd loads on untreated control frogs were substantially higher than on treated and non-experimental frogs (posterior probability = 1). 
 On average, loads of the control group were `r load_diff$diff[2]` (CI: `r load_diff$diff[1]` -- `r load_diff$diff[3]`) times higher than loads of the treated group (Figure 5a).
@@ -501,12 +502,20 @@ The suggestion from @hardy2015itraconazole that treated recently-metamorphosed *
 
 ## Itraconazole treatment of adults {-}
 
-In contrast to the relatively short-lived effects of treatment of early life stages, the two itraconazole treatment experiments in LeConte that focused on adults resulted in effects on Bd load and frog survival that were evident throughout the three-year duration of the study. 
-Specifically, the reduced Bd loads of treated animals at the end of the treatment period in 2015 were maintained during the 2016-2018 post-treatment period, and were similar to those of adults in populations characterized by enzootic frog-Bd dynamics [@joseph2018disease; @briggs2010enzootic; @knapp2011nowhere] (to allow comparison between zoospore equivalents (ZE) and ITS copies: 1 ZE = 60 copies (Joseph and Knapp 2018)). 
-In addition, survival of control frogs was near zero for the entire range of Bd load values that characterized this group (3.6--8.2, median = 7.2), but higher and relatively constant across the range of Bd loads of treated frogs (0--7.6, median = 4.0).
-Therefore, treated frogs appeared both more resistant to and tolerant of Bd infection, consistent with treated frogs having developed an effective adaptive immune response against Bd [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians]. 
-However, despite this extended period of reduced Bd loads and increased frog survival, recruitment of new animals into the adult population was notably lacking. 
-CHECK TO MAKE SURE NO RECRUITS WERE CAPTURED, MENTION THAT THIS WAS NOT DUE TO A LACK OF SUCCESSFUL REPRODUCTION WHICH WAS PRESENT IN ALL POST-TREATMENT YEARS BASED ON VES. LOOK UP VES RESULTS TO CONFIRM. CONSISTENT WITH LOW SURVIVAL OF SUBADULTS IN THE PRESENCE OF BD INFECTION, AS SEEN IN THE BARRETT-DUSY TREATMENT EXPERIMENTS. 
+In contrast to the relatively short-lived effects when early life stages were treated, the two itraconazole treatment experiments in LeConte that focused on adults caused changes to Bd load and frog survival that persisted throughout the three-year duration of the study. 
+Specifically, Bd loads on adults were substantially reduced by treatment in 2015, and these reduced loads were maintained throughout the 2016-2018 post-treatment period and were associated with increased frog survival.
+Bd loads on treated adults were similar to those of adults in populations characterized by enzootic frog-Bd dynamics and in which frogs are persisting over the long-term [@joseph2018disease; @briggs2010enzootic; @knapp2011nowhere] (to allow comparison between zoospore equivalents (ZE) and ITS copies: 1 ZE = 60 copies (Joseph and Knapp 2018)).
+<!-- Compare survival with that of persistent populations: Skelton, etc. -->
+
+The increased survival of treated frogs was associated with increased resistance against Bd infection (as indicated by lower loads of treated frogs (0--7.6, median = 4.0) than control frogs (3.6--8.2, median = 7.2)), but the results also suggest that treated frogs also had higher tolerance of Bd infection. 
+For example, although treated frogs had lower loads than control frogs throughout the post-treatment period, Bd load distributions for frogs in the two groups nonetheless overlapped substantially. 
+In this region of overlap (3.6--7.6), survival probability was near zero for control frogs, but was higher and relatively constant (~ 0.5) <!-- update this --> for treated frogs. 
+This higher survival is consistent with increased tolerance of Bd infection in treated frogs, and along with increased resistance, suggestive of treated frogs having mounted an effective adaptive immune response against Bd [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians]. 
+
+Despite this extended period of reduced Bd loads and increased frog survival, the adult population declined in each of the post-treatment years, and few treated frogs remained by 2018. 
+This was likely due to both relatively low survival (compared to other enzootic populations<!-- update as necessary -->) and limited recruitment. 
+We counted hundreds of tadpoles and subadults during VES conducted in 2016, 2017, and 2018 (maximum counts per year: 614, 2434, and 480, respectively), but detected relatively few new recruits during the same period. Of the 102 untagged frogs we captured that had sizes typical of new recruits (40--45 mm), 91 were tagged in 2016, nine in 2017, and two in 2018. 
+This low recruitment of new adults despite large numbers of early life stages is typical of enzootic *R. sierrae* populations and is likely a consequence of high chytridiomycosis-caused mortality of frogs during and soon after metamorphosis [@joseph2018disease, and results from Barrett and Dusy treatments described above].
 
 DISCUSS CAVEATS ASSOCIATED WITH HIGHER LOADS OF CONTROL FROGS AT BEGINNING OF TREATMENT, UNEXPECTED SURVIVAL OF UNTREATED NON-EXPERIMENTAL FROGS. 
 
