@@ -391,17 +391,19 @@ s_plot <- s_df %>%
   ), 
   trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
   ggplot(aes(visit_date, n, color = trt))  + 
-  geom_path(aes(group = iter), alpha = 0.006) +
-  geom_point(alpha = 0.01) + 
+  geom_jitter(alpha = .006, size = .5, width = 10, height = 0) + 
   facet_wrap(~trt, nrow = 1) + 
+  scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   ylab("Live adults") + 
+  theme_classic() + 
   xlab("Date") +   
   scale_color_manual("Group", values = pal) + 
   theme_classic() +
   theme(legend.position = "none", 
         strip.background = element_blank(),
         strip.text.x = element_blank(),
-        axis.text = element_text(color = "black"))
+        axis.text = element_text(color = "black")) + 
+  scale_y_log10()
 s_plot
 
 
@@ -496,11 +498,13 @@ surv_plot <- surv_df %>%
            aes(x = log10(bd_load + 1), color = trt),
            alpha = .2) +
   #  scale_x_log10() +
-  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
+  #  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
+  xlab("Bd load") +
   ylab("Survival probability") + 
   scale_color_manual("Group", values = pal) + 
   scale_fill_manual("Group", values = pal) + 
   theme_classic() +
+  #theme_minimal() + 
   theme(panel.grid.minor = element_blank(), 
         legend.position = "none", 
         strip.background = element_blank(),
@@ -523,17 +527,16 @@ bd_ts <- bd_load_df %>%
   #  scale_y_log10() + 
   geom_line(aes(group = pit_tag_id), size = .1) +
   facet_grid( ~ trt) + 
+  scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   xlab("Date") + 
-  ylab("Bd load\n(log10(copies + 1))") +
+  ylab("Bd load") +
+  #  ylab(expression("Bd load"~(log[10]~("copies + 1")))) +
   theme_classic() +
   theme(legend.position = "none", 
         panel.grid.minor = element_blank(),
         axis.text = element_text(color = "black")) + 
-#       axis.title.y = element_text(vjust = -3)) + 
-  
-  scale_color_manual(values = pal, "Group") 
+  scale_color_manual(values = pal, "Group")
 bd_ts
-
 
 # Save out the final figure
 p <- bd_ts + ggtitle("a") + 
