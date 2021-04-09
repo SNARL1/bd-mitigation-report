@@ -7,7 +7,7 @@ output: none
 Add required packages
 ```{r message = FALSE}
 library(tidyverse)
-library(readr)
+library(lubridate)
 ```
 
 Read in data
@@ -62,6 +62,21 @@ cmr1 %>% inner_join(move, by = c("pit_tag_ref")) %>%
   arrange(pit_tag_ref, visit_date) %>% View()
 ```
 
+Sizes of newly-tagged frogs: older adults or new recruits?
+```{r}
+cmr2 %>% filter(tag_new == "TRUE") %>% count()
+
+cmr2 %>% filter(tag_new == "TRUE" & !is.na(length)) %>% 
+  summarize(median(length), min(length), max(length))
+
+cmr2 %>% filter(tag_new == "TRUE" & length <= 45) %>% 
+  mutate(year = year(ymd(visit_date))) %>% 
+  count(year)
+
+cmr2 %>% filter(tag_new == "TRUE" & !is.na(length)) %>% 
+  ggplot(aes(x = length)) +
+    geom_histogram(binwidth = 1, col = "black")
+```
 
 
 
