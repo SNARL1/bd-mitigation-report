@@ -403,9 +403,11 @@ ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
 ```
 
 During the three year post-treatment period across both experiments, 51% of treated frogs and 2% of control frogs were recaptured. 
-In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals. 
-Between frog release in 2015 and the final survey in 2018, three recaptured individuals moved between the two basins. All three were in the treated group and had moved from the upper to the lower basin. All three were included in counts of unique individuals in the basin in which they were captured.
-Of the 749 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 615 were not part of the original treatment experiment (“non-experimental” frogs). 
+In CMR surveys conducted during 2016-2018, a total of 2208 adult frogs were captured, representing 831 unique individuals. 
+Between frog release in 2015 and the final survey in 2018, seven recaptured individuals moved between the two basins. 
+All seven were in the treated group and had moved from the upper to the lower basin. 
+These individuals were included in counts of unique individuals in the basin in which they were captured.
+Of the 745 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 611 were not part of the original treatment experiment (“non-experimental” frogs). 
 These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
 In the upper basin, of the 89 unique frogs captured, 81 were in the treated group and eight were non-experimental. 
 No control frogs were captured. 
