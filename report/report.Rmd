@@ -91,7 +91,7 @@ All study populations were Bd-naive in the years prior to the Bd epizootic and s
 The first itraconazole treatments were conducted in 2009 and 2010, and focused on early life stages. 
 These two experiments were motivated by contemporaneous empirical and modeling results that suggested that reducing Bd transmission rates by treating a large proportion of a frog population could increase host survivorship and facilitate a transition from epizootic to enzootic Bd dynamics [@vredenburg2010dynamics; @briggs2010enzootic]. 
 <!-- MJ: I think we could add some detail here to make a stronger connection between the briggs 2010 pnas paper and the focus on early life stages here. e.g., is there something worth mentioning here about the zoospore pool, or trying to target a large fraction of the population that would point to treatments focused on non-adult life stages? -->
-Early life stages of amphibians have immune systems that appear relatively ineffective against Bd [@rollins1998metamorphosis; @grogan2018review], but adults of at least some species, including MYL frogs, can develop adaptive immune defenses that may be partially protective [@ellison2015more; @grogan2018evolution; @knapp2016large]. 
+Early life stages of amphibians have immune systems that appear relatively ineffective against Bd [@rollins1998metamorphosis; @grogan2018review], but adults of at least some species, including MYL frogs, can develop adaptive immune defenses that may be at least partially protective [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians]. 
 
 In adults, antifungal treatments could work in parallel with adaptive immunity to increase survival during epizootics and facilitate the transition of affected populations to an enzootic state. 
 Under this scenario, the high mortality observed in MYL frogs during Bd epizootics could be the result of rapid increases in Bd loads on frogs causing severe chytridiomycosis and subsequent mortality before adaptive immune defenses are fully developed. 
@@ -200,13 +200,15 @@ A total of 977 tadpoles and 65 subadults were treated and released back into the
 In the control populations, animals were captured on a single day (one population per day during August 2--4), swabbed, held in a pen until capturing was complete, and then released. 
 Swabs were collected from a total of 75 tadpoles and 23 subadults. 
 To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond monthly in August and September 2009, and in July, August, and September 2010. 
+In treated populations, given that we were unable to capture all animals for treatment, animals swabbed during the post-treatment period likely included a mix of treated and untreated individuals. 
 
 The Dusy experiment was identical in most respects to the Barrett experiment. During July 24--26, we captured as many animals as possible from the ponds assigned to the treated group and placed them in pens. 
 Daily itraconazole treatments began on July 27 and lasted through August 2, resulting in seven days of treatment for all animals. 
 Swabs were collected from a subset of animals from the ponds assigned to the treated group on July 27 before treatment began, and after the final treatment on August 2. 
 A total of 3707 tadpoles and 125 subadults were treated. 
 Animals in control populations were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults). 
-We conducted follow-up VES in each pond monthly in August and September 2010, and July and August 2011.
+We conducted follow-up VES in each pond monthly in August and September 2010, and July and August 2011. 
+As with the Barrett treatment, animals swabbed in treated populations during the post-treatment period likely included a mix of treated and untreated individuals. 
 
 Our analysis of the data from the experiments focused on two questions: During the one-year period following the treatments, did itraconazole treatment influence (1) Bd loads and (2) survival of treated animals? 
 <!-- I'm changing the wording a bit here to better match descriptions in subsequent paragraph topic sentences -->
@@ -234,7 +236,7 @@ We sampled the zoospore pool before and after itraconazole treatments (July 23-2
 Water samples (six per pond) were collected by filtering water until filters clogged. 
 Bd loads on filters were quantified by analyzing three replicate subsamples using qPCR. 
 Additional details of the methods used are provided in Supporting Information. 
-The effect of frog treatments on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre-post = before/after the frog treatment period, sample_id included as a group-level effect to account for replicates). 
+The effect of frog treatments on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre_post = before/after the frog treatment period, sample_id included as a group-level effect to account for replicates). 
 
 ### Itraconazole treatment of adults {-}
 
@@ -247,7 +249,7 @@ The design of the treatment experiments in the lower and upper basins was nearly
 To simplify logistics, frogs in the treated group were captured during the first 2-3 days of the experiment, and frogs for the untreated (“control”) group were captured on the following day (day 3 or 4). 
 All frogs included in the study were adults, and were collected opportunistically. 
 Frogs that were visibly sick (as indicated by an impaired righting reflex) were excluded because these frogs were likely within hours of death. 
-In the lower basin, a total of 360 and 102 frogs were captured for the treated and control groups, respectively. 
+In the lower basin, a total of 359 and 102 frogs were captured for the treated and control groups, respectively. 
 In the upper basin, these totals were 206 and 74 frogs. 
 To meet our goal of completing frog capture and processing as quickly as possible (to minimize the introduction of additional confounding effects into the experiments), the number of adult frogs included in each experiment likely represented a relatively small proportion of those present. 
 
@@ -347,7 +349,7 @@ Formal assessment of the effect of treatment on survival was also not possible d
 In the Barrett and Dusy experiments, immediately before itraconazole treatments began, Bd loads of animals in ponds assigned to the treated and control groups were similar (Figure 1a: Days = "-1 to 5"; Figure 1b: Days = "0-2"). 
 Model results (Table S3) confirmed that Bd load did not differ between treatment groups. In addition, basin had a weak effect (loads were lower in Dusy than Barrett), and the (treatment x basin) interaction term was unimportant, indicating that the patterns of Bd load between treatment groups were similar in both basins. 
 
-The treatments substantially reduced Bd loads of treated frogs (Figure 1a: Days = "-1 to 5" versus "6", Figure 1b: Days = "0-2" versus "6"). 
+The treatments reduced Bd loads of treated animals by 1.8 orders of magnitude in Barrett and 6.1 orders of magnitude in Dusy (Figure 1a: Days = "-1 to 5" versus "6", Figure 1b: Days = "0-2" versus "6"). 
 Model results (Table S4) substantiated the important effect of treatment period ("treatcat"; lower after treatment than before treatment). 
 In addition, important effects on Bd load were also evident for frog stage (lower in tadpoles than subadults), basin (higher in Dusy than Barrett), and the (basin x treatment_category) interaction term. 
 The importance of the interaction term indicated that loads were higher in Dusy than Barrett at the beginning of the treatment, but lower in Dusy than Barrett at the end of treatment (Figure 1). 
@@ -394,7 +396,7 @@ Location and the (location x bd_load) interaction term were also unimportant.
 ```{r read-stan-results, include=FALSE}
 pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
 load_diff <- readr::read_csv(here::here("stan", "load_diffs.csv")) %>%
-  mutate(diff = round(diff))
+  dplyr::mutate(diff = round(diff))
 survival_diff <- readr::read_csv(here::here("stan", "survival_diffs.csv"))
 abund_2018 <- readr::read_csv(here::here("stan", "2018_abund.csv"))
 trt_2018 <- dplyr::filter(abund_2018, trt == "treated")
@@ -402,19 +404,22 @@ new_2018 <- dplyr::filter(abund_2018, trt == "new")
 ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
 ```
 
-During the three year post-treatment period across both experiments, 51% of treated frogs and 2% of control frogs were recaptured. 
-In CMR surveys conducted during 2016-2018, a total of 2208 adult frogs were captured, representing 831 unique individuals. 
+Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
 Between frog release in 2015 and the final survey in 2018, seven recaptured individuals moved between the two basins. 
 All seven were in the treated group and had moved from the upper to the lower basin. 
 These individuals were included in counts of unique individuals in the basin in which they were captured.
+In CMR surveys conducted during 2016-2018, a total of 2208 adult frogs were captured, representing 831 unique individuals. 
 Of the 745 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 611 were not part of the original treatment experiment (“non-experimental” frogs). 
-These non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
-In the upper basin, of the 89 unique frogs captured, 81 were in the treated group and eight were non-experimental. 
-No control frogs were captured. 
-Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1212 individuals captured were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
+In the upper basin, 89 unique frogs were captured, of which 81 were in the treated group and eight were non-experimental. 
+No control frogs were captured in the upper basin. 
+In total, during the three year post-treatment period across both experiments, 54% of treated frogs and 1% of control frogs were recaptured. 
+The 618 <!-- updated number compared to above --> non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
+Frogs in this group spanned a broad range of sizes (40--75 mm, median = 50 mm), and 83% were larger than the 40--45 mm range that characterizes recent adult *R. sierrae* recruits.  
+In addition, all of these larger untagged frogs (> 45 mm) were captured in 2016, and all frogs captured thereafter were in the 40--45 mm range. 
 
-During the 2015 (post-treatment) to 2018 period, Bd loads on untreated control frogs were substantially higher than on treated and non-experimental frogs (posterior probability = 1). 
+During the 2015 (during treatment) to 2018 period, Bd loads on untreated control frogs were substantially higher than on treated and non-experimental frogs (posterior probability = 1). 
 On average, loads of the control group were `r load_diff$diff[2]` (CI: `r load_diff$diff[1]` -- `r load_diff$diff[3]`) times higher than loads of the treated group (Figure 5a).
+<!-- Given that only 2 control frogs were recaptured following release in 2015, the higher Bd loads described here are due primarily to higher Bd loads in the control group prior to release. This is also shown in Figure 4. Given that this not an outcome of the experiment and is described previously, providing additional details here seems redundant. Consider focusing solely on recaptured control frogs. Or in above description, compare only Bd loads between control and treated frogs at time of release in 2015. --> 
 The two recaptured control frogs were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 5a). 
 Bd load dynamics of the treated and non-experimental groups from 2016 to 2018 were similar. 
 Importantly, the reduced loads of the treated group after the 2015 treatment period were maintained in subsequent years (Figure 5a). 
@@ -422,7 +427,8 @@ Importantly, the reduced loads of the treated group after the 2015 treatment per
 Overall, the LeConte adult population declined in abundance from 2015 to 2018, with the most rapid declines in the control group (Figure 5b). 
 Between the end of the treatments in 2015 and the first surveys of 2016, the number of animals surviving in the control group dropped from 176 to `r ctrl_abund$med[ctrl_abund$primary_period == 2]` (CI: `r ctrl_abund$lo[ctrl_abund$primary_period == 2]` -- `r ctrl_abund$hi[ctrl_abund$primary_period == 2]`). 
 By the end of the summer in 2016, the posterior median for the number of surviving control animals was `r ctrl_abund$med[ctrl_abund$primary_period == 4]` (CI: `r ctrl_abund$lo[ctrl_abund$primary_period == 4]` -- `r ctrl_abund$hi[ctrl_abund$primary_period == 4]`). 
-Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = `r survival_diff$ctrl_lt_trt` and `r survival_diff$ctrl_lt_new`, for control versus treated, and control versus non-experimental, respectively; Figure 5C), consistent with control animals being less tolerant of Bd infection. 
+Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = `r survival_diff$ctrl_lt_trt` and `r survival_diff$ctrl_lt_new`, for control versus treated, and control versus non-experimental, respectively; Figure 5c). 
+This was the case despite considerable overlap in Bd loads between the control and treated/nonexperimental groups (Figure 5a, 5c). 
 Nonetheless, despite the treatment, by 2018 the study populations had declined to few remaining adults. 
 In the last primary period of 2018, the posterior median for the number of treated frogs alive was `r trt_2018$med` (CI: `r trt_2018$lo` -- `r trt_2018$hi`), `r new_2018$med` for non-experimental frogs (CI: `r new_2018$lo` -- `r new_2018$hi`), and zero for controls (CI: 0 -- 0). 
 <!-- TODO: add a statement about detection probabilities -->
@@ -436,7 +442,7 @@ Model results affirmed the important effect of treatment (Table S9).
 The number of itraconazole treatments a frog received ("days_inside") increased treatment effectiveness (Table S10). Initial Bd load ("capture_bdload_std") and the (days_inside x capture_bdload_std) interaction term were both unimportant (Table S10). 
 
 Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure 7).
-During the CMR survey, one non-experimental frog was also captured (Figure 7: treatment duration = "NA"). 
+One non-experimental frog was also captured. 
 Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure 6, 7). 
 There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure 7). 
 In surveys conducted in 2019 (the year following the treatment), we observed no *R. sierrae* of any life stage. 
@@ -471,33 +477,96 @@ In conclusion, the itraconazole-*J. lividum* exposure did not increase survival 
 
 # Discussion {-}
 
-[e.g., @hardy2015itraconazole; @bosch2015successful; @hudson2016situ; @geiger2017antifungal; @bosch2020significant; @fernandez2020situ]. 
+The devastating impact of chytridiomycosis on amphibian populations worldwide [@scheele2019amphibian] has highlighted the urgent need to develop effective strategies to mitigate disease impacts in the wild following Bd emergence. 
+Strategies include those aimed at eliminating Bd (e.g., by disinfecting aquatic habitats and treating amphibians with antifungals), or facilitating host-pathogen coexistence via several potential mechanisms, including changes in host resistance or tolerance, adaptive immunity, or density-dependent transmission [@brannelly2021mechanisms].
+Affecting these changes might be possible by treating amphibians with antifungal agents, augmenting the amphibian microbiome with probiotics, or amphibian translocation and reintroduction [@garner2016mitigating]. 
+Although complete eradication of Bd from amphibians and the environment will rarely be feasible, in an isolated and simple ecosystem, treatment of all amphibians and chemical disinfection of aquatic habitats eliminated Bd over the long term [@bosch2015successful]. 
+Similar methods applied to a more complex system failed to achieve long-term eradication [@fernandez2020situ]. 
+Strategies that facilitate host-pathogen coexistence may be more universally applicable. 
+Direct treatment of larval or post-metamorphic frogs with antifungal agents has been attempted in several species, and generally produces short-term reductions in Bd prevalence or load [@geiger2017antifungal; @hudson2016situ; @hardy2015itraconazole] and associated increases in frog survival [@hudson2016situ]. However, in most cases, these effects disappear within weeks or months of treatment, with little effect on long-term population persistence [@hudson2016situ; but see @hardy2015itraconazole for a possible exception].
+Translocations and reintroductions that utilize amphibians from populations with a long history of Bd exposure and potential selection for more Bd resistant/tolerant genotypes also indicate some promise. 
+The translocation of frogs collected from recovering, Bd-infected populations resulted in the long-term reestablishment of an extirpated population [@joseph2018disease], but the success of such efforts may vary widely between sites and species [@joseph2018disease; @brannelly2016chytrid]. 
+Finally, laboratory experiments in which the frog skin microbiome was augmented with antifungal probiotics have demonstrated the potential of this method [@harris2009skin; @kueneman2016probiotic], but results from field trials are lacking. 
 
-All of the itraconazole treatment experiments, including those with tadpoles, subadults, or adults, produced the desired short-term effect of substantially reducing Bd loads [@garner2009using; @jones2012treatment], often by two or more orders of magnitude. 
-In all experiments in which early life stages were treated (Barrett, Dusy), Bd loads remained suppressed during the 1-2 month period following itraconazole treatment, and the reduction in Bd load was associated with increased survival of subadults. 
-Unfortunately, this effect was short-lived. 
-Bd loads gradually increased following treatment, and within a year Bd loads returned to the high pre-treatment levels typical of those in post-epizootic populations.
-Correspondingly, within a year, subadult survival was reduced to zero or near-zero. 
-In addition, the short-term increase in subadult survival observed in the 1-2 months immediately following treatment did not translate into an increase in recruitment of new animals into the adult population. 
-As such, treatment of early life stages did not affect adult population size or the probability of population persistence, and all study populations were eventually extirpated. 
+Despite some notable successes, most Bd mitigation efforts conducted to date have failed to increase the long-term persistence and growth of affected amphibian populations [@garner2016mitigating].
+Nonetheless, such trials can provide important insights into host-Bd dynamics that generally cannot be gained from observational studies alone, including those related to life stage-specific outcomes and the role of adaptive immunity. 
+In turn, these insights may suggest improvements to future mitigation efforts. 
+In the current study, we conducted six Bd treatments in larval, subadult, and adult mountain yellow-legged frogs, including direct treatment of tadpoles and adults using the antifungal drug itraconazole, and one treatment using both itraconazole and microbiome augmentation with the bacterium *J. lividum*. 
 
-The itraconazole treatment experiment that focused on adults (LeConte) resulted in Bd load dynamics distinct from those observed in experiments focused on early life stages. 
-Specifically, the reduced Bd loads in treated animals were maintained over the three-year duration of the experiment. 
-Bd load and survival of treated adults during this period were similar to those of adults in populations that have recovered in the decades following Bd-caused epizootics and subsequent frog die-offs [@joseph2018disease].
-However, despite this extended period of reduced Bd loads and increased frog survival, recruitment of new animals into the adult population was notably lacking. 
+## Itraconazole treatment of early life stages {-}
 
-These observed differences in Bd dynamics in early-stage versus adult frogs are well-known in anurans [@bakar2016susceptibility; @grogan2018review], and are consistent with the idea that given sufficient time, adult MYL frogs can mount a robust acquired immune response against Bd. In turn, this immunity results in long-term suppression of Bd loads and increased adult survival. 
-However, we suggest that a similar immune response appears muted or absent in early life stage MYL frogs, as is the case in early life stages of anurans in general [@grogan2018review]. As a result, Bd loads of treated early-stage MYL frogs return to pre-treatment levels relatively quickly. 
-Together, these results provide a framework to understand the post-treatment Bd-frog dynamics we observed following antifungal treatment of adults. 
-This includes treatment-caused long-lasting reductions of Bd loads in adult frogs (due to acquired immunity), but high Bd loads of progeny at the subadult stage (because of an inability to mount an immune response) that lead to repeated recruitment failure and the eventual decline and extirpation of the population as treated adult frogs succumb to age-induced mortality. 
-As such, increasing the survival of young life stages during and after Bd-caused epizootics is clearly essential to the success of any efforts to mitigate the negative effects of Bd on amphibian populations, but as the results of our experiments indicate, this is difficult to accomplish due to the low immunocompetence of early life-stage frogs against Bd [@bakar2016susceptibility].  
+In the two itraconazole treatment experiments focused on early life stage *R. sierrae*, treated populations had reduced Bd loads during the summer in which the treatment was conducted.
+In addition, this reduction in Bd load was associated with increased survival of subadults (as measured by increased numbers of subadults counted during VES). 
+However, this effect of treatment was short-lived, and within a year Bd loads returned to the high levels characteristic of the control populations, and subadult survival was reduced to zero or near-zero. 
+In addition, the short-term increase in subadult survival did not translate into an increase in recruitment of new animals into the adult population, and all control and treated populations in both basins were eventually extirpated. 
+The disappearance of any treatment effect within one year is similar to that reported by @geiger2017antifungal, and is consistent with tadpoles and subadults having relatively low immunocompetence [@bakar2016susceptibility; @grogan2018review]. 
+The suggestion from @hardy2015itraconazole that treated recently-metamorphosed *Rana cascadae* had increased survival one year following treatment was not observed in either of the current treatments, perhaps indicative of variation in immunocompetence of this life stage between even closely-related species. 
 
-The potential constraints on population persistence and recovery posed by the subadult stage was an important motivation for us to conduct the *J. lividum* augmentation experiment. 
-Given the low immunocompetence of subadults against Bd, could addition of protective probiotics to the frog skin microbiome reduce frog susceptibility to chytridiomycosis during this vulnerable life stage and increase the survival of subadults to adulthood [@rebollar2020amphibian; @harris2009skin; @bletz2013mitigating]? 
+## Itraconazole treatment of adults {-}
+
+In contrast to the relatively short-lived effects when early life stages were treated, the two itraconazole treatment experiments in LeConte that focused on adults reduced Bd load and increased frog survival, and these changes persisted throughout the three-year post-treatment period of the study. 
+The reduced Bd loads on treated adults were similar to those of adults in populations characterized by enzootic frog-Bd dynamics and in which frogs are persisting over the long-term [@joseph2018disease; @briggs2010enzootic; @knapp2011nowhere] (to allow comparison between zoospore equivalents (ZE) and ITS copies: 1 ZE = 60 copies (Joseph and Knapp 2018)).
+In addition to this increased resistance against Bd infection, the results also suggest that treated frogs had higher tolerance of Bd infection. 
+Specifically, although treated frogs had lower loads than control frogs throughout the post-treatment period (Bd load of treated frogs: 0--7.6, median = 4.0; control frogs:  3.6--8.2, median = 7.2), Bd load distributions for frogs in the two groups nonetheless overlapped substantially. 
+In the region of overlap (3.6--7.6 copies), survival probability was near zero for control frogs, but was higher and relatively constant (~ 0.5) <!-- update this --> for treated frogs. 
+This higher survival is consistent with increased tolerance of Bd infection, and along with increased resistance, is suggestive of treated frogs having mounted an effective adaptive immune response against Bd [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians]. 
+
+<!-- Compare survival with that of persistent populations: Skelton, etc. -->
+
+Despite the extended period of reduced Bd loads and increased frog survival, the adult population declined in each of the post-treatment years, and by 2018 few treated frogs remained. 
+This was likely due to both relatively low adult survival (compared to other enzootic populations<!-- update as necessary -->) and limited recruitment of new adults. 
+We counted hundreds of tadpoles and subadults during VES conducted in 2016, 2017, and 2018 (maximum counts per year: 614, 2434, and 480, respectively), but captured relatively few new recruits during the same period. Of the 102 untagged frogs we captured that had sizes typical of new recruits (40--45 mm), 91 were tagged in 2016, nine in 2017, and two in 2018. 
+This low recruitment of new adults despite large numbers of early life stages is known from other enzootic *R. sierrae* populations, and is likely a consequence of high chytridiomycosis-caused mortality of frogs during and soon after metamorphosis [@joseph2018disease, and results from Barrett and Dusy treatments described above].
+
+Two results from the adult treatment experiments complicate the interpretation of the overall treatment effect. 
+First, at the beginning of the experiment, frogs in the control group were captured and processed 1--3 days after the frogs in the treated group. Because Bd loads in the population were increasing during this period, Bd loads on control frogs were somewhat higher than those on treated frogs. 
+This could have exaggerated the effect of treatment on subsequent frog survival by reducing the survival of control frogs relative to that of treated frogs.
+Although we acknowledge this potential confounding effect, two factors suggest that the initial differences in Bd loads between control and treated frogs were not the primary cause of the lower survival of control frogs. 
+The pre-treatment Bd loads of control and treated frogs were both very high, and given the relationship between estimated survival and Bd load shown in Figure 5c, survival of frogs over the range of pre-treatment Bd loads observed in both groups would be expected to be relatively constant and near zero. 
+In addition, as described previously, for the range of Bd load values that overlapped between control and treated frogs, treated frogs had much higher survival than control frogs.
+Both results suggest that the higher survival of treated frogs compared to control frogs during the post-treatment period was primarily due to the reduction in Bd loads caused by the treatment, and not the relatively small difference in pre-treatment Bd loads between control and treated frogs. 
+
+The second complicating result is the unexpectedly large number of non-experimental frogs captured during the post-treatment period. In *R. sierrae* and *R. muscosa* populations, Bd epizootics typically result in the mortality of all, or nearly all, adults within one year [@vredenburg2010dynamics]. 
+Based on this, if the treatment increased frog survival as predicted, then during the post-treatment period we would have captured primarily treated frogs, with control frogs and frogs that had not been included in the experiment (i.e., untreated "non-experimental" frogs) being rare or absent. 
+This outcome was observed in the upper basin, where during 2016-2018 we captured 81 treated, zero control, and eight non-experimental frogs. 
+Although this same pattern was true in the lower basin for treated and control frogs (132 and 2 captured, respectively), we also captured 615 non-experimental frogs. 
+Based on their sizes, most were older adults that had survived the epizootic, and the remainder were new recruits that had survived the epizootic as subadults. 
+During the 2016-2018 period, frog-Bd dynamics in this non-experimental group were similar to those of the treated frogs, suggesting that these frogs had also mounted an effective adaptive immune response, and as a result, subsequently showed increased Bd resistance/tolerance and relatively high survival.
+
+How these frogs survived the Bd epizootic is unknown. 
+In theory, treatment of a large fraction of the adult population could have reduced the pathogen pressure experienced by untreated frogs and increased their survival  [@briggs2010enzootic]. However, this would have increased the survival of control and non-experimental frogs, but only non-experimental frogs were captured in large numbers. 
+In addition, despite similar treatments conducted in both the upper and lower basins, we observed a large number of non-experimental frogs only in the lower basin. 
+Another possible cause of unexpectedly high survival of non-experimental frogs, and only in the lower basin, could be the higher habitat complexity that characterizes the lower basin. 
+The upper basin contains a single lake and its associated inlet and outlet streams, but no adjacent ponds, meadows, or springs that provide suitable *R. sierrae* habitat.
+As a result, the entire frog population is restricted to the site at which the epizootic occurred. 
+In contrast, the lower basin contains an unusually diverse array of aquatic habitats, including two lakes, four ponds, and associated streams, marshes, and springs, all of which harbored *R. sierrae* prior to the epizootic. 
+Although conjectural, it is possible that frogs in some of these associated habitats experienced lower pathogen pressure, lower Bd loads, and higher survival during the epizootic than frogs in the large populations inhabiting the lakes. 
+
+In conclusion, the two LeConte treatment experiments that focused on adult frogs both altered frog-Bd dynamics in a predictable way, including reducing Bd loads of treated versus control frogs and increasing frogs survival. 
+Unlike the short-term effects resulting from the treatment of early life stages, effects on adults persisted over the three-year post-treatment period, and were consistent with adults having mounted an effective adaptive immune response against Bd infection. 
+However, both experiments failed in their ultimate objective to facilitate the long-term persistence of the study populations in an enzootic state. 
+Despite evidence of successful reproduction in all post-treatment years, little recruitment of new adults occurred and few treated frogs remained after three years. 
+Therefore, even when treatment increases adult survival, the high susceptibility of early life stages to chytridiomycosis [@bakar2016susceptibility; @grogan2018review] will often limit future population growth and preclude long-term population persistence.
+
+The short-term effects of the Treasure treatment paralleled those of the LeConte treatment. 
+Treatment substantially reduced Bd loads, and loads remained low one month following treatment. However, despite 48% of the treated frogs being recaptured one month after treatment, no treated frogs were detected the next summer, indicating that treatment did not increase longer-term survival. 
+The relatively few frogs treated and the inability to conduct this treatment as an experiment, with treated and control groups, precludes strong conclusions, but the lack of frog survival one year after treatment indicates that the strong effects of treatment observed in the LeConte experiment are not universal, and may depend on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc].
+
+## Microbiome augmentation of subadult frogs {-}
+
+Results from the treatment experiments described above indicate that the effectiveness of treatments in changing long-term frog-Bd dynamics and facilitating populution persistence depends heavily on the survival of subadult frogs under post-epizootic conditions. 
+Given the low immunocompetence of subadults against Bd [@rollins1998metamorphosis; @grogan2018review], simply reducing Bd loads on subadults using itraconazole appears insufficient to keep loads sufficiently low over the longer term and increase survival. 
+The addition of protective probiotics to the frog skin microbiome may be a possible mean to reduce susceptibility to chytridiomycosis of this vulnerable life stage and increase the survival to adulthood [@rebollar2020amphibian; @harris2009skin; @bletz2013mitigating]. 
+In this application, the effectiveness of probiotics will depend critically on their ability to establish on the frog skin and maintain sufficiently high densities over the months or years of the subadult-to-adult transition. 
+
 The results from our *J. lividum* augmentation experiment suggest that simply bathing frogs in a solution of *J. lividum*, either as a stand-alone manipulation or following itraconazole treatment to reduce Bd load, is insufficient to provide the long-term protection from Bd infection required to increase subadult survival. 
-The rapid decline of *J. lividum* concentrations on frogs in our study population suggests that the frog microbiome is relatively resilient to changes in microbial species composition, and that this is likely to serve as an important impediment to efforts to augment the microbiome with species that might confer increased protection from Bd [@kung2014stability]. 
-However, an unexpected outcome of the *J. lividum* experiment was the rapid spread of *J. lividum* from experimental animals to frogs in the study pond at large. These wild frogs quickly developed *J. lividum* concentrations on their skin that were similar to those of animals that were bathed in a concentrated *J. lividum* solution for several hours over a two-day period. 
-Although the colonization of wild frogs by *J. lividum* did not appear to confer increased Bd resistance, it does indicate that if an effective probiotic against Bd infection is eventually found, its introduction into a frog population may be as simple as exposing a small number of frogs to the probiotic, and then using these exposed frogs to transmit the microbial agent to the entire frog population.
+The relatively rapid decline of *J. lividum* concentrations on frogs in our study population suggests that the frog microbiome is relatively resilient to changes in microbial species composition, and that this is likely to serve as an important impediment to efforts to augment the microbiome with species that might confer increased protection from Bd [@kung2014stability]. 
+In addition, even during the several weeks immediately following probiotic exposure when *J. lividum* concentrations were relatively high, Bd loads on itraconazole-treated subadults increased quickly and those of control and wild subadults appeared unaffected. 
+Therefore, the predicted protective effect of *J. lividum* on subadults was not realized. 
+However, an unexpected outcome of the *J. lividum* experiment was the rapid spread of *J. lividum* from exposed animals to subadults in the study pond at large. 
+Control and wild frogs quickly developed *J. lividum* concentrations on their skin that were similar to those of animals that were bathed in a concentrated *J. lividum* solution for several hours over a two-day period. 
+Whether *J. lividum* was transferred via direct frog-to-frog contact or through the water is unknown. 
+In conclusion, although the colonization of frogs by *J. lividum* did not appear to confer increased Bd resistance, its spread from *J. lividum*-exposed to unexposed frogs indicates that if an effective probiotic against Bd infection is ever identified, its introduction into a frog population may be relatively straight-forward.
 
 As described above, the itraconazole treatment of adults conducted in LeConte Basin was relatively effective in facilitating the transition of Bd-frog dynamics from an epizootic to enzootic state. 
 However, in contrast to the 47% of treated frogs at LeConte that survived overwinter until the first CMR survey the year after treatment, the Treasure Lake treatment of adults resulted in 0% overwinter survival. Why was the itraconazole treatment of adult frogs in the Treasure Lakes Basin notably less successful? 
@@ -513,6 +582,13 @@ Instead, whenever possible, such efforts should utilize populations that are rob
 Frogs in these populations have likely acquired important adaptations that decrease their Bd susceptibility [@knapp2016large] and that are essential for population establishment. 
 Every such population in SEKI, Yosemite, and on surrounding national forests should be used to the maximum extent possible as a source of frogs for future translocations and reintroductions.
 Although relatively few such populations exist, they provide the best known opportunity to reestablish extirpated MYL frog populations across their historical range. 
+
+
+These observed differences in Bd dynamics in early-stage versus adult frogs are well-known in anurans [@bakar2016susceptibility; @grogan2018review], and are consistent with the idea that given sufficient time, adult MYL frogs can mount a robust acquired immune response against Bd. In turn, this immunity results in long-term suppression of Bd loads and increased adult survival. 
+However, we suggest that a similar immune response appears muted or absent in early life stage MYL frogs, as is the case in early life stages of anurans in general [@grogan2018review]. As a result, Bd loads of treated early-stage MYL frogs return to pre-treatment levels relatively quickly. 
+Together, these results provide a framework to understand the post-treatment Bd-frog dynamics we observed following antifungal treatment of adults. 
+This includes treatment-caused long-lasting reductions of Bd loads in adult frogs (due to acquired immunity), but high Bd loads of progeny at the subadult stage (because of an inability to mount an immune response) that lead to repeated recruitment failure and the eventual decline and extirpation of the population as treated adult frogs succumb to age-induced mortality. 
+As such, increasing the survival of young life stages during and after Bd-caused epizootics is clearly essential to the success of any efforts to mitigate the negative effects of Bd on amphibian populations, but as the results of our experiments indicate, this is difficult to accomplish due to the low immunocompetence of early life-stage frogs against Bd [@bakar2016susceptibility].  
 
 # Acknowledgements {-}
 
@@ -672,8 +748,11 @@ Box plot components are as in Figure 1.
 knitr::include_graphics(here::here("out", "figures", "leconte-multistate-results.png"))
 ```
 Outcome of the LeConte treatment experiment with adult *R. sierrae*, showing results for control, treated, and non-experimental animals. 
-Time series from 2015 to 2018 of observed (A) Bd loads (on a log scale), with lines connecting sequential observations of tagged individuals, (B) posterior estimates for the number of live adults (abundance) in each group, where each point is a draw from the posterior, and (C) estimated relationships between Bd load and adult survival probability, with one line for each posterior draw. 
+Time series from 2015 to 2018 of observed (a) Bd loads, with lines connecting sequential observations of tagged individuals, (b) posterior estimates for the number of live adults (abundance) in each group, where each point is a draw from the posterior, and (c) estimated relationships between Bd load and adult survival probability, with one line for each posterior draw. 
 A rug along the x-axis displays the observed distributions of Bd load. 
+In (a) and (b), the date tick marks indicate January-01 of each year. 
+In (a) and (c), the Bd load axis shows Bd loads as log~10~(copies + 1). 
+
 
 \clearpage
 

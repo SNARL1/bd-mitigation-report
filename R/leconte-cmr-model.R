@@ -406,15 +406,17 @@ s_plot <- s_df %>%
   ggplot(aes(visit_date, n, color = trt))  + 
   geom_jitter(alpha = .02, size = 0.5, width = 10, height = 0) + 
   facet_wrap(~trt, nrow = 1) + 
+  scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   ylab("Live adults") + 
   theme_classic() + 
-  xlab("Year") +   
+  xlab("Date") +   
   scale_color_manual("Group", values = pal) + 
   theme_classic() +
   theme(legend.position = "none", 
         strip.background = element_blank(),
         strip.text.x = element_blank(),
-        axis.text = element_text(color = "black"))
+        axis.text = element_text(color = "black")) + 
+  scale_y_log10()
 s_plot
 
 
@@ -509,7 +511,8 @@ surv_plot <- surv_df %>%
            aes(x = log10(bd_load + 1), color = trt),
            alpha = .2) +
   #  scale_x_log10() +
-  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
+  #  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
+  xlab("Bd load") +
   ylab("Survival probability") + 
   scale_color_manual("Group", values = pal) + 
   scale_fill_manual("Group", values = pal) + 
@@ -545,15 +548,16 @@ bd_ts <- bd_plot_data %>%
   geom_line(aes(group = pit_tag_id), size = .1) +
   geom_point(data = bd_medians, color = "black", shape = 18) +
   facet_grid( ~ trt) + 
-  xlab("Year") + 
-  ylab("Bd load\n(log10(copies + 1))") +
+  scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
+  xlab("Date") + 
+  ylab("Bd load") +
+  #  ylab(expression("Bd load"~(log[10]~("copies + 1")))) +
   theme_classic() +
   theme(legend.position = "none", 
         panel.grid.minor = element_blank(),
         axis.text = element_text(color = "black")) + 
-  scale_color_manual(values = pal, "Group") 
+  scale_color_manual(values = pal, "Group")
 bd_ts
-
 
 # Save out the final figure
 p <- bd_ts + ggtitle("a") + 

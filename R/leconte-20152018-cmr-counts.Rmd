@@ -1,0 +1,84 @@
+---
+title: "Counts from LeConte experiment: 2015-2018"
+author: Roland Knapp
+output: none
+---
+
+Add required packages
+```{r message = FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+Read in data
+```{r message = FALSE}
+cmr1 <- read_csv(here::here("data", "leconte-20152018-captures.csv")) %>% as_tibble()
+cmr1 <- cmr1 %>% mutate(pit_tag_ref = as.character(pit_tag_ref))
+```
+
+Number of frogs at start of experiment
+```{r}
+cmr1 %>% filter(trt_period == "pretreat") %>% count(category)
+```
+
+Number of frogs released back into study lakes after treatment
+```{r}
+cmr1 %>% filter(trt_period == "pretreat" & trt_died == "FALSE") %>% count(location, category)
+```
+
+Number of frogs captured: 2016-2018
+```{r}
+cmr2 <- cmr1 %>% filter(visit_date > "2016-01-01")
+cmr2 %>% count()
+```
+
+Number of unique individual frogs captured: 2016-2018
+```{r}
+cmr2 %>% distinct(pit_tag_ref) %>% count()
+```
+
+Number of unique individuals captured by basin
+```{r}
+cmr2 %>% group_by(location) %>% distinct(pit_tag_ref) %>% count()
+```
+
+Number of unique individuals captured by treatment category
+```{r}
+cmr2 %>% group_by(category) %>% distinct(pit_tag_ref) %>% count()
+cmr2 %>% group_by(location, category) %>% distinct(pit_tag_ref) %>% count()
+```
+
+Number of individuals that moved between the upper and lower basins: 2015-2018
+```{r}
+move <- cmr1 %>% group_by(pit_tag_ref) %>% 
+  summarize(basin_count = n_distinct(location)) %>% 
+  filter(basin_count > 1) %>% View()
+```
+
+More details about individuals that moved between basins
+```{r}
+cmr1 %>% inner_join(move, by = c("pit_tag_ref")) %>% 
+  select(pit_tag_ref, site_id, visit_date, location, category) %>% 
+  arrange(pit_tag_ref, visit_date) %>% View()
+```
+
+Sizes of newly-tagged frogs: older adults or new recruits?
+```{r}
+cmr2 %>% filter(tag_new == "TRUE") %>% count()
+
+cmr2 %>% filter(tag_new == "TRUE" & !is.na(length)) %>% 
+  summarize(median(length), min(length), max(length))
+
+cmr2 %>% filter(tag_new == "TRUE" & length <= 45) %>% 
+  mutate(year = year(ymd(visit_date))) %>% 
+  count(year)
+
+cmr2 %>% filter(tag_new == "TRUE" & !is.na(length)) %>% 
+  ggplot(aes(x = length)) +
+    geom_histogram(binwidth = 1, col = "black")
+```
+
+
+
+
+
