@@ -8,27 +8,42 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
 
-# Load capture data -------------------------------------------------------
-
+surveys <- read_csv("data/leconte-20152018-surveys.csv")
 captures <- read_csv("data/leconte-20152018-captures.csv") %>%
   mutate(visit_date = visit_date, 
-         pit_tag_id = as.character(pit_tag_ref))
-mean(captures$bd_load == 0, na.rm = TRUE)
+         pit_tag_id = as.character(pit_tag_ref)) %>%
+  filter((trt_period == "pretreat" | is.na(trt_period)) & (trt_died == FALSE | is.na(trt_died)))
+length(unique(captures$pit_tag_id))
+
+# how many adults were captured between 2016-2018?
+captures %>%
+  filter(visit_date > as.Date("2015-12-31")) %>%
+  distinct(pit_tag_id)
+
+# if we restrict attention to the lower basin, what was the treatment group
+# composition of captured animals? 
+captures %>%
+  filter(location == "lower", visit_date > as.Date("2015-12-31")) %>%
+  distinct(pit_tag_id, category) %>%
+  count(category)
+
+
+# How many individuals are known to have moved
+nsite_df <- captures %>%
+  group_by(pit_tag_id) %>%
+  summarize(nsite = length(unique(location))) %>%
+  filter(nsite > 1)
+
+# Which direction did those individuals move
+captures %>%
+  filter(pit_tag_id %in% nsite_df$pit_tag_id) %>%
+  arrange(pit_tag_id, visit_date) %>%
+  split(.$pit_tag_id)
 
 grp_df <- distinct(captures, pit_tag_id, location, category)
 
-
 end_trt_load <- captures %>%
   filter(trt_period == "endtreat")
-
-captures %>%
-  group_by(category) %>%
-  summarize(length(unique(pit_tag_id)))
-
-
-# Load survey data --------------------------------------------------------
-
-surveys <- read_csv("data/leconte-20152018-surveys.csv")
 
 first_period <- surveys %>%
   group_by(location) %>%
@@ -88,10 +103,6 @@ assert_that(nrow(survey_df) == nrow(surveys))
 
 last_swab_date <- tibble(location = c("lower", "upper"), 
                          last_date = as.Date(c("2015-09-01", "2015-09-15")))
-
-
-
-# Clean end of treatment Bd load data ---------------------------------------
 
 loads_2015 <- captures %>%
   filter(trt_period == "pretreat") %>%
@@ -163,7 +174,7 @@ y_obs <- captures %>%
   )) %>%
   select(pit_tag_id, primary_period, secondary_period, y)
 
-n_aug <- round(1 * length(unique(captures$pit_tag_id)))
+n_aug <- round(1.0 * length(unique(captures$pit_tag_id)))
 M <- length(unique(captures$pit_tag_id)) + n_aug
 y_aug <- tibble(pit_tag_id = paste0("aug_", 1:n_aug))
 
@@ -225,8 +236,6 @@ trt_grp <- ifelse(is.na(trt_grp), "new", trt_grp)
 table(trt_grp)
 
 
-# Clean up Bd load data ---------------------------------------------------
-
 bd_load_df <- captures %>%
   left_join(survey_df) %>%
   full_join(loads_2015) %>% 
@@ -248,8 +257,8 @@ unk_bd_idx <- all_bd_idx %>%
 
 assert_that(nrow(unk_bd_idx) == nrow(all_bd_idx)-nrow(obs_bd_idx))
 
-
 # Format data for rstan ---------------------------------------------------
+
 
 stan_d <- list(M = M, 
                T = dim(Y)[2], 
@@ -272,17 +281,22 @@ stan_d <- list(M = M,
 
 
 # Fit models --------------------------------------------------------------
-
+# Note that this will raise Rhat warnings because there are some discrete 
+# parameters that have no posterior variance (e.g., states that are known)
+# without error.
+# Note also that this model will take ~8 hrs to fit on a 4 core i7 workstation.
 m_init <- stan_model("stan/time-varying.stan")
-m_fit <- sampling(m_init, data = stan_d, 
-                  control = list(adapt_delta=0.99, max_treedepth=11))
+m_fit <- sampling(m_init, data = stan_d,
+                  control = list(max_treedepth = 11, adapt_delta = 0.99))
 write_rds(m_fit, "stan/m_fit.rds")
+
 # m_fit <- read_rds("stan/m_fit.rds")
 
-# Check convergence -----------------------------------------------------------
 
+# Check convergence -----------------------------------------------------------
 traceplot(m_fit)
 traceplot(m_fit, pars = c("beta_srv_bd", 
+                          "beta_detect",
                           "beta_srv",
                           "initial_state_vec"))
 pairs(m_fit, pars = c("beta_srv_bd", "mu_srv"))
@@ -300,8 +314,6 @@ print(m_fit, pars = "mu_bd")
 print(m_fit, pars = "Nsuper")
 print(m_fit, pars = "initial_state_vec")
 
-plot(m_fit, pars = "pr_detect")
-
 # Bd effects 
 # 1: ctrl, 2: new, 3: treated
 plot(m_fit, pars = "bd_grp_adj")  # adjustment on expected load
@@ -315,7 +327,8 @@ traceplot(m_fit, pars = "Nsuper") +
 
 # Generating final graphics -----------------------------------------------
 
-# visualize survival estimates
+
+# Visualize survival estimates
 
 primary_date_df <- survey_df %>%
   mutate(secondary_period = ifelse(is.na(secondary_period), 0, secondary_period)) %>%
@@ -388,10 +401,10 @@ s_plot <- s_df %>%
     trt == "control" ~ "Control", 
     trt == "new" ~ "Non-experimental", 
     trt == "treated" ~ "Treated"
-  ), 
-  trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
+    ), 
+    trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
   ggplot(aes(visit_date, n, color = trt))  + 
-  geom_jitter(alpha = .006, size = .5, width = 10, height = 0) + 
+  geom_jitter(alpha = .02, size = 0.5, width = 10, height = 0) + 
   facet_wrap(~trt, nrow = 1) + 
   scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   ylab("Live adults") + 
@@ -512,7 +525,7 @@ surv_plot <- surv_df %>%
         axis.text = element_text(color = "black"))
 surv_plot
 
-bd_ts <- bd_load_df %>%
+bd_plot_data <- bd_load_df %>%
   arrange(pit_tag_id, visit_date) %>%
   mutate(trt = case_when(
     category == "control" ~ "Control", 
@@ -521,11 +534,19 @@ bd_ts <- bd_load_df %>%
   ), 
   trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental")),
   name = ifelse(location == "lower",
-                "Lower site", "Upper site")) %>%
-  ggplot(aes(visit_date, log10(bd_load + 1), color = trt)) + 
+                "Lower site", "Upper site"), 
+  load = log10(bd_load + 1))
+
+bd_medians <- bd_plot_data %>%
+  group_by(primary_period, trt) %>%
+  summarize(load = median(load), 
+            visit_date = min(visit_date))
+
+bd_ts <- bd_plot_data %>%
+  ggplot(aes(visit_date, load, color = trt)) + 
   geom_point(alpha = .7, size = .5) + 
-  #  scale_y_log10() + 
   geom_line(aes(group = pit_tag_id), size = .1) +
+  geom_point(data = bd_medians, color = "black", shape = 18) +
   facet_grid( ~ trt) + 
   scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   xlab("Date") + 
@@ -543,9 +564,8 @@ p <- bd_ts + ggtitle("a") +
   s_plot + ggtitle("b") +
   surv_plot + ggtitle("c") + 
   plot_layout(ncol = 1, heights = c(1, .8, .8))
-dir.create("out/figures", showWarnings = FALSE, recursive = TRUE)
-ggsave("out/figures/leconte-multistate-results.png", plot = p, 
-       width = 6.5, height = 6)
+# dir.create("fig", showWarnings = FALSE)
+ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 6)
 
 
 
@@ -656,5 +676,49 @@ quantile(frac_observed, c(.025, .5, .975)) %>%
 
 
 
+# Summarize survival on an annual basis -----------------------------------
 
+
+primary_period_yrs <- survey_df %>%
+  mutate(year = lubridate::year(visit_date)) %>%
+  distinct(primary_period, year)
+
+survival_summary <- s_post %>%
+  melt(varnames = c('iter', 'i', 'primary_period')) %>%
+  as_tibble %>%
+  mutate(trt_grp = trt_grp[i]) %>%
+  left_join(primary_period_yrs)
+
+n_iter_use <- 1000
+fs_annual_survival <- survival_summary %>%
+  # use a subset of iterations to avoid memory explosion
+  filter(iter %in% sample(1:max(survival_summary$iter), 
+                          size = n_iter_use, replace = FALSE)) %>%
+  group_by(i, trt_grp, year, iter) %>%
+  summarize(alive = any(value == 1) | any(value == 2), 
+            dead = any(value == 4)) %>%
+  group_by(iter, i, trt_grp) %>%
+  arrange(iter, i, year) %>%
+  mutate(survived = case_when(
+    alive & lead(alive) ~ TRUE, 
+    alive & lead(dead) ~ FALSE,
+    TRUE ~ NA)
+    ) %>% 
+  filter(!is.na(survived)) %>%
+  ungroup %>%
+  group_by(trt_grp, year, iter) %>%
+  summarize(pr_survive_to_next_year = mean(survived))
+
+fs_annual_survival_summary <- fs_annual_survival %>%
+  ungroup %>%
+  group_by(trt_grp, year) %>%
+  summarize(median_pr_survive_to_next_year = median(pr_survive_to_next_year),
+            lo = quantile(pr_survive_to_next_year, .025), 
+            hi = quantile(pr_survive_to_next_year, .975))
+write_csv(fs_annual_survival_summary, "out/fs_annual_survival_summary.csv")
+
+fs_annual_survival %>%
+  ggplot(aes(x = pr_survive_to_next_year, fill = trt_grp)) + 
+  geom_density(alpha = 0.3) + 
+  facet_wrap(~year, ncol = 1)
 

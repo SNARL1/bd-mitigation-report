@@ -404,12 +404,14 @@ new_2018 <- dplyr::filter(abund_2018, trt == "new")
 ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
 ```
 
-Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1212 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
-Between frog release in 2015 and the final survey in 2018, three recaptured individuals moved between the two basins. All three were in the treated group and had moved from the upper to the lower basin. All three were included in counts of unique individuals in the basin in which they were captured.
-In CMR surveys conducted during 2016-2018, a total of 2212 adult frogs were captured, representing 835 unique individuals. 
-Of the 749 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 615 were not part of the original treatment experiment (“non-experimental” frogs). 
+Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
+Between frog release in 2015 and the final survey in 2018, seven recaptured individuals moved between the two basins. 
+All seven were in the treated group and had moved from the upper to the lower basin. 
+These individuals were included in counts of unique individuals in the basin in which they were captured.
+In CMR surveys conducted during 2016-2018, a total of 2208 adult frogs were captured, representing 831 unique individuals. 
+Of the 745 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 611 were not part of the original treatment experiment (“non-experimental” frogs). 
 In the upper basin, 89 unique frogs were captured, of which 81 were in the treated group and eight were non-experimental. 
-No control frogs were captured. 
+No control frogs were captured in the upper basin. 
 In total, during the three year post-treatment period across both experiments, 54% of treated frogs and 1% of control frogs were recaptured. 
 The 618 <!-- updated number compared to above --> non-experimental frogs could have either survived the 2015 Bd epizootic as adults or recruited into the adult population after the epizootic. 
 Frogs in this group spanned a broad range of sizes (40--75 mm, median = 50 mm), and 83% were larger than the 40--45 mm range that characterizes recent adult *R. sierrae* recruits.  
