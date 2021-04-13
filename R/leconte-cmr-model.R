@@ -568,8 +568,6 @@ p <- bd_ts + ggtitle("a") +
 ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 6)
 
 
-
-
 # Group adjustments on Bd load --------------------------------------------
 # 1: control
 # 2: new
@@ -587,7 +585,6 @@ tibble(
 ) %>%
   mutate_all(~round(., 2)) %>%
   write_csv("stan/survival_diffs.csv")
-
 
 
 # Expected Bd load by primary period and group ----------------------------
@@ -649,7 +646,6 @@ s_df %>%
   write_csv("stan/ctrl_abund.csv")
 
 
-
 # Total number of recruits over the experimental period ------------
 
 full_join(rec_low_df, rec_hi_df) %>%
@@ -675,9 +671,7 @@ quantile(frac_observed, c(.025, .5, .975)) %>%
   write_csv("stan/pct_observed.csv")
 
 
-
 # Summarize survival on an annual basis -----------------------------------
-
 
 primary_period_yrs <- survey_df %>%
   mutate(year = lubridate::year(visit_date)) %>%
