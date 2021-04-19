@@ -141,77 +141,18 @@ d3 %>% ggplot(aes(x = bd_load)) +
 ```
 * Strong negative skew, zero-inflation isn't extreme
 
-### Fit negative binomial model
-```{r}
-m3 <- brm(bd_load ~ trt_died * location,
-          data = d3,
-          family = negbinomial())
-summary(m3)
-plot(m3)
-plot(conditional_effects(m3), ask = FALSE)
-```
-
-### Fit negative binomial model with shape predictors
-```{r}
-m3b <- brm(bf(bd_load ~ trt_died * location, 
-             shape ~ trt_died + location),
-          data = d3,
-          family = negbinomial())
-summary(m3b)
-plot((m3b), ask = FALSE)
-plot(conditional_effects(m3b), ask = FALSE)
-```
-* Effects of predictors are unchanged.
-
-#### Compare fit of models with and wo shape predictors
-```{r}
-loo3 <- loo(m3, save_psis = TRUE)
-loo3b <- loo(m3b, save_psis = TRUE)
-
-loo(m3, m3b)
-```
-* m3b has a better fit (diff ratio = 3.1), but see LOO-PIT results. Use simpler model, m3.
-
-#### LOO probability integral transform
-```{r}
-# for m3b
-yrep <- posterior_predict(m3b)
-ppc_loo_pit_overlay(
-  y = d3$bd_load, 
-  yrep = yrep,
-  lw = weights(loo3b$psis_object))
-
-# for m3
-yrep <- posterior_predict(m3)
-ppc_loo_pit_overlay(
-  y = d3$bd_load, 
-  yrep = yrep,
-  lw = weights(loo3$psis_object))
-```
-* LOO-PIT shows better fit of m3 - more uniform
-
-### Fit zero-inflated negative binomial model
-```{r}
-m3a <- brm(bd_load ~ trt_died * location,
-          data = d3,
-          family = zero_inflated_negbinomial())
-summary(m3a)
-plot((m3a), ask = FALSE)
-plot(conditional_effects(m3a), ask = FALSE)
-```
-* No evidence of zero-inflation
-
 ### Fit binary logistic regression model
 ```{r}
-d3a <- d3 %>% 
+d3 <- d3 %>% 
   mutate(lbd_load = log10(bd_load + 1))
-
-m4 <- brm(trt_died ~ lbd_load * location,
-          data = d3a,
+```
+```{r}
+m3 <- brm(trt_died ~ lbd_load * location,
+          data = d3,
           family = bernoulli())
-summary(m4)
-plot((m4), ask = FALSE)
-plot(conditional_effects(m4), ask = FALSE)
+summary(m3)
+plot((m3), ask = FALSE)
+plot(conditional_effects(m3), ask = FALSE)
 ```
 
 # CREATE PLOT
