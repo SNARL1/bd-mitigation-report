@@ -22,10 +22,10 @@ treasure_Bd <- read_csv(file = here::here("data", "treasure-captures-swabs.csv")
 d1  <- treasure_Bd %>% 
   select(visit_date, bd_load) %>%
   filter(visit_date > "2018-07-15" & visit_date < "2018-07-24") %>% 
-  mutate(treatcat = case_when(visit_date < "2018-07-23" ~ "before",
+  mutate(trt_period = case_when(visit_date < "2018-07-23" ~ "before",
                            visit_date == "2018-07-23" ~ "after"),
          bd_load = as.integer(bd_load),
-         treatcat = fct_relevel(treatcat, "before", "after"))
+         trt_period = fct_relevel(trt_period, "before", "after"))
 ```
 
 ### Distribution of Bd load data
@@ -37,7 +37,7 @@ d1 %>% ggplot(aes(x = bd_load)) +
 
 ### Fit negative binomial model
 ```{r}
-m1 <- brm(bd_load ~ treatcat,
+m1 <- brm(bd_load ~ trt_period,
           data = d1, 
           family = negbinomial())
 summary(m1)
@@ -59,7 +59,7 @@ ppc_loo_pit_overlay(
 
 ### Fit zero-inflated negative binomial model
 ```{r}
-m1a <- brm(bd_load ~ treatcat,
+m1a <- brm(bd_load ~ trt_period,
           data = d1, 
           family = zero_inflated_negbinomial())
 summary(m1a)

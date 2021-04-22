@@ -489,14 +489,12 @@ surv_plot <- surv_df %>%
       trt == "treated" ~ "Treated"
     ), 
     trt = fct_relevel(trt, c("Control", "Treated", "Non-experimental"))) %>%
-  #  ggplot(aes(10^(scaled_load * sd(bd_load_df$log_load) + mean(bd_load_df$log_load)) - 1, 
   ggplot(aes(scaled_load * sd(bd_load_df$log_load) + mean(bd_load_df$log_load), 
              p,
              group = iter,
              color = trt, 
              fill = trt)) + 
   geom_path(alpha = .02, size=.2) + 
-  #geom_ribbon(aes(ymin = lo, ymax = hi), color = NA, alpha = .5) + 
   facet_wrap(~trt) + 
   geom_rug(inherit.aes = FALSE,
            data = bd_load_df %>%
@@ -510,18 +508,13 @@ surv_plot <- surv_df %>%
                            "Lower site", "Upper site")),
            aes(x = log10(bd_load + 1), color = trt),
            alpha = .2) +
-  #  scale_x_log10() +
-  #  xlab(expression("Bd load"~(log[10]~("copies + 1")))) + 
   xlab("Bd load") +
   ylab("Survival probability") + 
   scale_color_manual("Group", values = pal) + 
   scale_fill_manual("Group", values = pal) + 
   theme_classic() +
-  #theme_minimal() + 
   theme(panel.grid.minor = element_blank(), 
         legend.position = "none", 
-        strip.background = element_blank(),
-        strip.text.x = element_blank(),
         axis.text = element_text(color = "black"))
 surv_plot
 
@@ -551,7 +544,6 @@ bd_ts <- bd_plot_data %>%
   scale_x_date(limits = as.Date(c("2015-01-01", "2018-08-15"))) +
   xlab("Date") + 
   ylab("Bd load") +
-  #  ylab(expression("Bd load"~(log[10]~("copies + 1")))) +
   theme_classic() +
   theme(legend.position = "none", 
         panel.grid.minor = element_blank(),
@@ -563,9 +555,10 @@ bd_ts
 p <- bd_ts + ggtitle("a") + 
   s_plot + ggtitle("b") +
   surv_plot + ggtitle("c") + 
-  plot_layout(ncol = 1, heights = c(1, .8, .8))
-# dir.create("fig", showWarnings = FALSE)
-ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 6)
+  plot_layout(ncol = 1, heights = c(1, 0.8, 1))
+
+# dir.create("figures", showWarnings = FALSE)
+ggsave("out/figures/leconte-multistate-results.png", plot = p, width = 6.5, height = 8)
 
 
 # Group adjustments on Bd load --------------------------------------------

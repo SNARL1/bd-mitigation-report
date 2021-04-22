@@ -141,9 +141,9 @@ d %>% select(basin, date_label, num_days, treatment, site_id, stage) %>%
 ```{r}
 d2 <- d %>%
   filter(date_label == "1_experiment" & treatment == "treated") %>%
-  mutate(treatcat = if_else(num_days < 6, "begin", "end"),
-         across(c("stage", "treatcat", "basin"), as.factor)) %>% 
-  select(basin, site_id, swab_id, treatment, treatcat, visit_date, date_label, num_days, stage, bd_load) %>%
+  mutate(trt_period = if_else(num_days < 6, "begin", "end"),
+         across(c("stage", "trt_period", "basin"), as.factor)) %>% 
+  select(basin, site_id, swab_id, treatment, trt_period, visit_date, date_label, num_days, stage, bd_load) %>%
   as_tibble()
 ```
 
@@ -153,26 +153,26 @@ d2 %>% ggplot(aes(x = bd_load)) +
   geom_histogram()
 ```
 ```{r}
-d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
+d2 %>% ggplot(aes(x = trt_period, y = log10(bd_load + 1))) +
   geom_boxplot() +
   facet_grid( ~ basin) +
   stat_n_text()
 ```
 ```{r}
-d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
+d2 %>% ggplot(aes(x = trt_period, y = log10(bd_load + 1))) +
   geom_boxplot() +
   facet_grid( ~ basin + site_id) +
   stat_n_text()
 ```
 ```{r}
-d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1))) +
+d2 %>% ggplot(aes(x = trt_period, y = log10(bd_load + 1))) +
   geom_boxplot() +
   facet_grid(stage ~ basin + site_id) +
   stat_n_text()
 ```
 ```{r}
 # alternative visualization
-d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1), color = stage)) +
+d2 %>% ggplot(aes(x = trt_period, y = log10(bd_load + 1), color = stage)) +
   geom_point(position = "jitter") +
   facet_grid(~ basin + site_id) +
   stat_n_text()
@@ -181,7 +181,7 @@ d2 %>% ggplot(aes(x = treatcat, y = log10(bd_load + 1), color = stage)) +
 * Treatment reduced loads in both basins, but in Dusy load was reduced more than in Barrett. More zeros as a result. 
 * Within a basin, sites showed similar patterns (as described above).
 * Faceting by life_stage and site_id indicated that many of the subadults swabbed at end of treatment started treatment as tadpoles. As a result, fewer subadults swabbed at beginning of treatment than at end. Only 11469 in Barrett had any subadults at beginning of treatment (and had very few tadpoles). 
-* Overall, results suggest model with treatcat * basin term, likely no need to include site_id as random effect. 
+* Overall, results suggest model with trt_period * basin term, likely no need to include site_id as random effect. 
 * Include stage in model to account for potential stage-specific differences in load.
 
 ### Fit negative binomial model with 3 population-level effects plus interaction term
@@ -190,7 +190,7 @@ d2 <- d2 %>%
   mutate(bd_load = as.integer(bd_load))
 ```
 ```{r}
-m2 <- brm(bd_load ~ stage + treatcat * basin, 
+m2 <- brm(bd_load ~ stage + trt_period * basin, 
           data = d2,
           family = negbinomial())
 summary(m2)
@@ -214,7 +214,7 @@ ppc_loo_pit_overlay(
 
 ### Fit zero-inflated negative binomial model
 ```{r}
-m2a <- brm(bd_load ~ stage + treatcat * basin, 
+m2a <- brm(bd_load ~ stage + trt_period * basin, 
           data = d2,
           family = zero_inflated_negbinomial())
 summary(m2a)
@@ -241,7 +241,7 @@ ppc_loo_pit_overlay(
 
 ### Add group effect (site_id) to negative binomial model
 ```{r}
-m2b <- brm(bd_load ~ stage + treatcat * basin + (1 | site_id), 
+m2b <- brm(bd_load ~ stage + trt_period * basin + (1 | site_id), 
            data = d2,
            family = negbinomial(), 
            control = list(adapt_delta = 0.99, max_treedepth = 20), 
@@ -268,15 +268,15 @@ ppc_loo_pit_overlay(
 
 ### Add predictors of shape parameter to negative binomial model
 ```{r}
-m2c <- brm(bf(bd_load ~ stage + treatcat * basin, 
-              shape ~ stage + treatcat + basin), 
+m2c <- brm(bf(bd_load ~ stage + trt_period * basin, 
+              shape ~ stage + trt_period + basin), 
            data = d2,
            family = negbinomial())
 summary(m2c)
 plot(m2c, ask = FALSE)
 plot(conditional_effects(m2c), ask = FALSE)
 ```
-* Adding all three predictors of shape (based on differences in bd_load variation between levels for all three) changed importance of predictors: state, treatcat, and basin all have important effects, as does treatcat*basin interaction.
+* Adding all three predictors of shape (based on differences in bd_load variation between levels for all three) changed importance of predictors: state, trt_period, and basin all have important effects, as does trt_period*basin interaction.
 
 #### Compute fit diagnostics
 ```{r}
@@ -483,50 +483,60 @@ ppc_loo_pit_overlay(
 * Deviation from uniformity increased relative to m3c. m3c is best model. 
 
 ### Create plots of Bd load over 1 year period of experiment for both basins
-#### Add labels for plotting
+#### Add x-axis (time) labels for plotting
 ```{r}
 d_plot <- d %>% 
   mutate(
-    date_label1 = case_when(basin == "barrett" & num_days == "-14" ~ "-14",
-                            basin == "barrett" & between(num_days, -1, 5) ~ "-1 to 5",
-                            basin == "barrett" & num_days == "6" ~ "6", 
-                            basin == "barrett" & between(num_days, 22, 23) ~ "22-23", 
-                            basin == "barrett" & between(num_days, 41, 42) ~ "41-42",
-                            basin == "barrett" & between(num_days, 365, 366) ~ "365-366",
-                            basin == "barrett" & between(num_days, 383, 384) ~ "383-384", 
-                            basin == "barrett" & between(num_days, 407, 408) ~ "407-408", 
-                            basin == "dusy" & between(num_days, -15, -14) ~ "-15 to -14", 
-                            basin == "dusy" & between(num_days, 0, 2) ~ "0-2", 
-                            basin == "dusy" & num_days == 6 ~ "6", 
-                            basin == "dusy" & between(num_days, 20, 21) ~ "20-21", 
-                            basin == "dusy" & between(num_days, 46, 47) ~ "46-47", 
-                            basin == "dusy" & between(num_days, 356, 357) ~ "356-357", 
-                            basin == "dusy" & between(num_days, 389, 392) ~ "389-392")) %>%
-  add_row(basin = "dusy", num_days = 407, date_label1 = "407-408", treatment = "control") %>% # dummy row to match the number of categories in barrett
-  add_row(basin = "dusy", num_days = 408, date_label1 = "407-408", treatment = "treated") %>% # dummy row to match the number of categories in barrett
-  select(site_id, basin, visit_date, num_days, date_label, date_label1, treatment, stage, bd_load)
+    date_label1 = ((num_days - 6)/7))
+
+d_plot <- d_plot %>% 
+  mutate(date_label2 = ceiling(date_label1))
+```
+```{r}
+d_plot <- d_plot %>% 
+  mutate(
+    date_label3 = case_when(basin == "barrett" & num_days == -14 ~ -3,
+                            basin == "barrett" & between(num_days, -1, 5) ~ -1,
+                            basin == "barrett" & num_days == 6 ~ 0, 
+                            basin == "barrett" & between(num_days, 22, 23) ~ 3, 
+                            basin == "barrett" & between(num_days, 41, 42) ~ 6,
+                            basin == "barrett" & between(num_days, 365, 366) ~ 52,
+                            basin == "barrett" & between(num_days, 383, 384) ~ 54, 
+                            basin == "barrett" & between(num_days, 407, 408) ~ 58,
+                            basin == "dusy" & num_days == -14 ~ -3,
+                            basin == "dusy" & num_days == -15 ~ -3,
+                            basin == "dusy" & between(num_days, 0, 2) ~ -1,
+                            basin == "dusy" & num_days == 6 ~ 0, 
+                            basin == "dusy" & between(num_days, 20, 21) ~ 3, 
+                            basin == "dusy" & between(num_days, 46, 47) ~ 6,
+                            basin == "dusy" & between(num_days, 356, 357) ~ 51,
+                            basin == "dusy" & between(num_days, 389, 392) ~ 55),
+    treatment = recode(treatment, "control" = "Control", "treated" = "Treated")) %>%
+  add_row(basin = "dusy", num_days = 407, date_label3 = 58, treatment = "control") %>% # dummy row to match the number of categories in barrett
+  add_row(basin = "dusy", num_days = 408, date_label3 = 58, treatment = "treated") %>% # dummy row to match the number of categories in barrett
+  select(site_id, basin, visit_date, num_days, date_label, date_label3, treatment, stage, bd_load)
 ```
 
 #### Create sample size annotation for use in each plot
 ```{r}
 anno_plot1_control <- d_plot %>% 
-  filter(basin == "barrett" & treatment == "control" & date_label1 != "6") %>% 
-  count(date_label1, treatment) %>% 
+  filter(basin == "barrett" & treatment == "Control" & date_label3 != 0) %>% 
+  count(date_label3, treatment) %>% 
   mutate(y_value = -0.2) %>% as_tibble()
 
 anno_plot1_treated <- d_plot %>% 
-  filter(basin == "barrett" & treatment == "treated" & date_label1 != "6") %>% 
-  count(date_label1, treatment) %>% 
+  filter(basin == "barrett" & treatment == "Treated" & date_label3 != 0) %>% 
+  count(date_label3, treatment) %>% 
   mutate(y_value = -0.2) %>% as_tibble()
 
 anno_plot2_control <- d_plot %>% 
-  filter(basin == "dusy" & treatment == "control" & date_label1 != "407-408" & date_label1 != "6") %>% 
-  count(date_label1, treatment) %>% 
+  filter(basin == "dusy" & treatment == "Control" & date_label3 != 58 & date_label3 != 0) %>% 
+  count(date_label3, treatment) %>% 
   mutate(y_value = -0.2) %>% as_tibble()
 
 anno_plot2_treated <- d_plot %>% 
-  filter(basin == "dusy" & treatment == "treated" & date_label1 != "407-408" & date_label1 != "6") %>% 
-  count(date_label1, treatment) %>% 
+  filter(basin == "dusy" & treatment == "Treated" & date_label3 != 58 & date_label3 != 0) %>% 
+  count(date_label3, treatment) %>% 
   mutate(y_value = -0.2) %>% as_tibble()
 ```
 
@@ -537,44 +547,42 @@ library(patchwork)
 ```{r}
 d_plot1 <- d_plot %>%
   filter(basin == "barrett") %>%
-  mutate(date_label1 = fct_relevel(
-    date_label1, "-14", "-1 to 5", "6", "22-23", "41-42", "365-366", "383-384", "407-408")) %>%
-  ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
-    geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 7 same size as others
+  ggplot(aes(x = factor(date_label3), y = log10(bd_load + 1), fill = treatment)) +
+    geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 0 same size as others
     ylim(-0.5, 7.3) +
     labs(title = "(a)",
-      x = "Days",
+      x = "Week",
       y = (expression(Bd~load~(log["10"]~copies+1))),
       fill = "Treatment group") +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
-    geom_text(data = anno_plot1_control, aes(x = date_label1, y = y_value, label = n), hjust = 1.3, vjust = 1.5, size = 3) +
-    geom_text(data = anno_plot1_treated, aes(x = date_label1, y = y_value, label = n), hjust = -0.2, vjust = 1.5, size = 3) +
-    annotate("text", x = "6", y = -0.2, label = "139", vjust = 1.5, size = 3) +
+    geom_text(data = anno_plot1_control, aes(x = factor(date_label3), y = y_value, label = n), hjust = 1.3, vjust = 1.5, size = 3) +
+    geom_text(data = anno_plot1_treated, aes(x = factor(date_label3), y = y_value, label = n), hjust = -0.2, vjust = 1.5, size = 3) +
+    annotate("text", x = factor(0), y = -0.2, label = "139", vjust = 1.5, size = 3) +
     theme_classic() +
     theme(plot.title = element_text(margin = margin(t = 0, b = -30)), 
           axis.title.x = element_blank(), 
           axis.text = element_text(color = "black"),
           legend.position = "top", 
           legend.background = element_rect(size = 0.5, color = "black"))
+d_plot1
 ```
 ```{r}
 d_plot2 <- d_plot %>%
   filter(basin == "dusy") %>%
-  mutate(date_label1 = fct_relevel(
-    date_label1, "-15 to -14", "0-2", "6", "20-21", "46-47", "356-357", "389-392", "407-408")) %>% 
-  ggplot(aes(x = date_label1, y = log10(bd_load + 1), fill = treatment)) +
+  ggplot(aes(x = factor(date_label3), y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 7 same size as others
     ylim(-0.5, 7.3) +
     labs(title = "(b)",
-      x = "Days",
+      x = "Week",
       y = (expression(Bd~load~(log["10"]~copies+1)))) +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
-    geom_text(data = anno_plot2_control, aes(x = date_label1, y = y_value, label = n), hjust = 1.3, vjust = 1.5, size = 3) +
-    geom_text(data = anno_plot2_treated, aes(x = date_label1, y = y_value, label = n), hjust = -0.2, vjust = 1.5, size = 3) +
-    annotate("text", x = "6", y = -0.2, label = "121", vjust = 1.5, size = 3) +
+    geom_text(data = anno_plot2_control, aes(x = factor(date_label3), y = y_value, label = n), hjust = 1.3, vjust = 1.5, size = 3) +
+    geom_text(data = anno_plot2_treated, aes(x = factor(date_label3), y = y_value, label = n), hjust = -0.2, vjust = 1.5, size = 3) +
+    annotate("text", x = factor(0), y = -0.2, label = "121", vjust = 1.5, size = 3) +
     theme_classic() +
     theme(axis.text = element_text(color = "black"),
       legend.position = "none")
+d_plot2
 ```
 ```{r}
 d_plot1 / d_plot2
