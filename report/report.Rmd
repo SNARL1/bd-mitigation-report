@@ -419,10 +419,7 @@ The 618 <!-- updated number compared to above --> non-experimental frogs could h
 Frogs in this group spanned a broad range of sizes (40--75 mm, median = 50 mm), and 83% were larger than the 40--45 mm range that characterizes recent adult *R. sierrae* recruits.  
 In addition, all of these larger untagged frogs (> 45 mm) were captured in 2016, and all frogs captured thereafter were in the 40--45 mm range. 
 
-During the 2015 (during treatment) to 2018 period, Bd loads on untreated control frogs were substantially higher than on treated and non-experimental frogs (posterior probability = 1). 
-On average, loads of the control group were `r load_diff$diff[2]` (CI: `r load_diff$diff[1]` -- `r load_diff$diff[3]`) times higher than loads of the treated group (Figure 4a).
-<!-- Given that only 2 control frogs were recaptured following release in 2015, the higher Bd loads described here are due primarily to higher Bd loads in the control group prior to release. This is also shown in Figure 3. Given that this not an outcome of the experiment and is described previously, providing additional details here seems redundant. Consider focusing solely on recaptured control frogs. Or in above description, compare only Bd loads between control and treated frogs at time of release in 2015. --> 
-The two recaptured control frogs were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 4a). 
+Two recaptured control frogs were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 4a). 
 Bd load dynamics of the treated and non-experimental groups from 2016 to 2018 were similar. 
 Importantly, the reduced loads of the treated group after the 2015 treatment period were maintained in subsequent years (Figure 4a). 
 
@@ -433,7 +430,18 @@ Bd load had a stronger negative effect on survival in the control group relative
 This was the case despite considerable overlap in Bd loads between the control and treated/nonexperimental groups (Figure 4a, 5c). 
 Nonetheless, despite the treatment, by 2018 the study populations had declined to few remaining adults. 
 In the last primary period of 2018, the posterior median for the number of treated frogs alive was `r trt_2018$med` (CI: `r trt_2018$lo` -- `r trt_2018$hi`), `r new_2018$med` for non-experimental frogs (CI: `r new_2018$lo` -- `r new_2018$hi`), and zero for controls (CI: 0 -- 0). 
-<!-- TODO: add a statement about detection probabilities -->
+
+```{r load-detection-probs}
+p_df <- readr::read_csv(here::here("out", "detection_prob_summary.csv"))
+highest_p <- dplyr::slice_max(p_df, med, n = 1)
+lowest_p <- dplyr::slice_min(p_df, med, n = 1)
+mean_p <- readr::read_csv(here::here("out", "mean_p.csv"))
+```
+
+Detection probabilities at LeConte varied over time, but overall were comparable to estimates previously reported from other populations [@joseph2018disease]. 
+The primary period with the highest detection probabilities had a posterior median detection probability of `r highest_p$med` (CI: `r highest_p$lo`, `r highest_p$hi`). 
+In contrast, the primary period with the lowest detection probabilities had a posterior median of `r lowest_p$med` (CI: `r lowest_p$lo`, `r lowest_p$hi`).
+On an average primary period, posterior median detection probability was `r mean_p$med` (CI: `r mean_p$lo`, `r mean_p$hi`).
 
 ### Treasure Lakes Basin {-}
 
