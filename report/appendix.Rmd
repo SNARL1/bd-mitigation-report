@@ -296,7 +296,7 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
 
 ## Table S3 {-}
 
-In for the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs from ponds assigned to control and treated groups immediately before the treatment period. 
+For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs in ponds assigned to control and treated groups immediately before the treatment period. 
 
 ```{r, include=FALSE}
 barrettdusy_m1 <- read_csv(file = here::here("out", "tables", "barrettdusy-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -315,7 +315,7 @@ kbl(barrettdusy_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 
 ## Table S4 {-}
 
-For the itraconazole treatment experiment in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
+For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period. 
 
 ```{r, include=FALSE}
 barrettdusy_m2c <- read_csv(file = here::here("out", "tables", "barrettdusy-m2c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))

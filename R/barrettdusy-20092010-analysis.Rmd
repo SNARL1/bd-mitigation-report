@@ -271,7 +271,8 @@ ppc_loo_pit_overlay(
 m2c <- brm(bf(bd_load ~ stage + trt_period * basin, 
               shape ~ stage + trt_period + basin), 
            data = d2,
-           family = negbinomial())
+           family = negbinomial(), 
+           cores = 2)
 summary(m2c)
 plot(m2c, ask = FALSE)
 plot(conditional_effects(m2c), ask = FALSE)

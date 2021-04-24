@@ -18,7 +18,7 @@ cmr1 <- cmr1 %>% mutate(pit_tag_ref = as.character(pit_tag_ref))
 
 Number of frogs at start of experiment
 ```{r}
-cmr1 %>% filter(trt_period == "pretreat") %>% count(category)
+cmr1 %>% filter(trt_period == "pretreat") %>% count(location, category)
 ```
 
 Number of frogs released back into study lakes after treatment
