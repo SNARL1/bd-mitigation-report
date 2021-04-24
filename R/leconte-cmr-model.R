@@ -296,7 +296,6 @@ write_rds(m_fit, "stan/m_fit.rds")
 # Check convergence -----------------------------------------------------------
 traceplot(m_fit)
 traceplot(m_fit, pars = c("beta_srv_bd", 
-                          "beta_detect",
                           "beta_srv",
                           "initial_state_vec"))
 pairs(m_fit, pars = c("beta_srv_bd", "mu_srv"))
@@ -662,6 +661,31 @@ quantile(frac_observed, c(.025, .5, .975)) %>%
   tibble(p = round(., 2) * 100, 
          vals = c(0.025, .5, .975)) %>%
   write_csv("stan/pct_observed.csv")
+
+
+
+# Write detection probability data to file --------------------------------
+
+p_df <- rstan::extract(m_fit, pars = c("pr_detect"))[[1]] %>%
+  apply(2, quantile, c(0.025, .5, .975)) %>%
+  reshape2::melt(varnames = c("q", "t")) %>%
+  as_tibble %>%
+  mutate(q = case_when(
+    q == "2.5%" ~ "lo", 
+    q == "50%" ~ "med", 
+    q == "97.5%" ~ "hi"
+  )) %>%
+  mutate(value = round(value, 2)) %>%
+  tidyr::pivot_wider(names_from = q, values_from = value)
+write_csv(p_df, here::here("out", "detection_prob_summary.csv"))
+
+mean_p_df <- rstan::extract(m_fit, pars = "mu_detect")[[1]] %>%
+  plogis %>%
+  quantile(c(0.025, .5, .975)) %>%
+  round(2)
+names(mean_p_df) <- c("lo", "med", "hi")
+as_tibble(t(mean_p_df)) %>%
+  write_csv(here::here("out", "mean_p.csv"))
 
 
 # Summarize survival on an annual basis -----------------------------------
