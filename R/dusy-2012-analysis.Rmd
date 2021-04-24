@@ -21,7 +21,8 @@ library(tidyverse)
 
 ### Load data
 ```{r}
-d <- read_csv(file = here::here("data", "dusy-2012-swabs.csv"))
+d <- read_csv(file = here::here("data", "dusy-2012-swabs.csv")) %>% 
+  rename(jliv = jliv_ge)
 ```
 
 ### Create dataframe for use in datasets developed below
@@ -224,7 +225,7 @@ ppc_loo_pit_overlay(
 # Distribution of Jliv concentrations in 2012, excluding records from prior to Jliv exposure
 d %>%
   filter(group_date > "2012-07-19") %>%
-  ggplot(aes(x = jliv_ge)) +
+  ggplot(aes(x = jliv)) +
         geom_histogram()
 ```
 * Highly left-skewed and possible zero-inflation. Negative binomial distribution is reasonable. 
@@ -235,7 +236,7 @@ d %>%
 d %>%
   mutate(expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%
   filter(group_date > "2012-07-12") %>%
-  ggplot(aes(x = expt_trt, y = log10(jliv_ge + 1), fill = expt_trt)) +
+  ggplot(aes(x = expt_trt, y = log10(jliv + 1), fill = expt_trt)) +
     geom_boxplot() +
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     facet_grid(~ group_date) +
@@ -257,12 +258,12 @@ d3 <- d %>%
     frog_group = replace(frog_group, is.na(frog_group) & expt_or_wild == "wild", "wild")) %>% 
   filter(group_date > "2012-07-19") %>%
   mutate(frog_group = as.factor(frog_group), 
-         jliv_ge = as.integer(jliv_ge))
+         jliv = as.integer(jliv))
 ```
 
 #### Fit negative binomial model
 ```{r}
-m3 <- brm(jliv_ge ~ days,
+m3 <- brm(jliv ~ days,
           data = d3,
           family = negbinomial())
 summary(m3)
@@ -270,7 +271,7 @@ plot(m3)
 conditional_effects(m3)
 ```
 * frog_group not included as predictor in model because there is only 1 sample for control group on 2nd date and none on 3rd date 
-* Important effect of days on jliv_ge, with exponential decline of jliv_ge over time 
+* Important effect of days on jliv, with exponential decline of jliv over time 
 
 #### LOO probability integral transform
 ```{r}
@@ -279,7 +280,7 @@ loo_m3 <- loo(m3, save_psis = TRUE)
 ```{r}
 yrep <- posterior_predict(m3)
 ppc_loo_pit_overlay(
-  y = d3$jliv_ge, 
+  y = d3$jliv, 
   yrep = yrep,
   lw = weights(loo_m3$psis_object))
 ```
@@ -287,7 +288,7 @@ ppc_loo_pit_overlay(
 
 #### Fit zero inflated negative binomial model
 ```{r}
-m3a <- brm(jliv_ge ~ days,
+m3a <- brm(jliv ~ days,
           data = d3,
           family = zero_inflated_negbinomial())
 summary(m3a)
@@ -307,7 +308,7 @@ loo(m3, m3a)
 d3a <- d3 %>% filter(frog_group != "control")
 ```
 ```{r}
-m3b <- brm(jliv_ge ~ days * frog_group,
+m3b <- brm(jliv ~ days * frog_group,
           data = d3a,
           family = negbinomial())
 summary(m3b)
@@ -319,7 +320,7 @@ plot(conditional_effects(m3b), ask = FALSE)
 
 #### Plot of Jliv concentrations over time 
 ```{r}
-anno_text1 <- tibble(expt_trt = "control", jliv_ge = -0.57, lab = "text",
+anno_text1 <- tibble(expt_trt = "control", jliv = -0.57, lab = "text",
                     days = factor(56, levels = c("0", "12", "37", "56")))
 ```
 ```{r}
@@ -333,7 +334,7 @@ d %>%
   mutate(
     expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
   filter(group_date > "2012-07-12") %>% 
-  ggplot(aes(x = expt_trt, y = log10(jliv_ge + 1), fill = expt_trt)) + 
+  ggplot(aes(x = expt_trt, y = log10(jliv + 1), fill = expt_trt)) + 
     geom_boxplot(width = 0.9) +  
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(fill = "Frog group", 
