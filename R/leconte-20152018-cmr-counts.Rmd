@@ -78,6 +78,17 @@ cmr2 %>% filter(tag_new == "TRUE" & !is.na(length)) %>%
     geom_histogram(binwidth = 1, col = "black")
 ```
 
+Number of frogs 2015-2018
+```{r include=FALSE}
+cmr3 <- cmr1 <- read_csv(here::here("data", "leconte-20152018-captures.csv")) %>% 
+  filter((trt_period == "pretreat" | is.na(trt_period)) & (trt_died == FALSE | is.na(trt_died))) %>%
+  as_tibble()
+```
+```{r}
+cmr3 %>% distinct(pit_tag_ref) %>% count()
+```
+
+
 
 
 
