@@ -62,18 +62,20 @@ Cheryl Briggs provided modeling results that motivated the treatments, assisted 
 
 ## Estimating the zoospore pool from water samples  {-}
 
-We sampled the zoospore pool in each of the five ponds included in the Dusy itraconazole treatment experiment (Table 1), and sampled both before and after the treatments (July 23-25 and August 21-24, respectively).
+We sampled the zoospore pool in each of the five ponds included in the Dusy itraconazole treatment experiment (Table 1) before and after the treatments (July 23-25 and August 21-24, respectively).
 Water samples (six per pond) were collected by filtering pond water through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
 Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
 We extracted DNA using the DNEasy Blood and Tissue kit (Qiagen).
-Bd loads on filters were quantified using qPCR [see @jani2017epidemic for details], and Bd load was normalized to a 1-liter sample volume. 
+Bd concentrations in water samples (environmental "Bd loads") were quantified using qPCR [see @jani2017epidemic for details], and Bd load was normalized to a 1-liter sample volume. 
 For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
 To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
+Finally, we included 21 negative controls: nine no-template-controls (three per PCR plate) and 12 field-collected negative controls (six water samples collected from a pond where all frogs were Bd-negative, each with 2 technical replicates). 
 
-It is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
-Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (90 from samples collected before and 90 from samples collected after the itraconazole treatment), 49% had a Bd load = 0. 
-Because ponds were clearly Bd-positive, in the analysis of the effect of itraconazole treatment on the zoospore pool, we excluded all false-negative replicates.
-This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post-by-treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for replicates). 
+The 21 negative controls yielded no false-positive PCR reactions. 
+However, it is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
+Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (5 ponds x 6 water samples x 3 technical replicates x 2 time periods (before and after treatment), 49% had a Bd load = 0. 
+Because the five ponds in the experiment were clearly Bd-positive, we considered replicates with Bd load = 0 to be false negative replicates, which we excluded from the analysis of the effect of itraconazole treatment on the Bd zoospore pool. 
+This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post-by-treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for technical replicates). 
 
 
 ## *Janthinobacterium lividum* qPCR assay {-}
@@ -491,7 +493,7 @@ Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 
 
 ## Figure S2 {-}
 
-```{r fig3, echo=FALSE, fig.cap="", out.width="450px"}
+```{r figS2, echo=FALSE, fig.cap="", out.width="450px"}
 knitr::include_graphics(here::here("out", "figures", "dusy-zsppool.png"))
 ```
 
@@ -499,6 +501,18 @@ In the Dusy Basin study ponds assigned to the treated or control groups, zoospor
 The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. Each dot represents a single sample, and median values for each treatment period are indicated with a black diamond. 
 The number of samples included is displayed above the x-axis. 
 
+## Figure S3 {-}
+
+<!-- Consider better facet labels (e.g., "Died during experiment", "Never recaptured', "Recaptured") -->
+
+```{r figS3, fig.cap="", echo=FALSE}
+knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-loads.png"))
+```
+
+For all adult *R. sierrae* in the 2018 Treasure Lakes itraconazole treatment, Bd loads over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys. 
+Points from the same frog are connected by a line. 
+Panel labels are as follows: 1 = frog that died during the treatment ("non-survivor"), 2 = survivor that was not recaptured during the post-release survey in August, and 3 = survivor that was recaptured during the post-release survey. 
+The single non-experimental frog captured in August was not included in the treatment (treatment duration = "NA") and is included in panel 1. 
 
 \clearpage
 
