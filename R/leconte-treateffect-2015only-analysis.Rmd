@@ -165,6 +165,7 @@ library(EnvStats)
 ## Plot of Bd loads before and at end of treatment, by location
 ```{r}
 p1 <- d %>% 
+  mutate(group = recode(group, "control" = "Control", "treated" = "Treated")) %>% 
   filter(location == "lower" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
   ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = group)) +
@@ -182,6 +183,7 @@ p1 <- d %>%
           axis.title.x = element_text(vjust = -0.7))
 
 p2 <- d %>% 
+  mutate(group = recode(group, "control" = "Control", "treated" = "Treated")) %>% 
   filter(location == "upper" & (trt_died == FALSE | is.na(trt_died))) %>% 
   mutate(trt_period = fct_relevel(trt_period, rev)) %>% 
   ggplot(aes(x = trt_period, y = log10(bd_load + 1), fill = group)) +

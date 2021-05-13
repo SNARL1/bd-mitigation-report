@@ -320,7 +320,7 @@ plot(conditional_effects(m3b), ask = FALSE)
 
 #### Plot of Jliv concentrations over time 
 ```{r}
-anno_text1 <- tibble(expt_trt = "control", jliv = -0.57, lab = "text",
+anno_text1 <- tibble(expt_trt = "Control", jliv = -0.57, lab = "text",
                     days = factor(56, levels = c("0", "12", "37", "56")))
 ```
 ```{r}
@@ -332,7 +332,8 @@ facet_names1 <- c('0' = "Day 0",
 ```{r}
 d %>%
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>%  
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"),
+    expt_trt = recode(expt_trt, "control" = "Control", "treated" = "Treated", "wild" = "Wild")) %>% 
   filter(group_date > "2012-07-12") %>% 
   ggplot(aes(x = expt_trt, y = log10(jliv + 1), fill = expt_trt)) + 
     geom_boxplot(width = 0.9) +  
@@ -428,7 +429,7 @@ plot(conditional_effects(m4b), ask = FALSE)
 
 #### Plot of Bd loads over time 
 ```{r}
-anno_text2 <- tibble(expt_trt = "control", bd_load = -0.81, lab = "text",
+anno_text2 <- tibble(expt_trt = "Control", bd_load = -0.81, lab = "text",
                     days = factor(56, levels = c("-7", "0", "12", "37", "56")))
 ```
 ```{r}
@@ -441,7 +442,8 @@ facet_names2 <- c('-7' = "Day -7",
 ```{r}
 d %>%
   mutate(
-    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild")) %>% 
+    expt_trt = replace(expt_trt, is.na(expt_trt) & expt_or_wild == "wild", "wild"),
+    expt_trt = recode(expt_trt, "control" = "Control", "treated" = "Treated", "wild" = "Wild")) %>% 
   ggplot(aes(x = expt_trt, y = log10(bd_load + 1), fill = expt_trt)) + 
     geom_boxplot(width = 0.9) +  
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
@@ -464,7 +466,7 @@ ggsave(here::here("out", "figures", "dusy-2012-bdload.png"), width = 15, height 
 #### Create dataset
 ```{r}
 d4 <- d %>%
-  left_join(jliv_days, by = "group_date") %>% 
+#  left_join(jliv_days, by = "group_date") %>% 
   filter(group_date > "2012-07-19" & expt_or_wild == "expt") %>%
   mutate(
     released = case_when(
@@ -483,6 +485,7 @@ d4_count <- d4 %>%
 #### Plot showing frog recaptures over time in 2012
 ```{r}
 d4_count %>% 
+  mutate(expt_trt = recode(expt_trt, "control" = "Control", "treated" = "Treated")) %>% 
   ggplot(aes(x = days, y = freq, fill = expt_trt)) +
     geom_line() +
     geom_point(shape = 21, size = 4) + 
