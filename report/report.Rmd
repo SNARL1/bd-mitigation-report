@@ -298,7 +298,7 @@ We treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4
 Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
 We compared Bd loads measured before and after treatment using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
-We conducted follow-up VES, swabbing, and CMR surveys one month after the 2018 treatment (August 21-23), in 2019 (August 15-16, 2019), and 2020 (June 23-25).  
+We conducted follow-up VES, swabbing, and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25).  
 
 The greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
 We calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). Larger absolute values of LRR indicate a larger reduction in Bd load. 
@@ -458,13 +458,12 @@ Model results affirmed the important effect of treatment (Table S9).
 
 The number of itraconazole treatments a frog received ("days_inside") increased treatment effectiveness (Table S10). Initial Bd load ("capture_bdload_std") and the (days_inside x capture_bdload_std) interaction term were both unimportant (Table S10). 
 
-Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure S3).
-<!--Jim says that 17 individuals were recaptured in 2019, and were captured on 8/15-16 and not 8/21-23. If true, revise figures 5 and and S3, update methods and results. -->
-One non-experimental frog was also captured. 
+Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure 5).
+In addition, one non-experimental adult frog was captured, and one dead tagged (i.e., treated) adult was found. 
 Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure 5, S3). 
 There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S3). 
 In surveys conducted in 2019 (the year following treatment) and 2020, we observed no *R. sierrae* of any life stage. 
-Therefore, despite the substantial reduction in Bd loads caused by the 2018 treatment and the relatively large fraction of treated frogs recaptured one month later, few or none of the frogs survived overwinter until summer 2019. 
+Therefore, despite the substantial reduction in Bd loads caused by the 2018 treatment and the relatively large fraction of treated frogs recaptured one month later, few or no frogs survived overwinter until summer 2019. 
 
 ## Microbiome augmentation of subadult frogs {-}
 
