@@ -12,7 +12,7 @@ Missing values in all files are coded as NA.
 
 #### dusybarrett-20092010-captures.csv
 
-This CSV file contains the data collected from individual tadpoles and subadults during the itraconazole treatment experiments in Barrett Lakes Basin (2009) and Dusy Basin (2010), Kings Canyon National Park. 
+This CSV file contains data collected from tadpoles and subadults during the itraconazole treatment experiments in Barrett Lakes Basin and Dusy Basin. 
 
 Fields: 
 
@@ -20,23 +20,18 @@ Fields:
 - `basin`: Lake basin in which the treatment was conducted (Barrett, Dusy).
 - `visit_date`: Date on which the record was collected (YYYY-MM-DD).
 - `date_label`: Date categories identifying records as collected prior to, during, or after the treatment.
-- `prepost`: Categories identifying those records collected immediately prior to or after the treatment.
 - `treatment`: Frog treatment category (treated, control).
-- `survey_type`: Survey type during which records was collected (swab).
+- `survey_type`: Survey type during which record was collected (swab).
 - `species`: Frog species code (ramu).
 - `stage`: Frog life stage (tadpole, subadult).
 - `capture_animal_state`: Animal state at the time of capture (healthy, sick). 
 - `tad_stage`: Gosner stage of tadpole.
-- `sex`: Sex of animal.
 - `swab_id`: 8-digit swab identification code.
-- `replicate`: Swab PCR replicate number.
 - `bd_load`: Number of Bd ITS copies on swab.
-- `month`:
-- `year`:
-- `year_std`: Year of treatment standardized relative to the year in which the treatment was conducted (0, 1).
-- `num_days`: Number of days since the final itraconazole treatment. 
+- `year_std`: Year in which survey was conducted standardized relative to the year in which the treatment was conducted (0, 1).
+- `num_days`: Number of days since the start of the itraconazole treatment period. 
 
-#### dusybarrett-20092010-counts
+#### dusybarrett-20092010-counts.csv
 
 This CSV file contains frog count data collected during visual encounter surveys (VES) at the study ponds in Barrett Lakes Basin and Dusy Basin following the itraconazole treatments. 
 
@@ -47,9 +42,9 @@ Fields
 - `treatment`: Frog treatment category (treated, control).
 - `visit_date`: Date on which VES was conducted (YYYY-MM-DD).
 - `plot_date`: Date for plotting purposes, slightly revised from `visit_date` to combine adjacent dates.
-- `year`: Year in which VES was conducted.
-- `year_std`: Year of treatment standardized relative to the year in which the treatment was conducted (0, 1).
-- `subadult`: Number of subadult mountain yellow-legged frogs counted during VES.
+- `year_std`: Year in which VES was conducted standardized relative to the year in which the treatment was conducted (0, 1).
+- `tadpole`: Number of tadpoles counted during VES.
+- `subadult`: Number of subadults counted during VES.
 
 #### dusy-2010-zsppool.csv
 
@@ -63,14 +58,14 @@ Fields
 - `pre_post`: Sampling period descriptor, relative to treatment (pre, post)
 - `tmt`: Frog treatment category (treated, control).
 - `group`: `pre-post` and `tmt` combined. 
-- `replicate`: Filter PCR replicate number.
+- `replicate`: PCR replicate number.
 - `bd_load`: Number of Bd ITS copies on filter, normalized to a 1-liter sample volume.
 
 ### Itraconazole treatment of adults (LeConte and Treasure Basins)
 
 #### leconte-20152018-captures.csv
 
-This CSV file contains data on adult frogs captured for itraconazole treatment experiments conducted in the upper and lower portions of LeConte Basin (2015), and during subsequent capture-mark-recapture (CMR) surveys (2016-2018).
+This CSV file contains data collected from adult frogs during itraconazole treatment experiments conducted in LeConte Basin.
 
 Fields
 
@@ -88,7 +83,7 @@ Fields
 
 #### leconte-20152018-surveys.csv
 
-This CSV file contains data on the initial frog captures and subsequent CMR surveys conducted as part of the treatment experiments conducted in the upper and lower portions of LeConte Basin. 
+This CSV file contains data on the initial frog capture surveys and subsequent capture-mark-recapture (CMR) surveys conducted as part of the LeConte Basin treatment experiments. 
 
 Fields
 
@@ -100,7 +95,7 @@ Fields
 
 #### treasure-captures-swabs.csv
 
-This CSV file contains data on adult frogs captured for itraconazole treatment in Treasure Basin (2018), and during subsequent capture-mark-recapture (CMR) surveys (2018-2020).
+This CSV file contains data on adult frogs before, during, and after the itraconazole treatment conducted in Treasure Basin.
 
 Fields
 
@@ -117,7 +112,7 @@ Fields
 - `length`: Snout-vent length, in millimeters.
 - `weight`: Weight, in grams. 
 - `swab_id`: 8-digit swab identification code.
-- `replicate`: Swab PCR replicate number.
+- `replicate`: PCR replicate number.
 - `bd_load`: Number of Bd ITS copies on swab.
 
 #### treasure-Bd-4.csv
@@ -138,13 +133,13 @@ Fields
 
 #### dusy-2012-swabs.csv
 
-This CSV file contains the data collected from individual subadults during the experiment in Dusy Basin (2012) in which the frog microbiome was augmented with the probiotic bacterium *Janthinobacterium lividum*. 
+This CSV file contains data collected from subadults during the experiment in Dusy Basin in which the frog microbiome was augmented with the probiotic bacterium *Janthinobacterium lividum*. 
 
 Fields
 
 - `site_id`: 5-digit site identification code.
 - `visit_date`: Date on which the record was collected (YYYY-MM-DD).
-- `group_date`: Date for plotting purposes, slightly revised from `visit_date` to combine adjacent dates.
+- `group_date`: Identical to `visit_date` for this data subset.
 - `capture_stage`: Frog life stage (subadult).
 - `toe_clip1`: Code indicating whether the second toe on the left or right front foot was clipped (L2 = control, R2 = treated).
 - `swab_id`: 8-digit swab identification code.
