@@ -17,6 +17,7 @@ All sections (1-6) are included in a report ("Version 1") that was a required de
 Sections 1-3 are included in the manuscript **Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog** ("Version 2"). 
 
 All raw data used in the analyses are in the `data` directory (see `README` file in that directory for details).
-All R code used to analyze the data and write the report/manuscript are in the `R` directory (see `README` file in that directory for details). 
+All R code to analyze the data and write the report/manuscript are in the `R` directory (see `README` file in that directory for details). 
+All R code and bibliography files to write the report/manuscript are in the `report` directory.
 
 This repository is maintained by Roland Knapp (roland.knapp(at)ucsb.edu).
