@@ -24,8 +24,7 @@ d1 <- read_csv(here::here("data", "dusy-2010-zsppool.csv"))
 d1 <- d1 %>% 
   filter(bd_load > 0) %>% 
   mutate(pre_post = fct_relevel(pre_post, "pre", "post"),
-         tmt = as.factor(tmt)) %>% 
-  select(-group)
+         tmt = as.factor(tmt))
 ```
 
 ### Data exploration
