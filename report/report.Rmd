@@ -576,7 +576,6 @@ Therefore, even when treatment increases adult survival, the high susceptibility
 The short-term effects of the Treasure treatment paralleled those of the LeConte treatment. 
 Treatment substantially reduced Bd loads, and loads remained low one month following treatment. However, despite 48% of the treated frogs being recaptured one month after treatment, no treated frogs were detected during the subsequent two summers, indicating that in this population treatment did not increase longer-term survival. 
 The relatively few frogs treated and the inability to conduct this treatment as an experiment with treated and control groups preclude strong conclusions, but the lack of frog survival one year after treatment indicates that the strong effects of treatment observed in the LeConte experiments are not universal, and may depend on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc]. 
-<!-- TS: I am sure you considered other reasons, but small treated population size an subsequent sampling effects, or environmental effects/stochasticity could all be non-disease related factors that undermine persistence. It's a rabbit hole for sure, and I don't know relevant references off top of my head. -->
 
 ## Microbiome augmentation of subadult frogs {-}
 
