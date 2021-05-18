@@ -57,7 +57,6 @@ Fields
 - `site_id`: 5-digit site identification code.
 - `pre_post`: Sampling period descriptor, relative to treatment (pre, post)
 - `tmt`: Frog treatment category (treated, control).
-- `group`: `pre-post` and `tmt` combined. 
 - `replicate`: PCR replicate number.
 - `bd_load`: Number of Bd ITS copies on filter, normalized to a 1-liter sample volume.
 
