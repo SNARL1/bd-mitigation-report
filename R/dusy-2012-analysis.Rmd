@@ -301,7 +301,7 @@ conditional_effects(m3a)
 ```{r}
 loo(m3, m3a)
 ```
-* No evidence of zero inflation (elpd_diff/se_diff < 1), use m3. 
+* No evidence of zero inflation (elpd_diff/se_diff < 1), m3 is better fit. 
 
 #### Fit model with days and treatment group as predictors, exclude control treatment because of small sample sizes
 ```{r}
@@ -416,9 +416,9 @@ ppc_loo_pit_overlay(
 ```
 * Some improvement in uniformity (except at smallest values of x). 
 
-#### Add expt_trt as shape predictor
+#### Add frog_group as shape predictor
 ```{r}
-m4b <- brm(bf(bd_load ~ days * frog_group, shape ~ expt_trt),
+m4b <- brm(bf(bd_load ~ days * frog_group, shape ~ frog_group),
           data = d3a,
           family = zero_inflated_negbinomial())
 summary(m4b)

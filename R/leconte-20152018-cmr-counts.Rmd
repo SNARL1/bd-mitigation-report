@@ -52,7 +52,7 @@ Number of individuals that moved between the upper and lower basins: 2015-2018
 ```{r}
 move <- cmr1 %>% group_by(pit_tag_ref) %>% 
   summarize(basin_count = n_distinct(location)) %>% 
-  filter(basin_count > 1) %>% View()
+  filter(basin_count > 1)
 ```
 
 More details about individuals that moved between basins

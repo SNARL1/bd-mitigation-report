@@ -98,7 +98,7 @@ plot(conditional_effects(m1a), ask = FALSE)
 ```
 * Predictors of shape are both unimportant.
 * No additional analyses possible. 
-* Small sample sizes are likely a factor in poor fit. 
+* Small sample sizes are likely a factor in relatively poor fit. 
 
 ## CREATE PLOT 
 ```{r}

@@ -125,7 +125,7 @@ summary(m2a)
 plot((m2a), ask = FALSE)
 plot(conditional_effects(m2a), ask = FALSE)  
 ```
-* No evidence of zero inflation (zi-estimate = 0.03), use negative binomial model
+* Little evidence of zero inflation (zi-estimate = 0.03), use negative binomial model
 
 # ANALYSIS #3: Loads of frogs that lived vs died during treatment
 ```{r}

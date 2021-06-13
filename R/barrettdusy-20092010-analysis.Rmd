@@ -220,7 +220,6 @@ m2a <- brm(bd_load ~ stage + trt_period * basin,
 summary(m2a)
 plot((m2a), ask = FALSE)
 plot(conditional_effects(m2a), ask = FALSE)
-loo(m2, m2a)
 ```
 
 #### Calculate fit diagnostics
@@ -543,9 +542,6 @@ anno_plot2_treated <- d_plot %>%
 
 #### Create Barrett and Dusy plots
 ```{r}
-library(patchwork)
-```
-```{r}
 d_plot1 <- d_plot %>%
   filter(basin == "barrett") %>%
   ggplot(aes(x = factor(date_label3), y = log10(bd_load + 1), fill = treatment)) +
@@ -750,7 +746,7 @@ ppc_loo_pit_overlay(
   yrep = yrep,
   lw = weights(loo4d$psis_object))
 ```
-* No improvement of fit from adding shape predictors (LOO: elpd_diff/se_diff < 1)
+* No improvement of fit from adding shape predictors (LOO: elpd_diff/se_diff = 1.4)
 
 ### Make plots of count data 
 ```{r}
