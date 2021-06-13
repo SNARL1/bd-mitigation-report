@@ -40,7 +40,7 @@ library(kableExtra)
 
 # Author Contributions {-}
 
-Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the study data, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote most of the manuscript. 
+Roland Knapp obtained the permits for all treatments, designed and implemented all of the treatments except at Treasure, conducted post-treatment surveys, managed the datasets, conducted final analyses of all of the treatment datasets except the capture-mark-recapture (CMR) dataset from the LeConte and Treasure treatments, and wrote most of the manuscript. 
 
 Maxwell Joseph assisted with the Barrett-2009 and Dusy-2010 treatments and associated post-treatment surveys, analyzed the CMR dataset from the LeConte experiment and wrote the associated text, provided input on most of the analyses, and reviewed all drafts of the manuscript. 
 
@@ -48,7 +48,7 @@ Thomas Smith assisted with the LeConte and Treasure treatments, conducted post-t
 
 Ericka Hegeman assisted with the Treasure treatment, conducted post-treatment surveys for multiple treatments, managed the datasets, conducted preliminary analyses of the Barrett-2009 and Dusy-2010 treatments and wrote some of the associated text, and reviewed all drafts of the manuscript. 
 
-Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, including supporting the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and qPCR analysis of *J. lividum* samples, and reviewed all drafts of the manuscript.  
+Vance Vredenburg assisted with the design and implementation of the Dusy-2012 treatment, including supporting the development of the *J. lividum* qPCR assay, culturing of the *J. lividum* used in the treatment, and qPCR analysis of *J. lividum* samples.  
 
 James Erdman conducted pre- and post-treatment surveys at Treasure, implemented the Treasure treatment, and reviewed all drafts of the manuscript. 
 
@@ -73,16 +73,16 @@ Finally, we included 21 negative controls: nine no-template-controls (three per 
 
 The 21 negative controls yielded no false-positive PCR reactions. 
 However, it is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
-Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (5 ponds x 6 water samples x 3 technical replicates x 2 time periods (before and after treatment), 49% had a Bd load = 0. 
+Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (5 ponds x 6 water samples x 3 technical replicates x 2 time periods (before and after treatment)), 49% had a Bd load = 0. 
 Because the five ponds in the experiment were clearly Bd-positive, we considered replicates with Bd load = 0 to be false negative replicates, which we excluded from the analysis of the effect of itraconazole treatment on the Bd zoospore pool. 
-This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post-by-treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for technical replicates). 
+This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for technical replicates). 
 
 
 ## *Janthinobacterium lividum* qPCR assay {-}
 
 The *J. lividum* used to develop the real-time PCR assay was a strain provided by Reid Harris, Department of Biology, James Madison University. 
 *J. lividum* DNA was extracted from a pure culture of this strain using a Qiagen DNeasy blood and tissue kit following the manufacturer's protocol. 
-The DNA collected was amplified using methods in [@harris2009skin]. The PCR product was viewed on a 1% agarose gel, and the 500 bp product was sequenced. 
+The DNA collected was amplified using methods in @harris2009skin. The PCR product was viewed on a 1% agarose gel, and the 500 bp product was sequenced. 
 
 Primers were designed to be specific to *J. lividum* and sequences were: 
 
@@ -114,7 +114,7 @@ We use parameter-expanded data augmentation to account for the fact that the tot
 Across the entire time period of the study, we assume $N_s$ unique individuals have been alive at either site. 
 We observe $N$ unique individuals across all surveys, where $N \leq N_s$. 
 An estimate of $N_s$ can be acquired by augmenting the observed capture histories with additional capture histories that consist entirely of non-detections, thus modeling a large number $M > N_s$ of individuals, $M - N_s$ of which never existed [@royle2009analysis]. 
-Here, $M$ was chosen to be 2,182 (1,212 observed unique individuals plus 970 augmented individuals). 
+Here, $M$ was chosen to be 2182 (1212 observed unique individuals plus 970 augmented individuals). 
 We verified that posterior estimates of $N_s$ were much less than $M$ to avoid problems on the boundary of this augmented parameter space [@dennis2015computational]. 
 
 We denote the true state of individual $i$ in primary period $t$ as $s_{i, t}$. 
@@ -188,7 +188,7 @@ We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution for no
 ### Bd load model {-}
 
 We modeled Bd loads as being normally distributed on a transformed scale. 
-Raw Bd loads were transformed using a $\log_{10}$ plus one transformation, then centered and scaled to have mean zero and unit standard deviation (in an attempt to avoid ill-conditioning, as expected Bd load is used in the detection and survival model components).
+Raw Bd loads were transformed using a $\log_{10}$ + 1 transformation, then centered and scaled to have mean zero and unit standard deviation (in an attempt to avoid ill-conditioning, as expected Bd load is used in the detection and survival model components).
 Let $z^{\text{obs}}_{i, t}$ represent the observed transformed Bd load, and $z_{i, t}$ represent the expected value for individual $i$ on primary period $t$.
 The observation model for Bd loads of detected individuals was Gaussian on the transformed scale: 
 
@@ -210,7 +210,7 @@ Standard deviation parameters were given unit scale half normal priors, and all 
 
 ### Inference {-}
 
-We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte carlo in Stan. 
+We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte Carlo in Stan. 
 We drew 3000 iterations for each of four chains, using a maximum treedepth of 11 and an adapt_delta value of 0.99.
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
 Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
@@ -221,8 +221,9 @@ Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 
 ## Estimating the zoospore pool from water samples  {-}
 
-Before treatment, zoospore pools (measured as Bd load on collected filters) in the ponds assigned to the control and treated groups were similar. After treatment, zoospore pools in control ponds may have increased slightly, and remained relatively constant in treated ponds (Figure S2). 
-However, the estimated effects of treatment, basin, and the (treatment-by-basin) interaction term were all unimportant (Table S5). 
+Before treatment, zoospore pools (measured as Bd load on collected filters) in the ponds assigned to the control and treated groups were similar (Figure S2). 
+After treatment, zoospore pools in control ponds may have increased slightly, but remained relatively constant in treated ponds (Figure S2). 
+Model results indicated that the estimated effects of treatment, basin, and the (treatment x basin) interaction term were all unimportant (Table S5). 
 Therefore, assuming that the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not measurably alter the zoospore pools. 
 To avoid the high number of false-negative filters obtained using our methods, future studies attempting to quantify zoospore pools should consider using methods that allow filtering of larger volumes of water. 
 
