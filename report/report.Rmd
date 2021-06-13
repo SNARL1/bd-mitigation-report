@@ -68,7 +68,6 @@ Despite this protracted period of reduced impacts of Bd on adults, recruitment o
 In the microbiome augmentation experiment, bathing frogs in a *J. lividum* solution after Bd load reduction with itraconazole increased concentrations of this bacterium on frogs, but concentrations declined to baseline levels within one month and did not have a protective effect against Bd infection. 
 Collectively, these results suggest that Bd mitigation efforts focused on frog populations that have recently declined due to Bd emergence are ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd and resulting high susceptibility. 
 This results in repeated recruitment failure and a low probability of population persistence in the face of ongoing Bd infection. 
-<!-- Add final sentence about using resistant populations in reintroductions? -->
 
 *Keywords*: amphibian chytrid fungus, *Batrachochytrium dendrobatidis*, wildlife disease, epizootic, host population decline, antifungal treatment
 
@@ -282,7 +281,7 @@ Any untagged frogs captured during the surveys (i.e., frogs that were not part o
 
 We used open population multi-state hidden Markov models to describe subsequent population dynamics including survival and recruitment, while accounting for imperfect detection (see **Supporting Information** for details).
 Briefly, we estimated population size over time using parameter-expanded Bayesian data augmentation, which augments the capture histories of observed individuals with a large number of capture histories for individuals that were never detected [@royle2012parameter].
-The states included (1) “not recruited”, <!-- clarify what this state is --> (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
+The states included (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
 On any particular survey, we considered three possible observations of an individual: (1) “alive at the upper site”, (2) “alive at the lower site”, and (3) “not detected”. 
 The model structure builds on the work of Joseph and Knapp (2018), tracking individual Bd loads over time, allowing the expected Bd load (log~10~(Bd load + 1)) to vary as a function of treatment and time, and allowing the effect of Bd load on survival to vary as a function of treatment. 
 
@@ -437,7 +436,6 @@ In the last primary period of 2018, the posterior median for the number of treat
 
 Interestingly, Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = `r survival_diff$ctrl_lt_trt` and `r survival_diff$ctrl_lt_new`, for control versus treated, and control versus non-experimental, respectively; Figure 4c). 
 This was the case despite considerable overlap in Bd loads between the control and treated/nonexperimental groups (Figure 4a, 4c). 
-<!-- I'm concerned that a reader (especially someone not familiar with Bayesian methods and "posterior draws") might see the "stronger negative effect" mentioned in line 430 as the general negative slope of the survival-load relationship for control frogs, most of which is just the result of high uncertainty for Bd loads that were not present in the control population. The important result is the overall lower survival of control frogs across a wide range of loads compared to the higher survival of treated and non-experimental frogs across a similar Bd load range. Can the text be tweaked to steer the reader away from the areas of high uncertainty, and instead put the focus on the results where uncertainty is low? -->
 
 ```{r load-detection-probs, include=FALSE}
 p_df <- readr::read_csv(here::here("out", "detection_prob_summary.csv"))
@@ -487,7 +485,7 @@ In addition, there was an important effect of the (days x group) interaction ter
 Together, these results indicate that the combined effect of itraconazole treatment and *J. lividum* exposure was ineffective in preventing the increase in Bd loads to pre-treatment levels. 
 Increased concentrations of *J. lividum* on control and wild frogs also had no obvious effect on Bd load. 
 
-During the three surveys of the study population conducted in 2012, the percent of frogs in the treated and control groups that were recaptured declined, but the rate of decline was steeper in the control versus treated group (Figure 8). <!-- Move figure to appendix? -->
+During the three surveys of the study population conducted in 2012, the percent of frogs in the treated and control groups that were recaptured declined, but the rate of decline was steeper in the control versus treated group (Figure 8). 
 Although no formal analysis is possible due to the relatively few sample points, the results suggest that the itraconazole-*J. lividum* treatment increased frog survival over the two month period following treatment. 
 Nonetheless, during surveys conducted in 2013 (one year after treatment), only a single experimental (i.e., toe-clipped) animal was captured. 
 This animal was detected during a survey conducted in early summer, and was a member of the treated group. 
@@ -573,7 +571,6 @@ The upper basin contains a single lake and its associated inlet and outlet strea
 As a result, the entire frog population is restricted to the site at which the epizootic occurred. 
 In contrast, the lower basin contains a diverse array of aquatic habitats, including two lakes, four ponds, and associated streams, marshes, and springs, all of which were used by *R. sierrae* prior to the epizootic. 
 Although conjectural, it is possible that frogs in some of these associated habitats experienced lower pathogen pressure, lower Bd loads, and higher survival during the epizootic than frogs in the much larger lake-dwelling populations. 
-<!-- TS: One possible interpretation I was struck by upon reading the results, may be that housing frogs together even a short time enhanced their loads.  The similarity of the other treated and the non-experimental groups suggests that housing/penning has a negative effect that may have been balanced out by the antifungal treatment, but the unpenned non experimental frogs were just fine without the treatment. -->
 
 In summary, the two adult treatment experiments both altered frog-Bd dynamics in a predictable way, reducing Bd loads of treated versus control frogs and increasing frog survival. 
 Unlike the short-term effects resulting from the treatment of early life stages, effects on adults persisted over the three-year post-treatment period, and were consistent with adults having mounted an effective adaptive immune response against Bd infection. 
@@ -758,7 +755,6 @@ The number of swabs collected on each day is displayed above the x-axis.
 
 ## Figure 1 {-}
 
-<!-- Consider annotations to indicate pre-treatment, during treatment, and post-treatment -->
 ```{r fig1, echo=FALSE, fig.cap="", out.width="400px"}
 knitr::include_graphics(here::here("out", "figures", "barrettdusy-20092010-bdload.png"))
 ```
@@ -791,7 +787,6 @@ knitr::include_graphics(here::here("out", "figures", "leconte-multistate-results
 
 ## Figure 5 {-}
 
-<!-- Text annotations and dashed lines to indicate pre-, during, and post-treatment would be helpful (esp when printed in B&W) -->
 ```{r fig5, fig.cap="", echo=FALSE}
 knitr::include_graphics(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"))
 ```
