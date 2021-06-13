@@ -2,8 +2,8 @@
 
 *Roland A. Knapp, Maxwell B. Joseph, and Thomas C. Smith*
 
-This repository contains data, models, and a report/manuscript describing all antifungal treatments conducted to mitigate the effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* on mountain yellow-legged frog populations. 
-These mitigation efforts were conducted in Sequoia-Kings Canyon National Parks and Yosemite National Park during the period 2009-2018. 
+This repository contains data, models, and a report/manuscript describing antifungal treatments, frog translocations, and frog reintroductions conducted to mitigate the effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* on mountain yellow-legged frog populations. 
+These mitigation efforts were conducted in Sequoia-Kings Canyon National Parks and Yosemite National Park during the period 2006-2018. 
 
 The mitigation efforts include the following:
 1. Treatment of young life stages with itraconazole in Barrett Lakes Basin (2009) and Dusy Basin (2010).
