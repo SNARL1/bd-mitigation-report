@@ -188,6 +188,7 @@ Therefore, when we used distributional models, we limit our descriptions of mode
 The models described in subsequent sections are the best-fit models that resulted from the workflow outlined above.
 We considered predictors of group- and population-level effects and family-specific parameters to be important when the 95% credible interval ("CI") of the estimates did not include zero, and relatively unimportant otherwise. 
 We provide the results of all analyses in tabular form, either in the Results section for analyses describing the outcome of treatment experiments, or in **Supporting Information** for related but less central analyses. 
+All datasets and code to replicate the analyses are available at https://github.com/SNARL1/bd-mitigation-report. 
 To interpret the coefficients from negative binomial models, note that there is a log link for the mean (and therefore Bd load data is on a log scale). In addition, for zero-inflated negative binomial models, there is a logit link for the zero-inflation component. 
 The key results from treatment experiments are also visualized using boxplots or dotplots. 
 We used the former when sample sizes were relatively large and the latter when sample sizes were small and boxplots were consequently less informative. 
