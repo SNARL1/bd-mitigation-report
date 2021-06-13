@@ -89,8 +89,8 @@ Fields
 - `visit_date`: Date on which the survey was conducted (YYYY-MM-DD).
 - `location`: Location within LeConte Basin where treatment experiment was conducted (lower, upper).
 - `category`: Type of survey (capture, cmr).
-- `primary period`: Identifier for the site visit. Added by `leconte-cmr-model.R` during analysis of CMR data. 
-- `secondary period`: Identifier for the survey within a site visit. Added by `leconte-cmr-model.R` during analysis of CMR data.  
+- `primary_period`: Identifier for the site visit. Added by `leconte-cmr-model.R` during analysis of CMR data. 
+- `secondary_period`: Identifier for the survey within a site visit. Added by `leconte-cmr-model.R` during analysis of CMR data.  
 
 #### treasure-captures-swabs.csv
 
