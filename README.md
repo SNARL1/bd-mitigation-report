@@ -19,5 +19,6 @@ Sections 1-3 are included in the manuscript **Effectiveness of antifungal treatm
 All raw data used in the analyses are in the `data` directory (see `README` file in that directory for details).
 All R code to analyze the data are in the `R` directory. 
 All R code and bibliography files to write the report/manuscript are in the `report` directory.
+Stan code used to fit the LeConte CMR model is in the `stan` directory. 
 
 This repository is maintained by Roland Knapp (roland.knapp(at)ucsb.edu).
