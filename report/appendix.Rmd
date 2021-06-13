@@ -215,7 +215,6 @@ We drew 3000 iterations for each of four chains, using a maximum treedepth of 11
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
 Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 
-\clearpage
 
 # Results {-}
 
