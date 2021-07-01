@@ -30,6 +30,13 @@ library(readr)
 library(kableExtra)
 ```
 
+\large Running head: Mitigating impacts of disease outbreaks
+
+Open Research statement: All datasets and code to replicate the analyses are available at https://github.com/SNARL1/bd-mitigation-report. 
+If the paper is accepted for publication, we will submit all datasets and computer code to the Dryad data repository.
+
+\bigskip
+
 ^1^ Sierra Nevada Aquatic Research Laboratory, University of California, Mammoth Lakes, California, 93546 USA, roland.knapp@ucsb.edu
 
 ^2^ Earth Research Institute, University of California-Santa Barbara, California, 93106 USA 
