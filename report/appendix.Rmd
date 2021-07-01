@@ -36,6 +36,8 @@ library(readr)
 library(kableExtra)
 ```
 
+\large Ecological Applications
+
 \linenumbers
 
 # Author Contributions {-}

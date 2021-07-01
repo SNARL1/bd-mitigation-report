@@ -56,17 +56,17 @@ Note: Author contributions are described in **Supporting Information**.
 
 # Abstract {-}
 
-The recently-emerged amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd) has had an unprecedented impact on global amphibian populations, and highlights the urgent need to develop effective mitigation strategies against this pathogen. 
+The recently-emerged amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd) has had an unprecedented impact on global amphibian populations, and highlights the urgent need to develop effective mitigation strategies. 
 We conducted field antifungal treatment experiments in populations of the endangered mountain yellow-legged frog during or immediately after Bd-caused mass die-off events. 
-The objective of the treatments was to reduce Bd infection intensity ("load") and in doing so alter frog-Bd dynamics and increase the probability of frog population persistence despite ongoing Bd infection. 
+The objective of treatments was to reduce Bd infection intensity ("load") and in doing so alter frog-Bd dynamics and increase the probability of frog population persistence despite ongoing Bd infection. 
 Experiments included treatment of early life stages (tadpoles and subadults) with the antifungal drug itraconazole, treatment of adults with itraconazole, and augmentation of the skin microbiome of subadults with *Janthinobacterium lividum*, a commensal bacterium with antifungal properties. 
 All itraconazole treatments caused immediate reductions in Bd load, and produced longer-term effects that differed between life stages.
 In experiments focused on early life stages, Bd load was reduced in the two months immediately following treatment and was associated with increased survival of subadults.
 However, Bd load and frog survival returned to pre-treatment levels in less than one year, and treatment had no effect on population persistence. 
 In adults, treatment reduced Bd load and increased frog survival over the three-year post-treatment period, consistent with frogs having developed an effective adaptive immune response against Bd. 
-Despite this protracted period of reduced impacts of Bd on adults, recruitment of new individuals into the adult population was limited and the population eventually declined to near-extirpation. 
+Despite this protracted period of reduced impacts of Bd on adults, recruitment into the adult population was limited and the population eventually declined to near-extirpation. 
 In the microbiome augmentation experiment, bathing frogs in a *J. lividum* solution after Bd load reduction with itraconazole increased concentrations of this bacterium on frogs, but concentrations declined to baseline levels within one month and did not have a protective effect against Bd infection. 
-Collectively, these results suggest that Bd mitigation efforts focused on frog populations that have recently declined due to Bd emergence are ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd and resulting high susceptibility. 
+Collectively, these results suggest that mitigation efforts focused on frog populations that have recently declined due to Bd emergence are ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd. 
 This results in repeated recruitment failure and a low probability of population persistence in the face of ongoing Bd infection. 
 
 *Keywords*: amphibian chytrid fungus, *Batrachochytrium dendrobatidis*, wildlife disease, epizootic, host population decline, antifungal treatment
@@ -613,7 +613,7 @@ Given possible evolution of increased resistance or tolerance in other amphibian
 
 # Acknowledgements {-}
 
-The research described in this paper was supported by grants from Sequoia and Kings Canyon National Parks, National Science Foundation–National Institutes of Health Ecology of Infectious Disease program (EF-0723563), National Science Foundation Rapid Response Research program (IOS-1244804), and National Science Foundation Long-term Research in Environmental Biology program (DEB-1557190). 
+The research described in this paper was supported by grants from Sequoia and Kings Canyon National Parks, National Science Foundation (NSF)–National Institutes of Health Ecology of Infectious Disease program (EF-0723563), NSF Rapid Response Research program (IOS-1244804), NSF Long-term Research in Environmental Biology program (DEB-1557190), and NSF IOS-1455873.  
 Development of this paper was supported by Cooperative Agreement P19AC00789 from the National Park Service.
 The following people assisted with fieldwork: A. Adams, A. Beechan, D. Burkhart, K. Atkinson, I. Chellman, B. Currinder, C. Dorsey, M. Hernandez, B. Karin, N. Kauffman, A. Killion, J. Lester, A. Lindauer, S. Maple, M. Masten, D. Paolilli, W. Philbrook, G. Ruso, A. Stoerp, and L. Torres. 
 L. Torres developed the *J. lividum* qPCR protocol while employed in the Vredenburg lab (San Francisco State University). 
