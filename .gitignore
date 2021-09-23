@@ -3,12 +3,12 @@
 .Rhistory
 .RData
 .Ruserdata
-out/figures/*
+out/figures/
+out/*.csv
 R-working/
 *.pdf
 *.log
 *.tex
 *.aux
 *.out
-fig
 stan/*.rds
