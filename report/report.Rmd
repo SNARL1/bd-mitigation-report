@@ -73,7 +73,7 @@ However, Bd load and frog survival returned to pre-treatment levels in less than
 In adults, treatment reduced Bd load and increased frog survival over the three-year post-treatment period, consistent with frogs having developed an effective adaptive immune response against Bd. 
 Despite this protracted period of reduced impacts of Bd on adults, recruitment into the adult population was limited and the population eventually declined to near-extirpation. 
 In the microbiome augmentation experiment, bathing frogs in a *J. lividum* solution after Bd load reduction with itraconazole increased concentrations of this bacterium on frogs, but concentrations declined to baseline levels within one month and did not have a protective effect against Bd infection. 
-Collectively, these results suggest that mitigation efforts focused on frog populations that have recently declined due to Bd emergence are ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd. 
+Collectively, these results indicate that our mitigation efforts were ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd. 
 This results in repeated recruitment failure and a low probability of population persistence in the face of ongoing Bd infection. 
 
 *Keywords*: amphibian chytrid fungus, *Batrachochytrium dendrobatidis*, wildlife disease, epizootic, host population decline, antifungal treatment
@@ -82,34 +82,36 @@ This results in repeated recruitment failure and a low probability of population
 
 Emerging infectious diseases are increasingly common in wildlife, often due to anthropogenic changes in the ecology of the host or pathogen [@daszak2000emerging; @cunningham2017one].
 Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems [@ostfeld2008infectious; @scheele2019amphibian].
-Diseases of wildlife can also spill over to humans and domestic animals [@alexander2018ecology]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
-As such, the ability to control diseases in wildlife is critically important, but disease management is often difficult because wildlife diseases are relatively poorly described, many fewer intervention measures (e.g., vaccines) are available than for humans, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. As a result, available management strategies are mostly insufficient to mitigate the destructive effects of disease on wildlife.
+Wildlife diseases can also spill over to humans and domestic animals [@alexander2018ecology]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
+As such, the ability to manage wildlife diseases is critically important. However, doing so is often challenging because wildlife diseases are poorly described, few intervention measures are available, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. 
 
-The amphibian disease chytridiomycosis is caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”). 
+One of the most destructive wildlife diseases in recorded history is the amphibian disease chytridiomycosis [@scheele2019amphibian], caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”). 
 This recently discovered pathogen [@berger1998chytridiomycosis; @longcore1999batrachochytrium] is thought to have originated in Asia [@ohanlon2018recent] and spread globally via human commerce [@schloegel2009magnitude]. 
 Bd is highly pathogenic to a wide range of amphibian taxa and, by one estimate, has caused the severe decline or extinction of at least 500 amphibian species [@scheele2019amphibian], with many more predicted to be at risk [@rodder2009global]. 
-In an effort to reduce the impact of chytridiomycosis, several mitigation measures have been suggested as means to increase the fraction of frogs surviving chytridiomycosis outbreaks, including treating frogs with antifungal agents (using drugs or augmentation of the skin microbiome with probiotics), treating the environment with antifungals to reduce the pool of infectious zoospores, and reducing host population density [@woodhams2011mitigating; @garner2016mitigating].
-However, recent mathematical modeling suggests that none of these three types of mitigation measures are likely to be universally effective at preventing chytridiomycosis-induced population extirpation, but treating frogs had the greatest likelihood of a beneficial outcome [@drawert2017using]. 
-Relatively few field tests of these treatment strategies have been conducted to date, and results from these trials indicate limited effectiveness in promoting host population persistence [@woodhams2012treatment; @garner2016mitigating].
-As such, despite years of research on Bd-host dynamics and possible mitigation measures, field-tested methods to prevent ongoing Bd-caused amphibian declines and extinctions are still lacking. 
+The pathogenesis of chytridiomycosis is the result of Bd infection disrupting cutaneous osmoregulatory function, leading to electrolyte imbalance and death [@voyles2009pathogenesis].
+Bd infection is transferred between hosts via an aquatic flagellated zoospore stage [@longcore1999batrachochytrium]. 
+Mechanisms facilitating the spread of Bd between amphibian populations are not well understood, but spatial spread is likely due in part to the dispersal of infected hosts [@vredenburg2010dynamics].  
 
-Mountain yellow-legged (“MYL”) frogs are emblematic of global amphibian declines, including those caused by Bd. 
+In an effort to reduce the impact of chytridiomycosis, several mitigation measures have been suggested as means to increase the fraction of amphibian hosts surviving chytridiomycosis outbreaks, including treating animals with antifungal agents (using drugs or augmentation of the skin microbiome with probiotics), treating the environment with antifungals to reduce the pool of infectious zoospores, and reducing host population density [@woodhams2011mitigating; @garner2016mitigating].
+However, results from field trials conducted to date, including treatment of individuals and reducing host population density, indicate only short-term effects on targeted populations and limited effectiveness in promoting host population persistence [@woodhams2012treatment; @garner2016mitigating].
+As such, despite the urgent need for effective mitigation measures, methods to prevent ongoing Bd-caused amphibian declines and extinctions are still lacking. 
+The difficulty of developing effective methods is further highlighted by recent mathematical modeling [@drawert2017using] that indicates that none of the three types of mitigation measures mentioned above are likely to be universally effective at preventing chytridiomycosis-induced population extirpation. 
+Nonetheless, this analysis suggested that treating individual hosts had the greatest likelihood of a beneficial outcome. 
+
+We used Bd epizootics occurring in populations of the endangered mountain yellow-legged frog to evaluate the effectiveness of individual-level treatments applied to different host life stages ("epizootic" is an outbreak of disease in a wildlife population). 
+Mountain yellow-legged ("MYL") frogs are emblematic of global amphibian declines, including those caused by Bd. 
 The MYL frog is a complex of two closely-related species, *Rana muscosa* and *Rana sierrae*, endemic to the mountains of California and adjacent Nevada, USA [@vredenburg2007concordant].
 During the past century, MYL frogs have disappeared from more than 90% of their historical localities [@vredenburg2007concordant] and are listed as “endangered” under the U.S. Endangered Species Act [@usfws2002determination; @usfws2014endangered]. 
 In the Sierra Nevada portion of their range, the primary causes of decline are the introduction of nonnative fish into naturally fishless water bodies and, more recently, the spread of Bd [@knapp2000nonnative; @vredenburg2010dynamics]. 
 MYL frogs are highly susceptible to chytridiomycosis.
-Arrival of Bd in a naive population typically results in rapid increases in Bd prevalence and infection intensity ("load"), and subsequent mass frog die-offs [@vredenburg2010dynamics]. 
-Such epizootics (epizootic = outbreak of disease in a wildlife population) generally lead to extirpation of the affected frog population, and hundreds of such extirpations have occurred in the past several decades as Bd spread across the Sierra Nevada [e.g., @rachowicz2006emerging; @vredenburg2010dynamics]. 
+Arrival of Bd in a naive population typically results in rapid increases in Bd prevalence and infection intensity ("load"), leading to subsequent mass frog die-offs [@vredenburg2010dynamics]. 
+Such epizootics generally lead to extirpation of the affected frog population, and hundreds of such extirpations have occurred in the past several decades as Bd spread across the Sierra Nevada [e.g., @rachowicz2006emerging; @vredenburg2010dynamics]. 
 Examples of affected populations transitioning to an enzootic state, in which host populations coexist with Bd in a relatively stable dynamic, are rare [@briggs2010enzootic].
 
-Empirical and modeling results from MYL frog populations indicate the primary role of Bd load in driving epizootics, and provide insights into the factors that might produce epizootic versus enzootic dynamics [@vredenburg2010dynamics; @briggs2010enzootic]. 
-Models developed for this system follow the number of infective Bd zoospores in a "zoospore pool" (i.e, a lake containing a population frogs) and the load on each frog.
-The growth rate of Bd is assumed to be an increasing function of host density, and frog mortality occurs when Bd load exceeds a threshold value [@briggs2010enzootic].
-Model results demonstrate that following Bd invasion into a naive host population, host extinction versus persistence can result solely from density-dependent host-pathogen dynamics. 
-This suggests that suppression of Bd loads (e.g., by reducing frog density or treating frogs with antifungal agents), could increase frog survivorship and the likelihood of long-term population persistence in an enzootic state. 
-Given the typical abundance of early life stages in naive MYL frog populations and their importance in driving frog-Bd dynamics [@briggs2010enzootic], treatments focused on early life stages could be particularly influential. 
-
-Although density-dependent frog-Bd dynamics alone can produce both epizootic and enzootic states, an adaptive immune response by frogs against Bd may increase the likelihood of an enzootic outcome [@woodhams2011mitigating]. 
+An understanding of the factors affecting whether a host population is driven to extinction following an epizootic or transitions to an enzootic state is critical for the development of effective mitigation measures. 
+The results of @briggs2010enzootic indicate that host extinction versus persistence can result solely from density-dependent host-pathogen dynamics. 
+This suggests that suppression of Bd loads (e.g., by reducing frog density or treating frogs with antifungal agents) could increase frog survivorship and the likelihood of long-term population persistence in an enzootic state. 
+An adaptive immune response by frogs against Bd may also increase the likelihood of an enzootic outcome [@woodhams2011mitigating]. 
 In contrast to the relatively low immunocompetence of early life stages [@rollins1998metamorphosis; @grogan2018review], adults of some species, including MYL frogs, can develop adaptive immune defenses that may be at least partially protective against Bd [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians].
 Antifungal treatments conducted during epizootics could slow the growth of Bd and allow the full development of adaptive immunity, which in turn could increase adult survival and population persistence [@woodhams2011mitigating]. 
 
@@ -117,15 +119,14 @@ Treatment of frogs using antifungal drugs is typically conducted as a short-term
 In contrast, a press perturbation that, by definition, is sustained over a longer time period, may have a higher probability of producing long-lasting outcomes. 
 One such press perturbation is the manipulation of the amphibian skin microbiome to shift the ambient microbial community to an alternative stable configuration that has stronger antifungal properties [@woodhams2014interacting; @bletz2013mitigating]. 
 The feasibility of such a manipulation is suggested by laboratory experiments in which augmentation of the skin microbiome with antifungal bacteria altered frog-Bd dynamics and increased frog survival [@harris2009skin; @kueneman2016probiotic; but see also @becker2011towards]. 
+However, field tests of the effectiveness of skin microbiome augmentations are currently lacking. 
 
-During 2009-2018, we conducted six field trials of antifungal treatments applied to *R. sierrae* populations during or soon after epizootics, with a goal of reducing Bd load and increasing frog survival and population persistence. 
+During 2009-2018, we conducted six field trials of antifungal treatments applied to *R. sierrae* populations during or soon after epizootics.
 Based on multiple years of skin swab collection [e.g., @vredenburg2010dynamics], all study populations were Bd-naive in the years prior to the epizootic and subsequent treatment.
 Trials included (1) two treatments of early life stages (tadpoles and recently metamorphosed subadults) with the antifungal drug itraconazole [@garner2009using], (2) three treatments of adults with itraconazole, and (3) one manipulation of the frog skin microbiome that involved exposing subadult frogs to *Janthinobacterium lividum*, a symbiotic bacterium on amphibian skin that has antifungal properties [@brucker2008amphibian]. 
-
-All six antifungal treatments changed frog-Bd dynamics, and most increased frog survival. 
-However, they failed to accomplish the ultimate objective of increasing the probability of frog population persistence, and all populations declined to extirpation or near-extirpation during the study periods. 
-Nevertheless, the detailed results from multiple treatments across different life stages is unusual, and collectively allow important insights into the repeatability of treatment outcomes and the reasons for the failure of treatments to influence population persistence. 
-These insights are essential for the future development of mitigation measures that accomplish this important objective in the face of one of the most devastating wildlife diseases in recorded history [@scheele2019amphibian].
+We predicted that the treatments would reduce Bd load on individuals, increase frog survivorship, and allow the long-term persistence of the treated population despite ongoing Bd infection (i.e., in an enzootic state). 
+We include all six treatments here because the collective results from multiple treatments across different life stages provide important insights into the repeatability of treatment outcomes and the mechanisms underlying treatment outcomes. 
+These insights are essential for the development of effective mitigation measures against this unusually devastating wildlife disease [@scheele2019amphibian].
 
 # Methods {-}
 
