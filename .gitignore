@@ -3,8 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
-data/clean/
-out/figures/
+out/figures/*
 R-working/
 *.pdf
 *.log
