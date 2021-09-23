@@ -1,0 +1,16 @@
+Basin,Site_ID,Experiment,Life_stage,Category,Elevation (m),Depth (m),Area (m^2)
+Barrett,11469,itraconazole,early,treated,3383,2.7,3875
+Barrett,11491,itraconazole,early,treated,3530,5,2316
+Barrett,11493,itraconazole,early,treated,3459,0.6,269
+Barrett,11470,itraconazole,early,control,3383,5,3998
+Barrett,10222,itraconazole,early,control,3554,5.2,10568
+Barrett,11495,itraconazole,early,control,3459,1,970
+Dusy,11518,itraconazole,early,treated,3408,1,2002
+Dusy,11526,itraconazole,early,treated,3219,1.9,2966
+Dusy,11506,itraconazole,early,treated,3469,1.8,1414
+Dusy,11517,itraconazole,early,control,3395,0.8,816
+Dusy,11525,itraconazole,early,control,3158,1.2,2604
+LeConte,10101,itraconazole,adult,treated,3213,1.5,5187
+LeConte,10100,itraconazole,adult,treated,3298,14.9,25974
+Treasure,50839,itraconazole,adult,treated,3410,11,34317
+Dusy,11518,itracon + Jliv,subadult,treated,3408,1,2002

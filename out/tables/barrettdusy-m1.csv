@@ -1,0 +1,6 @@
+,Estimate,Est.Error,l-95%CI,u-95%CI,Rhat,Bulk_ESS,Tail_ESS
+Intercept,11.99,0.55,11.05,13.21,1,2273,1948
+treatment(treated),0.15,0.77,-1.39,1.64,1,1956,1993
+basin(dusy),-1.36,0.7,-2.81,-0.02,1,2058,1797
+treatment(treated):basin(dusy),1.36,0.93,-0.54,3.17,1,1842,1705
+overdispersion,0.3,0.04,0.23,0.39,1,2777,2617

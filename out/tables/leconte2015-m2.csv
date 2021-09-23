@@ -1,0 +1,6 @@
+,Estimate,Est.Error,l-95%CI,u-95%CI,Rhat,Bulk_ESS,Tail_ESS
+Intercept,16.11,0.11,15.9,16.32,1,4204,3258
+location(upper),0.54,0.19,0.16,0.93,1,3486,3216
+trt_period(endtreat),-2.66,0.22,-3.07,-2.23,1,3170,3162
+location(upper):trt_period(endtreat),1.15,0.38,0.41,1.89,1,3040,2980
+overdispersion,0.31,0.01,0.29,0.34,1,3988,2862
