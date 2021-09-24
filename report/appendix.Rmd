@@ -72,12 +72,13 @@ VES is commonly used in studies of MYL frogs to estimate the abundance of all li
 For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period. 
 Holding animals in pens assured that each animal could be captured and treated on each day of the treatment period; this would not have been possible if animals needed to be recaptured from the ponds each day. 
 Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night (Figure S1). 
-Animals assigned to the untreated "control" group were held in pens only 3-24 hr and then released back into the lake. 
+Animals assigned to the untreated "control" group were held in pens only 3-24 hr (to prevent resampling the same individuals) and then released back into the lake. 
 
 Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the treatment period, doing so could have produced spurious and misleading results. 
 Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
 This would have biased the outcome toward lower survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on survival. 
-Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals.
+Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals. 
+Including a second control group, in which were untreated animals were held for the entire treatment period, could have been informative, but would have substantially reduced the number of animals included in the existing treated and control groups, and potentially affected our ability to detect treatment effects. 
 
 To conduct the antifungal treatments, on each day during the multi-day treatment period we transferred all animals in the treated group from pens to small plastic tubs that contained a dilute solution [1.5 mg L^‑1^; @garner2009using] of the antifungal drug itraconazole (trade name = Sporonox). 
 The volume of itraconazole solution varied between 2 and 5 L and allowed all life stages to submerge fully. 
