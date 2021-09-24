@@ -36,7 +36,7 @@ library(readr)
 library(kableExtra)
 ```
 
-\large Ecological Applications
+\large PeerJ
 
 \linenumbers
 
@@ -61,6 +61,30 @@ Andrea Jani assisted with the LeConte treatment, and conducted the Dusy Basin zo
 Cheryl Briggs provided modeling results that motivated the treatments, assisted with the design of treatments, and reviewed all drafts of the manuscript.  
 
 # Methods {-}
+
+## Visual encounter surveys {-}
+
+We counted *R. sierrae* of all life stages (adults: $\geq$ 40 mm snout-vent length (SVL); subadults: <&nbsp;40 mm; tadpoles) using diurnal visual encounter surveys (VES) of the entire water body shoreline and the first 100 m of inlet and outlet streams. 
+VES is commonly used in studies of MYL frogs to estimate the abundance of all life stages present at a site [e.g., vredenburg2010dynamics; knapp2016large; @knapp2000nonnative]. Counts are highly repeatable [@knapp2000nonnative], but underestimate the number of animals present.
+
+## Itraconazole treatment {-}
+
+For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period. 
+Holding animals in pens assured that each animal could be captured and treated on each day of the treatment period; this would not have been possible if animals needed to be recaptured from the ponds each day. 
+Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night (Figure S1). 
+Animals assigned to the untreated "control" group were held in pens only 3-24 hr and then released back into the lake. 
+
+Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the treatment period, doing so could have produced spurious and misleading results. 
+Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
+This would have biased the outcome toward lower survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on survival. 
+Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals.
+
+To conduct the antifungal treatments, on each day during the multi-day treatment period we transferred all animals in the treated group from pens to small plastic tubs that contained a dilute solution [1.5 mg L^‑1^; @garner2009using] of the antifungal drug itraconazole (trade name = Sporonox). 
+The volume of itraconazole solution varied between 2 and 5 L and allowed all life stages to submerge fully. 
+We treated frogs in batches of approximately 50, and tadpoles in batches of approximately 100. 
+After 10 minutes, animals were transferred from the tubs back to the pens. 
+To determine treatment effectiveness, we re-swabbed all animals or a subset (depending on the experiment) at the end of the treatment period. 
+After the final treatment, we released all animals from the pens back into the study lakes.
 
 ## Estimating the zoospore pool from water samples  {-}
 
@@ -100,8 +124,24 @@ The amplification conditions consisted of an initial cycle of 2 min at 50&deg;C 
 To create standards, DNA was extracted from pure cultures of *J. lividum* with an UltraClean microbial DNA isolation kit (MoBio), and diluted to 10^4^, 10^3^, 10^2^, and 10^1^ *J. lividum* genome equivalents. 
 A standard curve was generated for each 96-well plate to estimate the number of *J. lividum* genome equivalents in sample extracts.
 
+## Statistical analyses
 
-## Hidden Markov model for the LeConte treatment experiment {-}
+### Simple and multilevel models using the brms package
+
+When using the brms package, our analysis workflow included starting with a model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
+When suggested by the data structure or measures of model fit, we evaluated other model families or added group-level ("random") effects to the model. 
+We compared fits of models using LOO cross-validation and the *loo* package [@vehtari2017practical]. 
+For all models, we used brms defaults for priors, number of chains (4), and warmup and post-warmup iterations (1000 for each). We evaluated the adequacy of posterior samples using trace plots, Gelman-Rubin statistics (Rhat), and measures of effective sample size ("bulk-ESS", "tail-ESS"). 
+When using negative binomal models (most analyses), the Bd load data were rounded to integer values to produce count data. 
+
+When necessary, we developed distributional models in which predictor terms are specified for other parameters of the response distribution instead of only the mean (e.g., negative binomial overdispersion ("shape"), zero-inflation ("zi"); see brms vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
+The overdispersion parameter $\phi$ controls the variance of the negative binomial distribution relative to the expected value $\mu$, such that the variance of the negative binomial distribution is $\mu + \mu^2 / \phi$. 
+Modeling effects on overdispersion and zero-inflation can be important for improving model fit. 
+For example, itraconazole treatment can reduce not only mean Bd load, but also the variation around the mean (i.e, overdispersion) and amount of zero-inflation. 
+Improving model fit was our primary interest in using distributional models, and not gaining insights into the causes of overdispersion or zero-inflation. 
+Therefore, when we used distributional models, we limit our descriptions of model results largely to effects of predictors on the mean. 
+
+### Hidden Markov model for the LeConte treatment experiment {-}
 
 We tracked the fates of individual animals in the LeConte population using a multi-state hidden Markov model. 
 We consider three possible observations for each individual $i=1, ..., M$ in primary period $t=1, ..., T$, on secondary period $j=1, ..., J_t$, where $T$ is the total number of primary periods and $J_t$ is the number of secondary periods in primary period $t$: 
@@ -132,9 +172,7 @@ Four states are possible:
 \end{itemize}
 
 
-### Observation model {-}
-
-An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
+*Observation model*. An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
 The rows in $\matr{\Omega}^{(t)}$ correspond to the state of an individual in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
 
 \[
@@ -157,9 +195,7 @@ $$\text{logit}(p_t) = \alpha_0 + \epsilon^{(p)}_t,$$
 
 where $\alpha_0$ is an intercept parameter, and $\epsilon^{(p)}_t$ is an adjustment on detection probability for primary period $t$.
 
-### State model {-}
-
-The hidden states of each individual evolve as a Markov process with transition matrix $\matr{\Psi}^{(i, t)}$, where the element in the $m^{th}$ row, $n^{th}$ column is $\text{Pr}(s_{i, t+1} = n \mid s_{i, t} = m)$:
+*State model*. The hidden states of each individual evolve as a Markov process with transition matrix $\matr{\Psi}^{(i, t)}$, where the element in the $m^{th}$ row, $n^{th}$ column is $\text{Pr}(s_{i, t+1} = n \mid s_{i, t} = m)$:
 \[
 \matr{\Psi}^{(i, t)} =
 \begin{blockarray}{ccccc}
@@ -187,9 +223,7 @@ Initial states are not known for non-experimental animals, which could have been
 Note that we are only interested in modeling the state and capture histories of animals that might have been alive. 
 We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution for non-experimental frogs, which assigns equal prior density to each initial state.
 
-### Bd load model {-}
-
-We modeled Bd loads as being normally distributed on a transformed scale. 
+*Bd load model*. We modeled Bd loads as being normally distributed on a transformed scale. 
 Raw Bd loads were transformed using a $\log_{10}$ + 1 transformation, then centered and scaled to have mean zero and unit standard deviation (in an attempt to avoid ill-conditioning, as expected Bd load is used in the detection and survival model components).
 Let $z^{\text{obs}}_{i, t}$ represent the observed transformed Bd load, and $z_{i, t}$ represent the expected value for individual $i$ on primary period $t$.
 The observation model for Bd loads of detected individuals was Gaussian on the transformed scale: 
@@ -210,9 +244,7 @@ We expected movement among sites to be rare, so both movement parameters ($\nu^{
 Primary period and individual-level adjustments were modeled using zero-mean normal distributions with unknown standard deviations specific to the process of interest, e.g., for the probability of entering the population: $[\lambda_{1:T}] = \prod_{t = 1}^{T} \text{Normal}(\lambda_t | 0, \sigma^{(\lambda)})$. 
 Standard deviation parameters were given unit scale half normal priors, and all remaining parameters were given unit scale normal priors.
 
-### Inference {-}
-
-We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte Carlo in Stan. 
+*Inference*. We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte Carlo in Stan. 
 We drew 3000 iterations for each of four chains, using a maximum treedepth of 11 and an adapt_delta value of 0.99.
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
 Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
@@ -227,6 +259,9 @@ After treatment, zoospore pools in control ponds may have increased slightly, bu
 Model results indicated that the estimated effects of treatment, basin, and the (treatment x basin) interaction term were all unimportant (Table S5). 
 Therefore, assuming that the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not measurably alter the zoospore pools. 
 To avoid the high number of false-negative filters obtained using our methods, future studies attempting to quantify zoospore pools should consider using methods that allow filtering of larger volumes of water. 
+
+## Hidden Markov model for the LeConte treatment experiment
+
 
 
 # Literature Cited {-}
