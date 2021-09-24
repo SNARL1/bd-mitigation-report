@@ -138,14 +138,27 @@ In some cases, this remoteness and wilderness regulations constrained potential 
 
 Bd-caused epizootics and resulting mass die-offs of *R. sierrae* occurred in Barrett Lakes Basin during 2005 to 2007 [@vredenburg2010dynamics] and in Dusy Basin in 2009 [@jani2017epidemic]. 
 In an effort to prevent the extirpation of remnant populations, itraconazole treatments were conducted during mid-summer of 2009 in Barrett and 2010 in Dusy. 
-Because adults typically succumb to chytridiomycosis early in an epizootic [@vredenburg2010dynamics], at the time of the experiments these populations contained only late-stage tadpoles and recently metamorphosed subadults. 
+Because adults typically succumb to chytridiomycosis early in an epizootic [@vredenburg2010dynamics], at the time of the experiments these populations contained primarily late-stage tadpoles and recently metamorphosed subadults. 
 We used results from basin-wide visual encounter surveys (VES; see **Supporting Information** for details) conducted prior to the experiments to identify the largest remaining populations, and these assigned to treated and control groups at random. 
 The Barrett experiment included three treated and three control populations, and in Dusy, where fewer frog populations remained extant, a total of three treated and two control populations were used (Table S1). 
 Based on VES conducted before and during the treatments, we estimate that we treated 70-90% of each population.
 
+```{r read-animal-stagesize, include=FALSE}
+library(magrittr)
+stage <- readr::read_csv(here::here("data", "dusybarrett-20092010-captures.csv")) %>%
+  dplyr::select(basin, visit_date, treatment, species, stage, tad_stage) %>% 
+  dplyr::filter(treatment == "treated",
+              stage == "tadpole",
+              (visit_date >= "2009-07-29" & visit_date <= "2009-08-01" | visit_date == "2010-07-27")) 
+minstage <- min(stage$tad_stage)
+maxstage <- max(stage$tad_stage)
+medianstage <- median(stage$tad_stage)
+# tibble::tibble(stats = c("min", "max", "median"),
+#       vals = c(minstage, maxstage, medianstage))
+```
 In the Barrett experiment, during July 29 to August 1 we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information** for details). 
-Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics; additional details provided below]. 
-Swabbed tadpoles were also staged [@gosner1960simplified] and subadults were measured (snout-vent length) and weighed. 
+Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details provided below]. <!-- Make statement more explicit about what details are provided? -->
+Swabbed tadpoles were also staged [@gosner1960simplified, tadpole stages included in experiment: range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
 Daily itraconazole treatments (see **Supporting Information** for details) were conducted during the period July 30 -- August 5, and animals were treated from four to seven times, depending on the day of capture. 
 To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment. 
 A total of 977 tadpoles and 65 subadults were treated and released back into the study ponds. <!-- Add mortality info -->
@@ -215,7 +228,7 @@ Therefore, given that subadults in the study population had high Bd loads, prior
 Subadults were captured on July 12-13 (n = 331), measured, weighed, and assigned at random to treated and control groups at a ratio of approximately 4:1 (271 treated, 60 control). 
 This ratio was chosen to maximize the number of subadults receiving antifungal treatment while maintaining a sufficiently large control group. 
 All animals were given group-specific toe-clips: (i) control = toe 2 on left front foot, and (ii) itraconazole + *J. lividum* = toe 2 on right front foot. 
-We used toe clips because PIT tags are too large to be used with subadults, and other tagging methods tested in pre-experiment trials gave unsatisfactory results [e.g., brannelly2014comparison]. 
+We used toe clips because PIT tags are too large to be used with subadults, and other tagging methods tested in pre-experiment trials gave unsatisfactory results [e.g., @brannelly2014comparison]. 
 Following processing, subadults in the treated and control groups were held in separate mesh pens. 
 To determine pre-itraconazole Bd loads, a subset of subadults from both groups were swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily on July 12-18 (see **Supporting Information** for details). 
 The number of animals in the treated group declined somewhat during this period due to Bd-caused mortality and occasional predation by gartersnakes <!--provide specifics-->. 
@@ -265,7 +278,7 @@ Adding a group-level effect of site_id did not improve model fit, indicating tha
 The immediate effect of treatment on Bd load was assessed using the model *bd_load ~ stage + (trt_period x basin)* (family = zero-inflated negative binomial, stage = [tadpole, subadult], trt_period = [begin, end of treatment period]). 
 We were able to include life stage in this model because many tadpoles metamorphosed into subadults during the treatment, producing a more balanced representation of life stages across sites. 
 Plots of conditional effects suggested substantial differences in Bd load variation between life stages, treatment categories, and basins. 
-Therefore, the overdispersion parameter was modeled as a function of all three predictor variables. 
+Therefore, the overdispersion parameter was modeled as a function of all three predictor variables. <!-- Explain why stage variable is okay to use. Lack of independence suggested by reviewer not the case because of minimal overlap between animals swabbed at beginning and end of treatment -->
 
 The effect of treatment on post-release Bd loads was evaluated using the model *bd_load ~ stage + basin + (year_std x treatment) + (1 | site_id)* (family = zero-inflated negative binomial, year_std is a dummy variable in which 0 = year of treatment and 1 = year after treatment, site_id included as a group-level effect). 
 Plots of conditional effects suggested substantial differences in Bd load variation between life stages, basins, years, and treatment groups, and therefore the overdispersion parameter was modeled as a function of all four predictor variables. 
