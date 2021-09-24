@@ -812,6 +812,8 @@ Given possible evolution of increased resistance or tolerance in other amphibian
 
 # Acknowledgements {-}
 
+**This is a trivial edit made by TomCSmith on 24 Sep 2021 at 1641 h.**
+
 The research described in this paper was supported by grants from Sequoia and Kings Canyon National Parks, National Science Foundation (NSF)–National Institutes of Health Ecology of Infectious Disease program (EF-0723563), NSF Rapid Response Research program (IOS-1244804), NSF Long-term Research in Environmental Biology program (DEB-1557190), and NSF IOS-1455873.  
 Development of this paper was supported by Cooperative Agreement P19AC00789 from the National Park Service.
 The following people assisted with fieldwork: A. Adams, A. Beechan, D. Burkhart, K. Atkinson, I. Chellman, B. Currinder, C. Dorsey, M. Hernandez, B. Karin, N. Kauffman, A. Killion, J. Lester, A. Lindauer, S. Maple, M. Masten, D. Paolilli, W. Philbrook, G. Ruso, A. Stoerp, and L. Torres. 
