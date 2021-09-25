@@ -81,9 +81,9 @@ Assuming that holding animals in pens for several days has some negative effect 
 Including a second control group, in which were untreated animals were held for the entire treatment period, could have been informative, but would have substantially reduced the number of animals included in the existing treated and control groups, and potentially affected our ability to detect treatment effects. 
 
 To conduct the antifungal treatments, on each day during the multi-day treatment period we transferred all animals in the treated group from pens to small plastic tubs that contained a dilute solution [1.5 mg L^‑1^; @garner2009using] of the antifungal drug itraconazole (trade name = Sporonox). 
-The volume of itraconazole solution varied between 2 and 5 L and allowed all life stages to submerge fully. 
 We treated frogs in batches of approximately 50, and tadpoles in batches of approximately 100. 
-After 10 minutes, animals were transferred from the tubs back to the pens. 
+The volume of itraconazole solution varied between 2 and 5 L, and was varied between batches based on the number and life stage of animals being treated to allow all individuals to submerge fully. 
+After 10 minutes of itraconazole exposure, animals were transferred from the tubs back to the pens. 
 To determine treatment effectiveness, we re-swabbed all animals or a subset (depending on the experiment) at the end of the treatment period. 
 After the final treatment, we released all animals from the pens back into the study lakes.
 
@@ -129,11 +129,13 @@ A standard curve was generated for each 96-well plate to estimate the number of 
 
 ### Simple and multilevel models using the brms package
 
-When using the brms package, our analysis workflow included starting with a model that included all relevant population-level ("fixed") effects and their interactions, and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
-When suggested by the data structure or measures of model fit, we evaluated other model families or added group-level ("random") effects to the model. 
+When using the brms package, our analysis workflow included starting with a model that included all relevant population-level ("fixed") effects and their interactions ("full model"), and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
+When data contained possible hierarchical structure (which could result in non-independence), we added group-level ("random") effects to the full model. 
+Bd load and frog counts were the most commonly modeled response variables, and models that used a negative binomial family generally produced the best fit. 
+However, when appropriate, we also evaluated the fit of models that used other model families, including Poisson and zero-inflated negative binomial. 
 We compared fits of models using LOO cross-validation and the *loo* package [@vehtari2017practical]. 
 For all models, we used brms defaults for priors, number of chains (4), and warmup and post-warmup iterations (1000 for each). We evaluated the adequacy of posterior samples using trace plots, Gelman-Rubin statistics (Rhat), and measures of effective sample size ("bulk-ESS", "tail-ESS"). 
-When using negative binomal models (most analyses), the Bd load data were rounded to integer values to produce count data. 
+When using negative binomial models (most analyses), the Bd load data were rounded to integer values to produce count data. 
 
 When necessary, we developed distributional models in which predictor terms are specified for other parameters of the response distribution instead of only the mean (e.g., negative binomial overdispersion ("shape"), zero-inflation ("zi"); see brms vignette, "Estimating distributional models with brms": https://paul-buerkner.github.io/brms/articles/brms_distreg.html). 
 The overdispersion parameter $\phi$ controls the variance of the negative binomial distribution relative to the expected value $\mu$, such that the variance of the negative binomial distribution is $\mu + \mu^2 / \phi$. 
