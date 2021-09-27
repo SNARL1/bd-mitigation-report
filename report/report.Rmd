@@ -131,7 +131,7 @@ These insights are essential for the development of effective mitigation measure
 # Methods {-}
 
 The six field trials were conducted at sites located in the remote backcountry of Kings Canyon National Park or the adjacent Inyo National Forest (California, USA), at elevations of 3150-3550 m. 
-These sites are ten to 26 km from the nearest road, and were accessed on foot. 
+These sites are ten to 26 km from the nearest road, and all experiment-related supplies were carried in and out on foot. 
 In some cases, this remoteness and wilderness regulations constrained potential study designs. 
 
 ## Itraconazole treatment of early life stages {-}
@@ -157,7 +157,7 @@ medianstage <- median(stage$tad_stage)
 #       vals = c(minstage, maxstage, medianstage))
 ```
 In the Barrett experiment, during July 29 to August 1 we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information** for details). 
-Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details provided below]. <!-- Make statement more explicit about what details are provided? -->
+Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details provided below]. <!-- Be more explicit about what details are provided in paranthetical text? -->
 Swabbed tadpoles were also staged [@gosner1960simplified, tadpole stages included in experiment: range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
 Daily itraconazole treatments (see **Supporting Information** for details) were conducted during the period July 30 -- August 5, and animals were treated from four to seven times, depending on the day of capture. 
 To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment. 
@@ -235,9 +235,9 @@ The number of animals in the treated group declined somewhat during this period 
 
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19, a concentrated solution of *J. lividum* culture was transported into Dusy Basin on foot in an insulated container.
-On July 19-20, we bathed the itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively; concentration of *J. lividum* is unknown). <!-- explain why -->
+On July 19-20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (all subadults treated once per day over two day; 75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively; concentration of *J. lividum* is unknown). <!-- explain why -->
 At the conclusion of the second *J. lividum* bath, all animals were released back into the pond.
-The solution of *J. lividum* culture was carried out of the backcountry and disposed of.  
+The solution of *J. lividum* culture was carried out of the backcountry and disposed of.  <!--Add sentence describing swabbing of itraconazole-treated frogs immediately prior to Jliv exposure. Objective, etc. --> 
 
 To evaluate the effects of the combined itraconazole-*J. lividum* treatment, we surveyed the study population during the summers of 2012 (n = 3 surveys), 2013 (n = 3), 2014 (n = 1), and 2019 (n = 1). 
 During each of these surveys, we conducted VES and captured and swabbed as many subadult frogs as possible (no adults were captured), and recorded the toe-clip (if present) for each individual. 
@@ -718,7 +718,9 @@ In the following sections we summarize the key results from our treatments and h
 
 ## Itraconazole treatment of early life stages {-}
 
-In the two itraconazole treatment experiments that focused on early life stage *R. sierrae* (Dusy and Barrett basins), Bd loads were reduced in treated populations and remained relatively low during the summer in which the treatment was conducted.
+The two itraconazole treatment experiments that focused on early life stage *R. sierrae* (Dusy and Barrett basins) produced very similar longer-term results, indicating high repeatability between basins and years. 
+The similar outcomes also suggest that the differences in number of itraconazole treatments to which study animals were exposed in the Barrett and Dusy experiments (4-7 versus seven treatments per population, respectively) had little if any effect on longer-term treatment results. 
+In both basins, Bd loads were reduced in treated populations and remained relatively low during the summer in which the treatment was conducted.
 In addition, this reduction in Bd load was associated with increased survival of subadults (as measured by increased numbers of subadults counted during VES). 
 However, treatment effects were short-lived. 
 Within a year, Bd loads returned to the high levels characteristic of the control populations, and subadult survival was reduced to zero or near-zero. 

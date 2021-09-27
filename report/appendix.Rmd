@@ -174,6 +174,7 @@ Four states are possible:
     \item $s_{i, t} = 4$ dead
 \end{itemize}
 
+The "not recruited" state applies to individuals that have not yet entered the population, including individuals that haven't reached adulthood or pseudo-individuals created via data augmentation (as described above). 
 
 *Observation model*. An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
 The rows in $\matr{\Omega}^{(t)}$ correspond to the state of an individual in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
