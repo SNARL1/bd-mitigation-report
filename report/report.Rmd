@@ -233,11 +233,12 @@ Following processing, subadults in the treated and control groups were held in s
 To determine pre-itraconazole Bd loads, a subset of subadults from both groups were swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily on July 12-18 (see **Supporting Information** for details). 
 The number of animals in the treated group declined somewhat during this period due to Bd-caused mortality and occasional predation by gartersnakes <!--provide specifics-->. 
 
+Immediately prior to the first *J. lividum* bath, we swabbed a subset of itraconazole-treated frogs to estimate their background level of *J. lividum*.
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19, a concentrated solution of *J. lividum* culture was transported into Dusy Basin on foot in an insulated container.
-On July 19-20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (all subadults treated once per day over two day; 75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively; concentration of *J. lividum* is unknown). <!-- explain why -->
-At the conclusion of the second *J. lividum* bath, all animals were released back into the pond.
-The solution of *J. lividum* culture was carried out of the backcountry and disposed of.  <!--Add sentence describing swabbing of itraconazole-treated frogs immediately prior to Jliv exposure. Objective, etc. --> 
+On July 19 and again on July 20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively). 
+At the conclusion of the second *J. lividum* bath, all animals were released back into the pond and the solution of *J. lividum* culture was carried out of the backcountry and disposed of.
+Because the survival of *J. lividum* during the two day period of transport and holding is unknown and we were unable to make counts of live cells in the field, the concentration of *J. lividum* to which frogs were exposed is also unknown. 
 
 To evaluate the effects of the combined itraconazole-*J. lividum* treatment, we surveyed the study population during the summers of 2012 (n = 3 surveys), 2013 (n = 3), 2014 (n = 1), and 2019 (n = 1). 
 During each of these surveys, we conducted VES and captured and swabbed as many subadult frogs as possible (no adults were captured), and recorded the toe-clip (if present) for each individual. 
