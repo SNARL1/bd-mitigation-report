@@ -88,9 +88,12 @@ As such, the ability to manage wildlife diseases is critically important. Howeve
 One of the most destructive wildlife diseases in recorded history is the amphibian disease chytridiomycosis [@scheele2019amphibian], caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”). 
 This recently discovered pathogen [@berger1998chytridiomycosis; @longcore1999batrachochytrium] <!--is thought to have originated in Asia [@ohanlon2018recent] and spread globally via human commerce [@schloegel2009magnitude]. 
 Bd--> is highly pathogenic to a wide range of amphibian taxa and, by one estimate, has caused the severe decline or extinction of at least 500 amphibian species [@scheele2019amphibian], with many more predicted to be at risk [@rodder2009global]. 
+<!--The following sentences were added to satisfy a reviewer, but I removed them because I didn't think they felt necessary. Sorry. That suggests we should leave them in. -->
 <!--The pathogenesis of chytridiomycosis is the result of Bd infection disrupting cutaneous osmoregulatory function, leading to electrolyte imbalance and death [@voyles2009pathogenesis].
 Bd infection is transferred between hosts via an aquatic flagellated zoospore stage [@longcore1999batrachochytrium]. -->
 <!--Mechanisms facilitating the spread of Bd between amphibian populations are not well understood, but spatial spread is likely due in part to the dispersal of infected hosts [@vredenburg2010dynamics].  -->
+<!--Whether those sentences are added/removed, I think the new paragraph at 'In an effort...' is an improvement.-->
+
 In an effort to reduce the impact of chytridiomycosis and increase the fraction of amphibian hosts that survive chytridiomycosis outbreaks, several mitigation measures have been suggested and tested, including treating hosts with antifungal agents (drugs or augmentation of skin microbiome with anti-fungal bacteria), treating the environment with antifungals to reduce abundance of zoospores that hosts encounter, and reducing host population density [@woodhams2011mitigating; @garner2016mitigating].
 However, existing field trials indicated only short-term effects on targeted populations and limited effectiveness in promoting host population persistence [@woodhams2012treatment; @garner2016mitigating].
 <!--As such, despite the urgent need for effective mitigation measures, methods to prevent ongoing Bd-caused amphibian declines and extinctions are still lacking. -->
@@ -101,15 +104,15 @@ Furthermore, modeling suggests that while any one of these approaches alone is u
 <!-- Nonetheless, this analysis suggested that treating individual hosts had the greatest likelihood of a beneficial outcome.-->
 <!-- I agree with the need for this statement, but as of this revision, I feel like it doesn't fit/flow with this paragraph  -->
 
-To evaluate the effectiveness of individual-level treatments applied to different host life stages, we leveraged Bd epizootics occurring in populations of the endangered mountain yellow-legged frog.  <!-- I removed the definition of epizootic that had been in the prior version of this sentence; how I had interpreted the reviewer comment  -->
+To evaluate the effectiveness of individual-level treatments applied to different host life stages, we leveraged Bd epizootics occurring in populations of the endangered mountain yellow-legged frog.  <!-- I removed the definition of epizootic that had been in the prior version of this sentence; I had interpreted the reviewer comment as suggesting that the whole definition be removed.  -->
 Mountain yellow-legged ("MYL") frogs are emblematic of global amphibian declines, including those caused by Bd. 
 The MYL frog is a complex of two closely-related species, *Rana muscosa* and *Rana sierrae*, endemic to the mountains of California and adjacent Nevada, USA [@vredenburg2007concordant].
-During the past century, MYL frogs disappeared <!-- I don't love the word disappear because it sounds mysterious, which it isn't; however, synonyms like 'were extirpated' require passive voice --> from more than 90% of their historical localities [@vredenburg2007concordant] and are listed as “endangered” under the U.S. Endangered Species Act [@usfws2002determination; @usfws2014endangered]. 
+During the past century, MYL frogs disappeared <!-- I don't love the word disappear because it sounds mysterious, which it isn't; however, the synonyms that I can currently think of, like 'were extirpated', require passive voice --> from more than 90% of their historical localities [@vredenburg2007concordant] and are listed as “endangered” under the U.S. Endangered Species Act [@usfws2002determination; @usfws2014endangered]. 
 In the Sierra Nevada portion of their range, the primary causes of decline are the introduction of nonnative fish into naturally fishless water bodies and, more recently, the spread of Bd [@knapp2000nonnative; @vredenburg2010dynamics]. 
 MYL frogs are highly susceptible to chytridiomycosis.
 Arrival of Bd in a naive population typically results in rapid increases in Bd prevalence, and in individual infection intensities ("load") leading to subsequent mass frog mortality [@vredenburg2010dynamics]. 
 Such epizootics generally extirpate affected frog populations, and hundreds of such extirpations have occurred in the past several decades as Bd spread across the Sierra Nevada [e.g., @rachowicz2006emerging; @vredenburg2010dynamics]. 
-Examples of affected populations transitioning to an enzootic state, in which host populations and Bd coexist, <!-- removed 'in a relatively stable dynamic'; R2 latched onto 'stability' which can be a confusing term even with lots of explanation; 'coexist' should be sufficient to say that both are present over time--> are rare [@briggs2010enzootic].
+Examples of affected populations transitioning to an enzootic state, in which host populations and Bd coexist, are rare [@briggs2010enzootic]. <!--I  removed 'in a relatively stable dynamic' from preceding sentence; R2 latched onto 'stability' which can be a confusing term even with lots of explanation; 'coexist' should be sufficient to say that both are present over time-->
 
 <!-- Understanding the factors that affect whether a host population is extirpated by an epizootic or transitions to an enzootic state is critical to development of effective mitigation measures. -->
 The interaction between the host and pathogen influence whether the host population is extirpated by an epizootic or transitions to an enzootic state and remains extant. 
@@ -120,23 +123,21 @@ In contrast to the relatively low immunocompetence of early life stages [@rollin
 Antifungal treatments conducted during epizootics could slow the growth of Bd and allow the full development of adaptive immunity, which in turn could increase adult survival and population persistence [@woodhams2011mitigating]. 
 <!--Treatment of frogs using antifungal drugs is typically conducted as a short-term pulse perturbation, and the ability of such short-term actions to cause long-lasting changes in frog-Bd dynamics is uncertain. 
 In contrast, a press perturbation that, by definition, is sustained over a longer time period, may have a higher probability of producing long-lasting outcomes. -->
-If the short duration of antifungal drug application results in only limited suppression of Bd or fails to change the fate of a population, a more sustained manipulation could encourage longer-lasting outcomes (i.e. press versus pulse manupulations). 
+If the short duration of antifungal drug application results in only limited suppression of Bd or fails to change the fate of a population, a more sustained manipulation could encourage longer-lasting outcomes (i.e. press versus pulse i). 
 One potential sustained manipulation is to impart stronger antifungal properties to the amphibian host's skin microbiome [@woodhams2014interacting; @bletz2013mitigating]. 
 The feasibility of such a manipulation is suggested by laboratory experiments in which augmentation of the skin microbiome with antifungal bacteria altered frog-Bd dynamics and increased frog survival [@harris2009skin; @kueneman2016probiotic; but see also @becker2011towards]. 
 However, both approaches have been rarely tested or are untested in wild amphibian populations.
-<!--field tests of the effectiveness of both approaches have been rare or skin microbiome augmentations are currently lacking, and . -->
 
-Over a decade (2009-2018), we conducted six field trials to mitigate incipient or ongoing <!--of antifungal treatments applied to *R. sierrae* populations--> epizootics in previously disease naive *R. sierrae* populations (disease history was known from multiple years of skin swab collection [e.g., @vredenburg2010dynamics]). <!--, all study populations were Bd-naive in the years prior to the epizootic and subsequent treatment.-->
-Trials included (1) two treatments of early life stages (tadpoles and recently metamorphosed subadults) with the antifungal drug itraconazole [@garner2009using], (2) three treatments of adults with itraconazole <!-- Is it right to call LeConte two treatments here? In the rest of the manuscript, it feels like we treat it as a single treatment-->, and (3) one manipulation of the frog skin microbiome that involved exposing subadult frogs to *Janthinobacterium lividum*, a symbiotic bacterium that can occur on amphibian skin and has antifungal properties [@brucker2008amphibian]. 
-
+Over a decade (2009-2018), we conducted six field trials to mitigate incipient or ongoing epizootics in previously disease naive *R. sierrae* populations (disease history was known from multiple years of skin swab collection [e.g., @vredenburg2010dynamics]). 
+Trials included (1) two treatments of early life stages (tadpoles and recently metamorphosed subadults) with the antifungal drug itraconazole [@garner2009using], (2) three treatments of adults with itraconazole, and (3) one manipulation of the frog skin microbiome that involved exposing subadult frogs to *Janthinobacterium lividum*, a symbiotic bacterium that can occur on amphibian skin and has antifungal properties [@brucker2008amphibian]. 
 Throughout all field trials, we predicted that the treatments would reduce Bd load on individuals, increase frog survivorship, and allow the long-term persistence of the treated population despite ongoing Bd infection (i.e., in an enzootic state). 
-We present all six trials together here because the collective results <!--from multiple treatments across different life stages--> highlight the repeatability of the outcomes, and provide important insights into mechanisms underlying those outcomes. 
-These insights are essential for the development of effective mitigation measures against this <!--unusually--> devastating wildlife disease <!--[@scheele2019amphibian]-->.
+We present all six trials together here because the collective results highlight the repeatability of the outcomes, and provide important insights into mechanisms underlying those outcomes. 
+These insights are essential for the development of effective mitigation measures against this devastating wildlife disease <!--[@scheele2019amphibian]-->.
 
 # Methods {-}
 
 The five field trials were conducted at sites located in the remote backcountry of Kings Canyon National Park (California, USA), at elevations of 3150-3550 m. <!--revised to 5 because I moved Treasure to Supporting Information, and removed Inyo NF for same reason--> 
-These sites are ten to 26 km from the nearest road, and all experiment-related supplies were carried in and out on foot. 
+These sites are ten to 26 km from the nearest road, and all experiment-related, camping supplies, and food were carried in and out on foot. 
 In some cases, this remoteness and wilderness regulations constrained potential study designs. 
 
 ## Itraconazole treatment of early life stages {-}
@@ -686,8 +687,7 @@ However, these effects typically disappear within weeks or months of treatment, 
 Laboratory experiments in which the frog skin microbiome was augmented with antifungal probiotics have demonstrated the potential of this method [@harris2009skin; @kueneman2016probiotic], but field trials are lacking. -->
 
 <!-- 
-remove preceding paragraphs?
-move or absorb elsewhere?
+I suggest removing  preceding paragraphs to address reviewer comments about length and clarity. It is possible that some of the content could be absorbed elsewhere, but I also felt that the most critical points were already covered/redundant with existing text. The following paragraph can be a new, shorter, more summary-like opening for the Discussion.
 -->
 
 The six field trials we conducted failed to facilitate coexistence of wild mountain yellow-legged frog hosts and the Bd pathogen over the scale of 1-5 years. Although we universally succeeded in reducing Bd loads on individual frogs during antifungal treatments and in subsequent weeks, the outcome of our interventions was no different than outcomes in hundreds of wild populations where no interventions have occurred: the experimental populations declined to local extirpation following the Bd epizootic. 
@@ -719,7 +719,7 @@ At least for amphibian species in which early life stages have low immunocompete
 
 ## Itraconazole treatment of adults {-}
 
-<!--The definition and result of resistance is not clear to me in this paragraph, as worded... Is resistance the result of maintenance of lower loads over years following treatment?-->
+<!--The definition and result of resistance is not clear to me in this paragraph, as worded... Is resistance the result of maintenance of lower loads over years following treatment? Tolerance was clearly explained though.-->
 In contrast to the relatively short-lived effects when early life stages were treated, two of the antifungal treatment experiments using *R. sierrae* adults (in LeConte) suggested a positive effect on disease resistance and tolerance (see @schneider2008two and @soares2017disease for recent reviews of resistance, tolerance, and the role of adaptive immunity in both). 
 The sustained reduction in individual Bd loads may indicate that treated frogs developed disease resistance. 
 That conclusion is supported by the similarity of the loads sustained by treated adults to the loads sustained by adults in persistent MYL frog populations characterized by enzootic Bd dynamics [@joseph2018disease; @briggs2010enzootic; @knapp2011nowhere].
@@ -744,16 +744,17 @@ Of the 102 untagged (i.e., non-experimental) adults we captured that had sizes t
 The low recruitment of new adults in 2017 and 2018 despite large numbers of early life stages resembles recruitment levels we have observed in other enzootic *R. sierrae* populations, and is likely a consequence of high chytridiomycosis-caused mortality of frogs during and soon after metamorphosis [@joseph2018disease, and results from Barrett and Dusy treatments described above].
 Whether this recruitment bottleneck was more severe in the LeConte population than in persistent enzootic MYL frog populations remains an important unanswered question. -->
 
+<!--R2 requests a comment/citation about frog longevity; that seems worthwhile-->
 Despite the apparent ability of antifungal treatment to facilitate an adaptive immune response and enhance resistance and tolerance, the adult population declined in each of the post-treatment years. When CMR ended in 2018 few treated frogs remained, and in 2021 surveys only a single adult was observed. 
 This decline was likely due to both reduced adult survival and insufficient recruitment. 
-Survival of treated adults, although higher than that for control frogs, was generally still lower than that of most persisting enzootic MYL frog populations [@joseph2018disease; @briggs2010enzootic].
+Survival of treated adults, although higher than that for control frogs, was generally still lower than that of most persisting enzootic MYL frog populations [@joseph2018disease; @briggs2010enzootic]. <!--R2 wants preceding sentence to have comparative ranges of frog survival in LeConte vs persistent sites. My text reduction removed the values that had been presented for LeConte, which may lessen the need/desire to see two sets of values compared-->
 The low recruitment of new adults in 2017 and 2018 despite large numbers of early life stages resembles recruitment levels we have observed in other enzootic *R. sierrae* populations, and is likely a consequence of high chytridiomycosis-caused mortality of frogs during and soon after metamorphosis [@joseph2018disease, and results from Barrett and Dusy treatments described above].
 Whether this recruitment bottleneck was more severe in the LeConte population than in persistent enzootic MYL frog populations remains an important unanswered question. 
 
 <!--transition needed-->
 
 Two results from the adult treatment experiments complicate the interpretation of the overall treatment effect. 
-First, at the beginning of the experiment, frogs in the control group were captured and processed 1--3 days after frogs in the treated group. 
+First, at the beginning of the experiment, all frogs in the control group were captured and processed 1--3 days after all frogs in the treated group. 
 Because Bd loads in the population were increasing during this period, Bd loads on control frogs were somewhat higher than those on treated frogs. 
 This could have exaggerated the subsequent differences in survival between control and treated frogs.
 Although we acknowledge this potential confounding effect, two factors suggest that the initial differences in Bd loads between control and treated frogs were not the primary cause of the lower survival of control frogs. 
@@ -773,8 +774,11 @@ The mechanism underlying the unexpectedly high survival of the non-experimental 
 In theory, treatment of a large fraction of the adult population could have reduced the pathogen pressure experienced by untreated frogs and increased their survival  [@briggs2010enzootic]. 
 However, this would have increased the survival of control and non-experimental frogs, but only non-experimental frogs were captured in large numbers. 
 In addition, despite similar treatments conducted in both the upper and lower basins, we observed a large number of non-experimental frogs only in the lower basin. 
-Another possible cause of unexpectedly high survival of non-experimental frogs, and only in the lower basin, could be the higher habitat complexity that characterizes the lower basin. 
+
+Another possible cause of unexpectedly high survival of non-experimental frogs, and only in the lower basin, could be the high habitat complexity that characterizes the lower basin. 
+
 The upper basin contains a single lake and its associated inlet and outlet streams, but no adjacent ponds, meadows, or springs that provide suitable *R. sierrae* habitat.
+
 As a result, the entire frog population is restricted to the site at which the epizootic occurred. 
 In contrast, the lower basin contains a diverse array of aquatic habitats, including two lakes, four ponds, and associated streams, marshes, and springs, all of which were used by *R. sierrae* prior to the epizootic. 
 Although conjectural, it is possible that frogs in some of these associated habitats experienced lower pathogen pressure, lower Bd loads, and higher survival during the epizootic than frogs in the much larger lake-dwelling populations. 
@@ -824,21 +828,24 @@ Encouragingly, these translocated populations are typically characterized by sta
 Such translocations provide the best known opportunity to reestablish extirpated MYL frog populations across their historical range. 
 Given possible evolution of increased resistance or tolerance in other amphibian species following exposure to Bd [@voyles2018shifts; @savage2016adaptive; @bataille2015susceptibility], similar efforts might be applicable to the recovery of other Bd-endangered amphibian species [e.g., @brannelly2016chytrid; @mendelson2019recovery]. -->
 
-<!-- this paragraph de-emphasizes translocation, which was a dangling concept introduced at the conclusion of the paper. If we want to emphasize translocation, it needs its own paragraph which is not the last paragraph in the paper -->
+<!-- My paragraph below de-emphasizes translocation, which was a dangling concept introduced at the conclusion of the paper. If we want to emphasize translocation, it needs its own paragraph which is not the last paragraph in the paper -->
+<!--This is approximately 100 words longer than what I removed-->
 
-<!--current state is more of a thought outline than a final version. Trying to re-visit the wide scope for the conclusion. -->
+Our results demonstrate that in situ treatment of wild, early life stage and adult MYL frogs with antifungal agents during or immediately following epizootics can strongly reduce Bd loads on individuals over the short term. 
+This is a critical step in mitigating an epizootic and facilitating a transition to enzootic host-pathogen dynamics [@drawert2017using]. 
+However, in the long term, our three treatment strategies failed to facilitate host population persistence in the presence of Bd.
+Given this, managed recovery (restoration) of MYL frogs will require alternative or combined approaches that simultaneously mitigate infections in all life stages and enhance the survival and recruitment of early life stages. 
+Natural recovery of MYL frogs in the presence of Bd may also provide lessons and tools to improve restoration efforts. 
+Mountain yellow-legged frog and disease research conducted during the past 15 years has revealed natural recovery of populations that rebounded over two or more decades following past Bd epizootics [@knapp2016large; @joseph2018disease]. 
 
-Our results indicate that treatment of early life stage and adult MYL frogs with antifungal agents during or immediately following epizootics strongly altered frog-Bd dynamics over the short term. 
-However, in the long term, three treatment strategies failed to facilitate host population persistence in the presence of Bd.
-Given this, recovery of MYL frogs will require other approaches that more effectively mitigate the impacts of Bd infection, in particular by increasing the survival and recruitment of early life stages. 
-Mountain yellow-legged frog and disease research conducted during the past 15 years have discovered populations that rebounded over two or more decades following past Bd epizootics [@knapp2016large; @joseph2018disease]. 
-Frogs in these populations may have genotypes or microbiomes that are more resistant to or tolerant of Bd infection than those in Bd-naive populations [@knapp2016large], or the environments in those sites are less suitable to Bd transmission [add a citation].
-These resistant or tolerant frogs and these persistent populations provide both management and scientific value. 
-First, they provide a sustainable source for translocations, which have had a relatively high success rate. 
-Translocations are an effective recovery strategy in general...
-Second, they are evidence that there is variation among host, pathogen, or habitat; variation that can be exploited in MYL frog and other species...
-Given possible evolution of increased resistance or tolerance in other amphibian species following exposure to Bd [@voyles2018shifts; @savage2016adaptive; @bataille2015susceptibility], similar efforts might be applicable to the recovery of other Bd-endangered amphibian species [e.g., @brannelly2016chytrid; @mendelson2019recovery]. 
-Continuing to explore and manipulate host-pathogen relationship is crucial to keeping these threatened hosts on the landscape and the planet as wildlife diseases crossover among hosts and even humans.
+Continued research into the mitigation of Bd epizootics, the transition to population persistence (host-pathogen coexistence), and the natural recovery of frogs in the presence of Bd can inform strategies to respond to Bd epizootics and other emerging wildlife diseases. 
+For example, Bd-resistant/tolerant MYL frogs and persistent populations provide sustainable sources for translocations, which have been relatively successful at reestablishing disease-persistent MYL frog populations in sites where frogs were previously extirpated by disease [@joseph2018disease, @knapp2011nowhere]. 
+Second, they demonstrate that variations within or among hosts, pathogens, or habitats can lead to alternate disease outcomes [@briggs2010enzootic].
+MYL frogs in these populations may have genotypes or microbiomes that are more resistant to or tolerant of Bd infection than those in Bd-naive populations [@knapp2016large], or the habitats may be less suitable to Bd transmission [add a citation].
+Other amphibian species have demonstrated potential evolution of increased resistance or tolerance following exposure to Bd [@voyles2018shifts; @savage2016adaptive; @bataille2015susceptibility].
+Across amphibian hosts threatened by Bd, these variable disease outcomes may provide opportunities for natural recovery or managed restoration [e.g., @brannelly2016chytrid; @mendelson2019recovery]. 
+Continuing to quantify - and learning how to alter - the amphibian-Bd host-pathogen relationship may be essential to maintaining many threatened species on the landscape.
+As wildlife diseases emerge [@daszak2000emerging; @cunningham2017one], the lessons that we learn from observing host-pathogen dynamics may help slow declines of threatened wildlife species, mitigate wildlife-human disease spillover, and preserve both global biodiversity and public health [alexander2018ecology, @daszak2000emerging].
 
 # Acknowledgements {-}
 
