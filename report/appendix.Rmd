@@ -266,6 +266,44 @@ To avoid the high number of false-negative filters obtained using our methods, f
 
 ## Hidden Markov model for the LeConte treatment experiment
 
+# Treasure Lake Intervention: Methods and Results 
+
+The Treasure Lake *Rana sierrae* population was Bd-naive until 2018, based on annual VES surveys, amphibian skin swabbing, and qPCR disease diagnostics of those skin swabs. In 2018, an incipient Bd epizootic was detected. Motivated by VES data and qPCR data that indicated frog abundance and disease loads similar to those observed prior to the LeConte treatment, we implemented an intervention with the objective of mitigating the disease outbreak and enhancing frog survival and population persistence. This action was intended to replicate the experimental treatments in LeConte. Treasure Lake is located at 3410 m elevation, in the Inyo National Forest adjacent to Kings Canyon National Park (California, USA).
+
+<!--the following text describing Treasure was merely moved from 'report.rmd' to 'appendix.Rmd' with no revision of content-->
+*Antifungal Treatment*.
+In July 2018, we conducted an antifungal treatment of adult *R. sierrae* during a Bd epizootic in the Treasure Lakes basin (Table S1). 
+Epizootics occurred in all other populations in this basin during summer 2017 and spread to the study population in 2018, providing another opportunity to conduct an itraconazole treatment on adult frogs. 
+Unlike the LeConte treatment, this treatment was conducted as a management action instead of an experiment due to the advanced stage of the epizootic and the resulting small number of adults remaining in the population. 
+Dividing this small population into treated and control groups would have provided little statistical power to detect between-group differences given low anticipated post-treatment recapture rates. 
+In addition, fewer frogs would have received antifungal treatment. 
+The lack of an experimental design limits the generality of our findings, but the treatment is included here because of the additional insights the results provide. 
+Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
+
+We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
+We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
+Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
+In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
+
+*Analysis*. 
+We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
+To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
+Larger absolute values of LRR indicate a larger reduction in Bd load. 
+To evaluate the factors influencing treatment effectiveness on individual frogs, we used the model *LRR ~ (capture_bdload_std x days_inside)* (family = gaussian, capture_bdload_std = Bd load prior to treatment standardized to mean = 0 and standard deviation = 1, days_inside = number of treatments a frog received). 
+
+*Results*. 
+Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
+Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure 5; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
+Model results affirmed the important effect of treatment (Table S9). 
+
+The number of itraconazole treatments a frog received ("days_inside") increased treatment effectiveness (Table S10). Initial Bd load ("capture_bdload_std") and the (days_inside x capture_bdload_std) interaction term were both unimportant (Table S10). 
+
+Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure 5).
+In addition, one non-experimental adult frog was captured, and one dead tagged (i.e., treated) adult was found. 
+Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure 5, S3). 
+There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S3). 
+In surveys conducted in 2019 (the year following treatment) and 2020, we observed no *R. sierrae* of any life stage. 
+Therefore, despite the substantial reduction in Bd loads caused by the 2018 treatment and the relatively large fraction of treated frogs recaptured one month later, few or no frogs survived overwinter until summer 2019. 
 
 
 # Literature Cited {-}
