@@ -30,7 +30,7 @@ library(readr)
 library(kableExtra)
 ```
 
-\large Running head: Mitigating impacts of disease outbreaks
+\large Running head: Mitigating impacts of disease outbreaks TESTING
 
 Open Research statement: All datasets and code to replicate the analyses are available at https://github.com/SNARL1/bd-mitigation-report. 
 If the paper is accepted for publication, we will submit all datasets and computer code to the Dryad data repository.
