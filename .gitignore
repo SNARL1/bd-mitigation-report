@@ -4,7 +4,6 @@
 .RData
 .Ruserdata
 out/figures/
-out/*.csv
 R-working/
 *.pdf
 *.log
