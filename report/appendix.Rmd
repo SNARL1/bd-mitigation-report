@@ -291,13 +291,6 @@ To avoid the high number of false-negative filters obtained using our methods, f
 *Leconte Basin*. 
 ```{r read-stan-results, include=FALSE}
 pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
-load_diff <- readr::read_csv(here::here("stan", "load_diffs.csv")) %>%
-  dplyr::mutate(diff = round(diff))
-survival_diff <- readr::read_csv(here::here("stan", "survival_diffs.csv"))
-abund_2018 <- readr::read_csv(here::here("stan", "2018_abund.csv"))
-trt_2018 <- dplyr::filter(abund_2018, trt == "treated")
-new_2018 <- dplyr::filter(abund_2018, trt == "new")
-ctrl_abund <- readr::read_csv(here::here("stan", "ctrl_abund.csv"))
 ```
 
 Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
@@ -308,6 +301,18 @@ In CMR surveys conducted during 2016-2018, a total of 2208 adult frogs were capt
 Of the 745 unique frogs captured in the lower basin, 132 were in the treated group, two were in the control group, and 611 were not part of the original treatment experiment (“non-experimental” frogs). 
 In the upper basin, 89 unique frogs were captured, of which 81 were in the treated group and eight were non-experimental. 
 No control frogs were captured in the upper basin. 
+
+```{r load-detection-probs, include=FALSE}
+p_df <- readr::read_csv(here::here("out", "detection_prob_summary.csv"))
+highest_p <- dplyr::slice_max(p_df, med, n = 1)
+lowest_p <- dplyr::slice_min(p_df, med, n = 1)
+mean_p <- readr::read_csv(here::here("out", "mean_p.csv"))
+```
+
+Frog detection probabilities in the study populations varied over time, but overall were comparable to estimates previously reported from other populations [@joseph2018disease]. 
+The primary period with the highest detection probabilities had a posterior median detection probability of `r highest_p$med` (CI: `r highest_p$lo`, `r highest_p$hi`). 
+In contrast, the primary period with the lowest detection probabilities had a posterior median of `r lowest_p$med` (CI: `r lowest_p$lo`, `r lowest_p$hi`).
+On an average primary period, posterior median detection probability was `r mean_p$med` (CI: `r mean_p$lo`, `r mean_p$hi`). 
 
 *Treasure Lake*. Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
 Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure 5; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
@@ -587,11 +592,27 @@ In the Dusy Basin study ponds assigned to the control or treated groups, zoospor
 The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. Each dot represents a single sample, and median values for each treatment period are indicated with a black diamond. 
 The number of samples included is displayed above the x-axis. 
 
+\clearpage
+
 ## Figure S3 {-}
+
+```{r figS3, fig.cap="", echo=FALSE}
+knitr::include_graphics(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"))
+```
+
+Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred. 
+Box colors indicate Bd loads from pre- and post-treatment periods (gray) and during the treatment (blue). 
+The number of swabs collected on each date is displayed above the x-axis.
+Box plot components are as in Figure 1. 
+During the treatment period, individual frogs were swabbed for Bd immediately following their initial capture and again just prior to their release (on 2018-07-23). 
+
+\clearpage
+
+## Figure S4 {-}
 
 <!-- Consider better facet labels (e.g., "Died during experiment", "Never recaptured', "Recaptured") -->
 
-```{r figS3, fig.cap="", echo=FALSE}
+```{r figS4, fig.cap="", echo=FALSE}
 knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-loads.png"))
 ```
 
@@ -601,4 +622,12 @@ Panel labels are as follows: 1 = frog that died during the treatment ("non-survi
 The single non-experimental frog captured in August was not included in the treatment (treatment duration = "NA") and is included in panel 1. 
 
 \clearpage
+
+## Figure S5
+
+```{r figS5, fig.cap = "", echo = FALSE, out.width = "450px"}
+knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
+```
+
+In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure. The number of subadults captured on each survey is given in Figure 8 (number of subadults = number of swabs).
 
