@@ -92,7 +92,7 @@ Bd infection is transferred between hosts via an aquatic flagellated zoospore st
 Mechanisms facilitating the spread of Bd between amphibian populations are not well understood, but spatial spread is likely due in part to the dispersal of infected hosts [@vredenburg2010dynamics]. 
 
 To reduce the impact of chytridiomycosis and increase the fraction of amphibian hosts that survive chytridiomycosis outbreaks, several mitigation measures have been proposed and tested. 
-These include treating hosts with antifungal agents (i.e., drugs or antifungal symbiotic bacteria), treating the environment with antifungals, and reducing host density [@woodhams2011mitigating; @garner2016mitigating].
+These include treating hosts with antifungal agents (i.e., drugs or antifungal symbiotic bacteria), treating the environment with antifungals, and reducing host density [@woodhams2011mitigating; scheele2014interventions; @garner2016mitigating].
 However, existing field trials indicate only short-term benefits to targeted populations and limited effectiveness in promoting host population persistence [@woodhams2012treatment; @garner2016mitigating].
 Modeling also suggests that none of these approaches is likely to prevent Bd-driven population extirpation, but reducing Bd loads on individual hosts may have the greatest potential to produce a beneficial outcome [@drawert2017using].
 Given the uncertainty regarding effectiveness of mitigation measures, there is a critical need for additional field trials. 
@@ -131,7 +131,7 @@ These insights are essential for the development of effective mitigation measure
 The six field trials were conducted at sites located in the remote backcountry of Kings Canyon National Park and Inyo National Forest (California, USA), at elevations of 3150-3550 m. 
 These sites are ten to 26 km from the nearest road, and all supplies were carried in and out on foot. 
 In some cases, this remoteness and wilderness regulations constrained potential study designs. 
-Research was approved by Sequoia and Kings Canyon National Parks (SEKI-2009-SCI-0039, SEKI-2010-00334, SEKI-2015-SCI-0035, SEKI-2012-SCI-0455), U.S. Fish and Wildlife Service (TE-40090B), U.S. Forest Service (WMD17054), and the Institutional Animal Use and Care Committee at the University of California-Santa Barbara (protocol 478, 848).
+The research was approved by Sequoia and Kings Canyon National Parks (permit number SEKI-2009-SCI-0039, SEKI-2010-00334, SEKI-2012-SCI-0455, SEKI-2015-SCI-0035), U.S. Fish and Wildlife Service (permit number TE-40090B), U.S. Forest Service (permit number WMD17054), and the Institutional Animal Use and Care Committee at the University of California-Santa Barbara (protocol number 478, 848).
 
 ## Itraconazole treatment of early life stages {-}
 
@@ -378,6 +378,11 @@ In the last primary period of 2018, the posterior median for the number of treat
 Interestingly, Bd load had a stronger negative effect on survival in the control group relative to the treated and non-experimental groups (posterior probabilities = `r survival_diff$ctrl_lt_trt` and `r survival_diff$ctrl_lt_new`, for control versus treated, and control versus non-experimental, respectively; Figure 4c). 
 This was the case despite considerable overlap in Bd loads between the control and treated/non-experimental groups (Figure 4a, 4c). 
 
+### Treasure Lake
+Results of this treatment are provided in **Supporting Information**. Briefly, similar to the LeConte treatment, the antifungal treatment of adult *R. sierrae* in the Treasure Lakes basin reduced Bd loads over the short-term. 
+Because we were unable to include a control group in this intervention and the number of treated frogs was relatively small, the effect of treatment on frog survival is uncertain. 
+However, the absence of any treated *R. sierrae* adults in the year following the treatment suggests that the reduced Bd loads conferred little or no survival benefit. 
+
 
 ## Microbiome augmentation of subadults {-}
 
@@ -506,33 +511,30 @@ As a result, the entire frog population is restricted to the site at which the e
 In contrast, the lower basin contains a diverse array of aquatic habitats, including two lakes, four ponds, and associated streams, marshes, and springs, all of which were used by *R. sierrae* prior to the epizootic. 
 Although conjectural, it is possible that frogs in some of these associated habitats experienced lower pathogen pressure, lower Bd loads, and higher survival during the epizootic than frogs in the much larger lake-dwelling populations. 
 
-In contrast to the relatively strong effect of the antifungal treatment of adult survival in LeConte Basin, this effect was not observed in the antifungal treatment conducted at Treasure Lake. 
-Although the magnitude of load reductions was similar in both populations, and 48% of treated Treasure frogs were recaptured one month post-treatment, no treated frogs were detected at Treasure during the subsequent two summers (no frogs were detected). 
-The small number of frogs treated and the lack of a control group preclude strong conclusions.
-However, the way short-term outcomes were similar at both sites but diverged in the long-term suggests that the strong effects of treatment observed in the LeConte experiments are not universal. 
-Success likely depends on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc]. 
-The juxtaposition of these results suggests that effective intervention would require managers' constant vigilance and rapid response to an epizootic, but also managers' willingness to recognize a narrow window of opportunity in which an intervention is an effective use of resources.
+In contrast to the relatively strong effect of the antifungal treatment on adult survival in LeConte Basin, this effect was not observed in the antifungal treatment conducted at Treasure Lake. 
+The similar short-term reductions in Bd loads of treated frogs in both the LeConte and Treasure treatments, but lack of longer term effects on frog survival at Treasure suggests that the strong effects of treatment observed in the LeConte experiments are not universal. 
+Treatment success may depend on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or on the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc]. 
+The juxtaposition of these results suggests that an effective intervention will require frequent disease surveillance of frog populations to detect developing epizootics, and rapid application of adult frog treatments before Bd loads reach high levels. 
+Whether antifungal treatments of adult MYL frogs conducted during this narrow optimal time window would consistently increase long-term frog survival and frog population persistence remains uncertain. 
 
-In summary, our adult treatment experiments altered frog-Bd dynamics in a predictable way, reducing Bd loads of treated versus control frogs and increasing frog survival. 
-However, the duration of the effect on survival depended on at least the timing of the treatment relative to the development of the epizootic. Unlike the short-term effects resulting from the treatment of early life stages, effects on adults could be sustained over three-years post-treatment. 
-This is consistent with adults having mounted an effective adaptive immune response against Bd infection. 
-However, even when treatment increased adult survival, the high susceptibility of early life stages to chytridiomycosis [@bakar2016susceptibility; @grogan2018review] may limit recruitment, allow population declines due to senescence without replacement, and preclude long-term population persistence.
 
 ## Microbiome augmentation of subadult frogs {-}
 
-Results from the treatment experiments described above indicate that the effectiveness of treatments in changing long-term frog-Bd dynamics and facilitating population persistence depends heavily on the survival of subadult frogs and their recruitment into the adult population under post-epizootic conditions. 
-Given the low immunocompetence of subadults against Bd [@rollins1998metamorphosis; @grogan2018review], reducing Bd loads on subadults using itraconazole appears insufficient to keep loads low over the longer term and increase survival (see results of Barrett and Dusy treatments). 
+Results from the itraconazole treatment experiments we conducted (Barrett, Dusy, LeConte) indicate that the effectiveness of these treatments in changing long-term frog-Bd dynamics and facilitating population persistence depends heavily on the survival of subadult frogs and their recruitment into the adult population under post-epizootic conditions. 
+Given the low immunocompetence of subadults against Bd [@rollins1998metamorphosis; @grogan2018review], itraconazole treatment of early life stages or adults appears insufficient to keep loads on subadults low (i.e., following direct treatment or as a consequence of treatment-altered frog-Bd dynamics).
+Consequently, subadults succumb to chytridiomycosis relatively quickly and few or none remain to recruit into the adult population.
 The addition of protective probiotic bacteria to the frog skin microbiome may be a possible means to reduce susceptibility of this vulnerable life stage to chytridiomycosis and increase survival to adulthood [@rebollar2020amphibian; @harris2009skin; @bletz2013mitigating]. 
 In this application, the effectiveness of probiotics will depend critically on the ability of the added bacteria to establish on frog skin and maintain sufficiently high densities over the months or years of the subadult-to-adult transition. 
 
 The results from our microbiome augmentation experiment suggest that the addition of *J. lividum* to the frog skin microbiome following itraconazole treatment is insufficient to provide the long-term protection from Bd infection required to increase subadult survival. 
-The relatively rapid decline of *J. lividum* concentrations on frogs in our study population suggests that the frog microbiome is resilient to changes in the species composition of symbiotic bacteria, and represents an important impediment to efforts to augment the microbiome with species that might confer increased protection from Bd [@kung2014stability]. 
-In addition, for several weeks immediately following probiotic exposure when *J. lividum* concentrations were relatively high, Bd loads on *J. lividum*-treated subadults increased quickly and those of control and wild subadults appeared unaffected. 
+Following exposure of frogs to *J. lividum*, *J. lividum* appeared to colonize the skin of frogs in our study population, but concentrations declined relatively quickly. 
+This inability to persist on frog skin may be an important impediment to efforts to augment the microbiome with species that confer increased protection from Bd [@kung2014stability]. 
+In addition, for several weeks immediately following probiotic exposure when *J. lividum* concentrations were relatively high, Bd loads on *J. lividum*-treated subadults increased quickly and those of control and wild subadults (that were also colonized by *J. lividum* - see below) appeared unaffected. 
 Therefore, the predicted protective effect of *J. lividum* on subadults was not realized. 
 
-However, an unexpected outcome of the microbiome augmentation experiment was the rapid spread of *J. lividum* from exposed subadults to control and wild subadults, and its apparent proliferation on the new hosts (*J. lividum* concentrations on control and wild frogs increased to concentrations similar to treated frogs). 
+However, an unexpected outcome of the microbiome augmentation experiment was the rapid spread of *J. lividum* from exposed subadults to control and wild subadults, and its apparent proliferation on the new hosts (*J. lividum* concentrations on control and wild frogs increased to concentrations similar to those of frogs that were bathed in *J. lividum*). 
 Whether *J. lividum* was transferred via direct frog-to-frog contact or through the water is unknown. 
-In conclusion, although the colonization of frogs by *J. lividum* did not appear to confer increased Bd resistance, its spread from *J. lividum*-exposed to unexposed frogs indicates that if a probiotic with long-term effectiveness against Bd infection is ever identified, its introduction into a frog population may be relatively straight-forward.
+Regardless, the spread of *J. lividum* from exposed to unexposed frogs indicates that if a probiotic with long-term effectiveness against Bd infection is ever identified, its introduction into a frog population may be relatively straight-forward.
 
 ## Conclusions {-}
 
