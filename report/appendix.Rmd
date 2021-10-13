@@ -36,7 +36,7 @@ library(readr)
 library(kableExtra)
 ```
 
-\large PeerJ
+\begin{large}PeerJ\end{large} 
 
 \linenumbers
 
@@ -286,14 +286,12 @@ Therefore, assuming that the sampling method was adequate to accurately quantify
 To avoid the high number of false-negative filters obtained using our methods, future studies attempting to quantify zoospore pools should consider using methods that allow filtering of larger volumes of water. 
 
 
-## Itraconazole treatment of adults
+## Itraconazole treatment of adults {-}
 
-*Leconte Basin*. 
 ```{r read-stan-results, include=FALSE}
 pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
 ```
-
-Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
+*Leconte Basin*. Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
 Between frog release in 2015 and the final survey in 2018, seven recaptured individuals moved between the two basins. 
 All seven were in the treated group and moved from the upper to the lower basin. 
 These individuals were included in counts of unique individuals in the basin in which they were captured.
@@ -314,7 +312,7 @@ The primary period with the highest detection probabilities had a posterior medi
 In contrast, the primary period with the lowest detection probabilities had a posterior median of `r lowest_p$med` (CI: `r lowest_p$lo`, `r lowest_p$hi`).
 On an average primary period, posterior median detection probability was `r mean_p$med` (CI: `r mean_p$lo`, `r mean_p$hi`). 
 
-*Treasure Lake*. Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
+*Treasure Lake Basin*. Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
 Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure 5; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
 Model results affirmed the important effect of treatment (Table S9). 
 
