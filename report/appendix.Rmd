@@ -62,12 +62,12 @@ Cheryl Briggs provided modeling results that motivated the treatments, assisted 
 
 <!-- Reorganize sections. All methods together and all results together, and methods and results for each treatment? -->
 
-# Methods {-}
+# General Methods {-}
 
 ## Visual encounter surveys {-}
 
 We counted *R. sierrae* of all life stages (adults: $\geq$ 40 mm snout-vent length (SVL); subadults: <&nbsp;40 mm; tadpoles) using diurnal visual encounter surveys (VES) of the entire water body shoreline and the first 100 m of inlet and outlet streams. 
-VES is commonly used in studies of MYL frogs to estimate the abundance of all life stages present at a site [e.g., vredenburg2010dynamics; knapp2016large; @knapp2000nonnative]. Counts are highly repeatable [@knapp2000nonnative], but underestimate the number of animals present.
+VES is commonly used in studies of MYL frogs to estimate the abundance of all life stages present at a site [e.g., @knapp2000nonnative; @vredenburg2010dynamics; @knapp2016large]. Counts are highly repeatable [@knapp2000nonnative], but underestimate the number of animals present.
 
 ## Itraconazole treatment {-}
 
@@ -89,38 +89,6 @@ After 10 minutes of itraconazole exposure, animals were transferred from the tub
 To determine treatment effectiveness, we re-swabbed all animals or a subset (depending on the experiment) at the end of the treatment period. 
 After the final treatment, we released all animals from the pens back into the study lakes.
 
-## Estimating the zoospore pool from water samples  {-}
-
-We sampled the zoospore pool in each of the five ponds included in the Dusy itraconazole treatment experiment (Table 1) before and after the treatments (July 23-25 and August 21-24, respectively).
-Water samples (six per pond) were collected by filtering pond water through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
-Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
-We extracted DNA using the DNEasy Blood and Tissue kit (Qiagen).
-Bd concentrations in water samples (environmental "Bd loads") were quantified using qPCR [see @jani2017epidemic for details], and Bd load was normalized to a 1-liter sample volume. 
-For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
-To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
-Finally, we included 21 negative controls: nine no-template-controls (three per PCR plate) and 12 field-collected negative controls (six water samples collected from a pond where all frogs were Bd-negative, each with 2 technical replicates). 
-
-The 21 negative controls yielded no false-positive PCR reactions. 
-However, it is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
-Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (5 ponds x 6 water samples x 3 technical replicates x 2 time periods (before and after treatment)), 49% had a Bd load = 0. 
-Because the five ponds in the experiment were clearly Bd-positive, we considered replicates with Bd load = 0 to be false negative replicates, which we excluded from the analysis of the effect of itraconazole treatment on the Bd zoospore pool. 
-This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for technical replicates). 
-
-
-## Itraconazole treatment of adults
-
-*Treasure Lake*. In 2018, we detected a Bd epizootic in he Treasure Lake *Rana sierrae* population (Table S1), providing another opportunity to test the effectiveness of antifungal treatment on adult frogs.
-the treatment was conducted as a management action instead of an experiment because relatively few adults remained in this population at the time of the treatment. 
-As such, dividing the frogs into treated and control groups would have provided little statistical power to detect between-group differences. 
-Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
-Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
-
-We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
-We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
-Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
-In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
-
-
 ## *Janthinobacterium lividum* qPCR assay {-}
 
 The *J. lividum* used to develop the real-time PCR assay was a strain provided by Reid Harris, Department of Biology, James Madison University. 
@@ -141,9 +109,9 @@ The amplification conditions consisted of an initial cycle of 2 min at 50&deg;C 
 To create standards, DNA was extracted from pure cultures of *J. lividum* with an UltraClean microbial DNA isolation kit (MoBio), and diluted to 10^4^, 10^3^, 10^2^, and 10^1^ *J. lividum* genome equivalents. 
 A standard curve was generated for each 96-well plate to estimate the number of *J. lividum* genome equivalents in sample extracts.
 
-## Statistical analyses
+## Statistical analyses {-}
 
-### Simple and multilevel models using the brms package
+### Simple and multilevel models using the brms package {-}
 
 When using the brms package, our analysis workflow included starting with a model that included all relevant population-level ("fixed") effects and their interactions ("full model"), and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
 When data contained possible hierarchical structure (which could result in non-independence), we added group-level ("random") effects to the full model. 
@@ -267,31 +235,45 @@ We drew 3000 iterations for each of four chains, using a maximum treedepth of 11
 Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
 Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 
-### Itraconazole treatment of adults
 
-We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
-To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
-Larger absolute values of LRR indicate a larger reduction in Bd load. 
-To evaluate the factors influencing treatment effectiveness on individual frogs, we used the model *LRR ~ (capture_bdload_std x days_inside)* (family = gaussian, capture_bdload_std = Bd load prior to treatment standardized to mean = 0 and standard deviation = 1, days_inside = number of treatments a frog received). 
+# Treatment-specific Methods and Results {-}
 
+## Estimating the zoospore pool from water samples -- Dusy Basin {-}
 
-# Results {-}
+### Methods {-}
 
-## Estimating the zoospore pool from water samples  {-}
+As part of the Dusy Basin itraconazole treatment experiment (Table S1), we sampled the zoospore pool in each of the five study ponds before and after the treatments (July 23-25 and August 21-24, respectively).
+Water samples (six per pond) were collected by filtering pond water through a 0.22 mm pore polyethersulfone filter (Sterivex-GP; Millipore), until the filter clogged. 
+Filters were immediately amended with sucrose lysis buffer (40 mmol/l 1 EDTA, 50 mmol/l 1 Tris-HCl, 750 mmol/l sucrose, pH adjusted to 8.0). 
+We extracted DNA using the DNEasy Blood and Tissue kit (Qiagen).
+Bd concentrations in water samples (environmental "Bd loads") were quantified using qPCR [see @jani2017epidemic for details], and Bd load was normalized to a 1-liter sample volume. 
+For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
+To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
+Finally, we included 21 negative controls: nine no-template-controls (three per PCR plate) and 12 field-collected negative controls (six water samples collected from a pond where all frogs were Bd-negative, each with 2 technical replicates). 
 
-Before treatment, zoospore pools (measured as Bd load on collected filters) in the ponds assigned to the control and treated groups were similar (Figure S2). 
+The 21 negative controls yielded no false-positive PCR reactions. 
+However, it is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
+Despite the fact that all five study ponds contained relatively large numbers of early life stage *R. sierrae* characterized by high Bd loads, of the 180 total replicates (5 ponds x 6 water samples x 3 technical replicates x 2 time periods (before and after treatment)), 49% had a Bd load = 0. 
+Because the five ponds in the experiment were clearly Bd-positive, we considered replicates with Bd load = 0 to be false negative replicates, which we excluded from the analysis of the effect of itraconazole treatment on the Bd zoospore pool. 
+This resulted in one pond assigned to the treated group being dropped from the analysis due to a lack of any Bd-positive replicates. The effect of itraconazole treatment on Bd concentrations on filters was evaluated using the model *bd_load ~ (pre_post x treatment) + (1 | sample_id)* (family = negative binomial, pre_post = [before treatment, after treatment], treatment = [treated, control], sample_id included as a group-level effect to account for technical replicates). 
+
+### Results {-}
+
+Prior to the itraconazole treatment, zoospore pools (measured as Bd load on collected filters) in the ponds assigned to the control and treated groups were similar (Figure S2). 
 After treatment, zoospore pools in control ponds may have increased slightly, but remained relatively constant in treated ponds (Figure S2). 
 Model results indicated that the estimated effects of treatment, basin, and the (treatment x basin) interaction term were all unimportant (Table S5). 
 Therefore, assuming that the sampling method was adequate to accurately quantify pond-wide zoospore concentrations, the treatment of even a relatively large fraction of the resident *R. sierrae* in the study ponds did not measurably alter the zoospore pools. 
 To avoid the high number of false-negative filters obtained using our methods, future studies attempting to quantify zoospore pools should consider using methods that allow filtering of larger volumes of water. 
 
+## Itraconazole treatment of adults -- LeConte Basin {-}
 
-## Itraconazole treatment of adults {-}
+### Results {-}
 
 ```{r read-stan-results, include=FALSE}
 pct_observed <- readr::read_csv(here::here("stan", "pct_observed.csv"))
 ```
-*Leconte Basin*. Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
+
+Based on CMR modeling, across the entire duration of the experiment (2015-2018), the 1206 unique individuals included in the study were estimated to represent approximately `r pct_observed$p[2]`% (posterior median) of the adults that existed in the LeConte population during this time (CI: `r pct_observed$p[1]`% -- `r pct_observed$p[3]`%). 
 Between frog release in 2015 and the final survey in 2018, seven recaptured individuals moved between the two basins. 
 All seven were in the treated group and moved from the upper to the lower basin. 
 These individuals were included in counts of unique individuals in the basin in which they were captured.
@@ -312,7 +294,29 @@ The primary period with the highest detection probabilities had a posterior medi
 In contrast, the primary period with the lowest detection probabilities had a posterior median of `r lowest_p$med` (CI: `r lowest_p$lo`, `r lowest_p$hi`).
 On an average primary period, posterior median detection probability was `r mean_p$med` (CI: `r mean_p$lo`, `r mean_p$hi`). 
 
-*Treasure Lake Basin*. Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
+## Itraconazole treatment of adults -- Treasure Lakes Basin {-}
+
+### Methods {-}
+
+In 2018, we detected a Bd epizootic in the only Bd-naive *Rana sierrae* population remaining in the Treasure Lakes Basin (Table S1), providing another opportunity to test the effectiveness of antifungal treatment on adult frogs.
+the treatment was conducted as a management action instead of an experiment because relatively few adults remained in this population at the time of the treatment. 
+As such, dividing the frogs into treated and control groups would have provided little statistical power to detect between-group differences. 
+Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
+Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
+
+We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
+We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
+Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
+In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
+
+We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
+To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
+Larger absolute values of LRR indicate a larger reduction in Bd load. 
+To evaluate the factors influencing treatment effectiveness on individual frogs, we used the model *LRR ~ (capture_bdload_std x days_inside)* (family = gaussian, capture_bdload_std = Bd load prior to treatment standardized to mean = 0 and standard deviation = 1, days_inside = number of treatments a frog received). 
+
+### Results {-}
+
+Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
 Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure 5; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
 Model results affirmed the important effect of treatment (Table S9). 
 
