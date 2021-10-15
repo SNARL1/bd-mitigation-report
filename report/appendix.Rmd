@@ -308,6 +308,7 @@ We used the same methods as described for the LeConte treatments, with two impor
 We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
 Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
+To post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25)
 
 We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
 To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
@@ -625,11 +626,11 @@ The single non-experimental frog captured in August was not included in the trea
 
 \clearpage
 
-## Figure S5
+## Figure S5 {-}
 
 ```{r figS5, fig.cap = "", echo = FALSE, out.width = "450px"}
 knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
 ```
 
-In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure. The number of subadults captured on each survey is given in Figure 8 (number of subadults = number of swabs).
+In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure. The number of subadults captured during each survey is given in Figure 6.
 
