@@ -71,16 +71,16 @@ VES is commonly used in studies of MYL frogs to estimate the abundance of all li
 
 ## Itraconazole treatment {-}
 
-For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period. 
+For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period  (Figure S1). 
 Holding animals in pens assured that each animal could be captured and treated on each day of the treatment period; this would not have been possible if animals needed to be recaptured from the ponds each day. 
-Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night (Figure S1). 
-Animals assigned to the untreated "control" group were held in pens only 3-24 hr (to prevent resampling the same individuals) and then released back into the lake. 
+Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night. 
+Animals assigned to the untreated "control" group were held in pens only 3-24 hr (to prevent recapture and/or resampling of individuals) and then released back into the lake. 
 
 Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the treatment period, doing so could have produced spurious and misleading results. 
 Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
 This would have biased the outcome toward lower survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on survival. 
 Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals. 
-Including a second control group, in which were untreated animals were held for the entire treatment period, could have been informative, but would have substantially reduced the number of animals included in the existing treated and control groups, and potentially affected our ability to detect treatment effects. 
+Including a second control group, in which untreated animals were held for the entire treatment period, could have been informative, but would have substantially reduced the number of animals included in the existing treated and control groups and potentially affected our ability to detect treatment effects (due to reduced statistical power). 
 
 To conduct the antifungal treatments, on each day during the multi-day treatment period we transferred all animals in the treated group from pens to small plastic tubs that contained a dilute solution [1.5 mg L^‑1^; @garner2009using] of the antifungal drug itraconazole (trade name = Sporonox). 
 We treated frogs in batches of approximately 50, and tadpoles in batches of approximately 100. 
@@ -128,112 +128,7 @@ For example, itraconazole treatment can reduce not only mean Bd load, but also t
 Improving model fit was our primary interest in using distributional models, and not gaining insights into the causes of overdispersion or zero-inflation. 
 Therefore, when we used distributional models, we limit our descriptions of model results largely to effects of predictors on the mean. 
 
-### Hidden Markov model for the LeConte treatment experiment {-}
 
-We tracked the fates of individual animals in the LeConte population using a multi-state hidden Markov model. 
-We consider three possible observations for each individual $i=1, ..., M$ in primary period $t=1, ..., T$, on secondary period $j=1, ..., J_t$, where $T$ is the total number of primary periods and $J_t$ is the number of secondary periods in primary period $t$: 
-
-\begin{itemize}
-    \item $y_{i, t, j}=1$ detected at the upper site
-    \item $y_{i, t, j}=2$ detected at the lower site
-    \item $y_{i, t, j}=3$ not detected
-\end{itemize}
-
-We use parameter-expanded data augmentation to account for the fact that the total number of adults in the population is unknown [@royle2012parameter]. 
-Across the entire time period of the study, we assume $N_s$ unique individuals have been alive at either site. 
-We observe $N$ unique individuals across all surveys, where $N \leq N_s$. 
-An estimate of $N_s$ can be acquired by augmenting the observed capture histories with additional capture histories that consist entirely of non-detections, thus modeling a large number $M > N_s$ of individuals, $M - N_s$ of which never existed [@royle2009analysis]. 
-Here, $M$ was chosen to be 2182 (1212 observed unique individuals plus 970 augmented individuals). 
-We verified that posterior estimates of $N_s$ were much less than $M$ to avoid problems on the boundary of this augmented parameter space [@dennis2015computational]. 
-
-We denote the true state of individual $i$ in primary period $t$ as $s_{i, t}$. 
-We assume that within a primary period, the state of each individual does not change. 
-This assumption is justified by the short time intervals between secondary periods within primary periods.
-Four states are possible: 
-
-\begin{itemize}
-    \item $s_{i, t} = 1$ alive at the upper site
-    \item $s_{i, t} = 2$ alive at the lower site
-    \item $s_{i, t} = 3$ not recruited
-    \item $s_{i, t} = 4$ dead
-\end{itemize}
-
-The "not recruited" state applies to individuals that have not yet entered the population, including individuals that haven't reached adulthood or pseudo-individuals created via data augmentation (as described above). 
-
-*Observation model*. An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
-The rows in $\matr{\Omega}^{(t)}$ correspond to the state of an individual in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
-
-\[
-\matr{\Omega}^{(t)} =
-\begin{blockarray}{cccc}
-  \text{Detected: upper} & \text{Detected: lower} & \text{Not detected}\\
-\begin{block}{(ccc)c}
-  p_t & 0 & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: upper \end{tabular} \\
-  0 & p_t & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: lower \end{tabular} \\
-  0 & 0 & 1 & \begin{tabular}{@{}c@{}}Not recruited \end{tabular} \\
-  0 & 0 & 1 & \begin{tabular}{@{}c@{}}Dead \end{tabular} \\
-\end{block}
-\end{blockarray}
- \]
-
-Here, $p_t$ is the probability of detection for an individual if it is alive in primary period $t$. 
-We allowed detection probabilities to vary over time [@joseph2018]:
-
-$$\text{logit}(p_t) = \alpha_0 + \epsilon^{(p)}_t,$$
-
-where $\alpha_0$ is an intercept parameter, and $\epsilon^{(p)}_t$ is an adjustment on detection probability for primary period $t$.
-
-*State model*. The hidden states of each individual evolve as a Markov process with transition matrix $\matr{\Psi}^{(i, t)}$, where the element in the $m^{th}$ row, $n^{th}$ column is $\text{Pr}(s_{i, t+1} = n \mid s_{i, t} = m)$:
-\[
-\matr{\Psi}^{(i, t)} =
-\begin{blockarray}{ccccc}
-  \text{Alive: upper} & \text{Alive: lower} & \text{Not recruited} & \text{Dead} \\
-\begin{block}{(cccc)c}
-  \phi_{i, t} (1 - \nu^{(l)}) & \phi_{i, t} \nu^{(l)} & 0 & 1 - \phi_{i, t} & \begin{tabular}{@{}c@{}} Alive: upper \end{tabular} \\
-  \phi_{i, t} \nu^{(u)} & \phi_{i, t} (1 - \nu^{(u)}) & 0 & 1 - \phi_{i, t} & \begin{tabular}{@{}c@{}} Alive: lower \end{tabular} \\
-  \gamma_t \rho^{(u)} & \gamma_t (1 - \rho^{(u)}) & 1 - \gamma_t & 0 & \begin{tabular}{@{}c@{}} Not recruited \end{tabular} \\
-  0 & 0 & 0 & 1 & \begin{tabular}{@{}c@{}} Dead \end{tabular} \\
-\end{block}
-\end{blockarray}
- \]
-
-Here, $\phi_{i, t}$ is the probability of survival, $\nu^{(l)}$ and $\nu^{(u)}$ are the probabilities of moving to the lower or upper site respectively (conditional on survival), $\gamma_t$ is the probability of recruitment, and $\rho^{(u)}$ is the probability of recruiting into the upper site  conditional on recruitment. 
-
-Survival probabilities were modeled as a function of Bd load: 
-
-$$\text{logit}(\phi_{i, t}) = \beta_0 + \beta_\text{g[i]}^{(g)} + \beta_\text{g[i]}^{(z)} z_{i, t},$$
-
-where $\beta_0$ is an intercept parameter, $\beta_\text{g[i]}^{(g)}$ is an adjustment for group $g$, $g[i]$ is the group that individual $i$ belongs to, $\beta_\text{g[i]}^{(z)}$ is the effect of Bd load on group $g$, and $z_{i, t}$ is the Bd load of individual $i$ in primary period $t$.
-
-We treat the field experiment in 2015 as the first primary period, for which states are known for experimental animals. 
-For example, if individual $i$ was captured and released at the upper site, then we know that $s_{i, t} = 1$. 
-Initial states are not known for non-experimental animals, which could have been alive at either site (states 1 or 2), or in the not recruited class (state 3). 
-Note that we are only interested in modeling the state and capture histories of animals that might have been alive. 
-We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution for non-experimental frogs, which assigns equal prior density to each initial state.
-
-*Bd load model*. We modeled Bd loads as being normally distributed on a transformed scale. 
-Raw Bd loads were transformed using a $\log_{10}$ + 1 transformation, then centered and scaled to have mean zero and unit standard deviation (in an attempt to avoid ill-conditioning, as expected Bd load is used in the detection and survival model components).
-Let $z^{\text{obs}}_{i, t}$ represent the observed transformed Bd load, and $z_{i, t}$ represent the expected value for individual $i$ on primary period $t$.
-The observation model for Bd loads of detected individuals was Gaussian on the transformed scale: 
-
-$$z^{\text{obs}}_{i, t} \sim \text{Normal}(z_{i, t}, \sigma),$$
-
-\noindent where $\sigma$ is an observation-level standard deviation parameter. 
-
-Expected Bd load was modeled as a function of treatment, primary period, and individual identity: 
-
-$$z_{i, t} = \mu_t + \beta_{\text{trt}[i]} + \epsilon_i,$$
-
-\noindent where $\mu_t$ is a time-varying intercept, $\beta_{\text{trt}[i]}$ is an adjustment for the treatment group of individual $i$ (denoted $\text{trt}[i])$ to account for differences in mean Bd loads between treated, control, and non-experimental animals, and $\epsilon_i$ is an individual-level adjustment.
-
-*Prior distributions*. We expected movement among sites to be rare, so both movement parameters ($\nu^{(l)}$ and $\nu^{(u)}$) were assigned Beta(2, 20) priors.
-Primary period and individual-level adjustments were modeled using zero-mean normal distributions with unknown standard deviations specific to the process of interest, e.g., for the probability of entering the population: $[\lambda_{1:T}] = \prod_{t = 1}^{T} \text{Normal}(\lambda_t | 0, \sigma^{(\lambda)})$. 
-Standard deviation parameters were given unit scale half normal priors, and all remaining parameters were given unit scale normal priors.
-
-*Inference*. We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte Carlo in Stan. 
-We drew 3000 iterations for each of four chains, using a maximum treedepth of 11 and an adapt_delta value of 0.99.
-Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
-Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
 
 
 # Treatment-specific Methods and Results {-}
@@ -267,6 +162,113 @@ To avoid the high number of false-negative filters obtained using our methods, f
 
 ## Itraconazole treatment of adults -- LeConte Basin {-}
 
+### Methods -- Hidden Markov model {-}
+
+We tracked the fates of individual animals in the LeConte population using a multi-state hidden Markov model. 
+We consider three possible observations for each individual $i=1, ..., M$ in primary period $t=1, ..., T$, on secondary period $j=1, ..., J_t$, where $T$ is the total number of primary periods and $J_t$ is the number of secondary periods in primary period $t$: 
+
+\begin{itemize}
+    \item $y_{i, t, j}=1$ detected in the upper basin
+    \item $y_{i, t, j}=2$ detected in the lower basin
+    \item $y_{i, t, j}=3$ not detected
+\end{itemize}
+
+We use parameter-expanded data augmentation to account for the fact that the total number of adults in the population is unknown [@royle2012parameter]. 
+Across the entire time period of the study, we assume $N_s$ unique individuals have been alive in either basin. 
+We observe $N$ unique individuals across all surveys, where $N \leq N_s$. 
+An estimate of $N_s$ can be acquired by augmenting the observed capture histories with additional capture histories that consist entirely of non-detections, thus modeling a large number $M > N_s$ of individuals, $M - N_s$ of which never existed [@royle2009analysis]. 
+Here, $M$ was chosen to be 2182 (1212 observed unique individuals plus 970 augmented individuals). 
+We verified that posterior estimates of $N_s$ were much less than $M$ to avoid problems on the boundary of this augmented parameter space [@dennis2015computational]. 
+
+We denote the true state of individual $i$ in primary period $t$ as $s_{i, t}$. 
+We assume that within a primary period, the state of each individual does not change. 
+This assumption is justified by the short time intervals between secondary periods within primary periods.
+Four states are possible: 
+
+\begin{itemize}
+    \item $s_{i, t} = 1$ alive in the upper basin
+    \item $s_{i, t} = 2$ alive in the lower basin
+    \item $s_{i, t} = 3$ not recruited
+    \item $s_{i, t} = 4$ dead
+\end{itemize}
+
+The "not recruited" state applies to individuals that have not yet entered the population, including individuals that haven't reached adulthood or pseudo-individuals created via data augmentation (as described above). 
+
+*Observation model*. An emission matrix $\matr{\Omega}^{(t)}$ links observations to hidden states for primary period $t$.
+The rows in $\matr{\Omega}^{(t)}$ correspond to the state of an individual in primary period $t$, and the columns correspond to observation probabilities such that the entry in the $m^{th}$ row, $n^{th}$ column is $Pr(y_{i, t, j} = n \mid s_{i, t} = m)$:
+
+\[
+\matr{\Omega}^{(t)} =
+\begin{blockarray}{cccc}
+  \text{Detected: upper} & \text{Detected: lower} & \text{Not detected}\\
+\begin{block}{(ccc)c}
+  p_t & 0 & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: upper \end{tabular} \\
+  0 & p_t & 1 - p_t & \begin{tabular}{@{}c@{}}Alive: lower \end{tabular} \\
+  0 & 0 & 1 & \begin{tabular}{@{}c@{}}Not recruited \end{tabular} \\
+  0 & 0 & 1 & \begin{tabular}{@{}c@{}}Dead \end{tabular} \\
+\end{block}
+\end{blockarray}
+ \]
+
+Here, $p_t$ is the probability of detection for an individual if it is alive in primary period $t$. 
+We allowed detection probabilities to vary over time [@joseph2018disease]:
+
+$$\text{logit}(p_t) = \alpha_0 + \epsilon^{(p)}_t,$$
+
+where $\alpha_0$ is an intercept parameter, and $\epsilon^{(p)}_t$ is an adjustment on detection probability for primary period $t$.
+
+*State model*. The hidden states of each individual evolve as a Markov process with transition matrix $\matr{\Psi}^{(i, t)}$, where the element in the $m^{th}$ row, $n^{th}$ column is $\text{Pr}(s_{i, t+1} = n \mid s_{i, t} = m)$:
+\[
+\matr{\Psi}^{(i, t)} =
+\begin{blockarray}{ccccc}
+  \text{Alive: upper} & \text{Alive: lower} & \text{Not recruited} & \text{Dead} \\
+\begin{block}{(cccc)c}
+  \phi_{i, t} (1 - \nu^{(l)}) & \phi_{i, t} \nu^{(l)} & 0 & 1 - \phi_{i, t} & \begin{tabular}{@{}c@{}} Alive: upper \end{tabular} \\
+  \phi_{i, t} \nu^{(u)} & \phi_{i, t} (1 - \nu^{(u)}) & 0 & 1 - \phi_{i, t} & \begin{tabular}{@{}c@{}} Alive: lower \end{tabular} \\
+  \gamma_t \rho^{(u)} & \gamma_t (1 - \rho^{(u)}) & 1 - \gamma_t & 0 & \begin{tabular}{@{}c@{}} Not recruited \end{tabular} \\
+  0 & 0 & 0 & 1 & \begin{tabular}{@{}c@{}} Dead \end{tabular} \\
+\end{block}
+\end{blockarray}
+ \]
+
+Here, $\phi_{i, t}$ is the probability of survival, $\nu^{(l)}$ and $\nu^{(u)}$ are the probabilities of moving to the lower or upper basin respectively (conditional on survival), $\gamma_t$ is the probability of recruitment, and $\rho^{(u)}$ is the probability of recruiting into the upper basin conditional on recruitment. 
+
+Survival probabilities were modeled as a function of Bd load: 
+
+$$\text{logit}(\phi_{i, t}) = \beta_0 + \beta_\text{g[i]}^{(g)} + \beta_\text{g[i]}^{(z)} z_{i, t},$$
+
+where $\beta_0$ is an intercept parameter, $\beta_\text{g[i]}^{(g)}$ is an adjustment for group $g$, $g[i]$ is the group that individual $i$ belongs to, $\beta_\text{g[i]}^{(z)}$ is the effect of Bd load on group $g$, and $z_{i, t}$ is the Bd load of individual $i$ in primary period $t$.
+
+We treat the field experiment in 2015 as the first primary period, for which states are known for experimental animals. 
+For example, if individual $i$ was captured and released at the upper basin, then we know that $s_{i, t} = 1$. 
+Initial states are not known for non-experimental animals, which could have been alive in either basin (states 1 or 2), or in the not recruited class (state 3). 
+Note that we are only interested in modeling the state and capture histories of animals that might have been alive. 
+We assigned a Dirichlet(1, 1, 1) prior for the initial state distribution for non-experimental frogs, which assigns equal prior density to each initial state.
+
+*Bd load model*. We modeled Bd loads as being normally distributed on a transformed scale. 
+Raw Bd loads were transformed using a $\log_{10}$ + 1 transformation, then centered and scaled to have mean zero and unit standard deviation (in an attempt to avoid ill-conditioning, as expected Bd load is used in the detection and survival model components).
+Let $z^{\text{obs}}_{i, t}$ represent the observed transformed Bd load, and $z_{i, t}$ represent the expected value for individual $i$ on primary period $t$.
+The observation model for Bd loads of detected individuals was Gaussian on the transformed scale: 
+
+$$z^{\text{obs}}_{i, t} \sim \text{Normal}(z_{i, t}, \sigma),$$
+
+\noindent where $\sigma$ is an observation-level standard deviation parameter. 
+
+Expected Bd load was modeled as a function of treatment, primary period, and individual identity: 
+
+$$z_{i, t} = \mu_t + \beta_{\text{trt}[i]} + \epsilon_i,$$
+
+\noindent where $\mu_t$ is a time-varying intercept, $\beta_{\text{trt}[i]}$ is an adjustment for the treatment group of individual $i$ (denoted $\text{trt}[i])$ to account for differences in mean Bd loads between treated, control, and non-experimental animals, and $\epsilon_i$ is an individual-level adjustment.
+
+*Prior distributions*. We expected movement among basins to be rare, so both movement parameters ($\nu^{(l)}$ and $\nu^{(u)}$) were assigned Beta(2, 20) priors.
+Primary period and individual-level adjustments were modeled using zero-mean normal distributions with unknown standard deviations specific to the process of interest, e.g., for the probability of entering the population: $[\lambda_{1:T}] = \prod_{t = 1}^{T} \text{Normal}(\lambda_t | 0, \sigma^{(\lambda)})$. 
+Standard deviation parameters were given unit scale half normal priors, and all remaining parameters were given unit scale normal priors.
+
+*Inference*. We sampled from the posterior distribution of this model using dynamic Hamiltonian Monte Carlo in Stan. 
+We drew 3000 iterations for each of four chains, using a maximum treedepth of 11 and an adapt_delta value of 0.99.
+Convergence was checked by visual inspection of traceplots and with Rhat values, using Rhat < 1.1 as a threshold.
+Models were fit using the rstan R package, version 2.21.2 [@rstan2020].
+
 ### Results {-}
 
 ```{r read-stan-results, include=FALSE}
@@ -299,7 +301,7 @@ On an average primary period, posterior median detection probability was `r mean
 ### Methods {-}
 
 In 2018, we detected a Bd epizootic in the only Bd-naive *Rana sierrae* population remaining in the Treasure Lakes Basin (Table S1), providing another opportunity to test the effectiveness of antifungal treatment on adult frogs.
-the treatment was conducted as a management action instead of an experiment because relatively few adults remained in this population at the time of the treatment. 
+The treatment was conducted as a management action instead of an experiment because relatively few adults remained in this population at the time of the treatment. 
 As such, dividing the frogs into treated and control groups would have provided little statistical power to detect between-group differences. 
 Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
 Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
@@ -308,7 +310,7 @@ We used the same methods as described for the LeConte treatments, with two impor
 We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
 Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
-To post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25)
+To describe post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25)
 
 We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
 To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
@@ -317,16 +319,16 @@ To evaluate the factors influencing treatment effectiveness on individual frogs,
 
 ### Results {-}
 
-Similar to the situation in LeConte Basin, adult frog Bd loads were very high at Treasure Lake during early summer 2018, and at the start of the itraconazole treatment (Figure 5). 
-Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure 5; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
+Similar to the situation in LeConte Basin, in the Treasure Lake study population Bd loads on adult frogs were very high during early summer 2018 and at the start of the itraconazole treatment (Figure S3). 
+Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure S3; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
 Model results affirmed the important effect of treatment (Table S9). 
 
 The number of itraconazole treatments a frog received ("days_inside") increased treatment effectiveness (Table S10). Initial Bd load ("capture_bdload_std") and the (days_inside x capture_bdload_std) interaction term were both unimportant (Table S10). 
 
-Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure 5).
+Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure S4).
 In addition, one non-experimental adult frog was captured, and one dead tagged (i.e., treated) adult was found. 
-Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure 5, S3). 
-There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S3). 
+Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure S3, S4). 
+There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S4). 
 In surveys conducted in 2019 (the year following treatment) and 2020, we observed no *R. sierrae* of any life stage. 
 Therefore, despite the substantial reduction in Bd loads caused by the 2018 treatment and the relatively large fraction of treated frogs recaptured one month later, few or no frogs survived overwinter until summer 2019. 
 
@@ -621,7 +623,7 @@ knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-load
 
 For all adult *R. sierrae* in the 2018 Treasure Lakes itraconazole treatment, Bd loads over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys. 
 Points from the same frog are connected by a line. 
-Panel labels are as follows: 1 = frog that died during the treatment ("non-survivor"), 2 = survivor that was not recaptured during the post-release survey in August, and 3 = survivor that was recaptured during the post-release survey. 
+Panel labels are as follows: 1 = frog that died during the treatment period, 2 = survivor that was not recaptured during the post-release survey in August, and 3 = survivor that was recaptured during the August post-release survey. 
 The single non-experimental frog captured in August was not included in the treatment (treatment duration = "NA") and is included in panel 1. 
 
 \clearpage

@@ -186,7 +186,7 @@ In the lower basin, a total of 359 and 102 frogs were captured for the treated a
 In the upper basin, these totals were 206 and 74 frogs. 
 Because of the large size of this population, these totals are likely a relatively small proportion of the total frog population in the basin (maximum VES counts of adults in 2009, 2011, 2012, and 2015 were 4690, 4136, 4074, and 1047, respectively). 
 
-Immediately following capture, frogs were swabbed, tagged with passive integrated transponder (PIT) tags to allow identification of individuals [@joseph2018disease], measured, and weighed. Following processing, frogs in the treated category were held in capture date-specific pens for the duration of the 8-9 day treatment period and control frog were released (see **Supporting Information--General Methods** for details). 
+Immediately following capture, frogs were swabbed, tagged with passive integrated transponder (PIT) tags to allow identification of individuals [@joseph2018disease], measured, and weighed. Following processing, frogs in the treated category were held in capture date-specific pens for the duration of the 8-9 day treatment period and control frogs were released (see **Supporting Information--General Methods** for details). 
 To determine treatment effectiveness, 93 frogs in the lower basin (31 from each capture date) and 50 frogs in the upper basin (25 from each capture date) were re-swabbed on the day prior to the final treatment. 
 After the last treatment, all frogs were released from the pens. 
 
@@ -221,7 +221,7 @@ Following processing, subadults in the treated and control groups were held in s
 To determine pre-itraconazole Bd loads, a subset of subadults from both groups were swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily on July 12-18 (see **Supporting Information--General Methods** for details). 
 The number of animals in the treated group declined somewhat during this period due to Bd-caused mortality and occasional predation by gartersnakes. <!--provide specifics--> 
 
-To assess the effectiveness of itraconazole treatment in reducing Bd loads over the 7-day treatment period and to quantify the amount of *J. lividum* present naturally on subadults in this population, we swabbed a subset of animals on July 19 immediately prior to *J. lividum* exposure. 
+To assess the effectiveness of itraconazole treatment in reducing Bd loads over the 7-day treatment period and to quantify the amount of *J. lividum* present naturally on subadults in this population, we swabbed a subset of animals on July 19 immediately prior to *J. lividum* exposure (see **Supporting Information -- General Methods** for details). 
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19, a concentrated solution of *J. lividum* culture was transported into Dusy Basin on foot in an insulated container.
 On July 19 and again on July 20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively). 
@@ -229,7 +229,8 @@ At the conclusion of the second *J. lividum* bath, all animals were released bac
 Because the survival of *J. lividum* during the two day period of transport and holding is unknown and we were unable to make counts of live cells in the field, the concentration of *J. lividum* to which frogs were exposed is also unknown. 
 
 To evaluate the effects of the combined itraconazole-*J. lividum* treatment, we surveyed the study population during the summers of 2012 (n = 3 surveys), 2013 (n = 3), 2014 (n = 1), and 2019 (n = 1). 
-During each of these surveys, we conducted VES and captured and swabbed as many subadult frogs as possible (no adults were captured), and recorded the toe-clip (if present) for each individual. 
+During each of these surveys, we conducted VES and captured and swabbed as many subadult frogs as possible, including both experimental (i.e., toe-clipped) and non-experimental ("wild") animals. 
+The toe-clip, if present, was recorded for each captured individual. 
 The concentration of *J. lividum* on captured frogs was assessed using skin swabs and qPCR (see **Supporting Information--General Methods** for details). 
 
 ## Quantifying Bd load using skin swabs {-}
@@ -243,9 +244,9 @@ In post-metamorphic *R. sierrae*, Bd loads indicative of severe chytridiomycosis
 We analyzed the results of all treatments using linear simple and multilevel models in a Bayesian framework. 
 All analyses except one used the brms package in R [@bürkner2017rpackage; @bürkner2018advanced; @rsoftware2020]. 
 The exception was the analysis of the CMR data collected as part of the itraconazole treatments in LeConte Basin. 
-The LeConte CMR model was implemented in Stan [@carpenter2017stan] directly instead of via the brms interface (see **Supporting Information--General Methods** for details). 
+The LeConte CMR model was implemented in Stan [@carpenter2017stan] directly instead of via the brms interface (see **Supporting Information--Treatment-specific Methods and Results** for details). 
 
-The models described below are the best-fit models that resulted from the workflow outlined in **Supporting Information-General Methods**. 
+The models described below are the best-fit models that resulted from the workflow outlined in **Supporting Information--General Methods**. 
 We considered predictors of group- and population-level effects and family-specific parameters to be important when the 95% credible interval ("CI") of the estimates did not include zero, and relatively unimportant otherwise. 
 We provide the results of all analyses in tabular form, either in the **Results** for analyses describing the outcome of treatment experiments, or in **Supporting Information--Tables** for related but less central analyses. 
 To interpret the coefficients from negative binomial models provided in the tables, note that there is a log link for the mean (and therefore Bd load data is on a log scale). In addition, for zero-inflated negative binomial models, there is a logit link for the zero-inflation component. 
@@ -283,7 +284,7 @@ To evaluate the immediate effect of treatment on Bd loads, we used the model *bd
 For both analyses, we excluded any frogs that died during the treatment period. 
 We evaluated differences in Bd loads of frogs that lived versus died during the treatment period using the model *trt_died ~ (lbd_load x location)* (family = bernoulli, trt_died = [true, false], lbdload = log~10~(bd_load + 1) on swabs collected immediately prior to the treatment period).
 
-To describe post-treatment frog population dynamics in the LeConte experiments, including survival and recruitment, while accounting for imperfect detection, we used open population multi-state hidden Markov models (see **Supporting Information--General Methods** for details).
+To describe post-treatment frog population dynamics in the LeConte experiments, including survival and recruitment, while accounting for imperfect detection, we used open population multi-state hidden Markov models (see **Supporting Information--Treatment-specific Methods and Results** for details).
 Briefly, we estimated population size over time using parameter-expanded Bayesian data augmentation, which augments the capture histories of observed individuals with a large number of capture histories for individuals that were never detected [@royle2012parameter].
 The states included (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
 On any particular survey, we considered three possible observations of an individual: (1) “alive at the upper site”, (2) “alive at the lower site”, and (3) “not detected”. 
@@ -356,6 +357,7 @@ Importantly, the reduced Bd loads that characterized the treated group at the en
 Bd load dynamics in control frogs are less clear because of the paucity of control frogs recaptured during 2016-2018. 
 Both recaptured control frogs were recaptured in the year after the treatments (2016), and both had relatively low loads in 2015 relative to the rest of the individuals in the control group (Figure 4a). 
 During the 2016-2018 period, Bd loads in the non-experimental group were relatively low and similar to those of the treated group. 
+Additional details, including on frog movement patterns and detection probabilities, are provided in **Supporting Information -- Treatment-specific Methods and Results**.  
 
 ```{r read-stan-results, include=FALSE}
 load_diff <- readr::read_csv(here::here("stan", "load_diffs.csv")) %>%
