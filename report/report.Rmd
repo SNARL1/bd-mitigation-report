@@ -153,12 +153,12 @@ minstage <- min(stage$tad_stage)
 maxstage <- max(stage$tad_stage)
 medianstage <- median(stage$tad_stage)
 ```
-In the Barrett experiment, during July 29 to August 1 we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information--General Methods** for details). 
+In the Barrett experiment, during July 29 to August 1 we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information--General Methods** for details regarding the use of pens). 
 Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details on Bd load quantification provided below]. 
 Swabbed tadpoles were also staged [@gosner1960simplified, range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
 Daily itraconazole treatments were conducted during the period July 30 -- August 5, and animals were treated from four to seven times, depending on the day of capture (see **Supporting Information--General Methods** for details). 
 To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment. 
-A total of 977 tadpoles and 65 subadults were treated and released back into the study ponds. <!-- Add mortality info -->
+During the treatments, mortality across all three ponds was 6%, and a total of 917 tadpoles and 62 subadults completed the treatment and were released back into the study ponds (56, 688, and 235 animals across the three ponds, respectively). 
 In the control populations, we swabbed tadpoles and subadults on a single day (one population per day during August 2--4). To ensure that animals were not swabbed more than once, swabbed animals were held in pens until swabbing was complete. 
 Swabs were collected from a total of 75 tadpoles and 23 subadults. 
 To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond in August and September 2009, and in July, August, and September 2010. 
@@ -167,7 +167,8 @@ In treated populations, given that we were unable to capture all animals for tre
 The Dusy experiment was identical in most respects to the Barrett experiment. During July 24--26, we captured as many animals as possible from the ponds assigned to the treated group and placed them in pens. 
 Daily itraconazole treatments began on July 27 and lasted through August 2, resulting in seven days of treatment for all animals. 
 In treated populations, swabs were collected from a subset of animals on July 27 before treatment began, and after the final treatment on August 2. 
-A total of 3707 tadpoles and 125 subadults were treated. 
+<!--A total of 3707 tadpoles and 125 subadults were treated.--> 
+During the treatments, mortality across all three ponds was X%, a total of XXXX tadpoles and XX subadults completed the treatment and were released back into the study ponds (723, 1043, and xxxx animals across the three ponds, respectively).  <!-- Update when numbers from 11506 are compiled -->
 Animals in control populations were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults). 
 We also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
 To assess the longer-term effects of treatment on frog populations, we conducted follow-up VES in each pond in August and September 2010, and July and August 2011. 
@@ -187,8 +188,9 @@ In the upper basin, these totals were 206 and 74 frogs.
 Because of the large size of this population, these totals are likely a relatively small proportion of the total frog population in the basin (maximum VES counts of adults in 2009, 2011, 2012, and 2015 were 4690, 4136, 4074, and 1047, respectively). 
 
 Immediately following capture, frogs were swabbed, tagged with passive integrated transponder (PIT) tags to allow identification of individuals [@joseph2018disease], measured, and weighed. Following processing, frogs in the treated category were held in capture date-specific pens for the duration of the 8-9 day treatment period and control frogs were released (see **Supporting Information--General Methods** for details). 
+
 To determine treatment effectiveness, 93 frogs in the lower basin (31 from each capture date) and 50 frogs in the upper basin (25 from each capture date) were re-swabbed on the day prior to the final treatment. 
-After the last treatment, all frogs were released from the pens. 
+After the last treatment, all frogs were released from the pens (285 in the lower basin, 126 in the upper basin, total mortality during treatment = 27%; see **Results** for additional details). 
 
 Post-treatment frog survival was quantified using capture-mark-recapture (CMR) surveys [@joseph2018disease] conducted during the summers of 2016, 2017, and 2018. 
 No post-treatment surveys were possible in 2015 because the frog active season was nearly over by the time the treatments were completed. 
@@ -219,12 +221,13 @@ All animals were given group-specific toe-clips: (i) control = toe 2 on left fro
 We used toe clips because PIT tags are too large to be used with subadults, and other tagging methods tested in pre-experiment trials gave unsatisfactory results [e.g., @brannelly2014comparison]. 
 Following processing, subadults in the treated and control groups were held in separate mesh pens. 
 To determine pre-itraconazole Bd loads, a subset of subadults from both groups were swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily on July 12-18 (see **Supporting Information--General Methods** for details). 
-The number of animals in the treated group declined somewhat during this period due to Bd-caused mortality and occasional predation by gartersnakes. <!--provide specifics--> 
+Of the original 271 subadults, 256 completed the treatment (mortality = 6%) and were available for *J. lividum* exposure. 
 
 To assess the effectiveness of itraconazole treatment in reducing Bd loads over the 7-day treatment period and to quantify the amount of *J. lividum* present naturally on subadults in this population, we swabbed a subset of animals on July 19 immediately prior to *J. lividum* exposure (see **Supporting Information -- General Methods** for details). 
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19, a concentrated solution of *J. lividum* culture was transported into Dusy Basin on foot in an insulated container.
 On July 19 and again on July 20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively). 
+No frog mortality occurred during these *J. lividum* exposures. 
 At the conclusion of the second *J. lividum* bath, all animals were released back into the pond and the solution of *J. lividum* culture was carried out of the backcountry and disposed of.
 Because the survival of *J. lividum* during the two day period of transport and holding is unknown and we were unable to make counts of live cells in the field, the concentration of *J. lividum* to which frogs were exposed is also unknown. 
 
