@@ -74,7 +74,7 @@ VES is commonly used in studies of MYL frogs to estimate the abundance of all li
 For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period  (Figure S1). 
 Holding animals in pens assured that each animal could be captured and treated on each day of the treatment period; this would not have been possible if animals needed to be recaptured from the ponds each day. 
 Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night. 
-Animals assigned to the untreated "control" group were held in pens only 3-24 hr (to prevent recapture and/or resampling of individuals) and then released back into the lake. 
+Animals assigned to the untreated "control" group were held in pens only 3-24 hr and then released back into the lake; temporarily holding these individuals, rather than releasing them immediately, guaranteed they were not recaptured and resampled. 
 
 Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the treatment period, doing so could have produced spurious and misleading results. 
 Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
@@ -113,7 +113,7 @@ A standard curve was generated for each 96-well plate to estimate the number of 
 
 ### Simple and multilevel models using the brms package {-}
 
-When using the brms package, our analysis workflow included starting with a model that included all relevant population-level ("fixed") effects and their interactions ("full model"), and checking model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
+When using the brms package, we started with models that included all relevant population-level ("fixed") effects and their interactions ("full model"), then checked model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
 When data contained possible hierarchical structure (which could result in non-independence), we added group-level ("random") effects to the full model. 
 Bd load and frog counts were the most commonly modeled response variables, and models that used a negative binomial family generally produced the best fit. 
 However, when appropriate, we also evaluated the fit of models that used other model families, including Poisson and zero-inflated negative binomial. 
@@ -306,11 +306,11 @@ As such, dividing the frogs into treated and control groups would have provided 
 Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
 Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
 
-We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
+We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period - we included every live frog seen at the site. 
 We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
 Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
-To describe post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25)
+To describe post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25).
 
 We assessed treatment effectiveness by comparing Bd loads measured before and after treatment, using the model *bd_load ~ trt_period* (family = negative binomial, trt_period = [begin, end]). 
 To evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received, we calculated treatment effectiveness for individual frogs as the negative log ratio of pre-treatment to post-treatment Bd loads (hereafter, "LRR"): -log~10~((load~pre~ + 1)/(load~post~ + 1). 
