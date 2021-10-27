@@ -17,7 +17,7 @@ output:
     toc: FALSE
 bibliography: bibliography_appendix.bib
 fontsize: 12pt
-csl: ecology.csl
+csl: peerj.csl
 header-includes:
   - \usepackage{blkarray}
   - \usepackage{amsmath}
@@ -341,9 +341,9 @@ Therefore, despite the substantial reduction in Bd loads caused by the 2018 trea
 
 # Tables {-}
 
-## Table S1 {-}
+## Table S1: {-}
 
-Characteristics of all sites used in the antifungal treatment experiments
+**Characteristics of all sites used in the antifungal treatment experiments.**
 
 ```{r, include=FALSE}
 t_1 <- read_csv(file = here::here("out", "tables", "expt_sites.csv"))
@@ -363,9 +363,9 @@ kbl(
 
 \clearpage
 
-## Table S2 {-}
+## Table S2: {-}
 
-Timelines for antifungal treatment experiments conducted in the lower and upper basins of the LeConte study area in 2015.
+**Timelines for antifungal treatment experiments conducted in the lower and upper basins of the LeConte study area in 2015.**
 
 (a) Lower basin
 ```{r, include=FALSE}
@@ -402,9 +402,12 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
 
 \clearpage
 
-## Table S3 {-}
+## Table S3: {-}
 
-For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs in ponds assigned to control and treated groups immediately before the treatment period (model family is negative binomial). 
+**For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs in ponds assigned to control and treated groups immediately before the treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial.
 
 ```{r, include=FALSE}
 barrettdusy_m1 <- read_csv(file = here::here("out", "tables", "barrettdusy-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -420,9 +423,12 @@ kbl(barrettdusy_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 
 \clearpage
 
-## Table S4 {-}
+## Table S4: {-}
 
-For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period (model family is negative binomial). 
+**For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial. 
 
 ```{r, include=FALSE}
 barrettdusy_m2c <- read_csv(file = here::here("out", "tables", "barrettdusy-m2c.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -437,9 +443,12 @@ kbl(barrettdusy_m2c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 
 \clearpage
 
-## Table S5 {-}
+## Table S5: {-}
 
-For the Dusy Basin itraconazole treatment experiment, results of model comparing zoospore pools of ponds assigned to the control and treated groups before and after treatment (model family is negative binomial).   
+**For the Dusy Basin itraconazole treatment experiment, results of model comparing zoospore pools of ponds assigned to the control and treated groups before and after treatment.**
+
+\vspace{-2mm}
+Model family is negative binomial.   
 
 ```{r, include=FALSE}
 dusy2010_m1 <- read_csv(file = here::here("out", "tables", "dusy2010-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -456,9 +465,12 @@ kbl(dusy2010_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 
 \clearpage
 
-## Table S6 {-}
+## Table S6: {-}
 
-For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the control and treated categories immediately before the treatment period (model family is negative binomial).   
+**For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the control and treated categories immediately before the treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial.   
 
 ```{r, include=FALSE}
 leconte2015_m1 <- read_csv(file = here::here("out", "tables", "leconte2015-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -472,9 +484,12 @@ kbl(leconte2015_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       kable_styling(latex_options = "scale_down")
 ```
 
-## Table S7 {-}
+## Table S7: {-}
 
-For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period (model family is negative binomial). 
+**For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial. 
 
 ```{r, include=FALSE}
 leconte2015_m2 <- read_csv(file = here::here("out", "tables", "leconte2015-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -490,9 +505,12 @@ kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 
 \clearpage
 
-## Table S8 {-}
+## Table S8: {-}
 
-For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs in the treated group that survived versus died (model family is bernoulli).   
+**For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs in the treated group that survived versus died.**
+
+\vspace{-2mm}
+Model family is bernoulli.   
 
 ```{r, include=FALSE}
 leconte2015_m4 <- read_csv(file = here::here("out", "tables", "leconte2015-m4.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -505,9 +523,12 @@ kbl(leconte2015_m4, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       kable_styling(latex_options = "scale_down")
 ```
 
-## Table S9 {-}
+## Table S9: {-}
 
-For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs before versus the end of the treatment period (model family is negative binomial). 
+**For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs before versus the end of the treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial. 
 
 ```{r, include=FALSE}
 treasure_m1 <- read_csv(file = here::here("out", "tables", "treasure-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -523,9 +544,12 @@ kbl(treasure_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 
 \clearpage
 
-## Table S10 {-}
+## Table S10: {-}
 
-For the Treasure Lakes Basin itraconazole treatment, results of model evaluating predictors of treatment effectiveness (model family is gaussian).
+**For the Treasure Lakes Basin itraconazole treatment, results of model evaluating predictors of treatment effectiveness.**
+
+\vspace{-2mm}
+Model family is gaussian.
 
 ```{r, include=FALSE}
 treasure_m2 <- read_csv(file = here::here("out", "tables", "treasure-m2.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -539,9 +563,12 @@ kbl(treasure_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       kable_styling(latex_options = "scale_down")
 ```
 
-## Table S11 {-}
+## Table S11: {-}
 
-For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the control and treated groups immediately before the itraconazole treatment period (model family is negative binomial).   
+**For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the control and treated groups immediately before the itraconazole treatment period.**
+
+\vspace{-2mm}
+Model family is negative binomial.   
  
 ```{r, include=FALSE}
 dusy2012_m1 <- read_csv(file = here::here("out", "tables", "dusy2012-m1.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -557,9 +584,12 @@ kbl(dusy2012_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 
 \clearpage
 
-## Table S12 {-}
+## Table S12: {-}
 
-For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the treated category from immediately before versus at the end of the itraconazole treatment (model family is zero-inflated negative binomial).   
+**For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the treated category from immediately before versus at the end of the itraconazole treatment.**
+
+\vspace{-2mm}
+Model family is zero-inflated negative binomial.   
 
 ```{r, include=FALSE}
 dusy2012_m2a <- read_csv(file = here::here("out", "tables", "dusy2012-m2a.csv")) %>% dplyr::mutate(Rhat = sprintf("%0.2f", Rhat))
@@ -583,7 +613,10 @@ kbl(dusy2012_m2a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
 knitr::include_graphics(here::here("out", "figures", "dusy-2012-pens.jpg"))
 ```
 
-Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 microbiome augmentation experiment in Dusy Basin.  
+**Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 microbiome augmentation experiment in Dusy Basin.**
+
+\vspace{-2mm}
+Photo credit: Roland Knapp 
 
 \clearpage
 
@@ -593,7 +626,9 @@ Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 
 knitr::include_graphics(here::here("out", "figures", "dusy-zsppool.png"))
 ```
 
-In the Dusy Basin study ponds assigned to the control or treated groups, zoospore pools measured before and after itraconazole treatment of *R. sierrae*. 
+**In the Dusy Basin study ponds assigned to the control or treated groups, zoospore pools measured before and after itraconazole treatment of *R. sierrae*.**
+
+\vspace{-2mm}
 The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. Each dot represents a single sample, and median values for each treatment period are indicated with a black diamond. 
 The number of samples included is displayed above the x-axis. 
 
@@ -605,7 +640,9 @@ The number of samples included is displayed above the x-axis.
 knitr::include_graphics(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"))
 ```
 
-Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred. 
+**Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred.**
+
+\vspace{-2mm}
 Box colors indicate Bd loads from pre- and post-treatment periods (gray) and during the treatment (blue). 
 The number of swabs collected on each date is displayed above the x-axis.
 Box plot components are as in Figure 1. 
@@ -621,7 +658,9 @@ During the treatment period, individual frogs were swabbed for Bd immediately fo
 knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-loads.png"))
 ```
 
-For all adult *R. sierrae* in the 2018 Treasure Lakes itraconazole treatment, Bd loads over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys. 
+**For all adult *R. sierrae* in the 2018 Treasure Lakes itraconazole treatment, Bd loads over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys.**
+
+\vspace{-2mm}
 Points from the same frog are connected by a line. 
 Panel labels are as follows: 1 = frog that died during the treatment period, 2 = survivor that was not recaptured during the post-release survey in August, and 3 = survivor that was recaptured during the August post-release survey. 
 The single non-experimental frog captured in August was not included in the treatment (treatment duration = "NA") and is included in panel 1. 
@@ -634,5 +673,8 @@ The single non-experimental frog captured in August was not included in the trea
 knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
 ```
 
-In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure. The number of subadults captured during each survey is given in Figure 6.
+**In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure.**
+
+\vspace{-2mm}
+The number of subadults captured during each survey is given in Figure 6.
 
