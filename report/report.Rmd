@@ -72,7 +72,7 @@ In experiments focused on early life stages, Bd load was reduced in the two mont
 However, Bd load and frog survival returned to pre-treatment levels in less than one year, and treatment had no effect on population persistence. 
 In adults, treatment reduced Bd load and increased frog survival over the entire three-year post-treatment period, consistent with frogs having developed an effective adaptive immune response against Bd. 
 Despite this protracted period of reduced impacts of Bd on adults, recruitment into the adult population was limited and the population eventually declined to near-extirpation. 
-In the microbiome augmentation experiment, bathing frogs in a *J. lividum* solution after Bd load reduction with itraconazole increased concentrations of this bacterium on frogs, but concentrations declined to baseline levels within one month and did not have a protective effect against Bd infection. 
+In the microbiome augmentation experiment, itraconazole treatment first reduced Bd loads, followed by exposure to a solution of J liv that successfully increased concentrations of this potentially protective bacterium on frogs; however, concentrations declined to baseline levels within one month and did not have a protective effect against Bd infection. <!--edited this sentence because the verb referring to the increase in Jliv felt buried formerly: ("bathing frogs in a J. lividum solution after Bd load reduction with itraconazole **increased** concentrations"); however, my new version is slightly longer: -->
 Collectively, these results indicate that our mitigation efforts were ineffective in causing long-term changes in frog-Bd dynamics and increasing population persistence, due largely to the inability of early life stages to mount an effective immune response against Bd. 
 This results in repeated recruitment failure and a low probability of population persistence in the face of ongoing Bd infection. 
 
@@ -82,14 +82,16 @@ This results in repeated recruitment failure and a low probability of population
 
 Emerging infectious diseases are increasingly common in wildlife, often due to anthropogenic changes in the ecology of the host or pathogen [@daszak2000emerging; @cunningham2017one].
 Impacts of disease on wildlife can be severe, including long-term population decline and even extinction, with far-reaching effects on species, communities, and ecosystems [@ostfeld2008infectious; @scheele2019amphibian].
-Wildlife diseases can also spill over to humans and domestic animals [@alexander2018ecology]. Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
-As such, the ability to manage wildlife diseases is critically important. However, doing so is often challenging because wildlife diseases are poorly described, few intervention measures are available, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. 
+Wildlife diseases can also spill over to humans and domestic animals [@alexander2018ecology].
+Collectively, these impacts of emerging wildlife diseases have significant consequences to global biodiversity and public health [@daszak2000emerging]. 
+As such, the ability to manage wildlife diseases is critically important. 
+However, management is often challenging because wildlife diseases are poorly described, few intervention measures are available, and free ranging wildlife are inherently difficult to study and treat [@joseph2013taming]. <!--changed "doing so" to "management"; felt like better verb-subject agreement?-->  <!-- Added line breaks between some sentences. -->
 
 The amphibian disease chytridiomycosis, caused by the chytrid fungus *Batrachochytrium dendrobatidis* (“Bd”), is one of the most destructive wildlife diseases in recorded history. 
 This recently-emerged fungus [@ohanlon2018recent] is highly pathogenic to a wide range of amphibian taxa and, by one estimate, has caused the severe decline or extinction of at least 500 amphibian species [@scheele2019amphibian], with many more predicted to be at risk [@rodder2009global]. 
 The pathogenesis of chytridiomycosis is the result of Bd infection disrupting cutaneous osmoregulatory function, leading to electrolyte imbalance and death [@voyles2009pathogenesis].
 Bd infection is transferred between hosts via an aquatic flagellated zoospore stage [@longcore1999batrachochytrium]. 
-Mechanisms facilitating the spread of Bd between amphibian populations are not well understood, but spatial spread is likely due in part to the dispersal of infected hosts [@vredenburg2010dynamics]. 
+Mechanisms facilitating the spread of Bd between amphibian populations are not well understood, but spatial spread is likely due in part to the dispersal of infected hosts [@vredenburg2010dynamics]. <!--One could argue that although it adds context, this sentence could be removed since the paper has little/nothing to do with dispersal/between population spread.-->
 
 To reduce the impact of chytridiomycosis and increase the fraction of amphibian hosts that survive chytridiomycosis outbreaks, several mitigation measures have been proposed and tested. 
 These include treating hosts with antifungal agents (i.e., drugs or antifungal symbiotic bacteria), treating the environment with antifungals, and reducing host density [@woodhams2011mitigating; @scheele2014interventions; @garner2016mitigating].
@@ -134,7 +136,7 @@ In some cases, this remoteness and wilderness regulations constrained potential 
 The research was approved by Sequoia and Kings Canyon National Parks (permit number SEKI-2009-SCI-0039, SEKI-2010-00334, SEKI-2012-SCI-0455, SEKI-2015-SCI-0035), U.S. Fish and Wildlife Service (permit number TE-40090B), U.S. Forest Service (permit number WMD17054), and the Institutional Animal Use and Care Committee at the University of California--Santa Barbara (protocol number 478, 848).
 
 ## Itraconazole treatment of early life stages {-}
-
+<!-- sample sizes, treatment sizes etc. are provided where they differ between text and overview table; those are labeled as '[TCS table: n=XXX]'  -->
 Bd-caused epizootics and resulting mass die-offs of *R. sierrae* occurred in Barrett Lakes Basin during 2005 to 2007 [@vredenburg2010dynamics] and in Dusy Basin in 2009 [@jani2017epidemic]. 
 In an effort to prevent the extirpation of remnant populations, itraconazole treatments were conducted during mid-summer of 2009 in Barrett and 2010 in Dusy. 
 Because adults typically succumb to chytridiomycosis early in an epizootic [@vredenburg2010dynamics], at the time of the experiments these populations contained primarily late-stage tadpoles and recently metamorphosed subadults. 
@@ -153,26 +155,33 @@ minstage <- min(stage$tad_stage)
 maxstage <- max(stage$tad_stage)
 medianstage <- median(stage$tad_stage)
 ```
-In the Barrett experiment, during July 29 to August 1 we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information--General Methods** for details regarding the use of pens). 
+<!--The following revision addresses the comment about combining some of the repetitive information for the Barrett and Dusy experiments.--> 
+On the first day(s) of the Barrett and Dusy experiments, we captured as many *R. sierrae* as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information--General Methods** for details regarding the use of pens). 
 Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details on Bd load quantification provided below]. 
-Swabbed tadpoles were also staged [@gosner1960simplified, range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
-Daily itraconazole treatments were conducted during the period July 30 -- August 5, and animals were treated from four to seven times, depending on the day of capture (see **Supporting Information--General Methods** for details). 
-To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment. 
-During the treatments, mortality across all three ponds was 6%, and a total of 917 tadpoles and 62 subadults completed the treatment and were released back into the study ponds (56, 688, and 235 animals across the three ponds, respectively). 
-In the control populations, we swabbed tadpoles and subadults on a single day (one population per day during August 2--4). To ensure that animals were not swabbed more than once, swabbed animals were held in pens until swabbing was complete. 
-Swabs were collected from a total of 75 tadpoles and 23 subadults. 
-To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond in August and September 2009, and in July, August, and September 2010. 
+Swabbed tadpoles were staged [@gosner1960simplified, range = `r minstage` -- `r maxstage`, median = `r medianstage`]<!--The simplification to describe both experiments 'together' better matches this particular piece of data which according to preceding code chunk captures both Barrett and Dusy--> and subadults were measured (snout-vent length) and weighed. 
+Daily itraconazole treatments were conducted on four to seven consecutive days, depending on the day of capture (see **Supporting Information--General Methods** for details). 
+To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment.
+In the control populations, we swabbed tadpoles and subadults on a single day. 
+To ensure that control animals were not swabbed more than once, swabbed animals were held in temporarily erected pens until swabbing was complete. <!--added 'temporary' to avoid confusion with the experimental pens?-->
+To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond, approximately monthly in the treatment year and following year.
 In treated populations, given that we were unable to capture all animals for treatment, animals swabbed during the post-treatment period likely included a mix of treated and untreated individuals. 
 
-The Dusy experiment was identical in most respects to the Barrett experiment. During July 24--26, we captured as many animals as possible from the ponds assigned to the treated group and placed them in pens. 
-Daily itraconazole treatments began on July 27 and lasted through August 2, resulting in seven days of treatment for all animals. 
-In treated populations, swabs were collected from a subset of animals on July 27 before treatment began, and after the final treatment on August 2. 
-<!--A total of 3707 tadpoles and 125 subadults were treated.--> 
+In the Barrett experiment, we captured tadpoles and subadults during July 29 to August 1. 
+Daily itraconazole treatments were conducted during the period July 30--August 5, and animals were treated four to seven times depending on day of capture.
+During the treatments, mortality across all three ponds was 6%, and a total of 917 <!--[TCS table: n=977]--> tadpoles and 62 <!--[TCS table: n=66]--> subadults completed the treatment and were released back into the study ponds (0<!--changed from 56, which was the number of HYRE tadpoles reported-->, 688, and 235 <!-- [TCS table: 0, 716, 261 respectively]; the 56 were HYRE tadpoles so that needs to be changed--> animals across the three ponds, respectively). 
+For control sites, we collected swabs on August 2-4 (one population per day).
+Swabs were collected from a total of 75 <!--[TCS table: n=78]--> tadpoles and 23 <!--[TCS table: n=35]--> subadults. 
+We conducted post-treatment VES and swabbing in August and September 2009, and in July, August, and September 2010. 
+
+The Dusy experiment was identical in most respects to the Barrett experiment. 
+We captured tadpoles and subadults during July 24--26 from the ponds assigned to the treated group. 
+Daily itraconazole treatments occurred July 27--August 2; all animals received seven days of treatment. 
+In treated populations, we collected swabs on July 27 before treatment began, and after the final treatment on August 2. 
+<!--A total of 3707 tadpoles and 125 subadults were treated.--> <!--[TCS table: 3710 and 145]-->
 During the treatments, mortality across all three ponds was X%, a total of XXXX tadpoles and XX subadults completed the treatment and were released back into the study ponds (723, 1043, and xxxx animals across the three ponds, respectively).  <!-- Update when numbers from 11506 are compiled -->
-Animals in control populations were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults). 
-We also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
-To assess the longer-term effects of treatment on frog populations, we conducted follow-up VES in each pond in August and September 2010, and July and August 2011. 
-As with the Barrett treatment, animals swabbed in treated populations during the post-treatment period likely included a mix of treated and untreated individuals. <!-- There is a lot of repetition between the Dusy and Barrett paragraphs. Can we reduce text by combining these paragraphs? --> 
+Animals in control ponds were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults)<!--matches [TCS table]-->. 
+Follow-up VES in each pond occurred in August and September 2010, and July and August 2011. 
+The Dusy experiment featured one substantial difference from Barrett; in Dusy, we also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
 
 ## Itraconazole treatment of adults {-}
 
