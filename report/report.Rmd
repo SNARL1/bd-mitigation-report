@@ -166,6 +166,7 @@ To ensure that control animals were not swabbed more than once, swabbed animals 
 To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond, approximately monthly in the treatment year and following year.
 In treated populations, given that we were unable to capture all animals for treatment, animals swabbed during the post-treatment period likely included a mix of treated and untreated individuals. 
 
+<<<<<<< HEAD
 <!--In the following two paragraphs, the back-and-forth of numbers reported for lifestage w/o pond, then pond w/o lifestage, then lifestage w/o pond feels strange. We should pick one. Given the muddiness between lifestages in this experiment, it might make sense to report by pond. Further, as the ponds are replicates but have uneven numbers, that may be important to report. Or, given that lifestage is more relevant to disease and ponds are just replicates, that may make more sense. The relevant figures don't divide by pond or by lifestage, only control/treatment.-->
 In the Barrett experiment, in the ponds assigned to the treated group, we captured tadpoles and subadults during July 29 to August 1, 2009. 
 Daily itraconazole treatments were conducted during the period July 30--August 5, and animals were treated four to seven times.
@@ -183,6 +184,16 @@ During the treatments, mortality across all three ponds was X%, a total of XXXX 
 Animals in control ponds were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults)<!--matches [TCS table]-->. 
 Follow-up VES in each pond occurred in August and September 2010, and July and August 2011. 
 The Dusy experiment differed in that we also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
+=======
+The Dusy experiment was identical in most respects to the Barrett experiment. During July 24--26, we captured as many animals as possible from the ponds assigned to the treated group and placed them in pens. 
+Daily itraconazole treatments began on July 27 and lasted through August 2, resulting in seven days of treatment for all animals. 
+In treated populations, swabs were collected from a subset of animals on July 27 before treatment began, and after the final treatment on August 2. 
+During the treatments, mortality across all three ponds was 18%, and a total of 2730 tadpoles and 334 subadults completed the treatment and were released back into the study ponds (723, 1043, and 1298 animals across the three ponds, respectively). 
+Animals in control populations were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults). 
+We also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
+To assess the longer-term effects of treatment on frog populations, we conducted follow-up VES in each pond in August and September 2010, and July and August 2011. 
+As with the Barrett treatment, animals swabbed in treated populations during the post-treatment period likely included a mix of treated and untreated individuals. <!-- There is a lot of repetition between the Dusy and Barrett paragraphs. Can we reduce text by combining these paragraphs? --> 
+>>>>>>> Minor changes to Dusy 2010 methods
 
 ## Itraconazole treatment of adults {-}
 
