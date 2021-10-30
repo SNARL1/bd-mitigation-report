@@ -110,14 +110,14 @@ Such epizootics generally extirpate affected frog populations, and hundreds of s
 Examples of affected populations transitioning to an enzootic state, in which host populations and Bd coexist, are rare [@briggs2010enzootic]. 
 
 The interaction between host and pathogen influences whether the host population is extirpated by an epizootic or transitions to an enzootic state. 
-The results of @briggs2010enzootic indicate that in MYL frogs, host population extinction versus persistence can result solely from density-dependent host-pathogen dynamics. 
+In MYL frogs, host population extinction versus persistence can result solely from density-dependent host-pathogen dynamics [@briggs2010enzootic]. 
 This suggests that reducing Bd loads (e.g., by lowering frog density or treating frogs with antifungal agents) could increase both frog survivorship and the likelihood of enzootic dynamics. 
 An adaptive immune response by amphibians against Bd may also facilitate enzootic dynamics [@woodhams2011mitigating]. 
 Early life stage amphibians have relatively low immunocompetence [@rollins1998metamorphosis; @grogan2018review], but adults of some species, including MYL frogs, can develop adaptive immune defenses that may be at least partially protective against Bd [@ellison2015more; @grogan2018evolution; @mcmahon2014amphibians].
 In theory, antifungal treatments conducted in immunocompetent species and life stages during epizootics could slow the growth of Bd and allow the full development of adaptive immunity, which in turn could increase adult survival and population persistence [@woodhams2011mitigating]. 
 
 The short duration of antifungal drug application may result in only limited suppression of Bd in hosts and a failure to change the fate of Bd-infected amphibian populations. 
-However, a more sustained manipulation could produce longer-lasting outcomes. 
+A more sustained manipulation could potentially produce longer-lasting outcomes. 
 One potential sustained manipulation involves imparting stronger antifungal properties to the skin microbiome of amphibian hosts [@woodhams2014interacting; @bletz2013mitigating]. 
 The feasibility of such a manipulation is suggested by laboratory experiments in which augmentation of the skin microbiome with antifungal bacteria altered frog-Bd dynamics and increased frog survival [@harris2009skin; @kueneman2016probiotic; but see also @becker2011towards]. 
 However, this approach is untested in wild amphibian populations.
@@ -142,7 +142,7 @@ In an effort to prevent the extirpation of remnant populations, itraconazole tre
 Because adults typically succumb to chytridiomycosis early in an epizootic [@vredenburg2010dynamics], at the time of the experiments these populations contained primarily late-stage tadpoles and recently metamorphosed subadults. 
 We used results from basin-wide visual encounter surveys (VES; see **Supporting Information--General Methods** for details) conducted prior to the experiments to identify the largest remaining populations, and assigned them to treated and control groups at random. 
 The Barrett experiment included three treated and three control populations, and in Dusy, where fewer frog populations remained, a total of three treated and two control populations were used (Table S1). 
-Based on VES conducted before and during the treatments, we estimate that we treated 70-90% of each population.
+Based on VES conducted before and during the treatments, we estimate that we treated 60-90% of each population.
 
 ```{r read-animal-stagesize, include=FALSE}
 library(magrittr)
@@ -156,42 +156,39 @@ maxstage <- max(stage$tad_stage)
 medianstage <- median(stage$tad_stage)
 ```
 
-On the first three days of the Barrett and Dusy experiments, we captured as many *R. sierrae* tadpoles and subadults as possible from each pond assigned to the treated group and held them in large mesh pens anchored in the littoral zone of each pond (see **Supporting Information--General Methods** for details regarding the use of pens). 
-Immediately following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, additional details on Bd load quantification provided below]. 
-In addition, swabbed tadpoles were staged [@gosner1960simplified, range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
+During the first 3--4 days of the Barrett and Dusy experiments (see below for site-specific details), we captured as many *R. sierrae* tadpoles and subadults as possible from each pond assigned to the treated group.
+We held captured animals for the duration of the capture and treatment periods using large mesh pens anchored in the littoral zone of each pond. 
+Following capture, we collected skin swabs from a subset of animals to quantify Bd load [@vredenburg2010dynamics, see **Methods--Quantifying Bd load using skin swabs** below].
+In addition, swabbed tadpoles were staged [@gosner1960simplified: range = `r minstage` -- `r maxstage`, median = `r medianstage`] and subadults were measured (snout-vent length) and weighed. 
 Daily itraconazole treatments were conducted on seven consecutive days (see **Supporting Information--General Methods** for details). 
 To assess treatment effectiveness in reducing Bd loads, we collected a second set of skin swabs from a subset of animals following the final treatment.
+After the final treatment, animals were released back into the study ponds.
 In the control populations, we swabbed tadpoles and subadults on a single day. 
 To ensure that control animals were not swabbed more than once, swabbed animals were held in temporarily-erected pens until swabbing was complete. 
 To quantify the longer-term effects of treatment on Bd load and frog population dynamics, we conducted post-treatment VES and swabbing at each pond, approximately monthly in the treatment year and following year.
 In treated populations, given that we were unable to capture all animals for treatment, animals swabbed during the post-treatment period likely included a mix of treated and untreated individuals. 
 
-<!--In the following two paragraphs, the back-and-forth of numbers reported for lifestage w/o pond, then pond w/o lifestage, then lifestage w/o pond feels strange. We should pick one. Given the muddiness between lifestages in this experiment, it might make sense to report by pond. Further, as the ponds are replicates but have uneven numbers, that may be important to report. Or, given that lifestage is more relevant to disease and ponds are just replicates, that may make more sense. The relevant figures don't divide by pond or by lifestage, only control/treatment.-->
 The Barrett and Dusy experiments were identical in most respects, but also had some differences. 
 In the Barrett experiment, in the ponds assigned to the treated group, we captured tadpoles and subadults during July 29--August 1, 2009. 
 The seven-day period of daily itraconazole treatments (July 30--August 5) started on the second day of the capture period. 
 Because animals were added to pens throughout the capture period when treatments were underway, animals in the treated group were treated four to seven times.
-During the treatments, mortality across all three ponds was 6%, and a total of 917 <!--[TCS table: n=977]--> tadpoles and 62 <!--[TCS table: n=66]--> subadults completed the treatment and were released back into the study ponds (0<!--changed from 56, which was the number of HYRE tadpoles reported-->, 688, and 235 <!-- [TCS table: 0, 716, 261 respectively]; the 56 were HYRE tadpoles so that needs to be changed--> animals across the three ponds, respectively). 
-For control populations, we collected swabs from one population per day during August 2-4.
-Swabs were collected from a total of 75 <!--[TCS table: n=78]--> tadpoles and 23 <!--[TCS table: n=35]--> subadults. 
+During the treatments, mortality across all three ponds was 6%, and a total of 979 animals completed the treatment and were released back into the study ponds (56, 688, and 235 animals across the three ponds, respectively). 
+For control populations, we collected swabs from one population per day during August 2--4 (total number of swabs collected = 98).
 We conducted post-treatment VES and swabbing in August and September 2009, and in July, August, and September 2010. 
 
-In the Dusy experiment, we captured tadpoles and subadults during July 24--26, 2010, from the ponds assigned to the treated group. 
-Daily itraconazole treatments occurred July 27--August 2; all animals received seven days of treatment. 
-In treated populations, we collected swabs on July 27 before treatment began, and after the final treatment on August 2. 
-<!--A total of 3707 tadpoles and 125 subadults were treated.--> <!--[TCS table: 3710 and 145]-->
-During the treatments, mortality across all three ponds was 18%, a total of 2730 tadpoles and 334 subadults completed the treatment and were released back into the study ponds (723, 1043, and 1298 animals across the three ponds, respectively).
-Animals in control ponds were captured, swabbed, and released on July 29 (62 tadpoles and 18 subadults)<!--matches [TCS table]-->. 
+In the Dusy experiment, we captured tadpoles and subadults from the ponds assigned to the treated group during July 24--26, 2010. 
+Daily itraconazole treatments occurred during July 27--August 2, and began after all animals were captured. 
+Therefore, unlike in the Barrett experiment, all animals received seven days of treatment. 
+During the treatments, mortality across all three ponds was 18%, and a total of 3064 animals completed the treatment and were released back into the study ponds (723, 1043, and 1298 animals across the three ponds, respectively).
+Animals in control ponds were captured, swabbed, and released on July 29 (total number of swabs collected = 80). 
 Follow-up VES in each pond occurred in August and September 2010, and July and August 2011. 
-The Dusy experiment differed in that we also collected water samples from all study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
+Unlike in the Barrett experiment, we also collected water samples from all Dusy study ponds before and after the treatments to determine if treatment of frogs reduced the concentration of Bd zoospores in the ponds ["zoospore pool"; @briggs2010enzootic]; all associated methods and results are provided in **Supporting Information--Treatment-specific Methods and Results**.
 
 ## Itraconazole treatment of adults {-}
 
 *LeConte Basin*. In mid-summer 2015, annual disease surveillance at one of the largest remaining Bd-naive *R. sierrae* populations detected high Bd loads and the presence of many moribund and dead frogs. 
 In response to this epizootic, we conducted two antifungal treatment experiments focused on adults, one in the lower portion of the basin and one in the upper portion (Table S1). 
-The two areas (hereafter, "basins") are approximately 750 m apart and are linked by streams and relatively gentle terrain; we therefore expected some movement of frogs between them. <!--This could be removed/revised, if movement does not come up again (I don't remember it appearing again).-->
-
-The design of the treatment experiments in the lower and upper basins was nearly identical, differing only in the number of days spent capturing frogs for the “treated” group (Table S2). 
+The design of the two treatment experiments was nearly identical, differing only in the number of days spent capturing frogs for the “treated” group (Table S2). 
 To simplify logistics, frogs in the treated group were captured during the first two to three days of the experiment, and frogs for the untreated control group were captured on the following day. 
 Frogs that were visibly sick (as indicated by an impaired righting reflex) were excluded because these frogs were likely within hours of death. 
 In the lower basin, a total of 359 and 102 frogs were captured for the treated and control groups, respectively. 
@@ -199,7 +196,6 @@ In the upper basin, these totals were 206 and 74 frogs.
 Because of the large size of this population, these totals are likely a relatively small proportion of the total frog population in the basin (maximum VES counts of adults in 2009, 2011, 2012, and 2015 were 4690, 4136, 4074, and 1047, respectively). 
 
 Immediately following capture, frogs were swabbed, tagged with passive integrated transponder (PIT) tags to allow identification of individuals [@joseph2018disease], measured, and weighed. Following processing, frogs in the treated category were held in capture date-specific pens for the duration of the eight to nine day treatment period and control frogs were released (see **Supporting Information--General Methods** for details). 
-
 To determine treatment effectiveness, 93 frogs in the lower basin (31 from each capture date) and 50 frogs in the upper basin (25 from each capture date) were re-swabbed on the penultimate treatment day. 
 After the last treatment, all frogs were released from the pens (285 in the lower basin, 126 in the upper basin, total mortality during treatment = 27%; see **Results** for additional details). 
 
@@ -228,13 +224,13 @@ Therefore, given that subadults in the study population had high Bd loads, prior
 
 Subadults were captured on July 12-13 (n = 331), measured, weighed, and assigned at random to treated and control groups at a ratio of approximately 4:1 (271 treated, 60 control). 
 This ratio was chosen to maximize the number of subadults receiving antifungal treatment while maintaining a sufficiently large control group. 
-All animals were given group-specific toe-clips. <!--Removed the toe-clip assignments; I don't think those are important.-->
-We used toe clips because PIT tags are too large to be used with subadults, and other tagging methods tested in pre-experiment trials gave unsatisfactory results [e.g., @brannelly2014comparison]. 
+All animals were given group-specific toe-clips. 
+We used toe clips because PIT tags are too large to be used with subadults, and other tagging methods [e.g., @brannelly2014comparison] tested in pre-experiment trials gave unsatisfactory results. 
 Following processing, subadults in the treated and control groups were held in separate mesh pens. 
-To determine pre-itraconazole Bd loads, a subset of subadults from both groups were swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily on July 12-18 (seven days; see **Supporting Information--General Methods** for details). 
-Of the original 271 subadults, 256 completed the treatment (mortality = 9%) and were available for *J. lividum* exposure. As in the earlier Barrett and Dusy experiments, an unknown fraction of this mortality was due to predation by invertebrate predators, not disease. <!--Added this, but not attached to it-->
+To determine pre-itraconazole Bd loads, a subset of subadults from both groups was swabbed on July 12, and all control animals were released back into the study pond on July 13. Itraconazole treatments were conducted daily during July 12-18 (see **Supporting Information--General Methods** for details). 
+Of the original 271 subadults, 256 completed the treatment (mortality = 9%) and were available for *J. lividum* exposure. 
 
-To assess the effectiveness of itraconazole treatment in reducing Bd loads and to quantify the amount of *J. lividum* present naturally on subadults in this population, we swabbed a subset of animals on July 19 immediately prior to *J. lividum* exposure (see **Supporting Information -- General Methods** for details). 
+To assess the effectiveness of itraconazole treatment in reducing Bd loads and to quantify the amount of *J. lividum* present naturally on subadults in this population, we swabbed a subset of animals on July 19 immediately prior to *J. lividum* exposure (see **Supporting Information -- General Methods** for details on the *J. lividum* qPCR protocol). 
 *J. lividum* for use in the experiment was obtained from the skin of an adult *R. sierrae* in Dusy Basin in 2009 and cultured using standard methods [@harris2009skin]. 
 On July 19, a concentrated solution of *J. lividum* culture was transported into Dusy Basin on foot in an insulated container.
 On July 19 and again on July 20, we bathed all itraconazole-treated subadults (n = 256) in a solution of *J. lividum* culture for 4-4.5 hours (75 and 150 mL of *J. lividum* culture per liter of lake water on July 19 and 20, respectively). 
@@ -243,9 +239,9 @@ At the conclusion of the second *J. lividum* bath, all animals were released bac
 Because the survival of *J. lividum* during the two day period of transport and holding is unknown and we were unable to make counts of live cells in the field, the concentration of *J. lividum* to which frogs were exposed is also unknown. 
 
 To evaluate the effects of the combined itraconazole-*J. lividum* treatment, we surveyed the study population during the summers of 2012 (n = 3 surveys), 2013 (n = 3), 2014 (n = 1), and 2019 (n = 1). 
-During each of these surveys, we conducted VES and captured and swabbed as many subadult frogs as possible, including both experimental (i.e., toe-clipped) and non-experimental ("wild") animals. 
+During each of these surveys, we conducted VES and captured and swabbed as many subadult and adult frogs as possible, including both experimental (i.e., toe-clipped) and non-experimental ("wild") animals. 
 The toe-clip, if present, was recorded for each captured individual. 
-The concentration of *J. lividum* on captured frogs was assessed using skin swabs and qPCR (see **Supporting Information--General Methods** for details). 
+Each collected swab was analyzed for both Bd and *J. lividum* to describe their concentrations on captured frogs. 
 
 ## Quantifying Bd load using skin swabs {-}
 
@@ -357,7 +353,7 @@ Location and the (treatment x location) interaction term were both unimportant, 
 
 In both experiments the treatment reduced Bd loads on treated frogs by 1.4-2.7 orders of magnitude (Fig. 3), based on samples collected on the penultimate day of treatment (Table S2).
 Model results (Table S7) corroborated the important effect of treatment on Bd load. 
-The effect of location was also important (larger reduction <!--the juxtaposition of 'higher', 'upper', and 'lower' was confusing, but please make sure larger reduction is the appropriate wording--> in the upper than lower basin), as was the (location x trt_period) interaction term, with the latter indicating that Bd loads before and at the end of treatment were both higher in the upper than lower basin. 
+The effect of location was also important (loads were elevated in upper compared to lower basin), as was the (location x trt_period) interaction term, with the latter indicating that Bd loads before and at the end of treatment were both elevated in the upper compared to the lower basin. 
 
 During the treatment period, 74 (21%) of the lower basin treated frogs and 80 (39%) of the upper basin treated frogs died. 
 All control frogs survived during the several hour period between capture, processing, and release.
@@ -405,12 +401,11 @@ However, the absence of *R. sierrae* adults during CMR surveys conducted in the 
 In the 2012 Dusy Basin microbiome augmentation experiment, subadult frogs assigned to the treated category were treated with itraconazole and then exposed to the *J. lividum* probiotic.
 Prior to the itraconazole treatment, Bd loads were similar in subadults assigned to the control and treated groups (Fig. 5: day = -7).
 Model results (Table S11) affirmed that pre-treatment Bd loads of the two groups were not different. 
-Itraconazole treatment reduced Bd loads almost four orders of magnitude (Fig. 5: day -7 versus 0), and model results (Table S12) substantiated this important <!--understand the meaning of 'important' in the context of the analyses; a reader who doesn't, or forgets, or reads the results first, might see this as subjective; is there a way to reword?-->effect. 
+Itraconazole treatment reduced Bd loads almost four orders of magnitude (Fig. 5: day -7 versus 0), and model results (Table S12) substantiated this strong effect. 
 
 Immediately prior to *J. lividum* exposure, *J. lividum* concentrations on subadults in the treated group were either zero or near-zero for all individuals (Fig. 6: (day 0). 
 Twelve days after *J. lividum* exposure of frogs in the treated group and their release back into the study pond, *J. lividum* concentrations on subadults in the treated group were high (Fig. 6: day 0 versus 12).
-
-However, unexpectedly, *J. lividum* concentrations were also high in the control and wild groups despite their lack of direct *J. lividum* exposure. 
+Unexpectedly, *J. lividum* concentrations were also high in the control and wild groups despite their lack of direct *J. lividum* exposure. 
 Over the following 1.5 months (day 12 to day 56), *J. lividum* concentrations on subadults declined to near baseline levels (Fig. 6). 
 Formal comparison of *J. lividum* concentrations from day 12 to day 56 across all three groups was not possible due to the almost complete absence of control frogs on days 37 and 56. 
 However, a model that included the treated and wild groups indicated an important negative effect of the number of days since *J. lividum* exposure on *J. lividum* concentration, but no effect of group or the (day x group) interaction term (Table 3). 
@@ -423,7 +418,7 @@ However, a model that included the treated and wild groups indicated that Bd loa
 In addition, there was an important effect of the (days x group) interaction term, due to increasing loads of treated frogs versus relatively constant loads of wild frogs. 
 Together, these results indicate that the combined effect of itraconazole treatment and *J. lividum* exposure was ineffective in preventing the increase in Bd loads to pre-treatment levels. 
 
-During the three surveys of the study population conducted in 2012, we observed a decline in the percent of frogs in the treated and control groups that were recaptured <!--because 'recaptured declined' felt clumsy-->, but the rate of decline was steeper in the control versus treated group (Fig. S5). 
+During the three surveys of the study population conducted in 2012, we observed a decline in the percent of frogs in the treated and control groups that were recaptured, but the rate of decline was steeper in the control versus treated group (Fig. S5). 
 Although no formal analysis is possible due to the relatively few sample points, the results suggest that the itraconazole-*J. lividum* treatment increased frog survival over the 2-month period following treatment. 
 Nonetheless, during surveys conducted in 2013 (one year after treatment), only a single experimental (i.e., toe-clipped) animal was captured. 
 This animal was detected during a survey conducted in early summer, and was a member of the treated group. 
@@ -493,7 +488,7 @@ We conclude that although inadequacies in the study design and some paradoxical 
 In contrast to the relatively strong effect of the antifungal treatment on adult survival in LeConte Basin, this effect was not observed in the antifungal treatment conducted in the Treasure Lakes Basin. 
 The similar short-term reductions in Bd loads of treated frogs in both the LeConte and Treasure treatments, but the lack of longer term effects on frog survival at Treasure suggests that the strong effects of treatment observed in the LeConte experiments are not universal. 
 Treatment success may depend on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or on the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc]. 
-Because <!--substituted "because" for "the", which did not make sense;--> treatment timing is likely important, maximizing the effectiveness of interventions will require frequent disease surveillance of frog populations to detect developing epizootics as early in possible, and rapid adult frog treatments before Bd loads reach high levels. 
+Because treatment timing is likely important, maximizing the effectiveness of interventions will require frequent disease surveillance of frog populations to detect developing epizootics as early in possible, and rapid adult frog treatments before Bd loads reach high levels. 
 Whether antifungal treatments of adult MYL frogs conducted during this narrow optimal time window would consistently increase long-term frog survival and frog population persistence remains uncertain. 
 
 
@@ -524,10 +519,9 @@ Such a "press treatment" would be more effective at keeping Bd loads low for lon
 In addition, the eventual end of treatment would likely result in the same failure to change long-term frog-Bd dynamics as characterized our pulse treatments.
 
 The lack of effective treatment strategies severely restricts our ability to mitigate the effects of ongoing epizootics in MYL frogs, and poses a serious obstacle to reversing the decline of these and many other threatened amphibian species. 
-One possible solution to this dilemma is additional study of amphibian-Bd systems, to better understand what allows population persistence following epizootics [@brannelly2021mechanisms].
-However, although preventing the epizootic-caused decline of amphibian populations is a compelling objective, the current lack of any effective and generally applicable strategies to mitigate the impact of Bd epizootics despite the substantial research effort already expended [@garner2016mitigating] serves as an important reminder that preventing population declines by affecting long-term reductions in Bd loads may not be possible with currently-available or reasonably-foreseeable methods. <!--this is a very big sentence; the content is good-->
+One possible solution to this dilemma is additional study of amphibian-Bd systems to better understand what allows population persistence following epizootics [@brannelly2021mechanisms].
+Although preventing the epizootic-caused decline of amphibian populations is a compelling objective, the current lack of any effective and generally applicable strategies to mitigate the impact of Bd epizootics despite the substantial research effort already expended [@garner2016mitigating] serves as an important reminder that preventing population declines by affecting long-term reductions in Bd loads may not be possible with currently-available or reasonably-foreseeable methods. 
 Instead, we suggest that other approaches, including expanding populations that have survived epizootics and are coexisting with Bd in an enzootic state [e.g., @knapp2016large; @joseph2018disease; @mendelson2019recovery] or increasing the capacity of populations to persist despite elevated Bd-caused mortality [@scheele2014interventions], may produce more immediate conservation benefits for Earth's many imperiled amphibian species.  
-<!-- A final sentence could, or could not, be as follows; my suggestion may be overly grandiose, but attempts to reach the breadth of the first paragraph of the paper--> Lessons learned from attempts to mitigate Bd epizootics can better position wildlife managers and public health workers to protect species, communities, ecosystems, and human lives against current and future emerging infectious diseases.
 
 
 # Acknowledgements {-}

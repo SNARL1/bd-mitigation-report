@@ -73,10 +73,10 @@ VES is commonly used in studies of MYL frogs to estimate the abundance of all li
 
 For all itraconazole treatments, we held animals assigned to the "treated" group in large mesh pens (2 m x 2 m x 0.75 m) for the duration of the multi-day treatment period  (Figure S1). 
 Holding animals in pens assured that each animal could be captured and treated on each day of the treatment period; this would not have been possible if animals needed to be recaptured from the ponds each day. 
-Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking and deeper water habitat (up to 0.7 m) that frogs and tadpoles use at night. 
+Pens were anchored in the littoral zone of the study lakes, and contained shallow water and shoreline habitats for basking as well as deeper water habitat (up to 0.7 m). 
 Animals assigned to the untreated "control" group were held in pens only 3-24 hr and then released back into the lake; temporarily holding these individuals, rather than releasing them immediately, guaranteed they were not recaptured and resampled. 
 
-Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the treatment period, doing so could have produced spurious and misleading results. 
+Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the capture and treatment periods, doing so could have produced spurious and misleading results. 
 Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
 This would have biased the outcome toward lower survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on survival. 
 Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals. 
@@ -86,8 +86,8 @@ To conduct the antifungal treatments, on each day during the multi-day treatment
 We treated frogs in batches of approximately 50, and tadpoles in batches of approximately 100. 
 The volume of itraconazole solution varied between 2 and 5 L, and was varied between batches based on the number and life stage of animals being treated to allow all individuals to submerge fully. 
 After 10 minutes of itraconazole exposure, animals were transferred from the tubs back to the pens. 
-To determine treatment effectiveness, we re-swabbed all animals or a subset (depending on the experiment) at the end of the treatment period. 
 After the final treatment, we released all animals from the pens back into the study lakes.
+To determine treatment effectiveness, we swabbed all animals or a subset (depending on the experiment) following their initial capture and at the end of the treatment period. 
 
 ## *Janthinobacterium lividum* qPCR assay {-}
 
@@ -144,7 +144,7 @@ We extracted DNA using the DNEasy Blood and Tissue kit (Qiagen).
 Bd concentrations in water samples (environmental "Bd loads") were quantified using qPCR [see @jani2017epidemic for details], and Bd load was normalized to a 1-liter sample volume. 
 For each sample, we ran three technical replicates, each from an independent sample dilution and on an independent PCR run. 
 To minimize PCR inhibition, we diluted DNA extracts 50-fold based on pilot tests using undiluted, ten-, fifty-, and one hundred-fold dilutions. 
-Finally, we included 21 negative controls: nine no-template-controls (three per PCR plate) and 12 field-collected negative controls (six water samples collected from a pond where all frogs were Bd-negative, each with 2 technical replicates). 
+Finally, we included 21 negative controls: nine no-template-controls (three per PCR plate) and 12 field-collected negative controls (six water samples collected from a pond where all frogs were Bd-negative, each with two technical replicates). 
 
 The 21 negative controls yielded no false-positive PCR reactions. 
 However, it is common for technical replicates of environmental DNA samples to have a high rate of false-negatives due to low quantities of target DNA or PCR inhibitors in samples [@mosher2018beyond], and this was the case in our study.
@@ -306,8 +306,8 @@ As such, dividing the frogs into treated and control groups would have provided 
 Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
 Specifically, the greater range of treatment days to which frogs were exposed (compared to the LeConte treatments) provided an opportunity to evaluate the effectiveness of itraconazole treatment on Bd loads as a function of the number of daily treatments frogs received.
 
-We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period - we included every live frog seen at the site. 
-We captured and treated 28 frogs on July 16, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
+We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
+We captured and treated 28 frogs on 16 July 2018, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
 Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
 To describe post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25).
