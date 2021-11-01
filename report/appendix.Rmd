@@ -36,8 +36,6 @@ library(readr)
 library(kableExtra)
 ```
 
-\begin{large}PeerJ\end{large} 
-
 \linenumbers
 
 # Author Contributions {-}
@@ -114,7 +112,7 @@ A standard curve was generated for each 96-well plate to estimate the number of 
 ### Simple and multilevel models using the brms package {-}
 
 When using the brms package, we started with models that included all relevant population-level ("fixed") effects and their interactions ("full model"), then checked model fit using visualizations of leave-one-out ("LOO") probability integral transformations [@gelman2013bayesian; @vehtari2017practical]. 
-When data contained possible hierarchical structure (which could result in non-independence), we added group-level ("random") effects to the full model. 
+When data contained possible hierarchical structure (which could result in non-independence), we included group-level ("random") effects in the full model. 
 Bd load and frog counts were the most commonly modeled response variables, and models that used a negative binomial family generally produced the best fit. 
 However, when appropriate, we also evaluated the fit of models that used other model families, including Poisson and zero-inflated negative binomial. 
 We compared fits of models using LOO cross-validation and the *loo* package [@vehtari2017practical]. 
@@ -300,7 +298,7 @@ On an average primary period, posterior median detection probability was `r mean
 
 ### Methods {-}
 
-In 2018, we detected a Bd epizootic in the only Bd-naive *Rana sierrae* population remaining in the Treasure Lakes Basin (Table S1), providing another opportunity to test the effectiveness of antifungal treatment on adult frogs.
+In 2018, we detected a Bd epizootic in the only Bd-naive *R. sierrae* population remaining in the Treasure Lakes Basin (Table S1), providing another opportunity to test the effectiveness of antifungal treatment on adult frogs.
 The treatment was conducted as a management action instead of an experiment because relatively few adults remained in this population at the time of the treatment. 
 As such, dividing the frogs into treated and control groups would have provided little statistical power to detect between-group differences. 
 Although the lack of an experimental design limits the generality of our findings, the treatment is included here because of the additional insights the results provide. 
@@ -308,7 +306,7 @@ Specifically, the greater range of treatment days to which frogs were exposed (c
 
 We used the same methods as described for the LeConte treatments, with two important differences: (1) all frogs were treated (there was no control group), and (2) new frogs were captured from the lake and added to the pens during the first five days of the 7-day treatment period. 
 We captured and treated 28 frogs on 16 July 2018, then added and treated an additional 24, 7, 7, 4, and 4 frogs on July 17 through 21, respectively. 
-Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period.
+Although we captured and treated a total of 74 frogs, we released only 33 live frogs at the end of the treatment due to chytridiomycosis-caused mortality throughout the treatment period (mortality rate = 55%).
 In addition to swabs collected from all frogs immediately following their initial capture, we also collected swabs from each surviving frog after the final itraconazole treatment.
 To describe post-treatment frog-Bd dynamics, we conducted VES and CMR surveys one month after the 2018 treatment (August 21-23), and again in 2019 (August 15-16) and 2020 (June 23-25).
 
@@ -319,7 +317,7 @@ To evaluate the factors influencing treatment effectiveness on individual frogs,
 
 ### Results {-}
 
-Similar to the situation in LeConte Basin, in the Treasure Lake study population Bd loads on adult frogs were very high during early summer 2018 and at the start of the itraconazole treatment (Figure S3). 
+Similar to the situation in LeConte Basin, in the Treasure Lake study population Bd loads on adult frogs were very high prior to itraconazole treatment (Figure S3). 
 Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure S3; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
 Model results affirmed the important effect of treatment (Table S9). 
 
