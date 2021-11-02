@@ -75,8 +75,8 @@ Pens were anchored in the littoral zone of the study lakes, and contained shallo
 Animals assigned to the untreated "control" group were held in pens only 3-24 hr and then released back into the lake; temporarily holding these individuals, rather than releasing them immediately, guaranteed they were not recaptured and resampled. 
 
 Although it would have been ideal to hold animals from both the treated and control groups in pens for the duration of the capture and treatment periods, doing so could have produced spurious and misleading results. 
-Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads and reduced survival more than would be expected for animals in the treated group that were given daily antifungal baths. 
-This would have biased the outcome toward lower survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on survival. 
+Bd transmission is expected to increase with frog density [@rachowicz2007quantifying], and holding untreated control animals in pens at relatively high density could therefore have increased their Bd loads more than would be expected for animals in the treated group that were given daily antifungal baths. 
+This would have biased the outcome toward lower post-treatment survival of control animals compared to treated animals even if the antifungal treatment itself had no effect on post-treatment survival. 
 Assuming that holding animals in pens for several days has some negative effect (due to increased Bd transmission even in treated frogs, and lack of feeding opportunities), if our study design caused biases they should be conservative, i.e., reducing the survival of treated animals relative to control animals. 
 Including a second control group, in which untreated animals were held for the entire treatment period, could have been informative, but would have substantially reduced the number of animals included in the existing treated and control groups and potentially affected our ability to detect treatment effects (due to reduced statistical power). 
 
@@ -317,16 +317,14 @@ To evaluate the factors influencing treatment effectiveness on individual frogs,
 
 ### Results {-}
 
-Similar to the situation in LeConte Basin, in the Treasure Lake study population Bd loads on adult frogs were very high prior to itraconazole treatment (Figure S3). 
-Itraconazole treatment reduced Bd loads by more than two orders of magnitude (Figure S3; Bd loads on 2018-07-23 versus on days 2018-07-16 to 2018-07-21). 
-Model results affirmed the important effect of treatment (Table S9). 
-
+Similar to the situation in LeConte Basin, in the Treasure Lake study population Bd loads on adult frogs were very high prior to itraconazole treatment. 
+Itraconazole treatment reduced Bd loads by more than two orders of magnitude, and model results affirmed this effect (Table S9). 
 The number of itraconazole treatments a frog received ("days_inside") increased treatment effectiveness (Table S10). Initial Bd load ("capture_bdload_std") and the (days_inside x capture_bdload_std) interaction term were both unimportant (Table S10). 
 
-Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure S4).
+Of the 33 frogs that were released back into the lake following treatment, 16 were recaptured in the CMR survey conducted one month later (Figure S3).
 In addition, one non-experimental adult frog was captured, and one dead tagged (i.e., treated) adult was found. 
-Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure S3, S4). 
-There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S4). 
+Bd loads of most recaptured frogs were low compared to those of frogs at the start and end of the treatment period (Figure S3). 
+There was no obvious relationship between the number of treatments a frog received and whether or not it was recaptured one month later (Figure S3). 
 In surveys conducted in 2019 (the year following treatment) and 2020, we observed no *R. sierrae* of any life stage. 
 Therefore, despite the substantial reduction in Bd loads caused by the 2018 treatment and the relatively large fraction of treated frogs recaptured one month later, few or no frogs survived overwinter until summer 2019. 
 
@@ -348,11 +346,9 @@ t_1 <- read_csv(file = here::here("out", "tables", "expt_sites.csv"))
 ```
 ```{r tableS1, echo=FALSE}
 kbl(
-  t_1, col.names = c("Basin", "Site ID", "Experiment", "Life stage", "Category", "Elevation", "Depth", "Area"),
+  t_1, col.names = c("Basin", "Site ID", "Experiment", "Life stage", "Category", "Elevation (m)", "Depth (m)", "Area (m\\textsuperscript{2})"), escape = FALSE,
   booktabs = TRUE, linesep = "") %>%
   row_spec(0, bold = TRUE) %>%
-  footnote(general = "Units for Elevation and Depth are meters and those for Area are m\\\\textsuperscript{2}", 
-           general_title = "", escape = FALSE) %>%
   footnote(general = "Treatment = ``itracon + Jliv'' indicates the use of itraconazole and \\\\textit{J. lividum}", 
            general_title = "", escape = FALSE) %>%  
   footnote(general = "Life stage = ``early'' indicates tadpoles and subadults", general_title = "") %>%  
@@ -635,24 +631,6 @@ The number of samples included is displayed above the x-axis.
 ## Figure S3 {-}
 
 ```{r figS3, fig.cap="", echo=FALSE}
-knitr::include_graphics(here::here("out", "figures", "treasure-progress-plot-colored-boxes.png"))
-```
-
-**Bd loads for adult *R. sierrae* at the Treasure Lake study site before the Bd epizootic (2016-2017), and throughout the 2018 summer when the Bd epizootic began and the antifungal treatment occurred.**
-
-\vspace{-2mm}
-Box colors indicate Bd loads from pre- and post-treatment periods (gray) and during the treatment (blue). 
-The number of swabs collected on each date is displayed above the x-axis.
-Box plot components are as in Figure 1. 
-During the treatment period, individual frogs were swabbed for Bd immediately following their initial capture and again just prior to their release (on 2018-07-23). 
-
-\clearpage
-
-## Figure S4 {-}
-
-<!-- Consider better facet labels (e.g., "Died during experiment", "Never recaptured', "Recaptured") -->
-
-```{r figS4, fig.cap="", echo=FALSE}
 knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-loads.png"))
 ```
 
@@ -665,9 +643,9 @@ The single non-experimental frog captured in August was not included in the trea
 
 \clearpage
 
-## Figure S5 {-}
+## Figure S4 {-}
 
-```{r figS5, fig.cap = "", echo = FALSE, out.width = "450px"}
+```{r figS4, fig.cap = "", echo = FALSE, out.width = "450px"}
 knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
 ```
 

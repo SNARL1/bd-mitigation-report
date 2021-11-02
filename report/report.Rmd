@@ -334,7 +334,6 @@ Results from a model of predictors of Bd load over the 1-year post-release perio
 Basin did not have an important effect. 
 The (year x treatment) term indicated that Bd loads were lower in the treated group than the control group in year 0, but by year 1 loads in the treated group had increased such that Bd loads of the treated and control groups were similar. 
 Therefore, although the treatment effect was evident for more than a month, Bd loads on animals in treated populations returned to pre-treatment levels in the year following treatment (Fig. 1). 
-All predictors of the overdispersion parameter had important effects. 
 
 The reduction in Bd load caused by the treatment was associated with increased counts of subadults in treated versus control populations (Fig. 2).
 Model results (Table 2) indicated that treatment and the (year x treatment) interaction term had important effects. 
@@ -418,7 +417,7 @@ However, a model that included the treated and wild groups indicated that Bd loa
 In addition, there was an important effect of the (days x group) interaction term, due to increasing loads of treated frogs versus relatively constant loads of wild frogs. 
 Together, these results indicate that the combined effect of itraconazole treatment and *J. lividum* exposure was ineffective in preventing the increase in Bd loads to pre-treatment levels. 
 
-During the three surveys of the study population conducted in 2012, we observed a decline in the percent of frogs in the treated and control groups that were recaptured, but the rate of decline was steeper in the control versus treated group (Fig. S5). 
+During the three surveys of the study population conducted in 2012, we observed a decline in the percent of frogs in the treated and control groups that were recaptured, but the rate of decline was steeper in the control versus treated group (Fig. S4). 
 Although no formal analysis is possible due to the relatively few sample points, the results suggest that the itraconazole-*J. lividum* treatment increased frog survival over the 2-month period following treatment. 
 Nonetheless, during surveys conducted in 2013 (one year after treatment), only a single experimental (i.e., toe-clipped) animal was captured. 
 This animal was detected during a survey conducted in early summer, and was a member of the treated group. 
@@ -532,9 +531,11 @@ The following people assisted with fieldwork: A. Adams, A. Beechan, D. Burkhart,
 L. Torres developed the *J. lividum* qPCR protocol while employed in the Vredenburg lab (San Francisco State University). 
 M. Toothman in the Briggs lab (University of California-Santa Barbara) analyzed Bd swabs collected prior to 2016, and K. Rose and A. Barbella in the Knapp lab analyzed swabs collected thereafter. 
 
+\vspace{-6mm}
 
 # Literature Cited {-}
 
+\vspace{-4mm}
 <div id="refs"></div>
 
 \clearpage
