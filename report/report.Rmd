@@ -294,7 +294,7 @@ To evaluate the immediate effect of treatment on Bd loads, we used the model *bd
 For both analyses, we excluded any frogs that died during the treatment period. 
 We evaluated differences in Bd loads of frogs that lived versus died during the treatment period using the model *trt_died ~ (lbd_load x location)* (family = bernoulli, trt_died = [true, false], lbdload = log~10~(bd_load + 1) on swabs collected immediately prior to the treatment period).
 
-To describe post-treatment frog population dynamics in the LeConte experiments, including survival and recruitment, while accounting for imperfect detection, we used open population multi-state hidden Markov models (see **Supporting Information--Treatment-specific Methods and Results** for details).
+To describe post-treatment frog population dynamics in the LeConte experiments, including survival and recruitment, while accounting for imperfect detection, we used open population multi-state hidden Markov models (see **Supporting Information--Treatment- specific Methods and Results** for details).
 Briefly, we estimated population size over time using parameter-expanded Bayesian data augmentation, which augments the capture histories of observed individuals with a large number of capture histories for individuals that were never detected [@royle2012parameter].
 The states included (1) “not recruited”, (2) “alive at the upper site”, (3) “alive at the lower site”, and (4) “dead”. 
 On any particular survey, we considered three possible observations of an individual: (1) “alive at the upper site”, (2) “alive at the lower site”, and (3) “not detected”. 
@@ -607,7 +607,7 @@ kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
 
 \clearpage
 
-## Table 4 {-}
+## Table 4: {-}
 
 **Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs.**
 
