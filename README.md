@@ -22,3 +22,12 @@ All R code and bibliography files to write the report/manuscript are in the `rep
 Stan code used to fit the LeConte CMR model is in the `stan` directory. 
 
 This repository is maintained by Roland Knapp (roland.knapp(at)ucsb.edu).
+
+## Installing package dependencies
+
+You can install R package dependencies via:
+
+```r
+# install.packages("remotes")
+remotes::install_deps()
+```
