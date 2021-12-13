@@ -3,7 +3,7 @@
 *Roland A. Knapp, Maxwell B. Joseph, Thomas C. Smith, et al.*
 
 This repository contains datasets collected during six antifungal treatments conducted in an effort to improve the probability of mountain yellow-legged frog populations persisting following epizootics caused by the amphibian chytrid fungus *Batrachochytrium dendrobatidis* (Bd). 
-These datasets are associated with the manuscript **Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog**. 
+These datasets are associated with the paper **Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog**. 
 All treatments except that in Treasure Lakes Basin were conducted as experiments, with frogs assigned to treated and untreated control groups. 
 All of the raw data are tabular, in comma separated value (CSV) format. 
 Missing values in all files are coded as NA. 
@@ -12,7 +12,7 @@ Missing values in all files are coded as NA.
 
 #### dusybarrett-20092010-captures.csv
 
-This CSV file contains data collected from tadpoles and subadults during the itraconazole treatment experiments in Barrett Lakes Basin and Dusy Basin. 
+This CSV file contains data collected from tadpoles and subadults during the itraconazole treatment experiments conducted in Barrett Lakes Basin and Dusy Basin. 
 
 Fields: 
 
@@ -74,23 +74,23 @@ Fields
 - `trt_period`: Categories to identify records collected immediately before and at end of treatment period (pretreat, endtreat).
 - `category`: Frog treatment category (treated, control).
 - `trt_died`: Categories to identify frogs that died during the treatment period, or survived (TRUE, FALSE). 
-- `pit_tag_ref`: Unique identifier associated with an individual's passive integrated transponder (PIT) tag.
+- `pit_tag_ref`: Unique identifier associated with an individual frog's passive integrated transponder (PIT) tag.
 - `tag_new`: Categories to indicate whether a tag was inserted into an untagged frog, or whether a frog was already tagged (TRUE, FALSE). 
-- `length`: Snout-vent length, in millimeters.
+- `length`: Frog snout-vent length, in millimeters.
 - `swab_id`: 8-digit swab identification code.
 - `bd_load`: Number of Bd ITS copies on swab.
 
 #### leconte-20152018-surveys.csv
 
-This CSV file contains data on the initial frog capture surveys and subsequent capture-mark-recapture (CMR) surveys conducted as part of the LeConte Basin treatment experiments. 
+This CSV file contains data on the initial frog capture surveys at the start of the treatment period, and subsequent capture-mark-recapture (CMR) surveys. Both types of survey were conducted as part of the LeConte Basin treatment experiments. 
 
 Fields
 
 - `visit_date`: Date on which the survey was conducted (YYYY-MM-DD).
 - `location`: Location within LeConte Basin where treatment experiment was conducted (lower, upper).
-- `category`: Type of survey (capture, cmr).
-- `primary_period`: Identifier for the site visit. Added by `leconte-cmr-model.R` during analysis of CMR data. 
-- `secondary_period`: Identifier for the survey within a site visit. Added by `leconte-cmr-model.R` during analysis of CMR data.  
+- `category`: Type of survey (treatment, cmr).
+- `primary_period`: Identifier for the site visit. Values are added by `leconte-cmr-model.R` during analysis of CMR data. 
+- `secondary_period`: Identifier for the survey within a site visit. Values are added by `leconte-cmr-model.R` during analysis of CMR data.  
 
 #### treasure-captures-swabs.csv
 
@@ -101,15 +101,15 @@ Fields
 - `site_id`: 5-digit site identification code.
 - `visit_date`: Date on which the record was collected (YYYY-MM-DD).
 - `survey_type`: Type of survey (swab, cmr).
-- `survey_treatment`: Categories indicating whether record was collected during the treatment period or before/after the treatment period (Survey, Treatment).
+- `survey_treatment`: Categories indicating whether record was collected during the treatment period or before/after the treatment period (Treatment, Survey).
 - `species`: Frog species code (ramu).
 - `capture_life_stage`: Frog life stage (adult).
 - `capture_animal_state`: Animal state at the time of capture (healthy, sick). 
-- `pit_tag_ref`: Unique identifier associated with an individual's PIT tag.
+- `pit_tag_ref`: Unique identifier associated with an individual frog's PIT tag.
 - `tag_new`: Categories to indicate whether a tag was inserted into an untagged frog, or whether a frog was already tagged (TRUE, FALSE). 
-- `sex`: Sex of animal.
-- `length`: Snout-vent length, in millimeters.
-- `weight`: Weight, in grams. 
+- `sex`: Sex of frog (f, m).
+- `length`: Frog snout-vent length, in millimeters.
+- `weight`: Frog weight, in grams. 
 - `swab_id`: 8-digit swab identification code.
 - `replicate`: PCR replicate number.
 - `bd_load`: Number of Bd ITS copies on swab.
@@ -120,7 +120,7 @@ This CSV file contains data on the effectiveness of itraconazole treatment as a 
 
 Fields
 
-- `pit_tag_ref`: Unique identifier associated with an individual's PIT tag.
+- `pit_tag_ref`: Unique identifier associated with an individual frog's PIT tag.
 - `capture_swab`: Bd load (number of Bd ITS copies on swab) prior to treatment. 
 - `release_swab`: Bd load (number of Bd ITS copies on swab) when released.
 - `recapture_swab`: Bd load (number of Bd ITS copies on swab) when recaptured during subsequent CMR surveys.
@@ -146,4 +146,4 @@ Fields
 - `jliv_ge`: Number of *J. lividum* genomic equivalents on swab. 
 - `expt_or_wild`: Category indicating whether frog was included in the experiment or was a non-experimental animal (expt, wild).
 - `expt_trt`: Frog treatment category (treated, control). 
-- `trt_stage`: Frog life stage during pre-*J. lividum* itraconazole treatment. 
+- `trt_stage`: Frog life stage during pre-*J. lividum* itraconazole treatment (subadult). 
