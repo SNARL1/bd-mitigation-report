@@ -14,7 +14,7 @@ The mitigation efforts include the following:
 6. Translocation of adults from persistent populations in Yosemite. This summarizes the main results from the 2020 Yosemite translocation analysis report.
 
 All sections (1-6) are included in a report ("Version 1") that was a required deliverable under U.S. Department of the Interior - National Park Service cooperative agreement number P19AC00789. 
-Sections 1-3 are included in the manuscript **Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog** ("Version 2"). 
+Sections 1-3 are included in the manuscript **Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog** ("Version 2" = original submission, "Version 3" = revised submission). 
 
 All raw data used in the analyses are in the `data` directory (see `README` file in that directory for details).
 All R code to analyze the data are in the `R` directory. 
