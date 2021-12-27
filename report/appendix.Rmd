@@ -352,7 +352,7 @@ kbl(
   footnote(general = "Treatment = ``itracon + Jliv'' indicates the use of itraconazole and \\\\textit{J. lividum}", 
            general_title = "", escape = FALSE) %>%  
   footnote(general = "Life stage = ``early'' indicates tadpoles and subadults", general_title = "") %>%  
-  kable_styling(latex_options = "scale_down")
+  kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -375,7 +375,7 @@ kbl(t_lower, booktabs = TRUE, linesep = "") %>%
       column_spec(5, width = "7em") %>%
       column_spec(6, width = "7em") %>%
       column_spec(7, width = "7em") %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 (b) Upper basin
@@ -391,7 +391,7 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
       column_spec(4, width = "7em") %>%
       column_spec(5, width = "7em") %>%
       column_spec(6, width = "7em") %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -399,8 +399,6 @@ kbl(t_upper, booktabs = TRUE, linesep = "") %>%
 ## Table S3: {-}
 
 **For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs in ponds assigned to control and treated groups immediately before the treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial.
 
 ```{r, include=FALSE}
@@ -412,7 +410,7 @@ kbl(barrettdusy_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -420,8 +418,6 @@ kbl(barrettdusy_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 ## Table S4: {-}
 
 **For the itraconazole treatment experiments in Barrett and Dusy basins, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial. 
 
 ```{r, include=FALSE}
@@ -432,7 +428,7 @@ kbl(barrettdusy_m2c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 9) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -440,8 +436,6 @@ kbl(barrettdusy_m2c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 ## Table S5: {-}
 
 **For the Dusy Basin itraconazole treatment experiment, results of model comparing zoospore pools of ponds assigned to the control and treated groups before and after treatment.**
-
-\vspace{-2mm}
 Model family is negative binomial.   
 
 ```{r, include=FALSE}
@@ -454,7 +448,7 @@ kbl(dusy2010_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       pack_rows("Population-level effects", 2, 5) %>%
       pack_rows("Family-specific parameters", 6, 6) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -462,8 +456,6 @@ kbl(dusy2010_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 ## Table S6: {-}
 
 **For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the control and treated categories immediately before the treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial.   
 
 ```{r, include=FALSE}
@@ -475,14 +467,12 @@ kbl(leconte2015_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 ## Table S7: {-}
 
 **For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs assigned to the treated group from before versus the end of the treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial. 
 
 ```{r, include=FALSE}
@@ -494,7 +484,7 @@ kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -502,8 +492,6 @@ kbl(leconte2015_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
 ## Table S8: {-}
 
 **For the LeConte Basin itraconazole treatment experiment, results of model comparing Bd loads on frogs in the treated group that survived versus died.**
-
-\vspace{-2mm}
 Model family is bernoulli.   
 
 ```{r, include=FALSE}
@@ -514,14 +502,12 @@ kbl(leconte2015_m4, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up9
       booktabs = TRUE) %>%
       pack_rows("Population-level effects", 1, 4) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 ## Table S9: {-}
 
 **For the Treasure Lakes Basin itraconazole treatment, results of model comparing Bd loads on frogs before versus the end of the treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial. 
 
 ```{r, include=FALSE}
@@ -533,7 +519,7 @@ kbl(treasure_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       pack_rows("Population-level effects", 1, 2) %>%
       pack_rows("Family-specific parameters", 3, 3) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -541,8 +527,6 @@ kbl(treasure_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 ## Table S10: {-}
 
 **For the Treasure Lakes Basin itraconazole treatment, results of model evaluating predictors of treatment effectiveness.**
-
-\vspace{-2mm}
 Model family is gaussian.
 
 ```{r, include=FALSE}
@@ -554,14 +538,12 @@ kbl(treasure_m2, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 ## Table S11: {-}
 
 **For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the control and treated groups immediately before the itraconazole treatment period.**
-
-\vspace{-2mm}
 Model family is negative binomial.   
  
 ```{r, include=FALSE}
@@ -573,7 +555,7 @@ kbl(dusy2012_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
       pack_rows("Population-level effects", 1, 2) %>%
       pack_rows("Family-specific parameters", 3, 3) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -581,8 +563,6 @@ kbl(dusy2012_m1, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%C
 ## Table S12: {-}
 
 **For the Dusy Basin microbiome augmentation experiment, results of model comparing Bd loads on frogs assigned to the treated category from immediately before versus at the end of the itraconazole treatment.**
-
-\vspace{-2mm}
 Model family is zero-inflated negative binomial.   
 
 ```{r, include=FALSE}
@@ -594,7 +574,7 @@ kbl(dusy2012_m2a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
       pack_rows("Population-level effects", 1, 2) %>%
       pack_rows("Family-specific parameters", 3, 4) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -608,8 +588,6 @@ knitr::include_graphics(here::here("out", "figures", "dusy-2012-pens.jpg"))
 ```
 
 **Photograph showing mesh pens used to hold subadult *R. sierrae* during the 2012 microbiome augmentation experiment in Dusy Basin.**
-
-\vspace{-2mm}
 Photo credit: Roland Knapp 
 
 \clearpage
@@ -621,8 +599,6 @@ knitr::include_graphics(here::here("out", "figures", "dusy-zsppool.png"))
 ```
 
 **In the Dusy Basin study ponds assigned to the control or treated groups, zoospore pools measured before and after itraconazole treatment of *R. sierrae*.**
-
-\vspace{-2mm}
 The y-axis displays Bd load per water sample, normalized to a 1-liter sample volume. Each dot represents a single sample, and median values for each treatment period are indicated with a black diamond. 
 The number of samples included is displayed above the x-axis. 
 
@@ -635,8 +611,6 @@ knitr::include_graphics(here::here("out", "figures", "treasure-multicapture-load
 ```
 
 **For all adult *R. sierrae* in the 2018 Treasure Lakes itraconazole treatment, Bd loads over a two month period that includes the July treatment (16 July to 23 July 2018) and August follow-up surveys.**
-
-\vspace{-2mm}
 Points from the same frog are connected by a line. 
 Panel labels are as follows: 1 = frog that died during the treatment period, 2 = survivor that was not recaptured during the post-release survey in August, and 3 = survivor that was recaptured during the August post-release survey. 
 The single non-experimental frog captured in August was not included in the treatment (treatment duration = "NA") and is included in panel 1. 
@@ -650,7 +624,5 @@ knitr::include_graphics(here::here("out", "figures", "dusy-2012-recapture.png"))
 ```
 
 **In the Dusy Basin *J. lividum* augmentation experiment, the percent of frogs in the treated and control groups recaptured during the two months following *J. lividum* exposure.**
-
-\vspace{-2mm}
 The number of subadults captured during each survey is given in Figure 6.
 

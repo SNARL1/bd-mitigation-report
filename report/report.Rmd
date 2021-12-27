@@ -544,9 +544,7 @@ M. Toothman in the Briggs lab (University of California-Santa Barbara) analyzed 
 
 ## Table 1: {-}
 
-**Effect of itraconazole treatment in Barrett and Dusy basins on Bd loads during the following one year period.**  
-
-\vspace{-2mm}
+**Effect of itraconazole treatment in Barrett and Dusy basins on Bd loads during the following one year period.** 
 Model family is zero-inflated negative binomial.
 
 ```{r, include=FALSE}
@@ -559,16 +557,14 @@ kbl(barrettdusy_m3c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
       pack_rows("Population-level effects", 2, 12) %>%
       pack_rows("Family-specific parameters", 13, 13) %>% 
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
 
 ## Table 2: {-}
 
-**Effect of itraconazole treatment in Barrett and Dusy basins on counts of subadults during the following one year period.**
-
-\vspace{-2mm}
+**Effect of itraconazole treatment in Barrett and Dusy basins on counts of subadults during the following one year period.** 
 Model family is negative binomial.
 
 ```{r, include=FALSE}
@@ -581,7 +577,7 @@ kbl(barrettdusy_m4c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
       pack_rows("Population-level effects", 2, 7) %>%    
       pack_rows("Family-specific parameters", 8, 8) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
@@ -589,8 +585,6 @@ kbl(barrettdusy_m4c, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up
 ## Table 3: {-}
 
 **Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on *J. lividum* concentration on frogs.** 
-
-\vspace{-2mm}
 Model family is negative binomial. 
 
 ```{r, include=FALSE}
@@ -602,16 +596,14 @@ kbl(dusy2012_m3b, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 5) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
 
 ## Table 4: {-}
 
-**Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs.**
-
-\vspace{-2mm}
+**Effect of number of days since *J. lividum* exposure and frog group (treated, wild) on Bd load on frogs.** 
 Model family is zero-inflated negative binomial. 
 
 ```{r, include=FALSE}
@@ -623,29 +615,23 @@ kbl(dusy2012_m4a, col.names = c(" ", "Estimate", "Est. Error", "lo95%CI", "up95%
       pack_rows("Population-level effects", 1, 4) %>%
       pack_rows("Family-specific parameters", 5, 6) %>%
       row_spec(0, bold = TRUE) %>%
-      kable_styling(latex_options = "scale_down")
+      kable_styling(latex_options = c("scale_down", "HOLD_position"))
 ```
 
 \clearpage
 
 # Figure Legends {-}
 
-**Figure 1: For the itraconazole treatment experiment in Barrett (a) and Dusy (b) basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control and treated groups.**
-
-\vspace{-2mm}
+**Figure 1: For the itraconazole treatment experiment in Barrett (a) and Dusy (b) basins, temporal patterns of Bd loads of early life stage *R. sierrae* in populations assigned to control and treated groups.** 
 Weeks -3 and -1 are pre-treatment, week 0 is the end of treatment, and weeks 3-58 are post-treatment. 
 In the boxplots, the horizontal bar is the median, hinges represent first and third quartiles, whiskers extend to the largest and smallest values within 1.5x interquartile range beyond hinges, and dots indicate values outside the 1.5x interquartile range.
 The number of swabs collected in each week is displayed above the x-axis.
 
-**Figure 2: For control and treated populations in Barrett (a) and Dusy (b) basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted (year = 0) and the year following the treatment (year = 1).**
-
-\vspace{-2mm}
+**Figure 2: For control and treated populations in Barrett (a) and Dusy (b) basins, post-treatment counts of *R. sierrae* subadults in the year the treatment was conducted (year = 0) and the year following the treatment (year = 1).** 
 Each dot indicates the count made during a survey of one of the study ponds, and median values for each treatment group are indicated with a black diamond. 
 The total number of surveys is displayed above the x-axis. 
 
-**Figure 3: Effect of itraconazole treatment on Bd loads of adult *R. sierrae* in the LeConte treatment experiment: (a) lower basin, and (b) upper basin.**
-
-\vspace{-2mm}
+**Figure 3: Effect of itraconazole treatment on Bd loads of adult *R. sierrae* in the LeConte treatment experiment: (a) lower basin, and (b) upper basin.**\
 The legend for both panels is provided in (b). 
 Box plots show Bd loads on frogs in the control (untreated) and treated groups before the treatment began and at the end of the treatment period. 
 Control frogs were processed and released before the treatment period, and therefore no Bd samples were collected from control frogs at the end of this period. 
@@ -654,23 +640,17 @@ The number of swabs collected from frogs in each category are displayed above th
 Box plot components are as in Figure 1. 
 
 **Figure 4: Outcome of the LeConte treatment experiment with adult *R. sierrae*, showing results for control, treated, and non-experimental animals.**
-
-\vspace{-2mm}
 Time series from 2015 to 2018 of (a) observed Bd loads, with lines connecting sequential observations of tagged individuals, (b) posterior estimates for the number of live adults (abundance) in each group, where each point is a draw from the posterior, and (c) estimated relationships between Bd load and adult survival probability during the entire study period, with one line for each posterior draw. 
 A rug along the x-axis displays the observed distributions of Bd load. 
 In (a) and (b), the date tick marks indicate January-01 of each year. 
 In (a) and (c), the Bd load axis shows Bd loads as log~10~(copies + 1). 
 
 **Figure 5: In the Dusy Basin *J. lividum* augmentation experiment, temporal patterns of Bd loads on subadult *R. sierrae* in the control, treated, and wild groups.**
-
-\vspace{-2mm}
 Panel labels indicate the number of days since *J. lividum* exposure.
 Prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole on days -6 to -1 to reduce their Bd loads. 
 The number of swabs collected on each day is displayed above the x-axis. 
 
 **Figure 6: In the Dusy Basin *J. lividum* augmentation experiment, temporal patterns of *J. lividum* concentrations on subadult *R. sierrae* in the treated, control, and wild groups.**
-
-\vspace{-2mm}
 Panel labels indicate the number of days since *J. lividum* exposure.
 Prior to the exposure of frogs in the treated group to *J. lividum* on days 0 and 1, frogs in the treated group were treated with itraconazole on days -6 to -1 to reduce their Bd loads. 
 *J. lividum* concentrations on day 0 are from samples collected from frogs in the treated group just prior to the first *J. lividum* exposure. 
