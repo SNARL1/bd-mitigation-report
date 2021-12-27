@@ -547,7 +547,7 @@ d_plot1 <- d_plot %>%
   ggplot(aes(x = factor(date_label3), y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 0 same size as others
     ylim(-0.5, 7.3) +
-    labs(title = "(a)",
+    labs(title = "(A)",
       x = "Week",
       y = (expression(Bd~load~(log["10"]~copies+1))),
       fill = "Treatment group") +
@@ -569,7 +569,7 @@ d_plot2 <- d_plot %>%
   ggplot(aes(x = factor(date_label3), y = log10(bd_load + 1), fill = treatment)) +
     geom_boxplot(width = 0.7, position = position_dodge2(preserve = "single")) + # keep unmatched day 7 same size as others
     ylim(-0.5, 7.3) +
-    labs(title = "(b)",
+    labs(title = "(B)",
       x = "Week",
       y = (expression(Bd~load~(log["10"]~copies+1)))) +
     scale_fill_manual(values=c("forestgreen","deepskyblue2")) + 
@@ -758,7 +758,7 @@ d4_plot1 <- d4 %>%
     stat_summary(fun = median, geom = "point", shape = 18, size = 2.9, fill = "white", show.legend = FALSE) +
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(
-      title = "(a)",
+      title = "(A)",
       x = expression("Year"),
       y = "Number of subadults counted") + 
     facet_grid(~ treatment) + 
@@ -776,7 +776,7 @@ d4_plot2 <- d4 %>%
     stat_summary(fun = median, geom = "point", shape = 18, size = 2.9, fill = "white", show.legend = FALSE) +
     scale_fill_manual(values = c("forestgreen", "deepskyblue2", "darkgray")) +
     labs(
-      title = "(b)",
+      title = "(B)",
       x = expression("Year"),
       y = "Number of subadults counted") + 
     facet_grid(~ treatment) +

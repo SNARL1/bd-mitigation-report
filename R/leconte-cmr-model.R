@@ -551,9 +551,9 @@ bd_ts <- bd_plot_data %>%
 bd_ts
 
 # Save out the final figure
-p <- bd_ts + ggtitle("a") + 
-  s_plot + ggtitle("b") +
-  surv_plot + ggtitle("c") + 
+p <- bd_ts + ggtitle("A") + 
+  s_plot + ggtitle("B") +
+  surv_plot + ggtitle("C") + 
   plot_layout(ncol = 1, heights = c(1, 0.8, 1))
 
 # dir.create("figures", showWarnings = FALSE)
