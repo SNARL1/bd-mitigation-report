@@ -133,7 +133,7 @@ These insights are essential for the development of effective mitigation measure
 The six field trials were conducted at sites located in the remote backcountry of Kings Canyon National Park and Inyo National Forest (California, USA), at elevations of 3150-3550 m. 
 These sites are ten to 26 km from the nearest road, and all supplies were carried in and out on foot. 
 In some cases, this remoteness and wilderness regulations constrained potential study designs. 
-The research was approved by Sequoia and Kings Canyon National Parks (permit number SEKI-2009-SCI-0039, SEKI-2010-00334, SEKI-2012-SCI-0455, SEKI-2015-SCI-0035), U.S. Fish and Wildlife Service (permit number TE-40090B), U.S. Forest Service (permit number WMD17054), and the Institutional Animal Use and Care Committee at the University of California--Santa Barbara (protocol number 478, 848).
+The research was approved by Sequoia and Kings Canyon National Parks (permit number SEKI-2009-SCI-0039, SEKI-2010-SCI-0044, SEKI-2012-SCI-0455, SEKI-2015-SCI-0035), U.S. Fish and Wildlife Service (permit number TE-40090B), U.S. Forest Service (permit number WMD17054), and the Institutional Animal Use and Care Committee at the University of California--Santa Barbara (protocol number 478, 848).
 
 ## Itraconazole treatment of early life stages {-}
 <!-- sample sizes, treatment sizes etc. are provided where they differ between text and overview table; those are labeled as '[TCS table: n=XXX]'  -->
@@ -350,7 +350,7 @@ In the two itraconazole treatment experiments conducted in LeConte Basin, prior 
 Bd loads in the control group were somewhat higher than in the treated group, likely because control frogs were captured and processed 1-3 days later than frogs assigned to the treated group (Table S2) and during a period when Bd loads were increasing in the study populations. Model results (Table S6) affirmed an important pre-treatment difference in Bd load between treatment groups (treated groups lower than control groups).
 Location and the (treatment x location) interaction term were both unimportant, with the latter indicating that the pattern of Bd load between treatment groups was similar in the lower and upper basins. 
 
-In both experiments the treatment reduced Bd loads on treated frogs by 1.4-2.7 orders of magnitude (Fig. 3).
+In both experiments, the treatment reduced Bd loads on treated frogs by 1.4-2.7 orders of magnitude (Fig. 3).
 Model results (Table S7) corroborated the important effect of treatment on Bd load. 
 The effect of location was also important (loads were elevated in upper compared to lower basin), as was the (location x trt_period) interaction term, with the latter indicating that Bd loads before and at the end of treatment were both elevated in the upper compared to the lower basin. 
 
@@ -487,7 +487,7 @@ We conclude that although inadequacies in the study design and some paradoxical 
 In contrast to the relatively strong effect of the antifungal treatment on adult survival in LeConte Basin, this effect was not observed in the antifungal treatment conducted in the Treasure Lakes Basin. 
 The similar short-term reductions in Bd loads of treated frogs in both the LeConte and Treasure treatments, but the lack of longer term effects on frog survival at Treasure suggests that the strong effects of treatment observed in the LeConte experiments are not universal. 
 Treatment success may depend on the timing of the treatment relative to the onset of the epizootic (later in Treasure than LeConte) or on the inherent susceptibility of the frog population to Bd infection [e.g., @savage2011mhc]. 
-Because treatment timing is likely important, maximizing the effectiveness of interventions will require frequent disease surveillance of frog populations to detect developing epizootics as early in possible, and rapid adult frog treatments before Bd loads reach high levels. 
+Because treatment timing is likely important, maximizing the effectiveness of interventions will require frequent disease surveillance of frog populations to detect developing epizootics as early as possible, and rapid adult frog treatments before Bd loads reach high levels. 
 Whether antifungal treatments of adult MYL frogs conducted during this narrow optimal time window would consistently increase long-term frog survival and frog population persistence remains uncertain. 
 
 
