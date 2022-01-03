@@ -31,3 +31,20 @@ You can install R package dependencies via:
 # install.packages("remotes")
 remotes::install_deps()
 ```
+
+## Docker instructions
+
+To build a Docker image with the dependencies installed: 
+
+```
+docker build -t bd-mitigation-report .
+```
+
+The built image will include RStudio and all dependencies for this project. 
+To start a Docker container after building the image: 
+
+```
+docker run -e PASSWORD=yourpasswordhere --rm -p 8787:8787 bd-mitigation-report
+```
+
+Then, you can connect to the container's RStudio server in a web browser at `localhost:8787`.
