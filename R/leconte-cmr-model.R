@@ -285,13 +285,13 @@ stan_d <- list(M = M,
 # parameters that have no posterior variance (e.g., states that are known)
 # without error.
 # Note also that this model will take ~8 hrs to fit on a 4 core i7 workstation.
+# To proceed without fitting model, download leconte_m_fit.rds (3.8 GB) from 
+# https://drive.google.com/file/d/1azYfehESh1vflHrFOmIFpUFMOhGEL_-Q/view?usp=sharing, 
+# save to stan directory, read in using m_fit <- read_rds("stan/leconte_m_fit.rds").
 m_init <- stan_model("stan/time-varying.stan")
 m_fit <- sampling(m_init, data = stan_d,
                   control = list(max_treedepth = 11, adapt_delta = 0.99))
-write_rds(m_fit, "stan/m_fit.rds")
-
-# m_fit <- read_rds("stan/m_fit.rds")
-
+write_rds(m_fit, "stan/leconte_m_fit.rds")
 
 # Check convergence -----------------------------------------------------------
 traceplot(m_fit)
