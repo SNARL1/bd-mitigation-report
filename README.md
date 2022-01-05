@@ -9,7 +9,8 @@ Thomas C. Smith [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0001--7908--4
 
 ## Overview of content
 This repository is a research compendium for a decade-long effort to mitigate the effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* ("Bd") on populations of the endangered [mountain yellow-legged frog](https://bit.ly/conservationstrategy). 
-These mitigation efforts were conducted in the southern Sierra Nevada mountains (California, USA) during the period 2006-2018. This research culminated in the publication of a peer-reviewed paper entitled, "Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog" ([Knapp et al. 2022. PeerJ: XXXXX](xxxxxxxx)). 
+These mitigation efforts were conducted in the southern Sierra Nevada mountains (California, USA) during the period 2006-2018. 
+This research culminated in the publication of a peer-reviewed paper entitled, "Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog" ([Knapp et al. 2022](https://doi.org/10.7717/peerj.12712)). 
 
 The repository contains data, code to analyze treatment outcomes, and a report/manuscript describing the results of Bd mitigation efforts. 
 These efforts included the following:
@@ -21,8 +22,8 @@ These efforts included the following:
 6. Translocation of adults from persistent frog populations in Yosemite National Park to reestablish extirpated populations (2006-2018). This section summarizes the results from an April-2020 report submitted to Yosemite National Park ("Describing the dynamics of translocated Sierra Nevada yellow-legged frog populations in Yosemite National Park to aid future conservation efforts").
 
 All sections (1-6) are included in a December-2020 report ("Effectiveness of actions to mitigate impacts of the amphibian chytrid fungus on mountain yellow-legged
-frog populations") that was a required deliverable under U.S. Department of the Interior - National Park Service cooperative agreement number P19AC00789 (repository release = [v1](https://github.com/SNARL1/bd-mitigation-report/releases)). 
-Sections 1-3 are included in Knapp et al. (2022) (releases [v2](https://github.com/SNARL1/bd-mitigation-report/releases) and [v3](https://github.com/SNARL1/bd-mitigation-report/releases)). 
+frog populations") that was a required deliverable under U.S. Department of the Interior - National Park Service cooperative agreement number P19AC00789 (repository release = [v1.0](https://github.com/SNARL1/bd-mitigation-report/releases)). 
+Sections 1-3 are included in [Knapp et al. (2022)](https://doi.org/10.7717/peerj.12712) (releases [v2.0](https://github.com/SNARL1/bd-mitigation-report/releases) and [v3.0](https://github.com/SNARL1/bd-mitigation-report/releases)). 
 
 All raw data used in the analyses are in the `data` directory (see `README` file in that directory for details).
 All R code to analyze the data are in the `R` directory. 
@@ -48,7 +49,9 @@ remotes::install_deps()
 ```
 
 ## Docker instructions
-A Docker image is an executable package of software that includes all dependencies needed to run an application (e.g., all of the code in this research compendium). The Docker image can be run (as a "container") from anywhere, including in a browser window, without requiring any changes to the local computer (e.g., software installation). To create and run the Docker image for this research compendium, follow these steps. 
+A Docker image is an executable package of software that includes all dependencies needed to run an application (e.g., all of the code in this research compendium). 
+The Docker image can be run (as a "container") from anywhere, including in a browser window, without requiring any changes to the local computer (e.g., software installation). 
+To create and run the Docker image for this research compendium, follow these steps. 
 
 1. [Clone](https://book.cds101.com/using-rstudio-server-to-clone-a-github-repo-as-a-new-project.html) the bd-mitigation-report repository to your computer. 
 2. Install [Docker](https://docs.docker.com/get-docker/) on your computer. 
@@ -64,12 +67,19 @@ docker build -t bd-mitigation-report .
 ```
 docker run -e PASSWORD=yourpasswordhere --rm -p 8787:8787 bd-mitigation-report
 ```
-"yourpasswordhere" is a password of your choice that will be used to access the container's RStudio server (step 6). 
+"yourpasswordhere" is a password of your choice that will be used to access the container's RStudio Server instance (step 6). 
 
 6. Connect to the container's RStudio Server in a web browser at `localhost:8787`. In the login window, username = "rstudio" and password = password you specified in step 5. 
-7. In RStudio Server, create a new project and clone the repository into it, as in step 1. In the localhost browser window, you are now able to run any of the code in the repository without having to install the dependencies. 
-8. When done working with the repository in the browser window, log out of RStudio Server (File > Log Out). Close the Docker container running in Terminal with `ctrl-c`. 
-9. The next time you want to work with the containerized repository using RStudio Server, repeat steps 5-8. 
+7. In the container's RStudio Server, create a new project and clone the repository into it, as in step 1. You are now able to run any of the code in the repository - all of the dependencies are already installed. 
+8. When done working with the repository in the browser window, log out of RStudio Server (File > Sign Out). Close the Docker container running in Terminal with `ctrl-c`. If there are any files from your work in the container that you want to preserve (e.g., figures), save them to your local computer. Any unsaved files will be lost when the container is closed. 
+9. The next time you want to work with the containerized repository, repeat steps 5-8. 
+
+## Acknowledgements
+Many people contributed to this project over its 10+ year lifespan. 
+These include summer field assistants, research colleagues, and collaborators in the National Park Service, U.S. Fish and Wildlife Service, California Department of Fish and Wildlife, and U.S. Forest Service. 
+Thanks to all of you for your contributions that made this project possible. 
+For a list of people who made particularly important contributions, in [Knapp et al. (2022)](https://doi.org/10.7717/peerj.12712) see the list of authors and the Acknowledgements section. 
+Funding for this project was provided by the National Park Service, National Science Foundation, and National Institutes of Health. Additional funding details are provided in the "Funding" section of [Knapp et al. (2022)](https://doi.org/10.7717/peerj.12712). 
 
 ## Contact
 Roland Knapp, Research Biologist, University of California Sierra Nevada Aquatic Research Laboratory, Mammoth Lakes, CA 93546 USA; rolandknapp(at)ucsb.edu, <https://mountainlakesresearch.com/roland-knapp/>.
