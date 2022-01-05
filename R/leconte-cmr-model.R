@@ -1,3 +1,7 @@
+# See comments on lines 287-294. If you want to skip the lengthy model-fit section,
+# read in the saved model-fit object (as described in the comments) and skip 
+# lines 295-298. 
+
 library(tidyverse)
 library(reshape2)
 library(assertthat)
@@ -6,7 +10,6 @@ library(patchwork)
 library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
-
 
 surveys <- read_csv("data/leconte-20152018-surveys.csv")
 captures <- read_csv("data/leconte-20152018-captures.csv") %>%
@@ -287,7 +290,8 @@ stan_d <- list(M = M,
 # Note also that this model will take ~8 hrs to fit on a 4 core i7 workstation.
 # To proceed without fitting model, download leconte_m_fit.rds (3.8 GB) from 
 # https://drive.google.com/file/d/1azYfehESh1vflHrFOmIFpUFMOhGEL_-Q/view?usp=sharing, 
-# save to stan directory, read in using m_fit <- read_rds("stan/leconte_m_fit.rds").
+# save to stan directory, read in using m_fit <- read_rds("stan/leconte_m_fit.rds"), 
+# and skip lines 294-297.
 m_init <- stan_model("stan/time-varying.stan")
 m_fit <- sampling(m_init, data = stan_d,
                   control = list(max_treedepth = 11, adapt_delta = 0.99))
