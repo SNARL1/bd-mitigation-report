@@ -50,7 +50,7 @@ remotes::install_deps()
 
 ## Docker instructions
 A Docker image is an executable package of software that includes all dependencies needed to run an application (e.g., all of the code in this research compendium). 
-The Docker image can be run (as a "container") from anywhere, including in a browser window, without requiring any changes to the local computer (e.g., software installation). 
+The Docker image can be run (as a "container") from anywhere, including in a browser window, with only minimal changes to the local computer (e.g., software installation). 
 To create and run the Docker image for this research compendium, follow these steps. 
 
 1. [Clone](https://book.cds101.com/using-rstudio-server-to-clone-a-github-repo-as-a-new-project.html) the bd-mitigation-report repository to your computer. 
