@@ -1,13 +1,13 @@
 # Mitigating the effects of the amphibian chytrid fungus
 
-## Authors of this repository
+### Authors of this repository
 Roland A. Knapp [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0002--1954--2745-green.svg)](http://orcid.org/0000-0002-1954-2745)
 
 Maxwell B. Joseph [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0002--7745--9990-green.svg)](http://orcid.org/0000-0002-7745-9990)
 
 Thomas C. Smith [![ORCiD](https://img.shields.io/badge/ORCiD-0000--0001--7908--438X-green.svg)](http://orcid.org/0000-0001-7908-438X)
 
-## Overview of content
+### Overview of contents
 This repository is a research compendium for a decade-long effort to mitigate the effects of the amphibian chytrid fungus *Batrachochytrium dendrobatidis* ("Bd") on populations of the endangered [mountain yellow-legged frog](https://bit.ly/conservationstrategy). 
 These mitigation efforts were conducted in the southern Sierra Nevada mountains (California, USA) during the period 2006-2018. 
 This research culminated in the publication of a peer-reviewed paper entitled, "Effectiveness of antifungal treatments during chytridiomycosis epizootics in populations of an endangered frog" ([Knapp et al. 2022](https://doi.org/10.7717/peerj.12712)). 
@@ -30,7 +30,7 @@ All R code to analyze the data are in the `R` directory.
 Stan code used to fit the LeConte multi-state model is in the `stan` directory.
 All R code and bibliography files to create the report/manuscript are in the `report` directory.
 
-## License
+### License
 Manuscript: [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
 Code: [MIT](https://choosealicense.com/licenses/mit/) | year: 2022, copyright holder: Roland Knapp
@@ -39,47 +39,55 @@ Data: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 See [LICENSE](https://github.com/SNARL1/bd-mitigation-report/blob/master/LICENSE.md) file for details. 
 
-## Installing package dependencies
+### About the data
 
-You can install R package dependencies via:
+See the README file in the data directory (data/README.md) for a description of each data file.
 
-```r
-# install.packages("remotes")
-remotes::install_deps()
+### Reproducing the analyses
+
+#### Hardware requirements
+
+Most of the `xxxxx_analysis_mrmr.Rmd` files can be run on a computer with 32 GB of RAM and at least four physical CPU cores. 
+The exception is `70550_analysis_mrmr.Rmd` that, due to the large number of frogs included in the associated datasets, requires at least 128 GB of RAM. 
+
+#### Software requirements
+
+We ran the analyses using R and the R packages listed in the DESCRIPTION file. 
+All of the packages are available via the CRAN repository except [cmdstanr](https://mc-stan.org/cmdstanr/#installation) and [mrmr](https://snarl1.github.io/mrmr/index.html). 
+An installation of [cmdstan](https://mc-stan.org/cmdstanr/#installation) is also required. 
+
+We used the following R version and OS: 
+* [R](https://www.r-project.org/) version 4.0.5 (2021-03-31) 
+* Platform: x86_64-pc-linux-gnu (64-bit) 
+* Running under: Ubuntu 20.04.3 LTS
+
+#### Docker instructiuons
+
+As an alternative to a local installation, the software requirements have been wrapped in a Docker image (see Dockerfile for source code). 
+To run and use the Docker container, follow these steps: 
+1. [Install Docker](https://docs.docker.com/get-docker/), if not already installed.  
+2. Start the Docker container for the bd-mitigation-report project (Linux users will need to preface the command with `sudo`):  
+
+```bash
+docker run -e PASSWORD=yourpasswordhere --rm -p 8787:8787 rolandknapp/bd-mitigation-report
 ```
 
-## Docker instructions
-A Docker image is an executable package of software that includes all dependencies needed to run an application (e.g., all of the code in this research compendium). 
-The Docker image can be run (as a "container") from anywhere, including in a browser window, with only minimal changes to the local computer (e.g., software installation). 
-To create and run the Docker image for this research compendium, follow these steps. 
+This will launch an RStudio server on port 8787. 
+"yourpasswordhere" is a password of your choice that will be used to access the RStudio server (step 3).  
 
-1. [Clone](https://book.cds101.com/using-rstudio-server-to-clone-a-github-repo-as-a-new-project.html) the bd-mitigation-report repository to your computer. 
-2. Install [Docker](https://docs.docker.com/get-docker/) on your computer. 
-3. Set the local working directory as the top level directory of the repository: bd-mitigation-report/
-4. Build a Docker image that includes RStudio and all other dependencies (as specified in the [Dockerfile](https://github.com/SNARL1/bd-mitigation-report/blob/master/Dockerfile)): 
+3. Navigate to http://localhost:8787/. In the login window, username = "rstudio" and password = password you specified in step 2.
+4. In the RStudio server, [create a new project and clone the bd-mitigation-report repository into it](https://book.cds101.com/using-rstudio-server-to-clone-a-github-repo-as-a-new-project.html). 
+You are now able to run any of the code in the repository - all of the dependencies are already installed.  
+5. When done working with the repository in the browser window, log out of the RStudio server (File > Sign Out).
+Close the Docker container running in Terminal with `ctrl-c`. If there are any files from your work in the container that you want to preserve (e.g., plots), save them to your local computer.
+Any unsaved files will be lost when the container is closed.  
 
-```
-docker build -t bd-mitigation-report .
-```
-
-5. Start a Docker container using the image built in step 4: 
-
-```
-docker run -e PASSWORD=yourpasswordhere --rm -p 8787:8787 bd-mitigation-report
-```
-"yourpasswordhere" is a password of your choice that will be used to access the container's RStudio Server instance (step 6). 
-
-6. Connect to the container's RStudio Server in a web browser at `localhost:8787`. In the login window, username = "rstudio" and password = password you specified in step 5. 
-7. In the container's RStudio Server, create a new project and clone the repository into it, as in step 1. You are now able to run any of the code in the repository - all of the dependencies are already installed. 
-8. When done working with the repository in the browser window, log out of RStudio Server (File > Sign Out). Close the Docker container running in Terminal with `ctrl-c`. If there are any files from your work in the container that you want to preserve (e.g., figures), save them to your local computer. Any unsaved files will be lost when the container is closed. 
-9. The next time you want to work with the containerized repository, repeat steps 5-8. 
-
-## Acknowledgements
+### Acknowledgements
 Many people contributed to this project over its 10+ year lifespan. 
 These include summer field assistants, research colleagues, and collaborators in the National Park Service, U.S. Fish and Wildlife Service, California Department of Fish and Wildlife, and U.S. Forest Service. 
 Thanks to all of you for your contributions that made this project possible. 
 For a list of people who made particularly important contributions, in [Knapp et al. (2022)](https://doi.org/10.7717/peerj.12712) see the list of authors and the Acknowledgements section. 
 Funding for this project was provided by the National Park Service, National Science Foundation, and National Institutes of Health. Additional funding details are provided in the "Funding" section of [Knapp et al. (2022)](https://doi.org/10.7717/peerj.12712). 
 
-## Contact
+### Contact
 Roland Knapp, Research Biologist, University of California Sierra Nevada Aquatic Research Laboratory, Mammoth Lakes, CA 93546 USA; rolandknapp(at)ucsb.edu, <https://mountainlakesresearch.com/roland-knapp/>.
