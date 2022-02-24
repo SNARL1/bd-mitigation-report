@@ -61,7 +61,7 @@ We used the following R version and OS:
 * Platform: x86_64-pc-linux-gnu (64-bit) 
 * Running under: Ubuntu 20.04.3 LTS
 
-### Docker instructiuons
+### Docker instructions
 
 As an alternative to a local installation, the software requirements have been wrapped in a Docker image (see Dockerfile for source code). 
 To run and use the Docker container, follow these steps: 
