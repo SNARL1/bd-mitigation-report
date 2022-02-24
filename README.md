@@ -45,12 +45,12 @@ See the README file in the data directory (data/README.md) for a description of 
 
 ## Reproducing the analyses
 
-#### Hardware requirements
+### Hardware requirements
 
 Most of the `xxxxx_analysis_mrmr.Rmd` files can be run on a computer with 32 GB of RAM and at least four physical CPU cores. 
 The exception is `70550_analysis_mrmr.Rmd` that, due to the large number of frogs included in the associated datasets, requires at least 128 GB of RAM. 
 
-#### Software requirements
+### Software requirements
 
 We ran the analyses using R and the R packages listed in the DESCRIPTION file. 
 All of the packages are available via the CRAN repository except [cmdstanr](https://mc-stan.org/cmdstanr/#installation) and [mrmr](https://snarl1.github.io/mrmr/index.html). 
@@ -61,7 +61,7 @@ We used the following R version and OS:
 * Platform: x86_64-pc-linux-gnu (64-bit) 
 * Running under: Ubuntu 20.04.3 LTS
 
-#### Docker instructiuons
+### Docker instructiuons
 
 As an alternative to a local installation, the software requirements have been wrapped in a Docker image (see Dockerfile for source code). 
 To run and use the Docker container, follow these steps: 
